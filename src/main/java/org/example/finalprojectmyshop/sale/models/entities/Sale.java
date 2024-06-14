@@ -1,6 +1,7 @@
 package org.example.finalprojectmyshop.sale.models.entities;
 
 import jakarta.persistence.*;
+import org.example.finalprojectmyshop.user.models.entities.User;
 
 import java.util.Date;
 
@@ -20,8 +21,8 @@ public class Sale {
     @Column(name = "description")
     private String description;
 
-//   TODO
-//    private buyer
+    @ManyToOne
+    private User buyer;
 
 //   TODO
 //    private product

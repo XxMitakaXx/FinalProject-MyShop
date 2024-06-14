@@ -1,6 +1,7 @@
 package org.example.finalprojectmyshop.order.models.entities;
 
 import jakarta.persistence.*;
+import org.example.finalprojectmyshop.order.models.entities.enums.OrderStatus;
 
 import java.util.Date;
 
@@ -26,16 +27,15 @@ public class Order {
 //   TODO
 //    private product
 
-    @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private String status;
+    private OrderStatus status;
 
     @Column(name = "is_picked")
     private boolean isPicked;
 
     public Order() {}
 
-    public Order(Date date, String address, String description, String status, boolean isPicked) {
+    public Order(Date date, String address, String description, OrderStatus status, boolean isPicked) {
         this.date = date;
         this.address = address;
         this.description = description;
