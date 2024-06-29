@@ -1,4 +1,4 @@
-package org.example.finalprojectmyshop.review.models.entities;
+package org.example.finalprojectmyshop.product.models.entities;
 
 import jakarta.persistence.*;
 import org.example.finalprojectmyshop.user.models.entities.User;

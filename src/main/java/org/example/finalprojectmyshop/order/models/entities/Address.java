@@ -1,4 +1,4 @@
-package org.example.finalprojectmyshop.address.models.entities;
+package org.example.finalprojectmyshop.order.models.entities;
 
 import jakarta.persistence.*;
 
@@ -31,16 +31,6 @@ public class Address {
     private String floor;
 
     public Address() {}
-
-    public Address(String personName, String phoneNumber, String region, String city, String address, String neighborhood, String floor) {
-        this.personName = personName;
-        this.phoneNumber = phoneNumber;
-        this.region = region;
-        this.city = city;
-        this.address = address;
-        this.neighborhood = neighborhood;
-        this.floor = floor;
-    }
 
     public long getId() {
         return this.id;

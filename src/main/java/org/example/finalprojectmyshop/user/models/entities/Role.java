@@ -1,7 +1,7 @@
-package org.example.finalprojectmyshop.role.models.entities;
+package org.example.finalprojectmyshop.user.models.entities;
 
 import jakarta.persistence.*;
-import org.example.finalprojectmyshop.role.models.entities.enums.UserRole;
+import org.example.finalprojectmyshop.user.models.entities.enums.UserRole;
 
 @Entity
 @Table(name = "roles")

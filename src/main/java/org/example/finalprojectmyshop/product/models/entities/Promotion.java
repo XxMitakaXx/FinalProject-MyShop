@@ -1,7 +1,6 @@
-package org.example.finalprojectmyshop.promotion.models.entities;
+package org.example.finalprojectmyshop.product.models.entities;
 
 import jakarta.persistence.*;
-import org.example.finalprojectmyshop.product.models.entities.Product;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -72,7 +71,7 @@ public class Promotion {
 
     // TODO check is it optimal
     public boolean isActive() {
-        java.sql.Timestamp now = new java.sql.Timestamp(System.currentTimeMillis());
+        Timestamp now = new Timestamp(System.currentTimeMillis());
         int i = now.compareTo(this.endDate);
 
         if (i == -1) {

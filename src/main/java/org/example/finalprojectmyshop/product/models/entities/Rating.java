@@ -1,4 +1,4 @@
-package org.example.finalprojectmyshop.rating.models.entities;
+package org.example.finalprojectmyshop.product.models.entities;
 
 import jakarta.persistence.*;
 

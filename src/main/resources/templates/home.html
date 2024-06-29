@@ -2,9 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <link th:href="@{/css/home-styles.css}" rel="stylesheet" />
+    <link th:href="@{/css/search-bar-styles.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>My Shop</title>
 </head>
 <body>
+    <div>
+        <nav class="navbar">
+            <a href="/" class="navbar-brand">
+                <img src="/img/shop-icon-green-vector-18303437.jpg" alt="Shop Picture" class="logo">
+            </a>
 
+            <form>
+                <div class="search">
+                    <span class="search-icon material-symbols-outlined">search</span>
+                    <input class="search-input" type="search" placeholder="Search">
+                </div>
+            </form>
+<!--            -->
+<!--            <ul>-->
+<!--                <li class="profile-icon">-->
+<!--                    <button>-->
+<!--                        <img src="/img/shop-icon-green-vector-18303437.jpg" alt="profile-image">-->
+<!--                    </button>-->
+<!--                </li>-->
+<!--            </ul>-->
+          
+
+        </nav>
+
+    </div>
 </body>
 </html>

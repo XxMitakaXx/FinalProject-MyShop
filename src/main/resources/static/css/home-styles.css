@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    max-height: 4.5em;
+    max-width: 100%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1em;
+}
+
+.navbar .navbar-brand {}
+
+.navbar .navbar-brand .logo {
+    max-height: 4em;
+    max-width: 4em;
+
+    border-radius: 1em;
+}
+
+
+
+.navbar .search-field-form {
+    border-radius: 0.8em;
+    overflow: hidden;
+
+    border: 1px solid black
+}
+
+.navbar .search-field-form .search-field {
+    width: 30em;
+    height: 3em;
+    border: none;
+    outline: none;
+}
+
+.navbar .search-field-form .magnifying-glass-button {
+    height: 2em;
+    width: 2em;
+}
+
+
+
+
+.navbar .profile-icon {
+
+}

@@ -1,8 +1,6 @@
 package org.example.finalprojectmyshop.product.models.entities;
 
 import jakarta.persistence.*;
-import org.example.finalprojectmyshop.category.models.entities.Category;
-import org.example.finalprojectmyshop.rating.models.entities.Rating;
 
 import java.util.Set;
 

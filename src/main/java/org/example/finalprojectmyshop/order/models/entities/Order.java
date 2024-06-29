@@ -1,8 +1,8 @@
 package org.example.finalprojectmyshop.order.models.entities;
 
 import jakarta.persistence.*;
-import org.example.finalprojectmyshop.address.models.entities.Address;
-import org.example.finalprojectmyshop.order.models.entities.enums.OrderStatus;
+import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
+import org.example.finalprojectmyshop.order.models.enums.OrderPaymentStatus;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.user.models.entities.User;
 
@@ -32,7 +32,10 @@ public class Order {
     private Set<Product> products;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    private OrderLogisticStatus logisticStatus;
+
+    @Enumerated(EnumType.STRING)
+    private OrderPaymentStatus paymentStatus;
 
     @Column(name = "is_picked", nullable = false)
     private boolean isPicked;
@@ -87,12 +90,20 @@ public class Order {
         this.products = products;
     }
 
-    public OrderStatus getStatus() {
-        return this.status;
+    public OrderLogisticStatus getLogisticStatus() {
+        return this.logisticStatus;
     }
 
-    public void setStatus(OrderStatus status) {
-        this.status = status;
+    public void setLogisticStatus(OrderLogisticStatus status) {
+        this.logisticStatus = status;
+    }
+
+    public OrderPaymentStatus getPaymentStatus() {
+        return this.paymentStatus;
+    }
+
+    public void setPaymentStatus(OrderPaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
     public boolean isPicked() {

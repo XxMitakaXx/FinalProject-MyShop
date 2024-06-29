@@ -1,7 +1,6 @@
-package org.example.finalprojectmyshop.sale.models.entities;
+package org.example.finalprojectmyshop.order.models.entities;
 
 import jakarta.persistence.*;
-import org.example.finalprojectmyshop.address.models.entities.Address;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.user.models.entities.User;
 

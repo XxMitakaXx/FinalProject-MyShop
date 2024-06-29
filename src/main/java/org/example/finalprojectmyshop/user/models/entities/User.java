@@ -1,11 +1,10 @@
 package org.example.finalprojectmyshop.user.models.entities;
 
 import jakarta.persistence.*;
-import org.example.finalprojectmyshop.address.models.entities.Address;
+import org.example.finalprojectmyshop.order.models.entities.Address;
 import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.product.models.entities.Product;
-import org.example.finalprojectmyshop.review.models.entities.Review;
-import org.example.finalprojectmyshop.role.models.entities.Role;
+import org.example.finalprojectmyshop.product.models.entities.Review;
 import org.example.finalprojectmyshop.user.models.entities.enums.Status;
 import org.example.finalprojectmyshop.warranty.models.entities.Warranty;
 
