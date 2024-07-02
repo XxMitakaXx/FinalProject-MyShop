@@ -1,0 +1,67 @@
+.profile-context {
+    width: 6em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    float: right;
+    /*border: 1px solid white;*/
+}
+
+.profile-link {
+    padding: 0;
+    margin: 0.5em;
+    border: none;
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.profile-link .profile-image {
+    height: inherit;
+    width: inherit;
+}
+
+.context {
+    width: 7em;
+    margin-top: 75px;
+    padding-left: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: var(--primary-color);
+    position: fixed;
+    font-size: 30px;
+    border-radius: 2px;
+    transform: translateY(10px);
+    visibility: hidden;
+    transition: transform 0.5s;
+}
+
+.context::before {
+    content: '';
+    background: var(--primary-color);
+    height: 1.4em;
+    width: 1.4em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    z-index: -1;
+}
+
+.context-label {
+    background: transparent;
+}
+
+.context .context-link {
+    color: var(--secondary-color);
+    background: var(--primary-color);
+    list-style-type: none;
+    padding: 0.75em 1em;
+    font-size: 0.5em;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+}
+
+.context .context-link:hover {
+    background: #dedede;
+}

@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+
+    /*--primary-color: #282828;*/
+    --primary-color: #ffffff;
+    /*--secondary-color: #1ec687;*/
+    --secondary-color: #5454c5;
+    --third-color: #639cd9;
+
+    /*background: var(--primary-color);*/
+    /*color: var(--secondary-color);*/
+}

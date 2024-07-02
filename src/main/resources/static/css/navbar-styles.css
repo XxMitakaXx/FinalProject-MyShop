@@ -1,0 +1,21 @@
+.navbar {
+    max-height: 4em;
+    max-width: 100%;
+    /*background: var(--primary-color);*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1em;
+    border-bottom: 1px solid #5b5b5b;
+    box-shadow: 0 0 5px 0 #4f4e4e;
+}
+
+.navbar .navbar-brand {}
+
+.navbar .navbar-brand .logo {
+    max-height: 4em;
+    max-width: 4em;
+
+    border-radius: 0.5em;
+}
