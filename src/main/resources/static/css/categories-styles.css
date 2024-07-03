@@ -1,12 +1,15 @@
 .categories-navbar {
-    height: 50em;
+    height: 53em;
     width: 20em;
+    background: var(--primary-color);
+    padding: 0.5em;
     display: flex;
     flex-direction: column;
     justify-content: start;
-    position: relative;
-    top: 10px;
-    overflow: scroll;
+    position: absolute;
+    top: 100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     transform: translateX(-100%);
     transition: transform 0.3s;
 }
@@ -19,6 +22,21 @@
     width: 5px;
     color: #bdbdbd;
     background: #d7d6d6;
+}
+
+
+.categories-navbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.categories-navbar::-webkit-scrollbar-thumb {
+    background: #d5d5d5;
+}
+
+/* Handle on hover */
+.categories-navbar::-webkit-scrollbar-thumb:hover {
+    background: #dedede;
 }
 
 .categories-navbar .category {

@@ -3,4 +3,4 @@ const categoriesNavbar = document.getElementById("categories-navbar");
 
 categoryButton.addEventListener("click", (e) => {
     categoriesNavbar.classList.toggle("hide");
-})
+});
