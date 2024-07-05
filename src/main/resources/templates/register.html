@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{css/register-styles.css}" />
+    <title>My Shop</title>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Register</h1>
+
+        <form>
+            <div class="collect-name-container">
+                <div class="collect-data-container">
+                    <label for="input-first-name">First Name</label>
+                    <input name="input-first-name" type="text" id="input-first-name" placeholder="First Name">
+                </div>
+
+                <div class="collect-data-container">
+                    <label for="input-last-name">Last Name</label>
+                    <input name="input-last-name" type="text" id="input-last-name" placeholder="Last Name">
+                </div>
+            </div>
+
+            <div class="collect-data-container">
+                <label for="input-email">Email</label>
+                <input name="input-email" type="email" id="input-email" placeholder="Email">
+            </div>
+
+            <div class="collect-data-container">
+                <label for="input-password">Password</label>
+                <input name="input-password" type="password" id="input-password" placeholder="Password">
+            </div>
+
+            <div class="collect-data-container">
+                <label for="input-confirm-password">Confirm password</label>
+                <input name="input-confirm-password" type="password" id="input-confirm-password" placeholder="Confirm Password">
+            </div>
+
+            <div class="collect-data-container">
+                <label for="input-phone-number">Phone Number</label>
+                <input name="input-phone-number" type="tel" id="input-phone-number" placeholder="Phone Number">
+            </div>
+
+            <div class="collect-data-container">
+                <label for="input-birth-date">Birth Date</label>
+                <input name="input-birth-date" type="date" id="input-birth-date" placeholder="Birth Date">
+            </div>
+
+            <div class="collect-data-container">
+                <label for="input-user-role">Role</label>
+                <select name="input-user-role" id="input-user-role">
+                    <option value="option">Select Option</option>
+                    <option value="option">Option</option>
+                    <option value="option">Option</option>
+                    <option value="option">Option</option>
+                </select>
+            </div>
+
+            <button class="register-button" type="button">Register</button>
+        </form>
+    </div>
+</body>
+</html>

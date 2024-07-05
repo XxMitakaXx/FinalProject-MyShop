@@ -18,6 +18,10 @@
     transform: translateX(0);
 }
 
+.block-scroll {
+    overflow: hidden;
+}
+
 .categories-navbar::-webkit-scrollbar {
     width: 5px;
     color: #bdbdbd;

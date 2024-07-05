@@ -1,0 +1,10 @@
+footer {
+    height: 20em;
+    width: 100%;
+    color: var(--primary-color);
+    background: var(--third-color);
+}
+
+footer .footer-links a {
+    text-decoration: none;
+}

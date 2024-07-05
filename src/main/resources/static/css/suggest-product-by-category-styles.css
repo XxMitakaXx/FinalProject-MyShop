@@ -34,6 +34,7 @@
     height: 25em;
     width: 15em;
     padding: 1em 0.5em;
+    background: var(--primary-color);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -125,14 +126,14 @@
 
 .category-product .category-product-content .category-product-add-to-cart-button {
     color: #ffffff;
-    background: #639cd9;
+    background: var(--third-color);
     border-radius: 10px;
     padding: 0.5em;
     cursor: pointer;
 }
 
 .category-product .category-product-add-to-favorite-button {
-    background: #ffffff;
+    background: var(--primary-color);
     border-radius: 50%;
     padding: 0.5em;
     border: none;

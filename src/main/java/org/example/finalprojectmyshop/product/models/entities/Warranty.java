@@ -1,10 +1,8 @@
-package org.example.finalprojectmyshop.warranty.models.entities;
+package org.example.finalprojectmyshop.product.models.entities;
 
 import jakarta.persistence.*;
-import org.example.finalprojectmyshop.product.models.entities.Product;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Entity
 @Table(name = "warranties")

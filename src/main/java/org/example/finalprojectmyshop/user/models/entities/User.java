@@ -6,8 +6,9 @@ import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.entities.Review;
 import org.example.finalprojectmyshop.user.models.entities.enums.Status;
-import org.example.finalprojectmyshop.warranty.models.entities.Warranty;
+import org.example.finalprojectmyshop.product.models.entities.Warranty;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,8 +31,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
+
+    @Column(name = "birth_date", nullable = false)
+    private LocalDate birthDate;
 
     @ManyToMany()
     private Set<Address> addresses;
@@ -42,7 +46,7 @@ public class User {
     @OneToMany
     private Set<Order> orders;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private Set<Review> reviews;
 
     @OneToMany
@@ -56,7 +60,11 @@ public class User {
 
 
     public User() {
+        this.addresses = new HashSet<>();
+        this.wishlist = new HashSet<>();
         this.roles = new HashSet<>();
+        this.reviews = new HashSet<>();
+        this.warranties = new HashSet<>();
     }
 
     public long getId() {
@@ -105,6 +113,14 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public LocalDate getBirthDate() {
+        return this.birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public Set<Address> getAddresses() {

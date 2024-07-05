@@ -1,0 +1,9 @@
+package org.example.finalprojectmyshop.user.repository;
+
+import org.example.finalprojectmyshop.user.models.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+}

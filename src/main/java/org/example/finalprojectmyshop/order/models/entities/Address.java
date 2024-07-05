@@ -24,12 +24,6 @@ public class Address {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "neighborhood")
-    private String neighborhood;
-
-    @Column(name = "floor")
-    private String floor;
-
     public Address() {}
 
     public long getId() {
@@ -78,21 +72,5 @@ public class Address {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getNeighborhood() {
-        return this.neighborhood;
-    }
-
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
-    }
-
-    public String getFloor() {
-        return this.floor;
-    }
-
-    public void setFloor(String floor) {
-        this.floor = floor;
     }
 }

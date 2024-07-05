@@ -2,6 +2,7 @@ package org.example.finalprojectmyshop.product.models.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,10 +15,12 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @OneToMany
-    private Set<Product> products;
+    @OneToMany(mappedBy = "category")
+    private Set<SecondaryCategory> secondaryCategories;
 
-    public Category() {}
+    public Category() {
+        this.secondaryCategories = new HashSet<>();
+    }
 
 
     public long getId() {
@@ -36,11 +39,11 @@ public class Category {
         this.name = name;
     }
 
-    public Set<Product> getProducts() {
-        return this.products;
+    public Set<SecondaryCategory> getSecondaryCategories() {
+        return this.secondaryCategories;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setSecondaryCategories(Set<SecondaryCategory> secondaryCategories) {
+        this.secondaryCategories = secondaryCategories;
     }
 }
