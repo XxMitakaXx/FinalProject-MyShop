@@ -3,10 +3,7 @@ package org.example.finalprojectmyshop.product.models.entities;
 import jakarta.persistence.*;
 import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "products")
@@ -24,9 +21,10 @@ public class Product {
     @Column(nullable = false)
     private String description;
 
-//    private HashMap<String, String> properties;
+    @OneToMany(mappedBy = "product")
+    private Set<ProductProperty> properties;
 
-    private String color;
+//    private String color;
 
     @OneToMany
     private Set<MediaFile> imagesUrls;
@@ -84,13 +82,13 @@ public class Product {
         this.description = description;
     }
 
-    public String getColor() {
-        return this.color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
+//    public String getColor() {
+//        return this.color;
+//    }
+//
+//    public void setColor(String color) {
+//        this.color = color;
+//    }
 
     public Set<MediaFile> getImagesUrls() {
         return this.imagesUrls;
