@@ -1,0 +1,73 @@
+.login-container {
+    height: 57em;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: var(--secondary-color);
+    font-size: 40px;
+}
+
+form {
+    height: 35em;
+    width: 40em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    justify-content: center;
+    align-items: center;
+}
+
+form .data-collecting-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+form .data-collecting-container label {
+    color: var(--secondary-color);
+    font-size: 20px;
+    padding-bottom: 0.5em;
+}
+
+form .data-collecting-container input {
+    height: 100%;
+    width: 100%;
+    border: 2px solid #cecece;
+    /* border: none; */
+    /* border-bottom: 1px solid #5454c5; */
+    border-radius: 0.6em;
+    outline: none;
+    font-size: 16px;
+    color: var(--secondary-color);
+    padding: 1em;
+}
+
+form .login-button {
+    height: 10%;
+    width: 100%;
+    border-radius: 0.6em;
+    margin-top: 20px;
+    border: none;
+    font-size: 20px;
+    color: var(--primary-color);
+    background: #5454c5;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+form .login-button:hover {
+    background: #6262e6;
+}
+
+.do-not-have-account-button {
+    color: var(--secondary-color);
+    font-size: 20px;
+    text-decoration: none;
+}

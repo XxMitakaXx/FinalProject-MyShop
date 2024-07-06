@@ -1,6 +1,7 @@
 package org.example.finalprojectmyshop.user.models.entities;
 
 import jakarta.persistence.*;
+import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
 import org.example.finalprojectmyshop.order.models.entities.Address;
 import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.product.models.entities.Product;
@@ -58,6 +59,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @OneToOne
+    private MediaFile profileImage;
 
     public User() {
         this.addresses = new HashSet<>();

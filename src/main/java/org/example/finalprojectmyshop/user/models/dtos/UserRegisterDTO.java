@@ -23,21 +23,17 @@ public class UserRegisterDTO {
     private String email;
 
     @NotBlank
-    @Size(min = 8, max = 60)
     private String password;
 
     @NotBlank
-    @Size(min = 8, max = 60)
     private String confirmPassword;
 
     @Size(max = 10)
     @NotBlank
     private String phoneNumber;
 
-    @NotEmpty
     private LocalDate birthDate;
 
-    @NotEmpty
     private UserRole userRole;
 
     public UserRegisterDTO() {}

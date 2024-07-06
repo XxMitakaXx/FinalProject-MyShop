@@ -1,4 +1,5 @@
 .form-container {
+    padding: 2em;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -8,7 +9,7 @@
 
 h1 {
     font-size: 40px;
-    color: #5454c5;
+    color: var(--secondary-color);
 }
 
 form {
@@ -35,6 +36,21 @@ form .collect-name-container .collect-data-container input {
     height: 40%;
 }
 
+form .collect-password-container {
+    height: 8em;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+
+}
+
+form .collect-password-container .collect-data-container input {
+    height: 40%;
+}
+
 form .collect-data-container {
     height: 8em;
     width: 100%;
@@ -47,7 +63,7 @@ form .collect-data-container {
 form .collect-data-container label {
     font-size: 20px;
     padding-bottom: 0.5em;
-    color: #5454c5;
+    color: var(--secondary-color);
 }
 
 form .collect-data-container input {
@@ -57,8 +73,13 @@ form .collect-data-container input {
     border-radius: 0.6em;
     outline: none;
     font-size: 16px;
-    color: #5454c5;
+    color: var(--secondary-color);
     padding: 1em;
+}
+
+.error {
+    color: red;
+    border: 2px solid red;
 }
 
 form .collect-data-container input::placeholder {
@@ -71,7 +92,7 @@ form .collect-data-container select {
     border: 2px solid #cecece;
     border-radius: 0.6em;
     font-size: 16px;
-    color: #5454c5;
+    color: var(--secondary-color);
     padding: 0.6em;
     outline: none;
 }
@@ -80,8 +101,8 @@ form .collect-data-container select {
     height: 75px;
     width: 100%;
     font-size: 20px;
-    color: #ffffff;
-    background: #5454c5;
+    color: var(--primary-color);
+    background: var(--secondary-color);
     border: none;
     border-radius: 0.6em;
     cursor: pointer;

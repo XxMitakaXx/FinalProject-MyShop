@@ -5,6 +5,5 @@ import org.example.finalprojectmyshop.user.models.dtos.UserRegisterDTO;
 
 public interface UserService {
     void register(UserRegisterDTO userRegisterDTO);
-
-    void login(UserLoginDTO userLoginDTO);
+    boolean login(UserLoginDTO userLoginDTO);
 }

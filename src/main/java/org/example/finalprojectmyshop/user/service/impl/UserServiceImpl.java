@@ -13,11 +13,13 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final CurrentUser currentUser;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, CurrentUser currentUser, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.currentUser = currentUser;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
     }
@@ -31,10 +33,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void login(UserLoginDTO userLoginDTO) {
-        User user = this.modelMapper.map(userLoginDTO, User.class);
-        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+    public boolean login(UserLoginDTO userLoginDTO) {
+        User user = this.userRepository.findByEmail(userLoginDTO.getEmail());
 
-        this.userRepository.save(user);
+        if (user == null) {
+            // TODO Throw error
+            return false;
+        }
+
+        if (this.passwordEncoder.matches(userLoginDTO.getPassword(), user.getPassword()) && !this.currentUser.isLoggedIn()) {
+            this.currentUser.setUser(user);
+
+            return true;
+        }
+
+        return false;
     }
 }

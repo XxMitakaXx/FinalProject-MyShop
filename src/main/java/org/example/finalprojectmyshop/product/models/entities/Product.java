@@ -1,7 +1,11 @@
 package org.example.finalprojectmyshop.product.models.entities;
 
 import jakarta.persistence.*;
+import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,26 +15,26 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(name = "price", nullable = false)
+    @Column(nullable = false)
     private double price;
 
-    @Column(name = "description", nullable = false)
+    @Column(nullable = false)
     private String description;
 
 //    private HashMap<String, String> properties;
 
     private String color;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @OneToMany
+    private Set<MediaFile> imagesUrls;
 
     @ManyToOne
     private Category category;
 
-    @Column(name = "available", nullable = false)
+    @Column(nullable = false)
     private boolean available;
 
     @OneToMany
@@ -39,10 +43,13 @@ public class Product {
     @Column(name = "express_ship", nullable = false)
     private boolean expressShip;
 
-    @Column(name = "leasing", nullable = false)
+    @Column(nullable = false)
     private boolean leasing;
 
-    public Product() {}
+    public Product() {
+        this.imagesUrls = new HashSet<>();
+        this.ratings = new HashSet<>();
+    }
 
 
     public long getId() {
@@ -85,12 +92,12 @@ public class Product {
         this.color = color;
     }
 
-    public String getImageUrl() {
-        return this.imageUrl;
+    public Set<MediaFile> getImagesUrls() {
+        return this.imagesUrls;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImagesUrls(Set<MediaFile> imagesUrls) {
+        this.imagesUrls = imagesUrls;
     }
 
     public Category getCategory() {

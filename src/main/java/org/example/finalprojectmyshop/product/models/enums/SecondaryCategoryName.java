@@ -24,7 +24,7 @@ public enum SecondaryCategoryName {
     private final String name;
     private final CategoryName categoryName;
 
-    private SecondaryCategoryName(String name, CategoryName categoryName) {
+    SecondaryCategoryName(String name, CategoryName categoryName) {
         this.name = name;
         this.categoryName = categoryName;
     }

@@ -3,8 +3,29 @@ footer {
     width: 100%;
     color: var(--primary-color);
     background: var(--third-color);
+    position: relative;
+}
+
+footer .footer-links {
+    font-size: 1.3em;
+    list-style-type: none;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    justify-content: center;
+    align-items: start;
 }
 
 footer .footer-links a {
+    color: var(--primary-color);
     text-decoration: none;
+}
+
+.all-rights-reserved {
+    width: 100%;
+    padding: 1em;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid var(--primary-color);
 }

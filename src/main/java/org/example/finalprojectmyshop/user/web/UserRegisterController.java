@@ -2,18 +2,19 @@ package org.example.finalprojectmyshop.user.web;
 
 import jakarta.validation.Valid;
 import org.example.finalprojectmyshop.user.models.dtos.UserRegisterDTO;
+import org.example.finalprojectmyshop.user.models.entities.enums.UserRole;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/users")
+//@RequestMapping("/users")
 public class UserRegisterController {
 
     private final UserService userService;
@@ -30,10 +31,12 @@ public class UserRegisterController {
     }
 
     @GetMapping("/register")
-    public String viewRegister() {
+    public String viewRegister(Model model) {
         if (this.currentUser.isLoggedIn()) {
             return "redirect:/";
         }
+
+        model.addAttribute("roles", UserRole.values());
 
         return "register";
     }
@@ -49,14 +52,19 @@ public class UserRegisterController {
         }
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("registerData", data);
+            redirectAttributes.addFlashAttribute("userRegisterDTO", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserRegisterDTO");
 
-            return "redirect:/users/register";
+//            return "redirect:/users/register";
+            return "redirect:/register";
         }
 
         if (!data.getPassword().equals(data.getConfirmPassword())) {
             // TODO handle error
+            redirectAttributes.addFlashAttribute("userRegisterDTO", data);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserRegisterDTO", bindingResult);
+
+            return "redirect:/register";
         }
 
         this.userService.register(data);

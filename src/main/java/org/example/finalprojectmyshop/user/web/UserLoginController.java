@@ -1,10 +1,12 @@
 package org.example.finalprojectmyshop.user.web;
 
+import jakarta.validation.Valid;
 import org.example.finalprojectmyshop.user.models.dtos.UserLoginDTO;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/users")
+//@RequestMapping("/users")
 public class UserLoginController {
 
     private final UserService userService;
@@ -23,7 +25,7 @@ public class UserLoginController {
         this.currentUser = currentUser;
     }
 
-    @ModelAttribute("loginUserData")
+    @ModelAttribute("userLoginDTO")
     public UserLoginDTO userLoginDTO() {
         return new UserLoginDTO();
     }
@@ -40,8 +42,8 @@ public class UserLoginController {
 
     @PostMapping("/login")
     public String processLogin(
-            UserLoginDTO data,
-            Model model,
+            @Valid UserLoginDTO data,
+            BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
 
@@ -49,14 +51,33 @@ public class UserLoginController {
             return "redirect:/";
         }
 
-        if (currentUser.isLoggedIn()) {
-            redirectAttributes.addAttribute("loginData", data);
-            redirectAttributes.addAttribute("org.springframework.validation.BindingResult.UserLoginDTO");
-            return "redirect:/users/login";
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginDTO", data);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserLoginDTO", bindingResult);
+
+            return "redirect:/login";
         }
 
-        this.userService.login(data);
+        boolean success = this.userService.login(data);
+
+        if (!success) {
+            redirectAttributes.addFlashAttribute("userLoginDTO", data);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserLoginDTO", bindingResult);
+
+            return "redirect:/login";
+        }
 
         return "redirect:/";
     }
+
+    @PostMapping("/logout")
+    public String processLogout() {
+
+        if (this.currentUser.isLoggedIn()) {
+            this.currentUser.setUser(null);
+        }
+
+        return "redirect:/";
+    }
+
 }

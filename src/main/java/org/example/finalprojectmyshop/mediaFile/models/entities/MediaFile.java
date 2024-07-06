@@ -12,4 +12,22 @@ public class MediaFile {
     private long id;
 
     private File file;
+
+    public MediaFile() {}
+
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public File getFile() {
+        return this.file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
 }
