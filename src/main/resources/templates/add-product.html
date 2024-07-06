@@ -5,6 +5,43 @@
     <title>My Shop</title>
 </head>
 <body>
+<div>
+    <form method="post" id="add-product">
+        <div class="data-collecting-container">
+            <label for="name-input">Name</label>
+            <input name="name-input" type="text" id="name-input" placeholder="Name">
+        </div>
+
+        <div class="data-collecting-container">
+            <label for="price-input">Price</label>
+            <input name="price-input" type="text" id="price-input" placeholder="Price">
+        </div>
+
+        <div class="data-collecting-container">
+            <label for="name-input">Name</label>
+            <textarea name="name-input" type="text" form="add-product" placeholder="Description"></textarea>
+        </div>
+
+        <table>
+            <button type="button">Add</button>
+
+            <tr>
+                <th><label for="property">Property</label></th>
+                <th><label for="value">Value</label></th>
+            </tr>
+            <tr>
+                <td>
+                    <input name="property" type="text" id="property" placeholder="Property">
+                </td>
+                <td>
+                    <input name="value" type="text" id="value" placeholder="Value">
+                </td>
+            </tr>
+        </table>
+
+
+    </form>
+</div>
 
 </body>
 </html>
