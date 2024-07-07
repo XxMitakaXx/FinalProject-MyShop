@@ -55,7 +55,7 @@ public class MediaFileServiceImpl implements MediaFileService {
     }
 
     @Override
-    public String upload(File file, ImageType type) {
+    public List<String> upload(File file, ImageType type) throws IOException {
         try {
 //            String fileName = multipartFile.getOriginalFilename();
 //            fileName = UUID.randomUUID().toString().concat(this.getExtension(fileName));
@@ -63,10 +63,12 @@ public class MediaFileServiceImpl implements MediaFileService {
 //            File file = this.convertToFile(multipartFile, fileName);
 
             if (type == ImageType.USER) {
+                List<String> urls = new ArrayList<>();
                 String url = this.uploadFile(file, ImageType.USER.getCloudFolderPath() + file.getName());
                 file.delete();
+                urls.add(url);
 
-                return url;
+                return urls;
             } else if (type == ImageType.PRODUCT) {
                 File[] files = file.listFiles();
                 List<String> urls = new ArrayList<>();
@@ -80,14 +82,14 @@ public class MediaFileServiceImpl implements MediaFileService {
 
                 file.delete();
 
-                return String.join("\n", urls);
+                return urls;
             }
 
             return null;
 
         } catch (IOException e) {
             e.printStackTrace();
-            return "Image couldn't upload, Something went wrong";
+            throw new IOException("Image/s couldn't upload, Something went wrong");
         }
     }
 

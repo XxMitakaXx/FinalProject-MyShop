@@ -2,46 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{css/index.css}" />
+    <link rel="stylesheet" th:href="@{css/add-product-styles.css}" />
+    <link rel="stylesheet" th:href="@{css/footer-styles.css}" />
     <title>My Shop</title>
 </head>
 <body>
-<div>
-    <form method="post" id="add-product">
-        <div class="data-collecting-container">
-            <label for="name-input">Name</label>
-            <input name="name-input" type="text" id="name-input" placeholder="Name">
-        </div>
+    <div class="add-product-container">
+        <h1>Add Product</h1>
 
-        <div class="data-collecting-container">
-            <label for="price-input">Price</label>
-            <input name="price-input" type="text" id="price-input" placeholder="Price">
-        </div>
+        <form
+                th:action="@{/add-product}"
+                th:method="post"
+                th:object="${addProductDTO}"
+                id="add-product">
+            <div class="collecting-data-container">
+                <label for="name-input">Name</label>
+                <input
+                        th:field="*{name}"
+                        th:errorclass="error"
+                        name="name-input"
+                        type="text"
+                        id="name-input"
+                        placeholder="Name">
+            </div>
 
-        <div class="data-collecting-container">
-            <label for="name-input">Name</label>
-            <textarea name="name-input" type="text" form="add-product" placeholder="Description"></textarea>
-        </div>
+            <div class="collecting-data-container">
+                <label for="price-input">Price</label>
+                <input
+                        th:field="*{price}"
+                        th:errorclass="error"
+                        name="price-input"
+                        type="text"
+                        id="price-input"
+                        placeholder="Price">
+            </div>
 
-        <table>
-            <button type="button">Add</button>
+            <div class="collecting-data-container textarea-container">
+                <label for="name-input">Description</label>
+                <textarea
+                        th:field="*{description}"
+                        th:errorclass="error"
+                        name="name-input"
+                        type="text"
+                        form="add-product"
+                        placeholder="Description"></textarea>
+            </div>
 
-            <tr>
-                <th><label for="property">Property</label></th>
-                <th><label for="value">Value</label></th>
-            </tr>
-            <tr>
-                <td>
-                    <input name="property" type="text" id="property" placeholder="Property">
-                </td>
-                <td>
-                    <input name="value" type="text" id="value" placeholder="Value">
-                </td>
-            </tr>
-        </table>
+            <table
+                    th:field="*{properties}"
+                    class="collecting-data-table">
+                <button type="button">Add</button>
 
+                <tr>
+                    <th><label for="property">Property</label></th>
+                    <th><label for="value">Value</label></th>
+                </tr>
+                <tr>
+                    <td>
+                        <input name="property" type="text" id="property" placeholder="Property">
+                    </td>
+                    <td>
+                        <input name="value" type="text" id="value" placeholder="Value">
+                    </td>
+                </tr>
+            </table>
 
-    </form>
-</div>
+            <div class="collecting-data-container">
+                <label for="urls-input">Upload Images</label>
+                <div class="input-file-container">
+                    <input
+                            th:field="*{images}"
+                            th:errorclass="error"
+                            name="urls-input"
+                            type="file"
+                            id="urls-input"
+                            placeholder="Upload images">
+                </div>
+            </div>
 
+            <div class="collecting-data-container">
+                <label for="category-input">Category</label>
+                <select
+                        th:field="*{secondaryCategoryName}"
+                        th:errorclass="error"
+                        name="category-input"
+                        id="category-input">
+                    <option value="option">Select Category</option>
+                    <option th:each="secondaryCategory : ${secondaryCategories}" th:value="${secondaryCategory}" th:text="${secondaryCategory.name}">Select Category</option>
+                </select>
+            </div>
+
+            <button class="add-product-button" type="submit">Add Product</button>
+        </form>
+    </div>
+
+    <footer th:replace="/fragments/footer"></footer>
 </body>
 </html>
