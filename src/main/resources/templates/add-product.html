@@ -49,37 +49,102 @@
                         placeholder="Description"></textarea>
             </div>
 
-            <table
-                    th:field="*{properties}"
-                    class="collecting-data-table">
-                <button type="button">Add</button>
-
-                <tr>
-                    <th><label for="property">Property</label></th>
-                    <th><label for="value">Value</label></th>
-                </tr>
-                <tr>
-                    <td>
-                        <input name="property" type="text" id="property" placeholder="Property">
-                    </td>
-                    <td>
-                        <input name="value" type="text" id="value" placeholder="Value">
-                    </td>
-                </tr>
-            </table>
+            <div class="properties-table-container">
+                <table
+                        th:field="*{properties}"
+                        class="collecting-data-table"
+                        id="collecting-data-table">
+                    <tr>
+                        <th> Property</th>
+                        <th> Value</th>
+                    </tr>
+                    <tr th:each="property, itemStat : *{properties}" id="properties-table-row">
+                        <td>
+                            <input
+                                    th:field="*{properties[__${itemStat.index}__].name}"
+                                    name="property"
+                                    type="text"
+                                    id="property"
+                                    placeholder="Property">
+                        </td>
+                        <td>
+                            <input
+                                    th:field="*{properties[__${itemStat.index}__].value}"
+                                    name="value"
+                                    type="text"
+                                    id="value"
+                                    placeholder="Value">
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
             <div class="collecting-data-container">
-                <label for="urls-input">Upload Images</label>
+                <label>Upload Images 1</label>
                 <div class="input-file-container">
                     <input
-                            th:field="*{images}"
+                            th:field="*{firstImage}"
                             th:errorclass="error"
                             name="urls-input"
                             type="file"
-                            id="urls-input"
-                            placeholder="Upload images">
+                            id="first-image-input"
+                            placeholder="Upload image">
                 </div>
             </div>
+
+            <div class="collecting-data-container">
+                <label for="second-image-input">Upload Image 2</label>
+                <div class="input-file-container">
+                    <input
+                            th:field="*{secondImage}"
+                            th:errorclass="error"
+                            name="second-image-input"
+                            type="file"
+                            id="second-image-input"
+                            placeholder="Upload image">
+                </div>
+            </div>
+
+
+            <div class="collecting-data-container">
+                <label for="third-image-input">Upload Image 3</label>
+                <div class="input-file-container">
+                    <input
+                            th:field="*{thirdImage}"
+                            th:errorclass="error"
+                            name="third-image-input"
+                            type="file"
+                            id="third-image-input"
+                            placeholder="Upload image">
+                </div>
+            </div>
+
+            <div class="collecting-data-container">
+                <label for="fourth-image-input">Upload Image 4</label>
+                <div class="input-file-container">
+                    <input
+                            th:field="*{fourthImage}"
+                            th:errorclass="error"
+                            name="fourth-image-input"
+                            type="file"
+                            id="fourth-image-input"
+                            placeholder="Upload image">
+                </div>
+            </div>
+
+            <div class="collecting-data-container">
+                <label for="fifth-image-input">Upload Image 5</label>
+                <div class="input-file-container">
+                    <input
+                            th:field="*{fifthImage}"
+                            th:errorclass="error"
+                            name="fifth-image-input"
+                            type="file"
+                            id="fifth-image-input"
+                            placeholder="Upload image">
+                </div>
+            </div>
+
 
             <div class="collecting-data-container">
                 <label for="category-input">Category</label>
@@ -93,10 +158,21 @@
                 </select>
             </div>
 
+            <div class="collecting-data-container">
+                <label for="price-input">Quantity</label>
+                <input
+                        th:field="*{quantity}"
+                        th:errorclass="error"
+                        name="quantity-input"
+                        type="number"
+                        min="0"
+                        id="quantity-input"
+                        placeholder="Quantity">
+            </div>
+
             <button class="add-product-button" type="submit">Add Product</button>
         </form>
     </div>
-
-    <footer th:replace="/fragments/footer"></footer>
+    <footer th:replace="~{/fragments/footer}"></footer>
 </body>
 </html>

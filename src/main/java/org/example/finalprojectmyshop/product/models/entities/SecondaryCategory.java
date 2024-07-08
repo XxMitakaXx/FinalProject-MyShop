@@ -1,6 +1,10 @@
 package org.example.finalprojectmyshop.product.models.entities;
 
 import jakarta.persistence.*;
+import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "secondary_categories")
@@ -9,13 +13,18 @@ public class SecondaryCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private SecondaryCategoryName name;
 
     @ManyToOne
     private Category category;
 
-    public SecondaryCategory() {}
+    @OneToMany
+    private Set<Product> products;
+
+    public SecondaryCategory() {
+        this.products = new HashSet<>();
+    }
 
     public long getId() {
         return this.id;
@@ -25,11 +34,11 @@ public class SecondaryCategory {
         this.id = id;
     }
 
-    public String getName() {
+    public SecondaryCategoryName getName() {
         return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(SecondaryCategoryName name) {
         this.name = name;
     }
 
@@ -39,5 +48,13 @@ public class SecondaryCategory {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Set<Product> getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }

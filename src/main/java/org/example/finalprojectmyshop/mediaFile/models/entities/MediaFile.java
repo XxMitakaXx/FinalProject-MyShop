@@ -11,7 +11,7 @@ public class MediaFile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private File file;
+    private String url;
 
     public MediaFile() {}
 
@@ -19,15 +19,19 @@ public class MediaFile {
         return this.id;
     }
 
-    public void setId(long id) {
+    public MediaFile setId(long id) {
         this.id = id;
+
+        return this;
     }
 
-    public File getFile() {
-        return this.file;
+    public String getUrl() {
+        return this.url;
     }
 
-    public void setFile(File file) {
-        this.file = file;
+    public MediaFile setUrl(String url) {
+        this.url = url;
+
+        return this;
     }
 }

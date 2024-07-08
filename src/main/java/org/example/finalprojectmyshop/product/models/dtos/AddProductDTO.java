@@ -1,16 +1,11 @@
 package org.example.finalprojectmyshop.product.models.dtos;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
-import org.example.finalprojectmyshop.product.models.entities.Category;
-import org.example.finalprojectmyshop.product.models.entities.ProductProperty;
-import org.example.finalprojectmyshop.product.models.entities.SecondaryCategory;
+import jakarta.validation.constraints.*;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
 
 import java.io.File;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddProductDTO {
     @Size(min = 2, max = 50)
@@ -20,16 +15,29 @@ public class AddProductDTO {
     @Positive
     private double price;
 
-    @Size(min = 10, max = 200)
+    @Size(min = 10, max = 500)
     private String description;
 
-    private Set<ProductProperty> properties;
+    private List<AddProductPropertyDTO> properties;
 
-    private File images;
+    private File firstImage;
+
+    private File secondImage;
+
+    private File thirdImage;
+
+    private File fourthImage;
+
+    private File fifthImage;
 
     private SecondaryCategoryName secondaryCategoryName;
 
-    public AddProductDTO() {}
+    @PositiveOrZero
+    private int quantity;
+
+    public AddProductDTO() {
+        this.properties = new ArrayList<>();
+    }
 
     public String getName() {
         return this.name;
@@ -55,20 +63,52 @@ public class AddProductDTO {
         this.description = description;
     }
 
-    public Set<ProductProperty> getProperties() {
+    public List<AddProductPropertyDTO> getProperties() {
         return this.properties;
     }
 
-    public void setProperties(Set<ProductProperty> properties) {
+    public void setProperties(List<AddProductPropertyDTO> properties) {
         this.properties = properties;
     }
 
-    public File getImages() {
-        return this.images;
+    public File getFirstImage() {
+        return this.firstImage;
     }
 
-    public void setImages(File images) {
-        this.images = images;
+    public void setFirstImage(File firstImage) {
+        this.firstImage = firstImage;
+    }
+
+    public File getSecondImage() {
+        return this.secondImage;
+    }
+
+    public void setSecondImage(File secondImage) {
+        this.secondImage = secondImage;
+    }
+
+    public File getThirdImage() {
+        return this.thirdImage;
+    }
+
+    public void setThirdImage(File thirdImage) {
+        this.thirdImage = thirdImage;
+    }
+
+    public File getFourthImage() {
+        return this.fourthImage;
+    }
+
+    public void setFourthImage(File fourthImage) {
+        this.fourthImage = fourthImage;
+    }
+
+    public File getFifthImage() {
+        return this.fifthImage;
+    }
+
+    public void setFifthImage(File fifthImage) {
+        this.fifthImage = fifthImage;
     }
 
     public SecondaryCategoryName getSecondaryCategoryName() {
@@ -77,5 +117,13 @@ public class AddProductDTO {
 
     public void setSecondaryCategoryName(SecondaryCategoryName secondaryCategoryName) {
         this.secondaryCategoryName = secondaryCategoryName;
+    }
+
+    public int getQuantity() {
+        return this.quantity;
+    }
+
+    public void setQuantity( int quantity) {
+        this.quantity = quantity;
     }
 }

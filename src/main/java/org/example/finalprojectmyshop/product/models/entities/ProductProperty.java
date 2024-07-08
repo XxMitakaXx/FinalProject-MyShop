@@ -13,8 +13,8 @@ public class ProductProperty {
 
     private String value;
 
-    @ManyToOne
-    private Product product;
+//    @ManyToOne
+//    private Product product;
 
     public ProductProperty() {}
 
@@ -22,31 +22,39 @@ public class ProductProperty {
         return this.id;
     }
 
-    public void setId(long id) {
+    public ProductProperty setId(long id) {
         this.id = id;
+
+        return this;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public void setName(String name) {
+    public ProductProperty setName(String name) {
         this.name = name;
+
+        return this;
     }
 
     public String getValue() {
         return this.value;
     }
 
-    public void setValue(String value) {
+    public ProductProperty setValue(String value) {
         this.value = value;
+
+        return this;
     }
 
-    public Product getProduct() {
-        return this.product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+//    public Product getProduct() {
+//        return this.product;
+//    }
+//
+//    public ProductProperty setProduct(Product product) {
+//        this.product = product;
+//
+//        return this;
+//    }
 }

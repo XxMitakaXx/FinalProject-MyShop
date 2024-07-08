@@ -16,7 +16,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,42 +57,35 @@ public class MediaFileServiceImpl implements MediaFileService {
     }
 
     @Override
-    public List<String> upload(File file, ImageType type) throws IOException {
+    public String upload(File file, ImageType type) throws IOException {
         try {
 //            String fileName = multipartFile.getOriginalFilename();
 //            fileName = UUID.randomUUID().toString().concat(this.getExtension(fileName));
 
 //            File file = this.convertToFile(multipartFile, fileName);
 
-            if (type == ImageType.USER) {
-                List<String> urls = new ArrayList<>();
-                String url = this.uploadFile(file, ImageType.USER.getCloudFolderPath() + file.getName());
-                file.delete();
-                urls.add(url);
+            String url = this.uploadFile(file, ImageType.USER.getCloudFolderPath() + file.getName());
+            file.delete();
 
-                return urls;
-            } else if (type == ImageType.PRODUCT) {
-                File[] files = file.listFiles();
-                List<String> urls = new ArrayList<>();
-
-                for (File currentFile : files) {
-                    String url = this.uploadFile(currentFile, ImageType.PRODUCT.getCloudFolderPath() + file.getName() + "/" + currentFile.getName());
-                    currentFile.delete();
-
-                    urls.add(url);
-                }
-
-                file.delete();
-
-                return urls;
-            }
-
-            return null;
-
+            return url;
         } catch (IOException e) {
             e.printStackTrace();
             throw new IOException("Image/s couldn't upload, Something went wrong");
         }
+    }
+
+    @Override
+    public String upload(File file, ImageType type, String productName) {
+        try {
+            String url = this.uploadFile(file, ImageType.PRODUCT.getCloudFolderPath() + productName + file.getName());
+
+            file.delete();
+
+            return url;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override

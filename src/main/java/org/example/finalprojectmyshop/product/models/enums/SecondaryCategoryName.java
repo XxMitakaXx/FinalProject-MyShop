@@ -18,8 +18,7 @@ public enum SecondaryCategoryName {
     SPORT_AND_CAMPING("Sport and camping", CategoryName.SPORT_AND_OUTDOOR),
     LIFESTYLE_AND_FITNESS("Lifestyle and fitness", CategoryName.SPORT_AND_OUTDOOR),
     FOR_HOME_AND_OFFICE("For home and office", CategoryName.HOME_AND_GARDEN),
-    SMALL_ELECTRICAL_APPLIANCES("Small electrical appliances", CategoryName.HOME_AND_GARDEN)
-    ;
+    SMALL_ELECTRICAL_APPLIANCES("Small electrical appliances", CategoryName.HOME_AND_GARDEN);
 
     private final String name;
     private final CategoryName categoryName;
@@ -36,4 +35,6 @@ public enum SecondaryCategoryName {
     public CategoryName getCategoryName() {
         return this.categoryName;
     }
+
+
 }

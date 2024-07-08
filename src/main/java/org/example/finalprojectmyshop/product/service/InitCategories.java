@@ -31,19 +31,16 @@ public class InitCategories implements CommandLineRunner {
             Arrays.stream(categories)
                     .forEach(categoryName -> {
                         Category category = new Category();
-                        category.setName(categoryName.getName());
+                        category.setName(categoryName);
 
                         Arrays.stream(secondaryCategoryNames)
                                 .forEach(secondaryCategoryName -> {
                                     if (secondaryCategoryName.getCategoryName().equals(categoryName)) {
                                         SecondaryCategory secondaryCategory = new SecondaryCategory();
-                                        secondaryCategory.setName(secondaryCategoryName.getName());
+                                        secondaryCategory.setName(secondaryCategoryName);
                                         secondaryCategory.setCategory(category);
 
-//                                        this.secondaryCategoryRepository.save(secondaryCategory);
-
                                         category.getSecondaryCategories().add(secondaryCategory);
-
 
                                         this.categoryRepository.save(category);
                                         this.secondaryCategoryRepository.save(secondaryCategory);

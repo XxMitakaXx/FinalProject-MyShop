@@ -13,7 +13,7 @@
 }
 
 .add-product-container form {
-    height: 55em;
+    height: 130em;
     width: 40em;
     display: flex;
     flex-direction: column;
@@ -68,6 +68,49 @@
 
 .add-product-container .collecting-data-container textarea::-webkit-scrollbar {
     display: none;
+}
+
+.add-product-container .properties-table-container {
+    width: 100%;
+}
+
+.add-product-container .collecting-data-table {
+    height: 10em;
+    width: 100%;
+    border-radius: 0.6em;
+    text-align: center;
+}
+
+.add-product-container #add-property-button {
+    width: 100%;
+    color: #ffffff;
+    font-size: 13px;
+    background: #5454c5;
+    border: none;
+    border-radius: 0.6em;
+    padding: 0.5em;
+}
+
+.add-product-container .collecting-data-table tr th {
+    padding: 1em;
+    color: #5454c5;
+    font-size: 20px;
+}
+
+.add-product-container .collecting-data-table input {
+    height: 30px;
+    width: 100%;
+    border: 2px solid #cecece;
+    border-radius: 0.6em;
+    outline: none;
+    font-size: 12px;
+    color: #5454c5;
+    padding: 1em;
+    transition: 0.3s;
+}
+
+.add-product-container .collecting-data-table input::placeholder {
+    color: #cecece;
 }
 
 .input-file-container {
