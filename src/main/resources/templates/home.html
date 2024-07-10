@@ -19,50 +19,54 @@
     <title>My Shop</title>
 </head>
 <body>
-   <nav th:replace="fragments/navbar"></nav>
+   <nav th:replace="~{fragments/navbar::navbar(${imagePath})}"></nav>
 
-    <nav th:replace="fragments/second-navbar"></nav>
+    <nav th:replace="~{fragments/second-navbar}"></nav>
 
 
     <div class="categories-suggestion-container">
-        <div class="category-suggestion">
-            <h2 class="category-title">Smartphone and accessories</h2>
+        <div th:each="category : ${categories}"  class="category-suggestion">
+            <h2 class="category-title" th:text="${category.name}">Smartphone and accessories</h2>
 
             <div class="category-products">
-                <div class="category-product" data-star-rate="5">
-                    <a class="category-product-add-to-favorite-button" href="#fsfse">
-                        <span class="material-symbols-outlined">favorite</span>
-                    </a>
+                <div th:each="product : ${category.products}" class="category-product" data-star-rate="5">
+                    <form
+                        th:method="post"
+                        th:action="@{/add-to-favorites/{id}(id=*{product.id})}">
+                        <button type="submit" class="category-product-add-to-favorite-button">
+                            <span class="material-symbols-outlined">favorite</span>
+                        </button>
+                    </form>
 
-                    <a href="#">
+                    <a th:href="@{product-details/{id}(id=*{product.id})}">
 
                         <div class="category-product-info">
                             <div class="image-container">
-                                <img src="img/iphone_15-pink.jpg" alt="product-image">
+                                <img th:src="@{${'img/products/' + product.imageUrl}}" alt="product-image">
                             </div>
 
                             <div class="category-product-data">
-                                <h3 class="category-product-title">Smartphone Iphone 15, 128GB, 5G, Pink</h3>
+                                <h3 class="category-product-title" th:text="${product.name}">Smartphone Iphone 15, 128GB, 5G, Pink</h3>
 
                                 <div class="category-product-rate">
                                     <div class="category-product-stars">
-                                        <span class="star material-symbols-outlined">stars</span>
-                                        <span class="star material-symbols-outlined">stars</span>
-                                        <span class="star material-symbols-outlined">stars</span>
-                                        <span class="star material-symbols-outlined">stars</span>
-                                        <span class="star material-symbols-outlined">stars</span>
+                                        <span class="star material-symbols-outlined" th:attr="${product.rating > 0 ? 'active' : 'inactive'}">stars</span>
+                                        <span class="star material-symbols-outlined" th:attr="${product.rating > 1 ? 'active' : 'inactive'}">stars</span>
+                                        <span class="star material-symbols-outlined" th:attr="${product.rating > 3 ? 'active' : 'inactive'}">stars</span>
+                                        <span class="star material-symbols-outlined" th:attr="${product.rating > 4 ? 'active' : 'inactive'}">stars</span>
+                                        <span class="star material-symbols-outlined" th:attr="${product.rating > 4.5 ? 'active' : 'inactive'}">stars</span>
                                     </div>
 
-                                    <p class="actual-rate">3.83</p>
+                                    <p class="actual-rate" th:text="${product.rating}">3.83</p>
 
-                                    <p class="category-product-rate-count">(45)</p>
+                                    <p class="category-product-rate-count" th:text="${product.reviewsCount}">(45)</p>
                                 </div>
                             </div>
                         </div>
                     </a>
 
                     <div class="category-product-content">
-                        <p class="category-product-price">1567<sup>99</sup>LV.</p>
+                        <p class="category-product-price" th:text="${Double.toString(product.price).split('.')[0]}">1567<sup th:text="${Double.toString(product.price).split('.')[1]}">99</sup>LV.</p>
 
                         <a class="category-product-add-to-cart-button" type="button">
                             <span class="cart-icon material-symbols-outlined">shopping_cart</span>

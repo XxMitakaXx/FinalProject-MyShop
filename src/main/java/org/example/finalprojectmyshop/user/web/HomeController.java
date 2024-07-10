@@ -1,5 +1,7 @@
 package org.example.finalprojectmyshop.user.web;
 
+import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
+import org.example.finalprojectmyshop.product.models.dtos.CategoryAndRandomProductsDTO;
 import org.example.finalprojectmyshop.product.models.entities.Category;
 import org.example.finalprojectmyshop.product.service.CategoryService;
 import org.springframework.stereotype.Controller;
@@ -14,21 +16,19 @@ import java.util.Set;
 public class HomeController {
 
     private final CategoryService categoryService;
+    private final MediaFileService mediaFileService;
 
-    public HomeController(CategoryService categoryService) {
+    public HomeController(CategoryService categoryService, MediaFileService mediaFileService) {
         this.categoryService = categoryService;
+        this.mediaFileService = mediaFileService;
     }
 
     @GetMapping("/")
-    public ModelAndView home(ModelAndView modelAndView) {
+    public String home(Model model) {
+        Set<CategoryAndRandomProductsDTO> categories = this.categoryService.getCategoriesWithRandomProducts();
+        model.addAttribute("categories", categories);
 
-        modelAndView.setViewName("home");
-
-        Set<Category> categories = this.categoryService.getAllCategories();
-        modelAndView.addObject("categories", categories);
-
-
-        return modelAndView;
+        return "home";
     }
 
 }

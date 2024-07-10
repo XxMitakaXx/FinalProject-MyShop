@@ -3,7 +3,6 @@ const profileContext = document.getElementById("profile-context");
 const contextMenu = document.getElementById("context");
 
 profileLink.addEventListener("mouseover", () => {
-    console.log("add");
     contextMenu.style.visibility = "visible";
     contextMenu.style.transform = "translateY(0)";
 });

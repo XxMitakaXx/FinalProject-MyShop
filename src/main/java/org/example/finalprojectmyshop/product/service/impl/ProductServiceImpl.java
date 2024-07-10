@@ -2,6 +2,7 @@ package org.example.finalprojectmyshop.product.service.impl;
 
 import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
 import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
+import org.example.finalprojectmyshop.mediaFile.repository.MediaFileRepository;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
 import org.example.finalprojectmyshop.product.models.dtos.AddProductDTO;
 import org.example.finalprojectmyshop.product.models.entities.Product;
@@ -13,10 +14,8 @@ import org.example.finalprojectmyshop.product.repository.ProductRepository;
 import org.example.finalprojectmyshop.product.repository.SecondaryCategoryRepository;
 import org.example.finalprojectmyshop.product.service.ProductService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,13 +27,15 @@ public class ProductServiceImpl implements ProductService {
     private final SecondaryCategoryRepository secondaryCategoryRepository;
     private final CategoryRepository categoryRepository;
     private final ProductPropertyRepository productPropertyRepository;
+    private final MediaFileRepository mediaFileRepository;
     private final MediaFileService mediaFileService;
 
-    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, CategoryRepository categoryRepository, ProductPropertyRepository productPropertyRepository, MediaFileService mediaFileService) {
+    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, CategoryRepository categoryRepository, ProductPropertyRepository productPropertyRepository, MediaFileRepository mediaFileRepository, MediaFileService mediaFileService) {
         this.productRepository = productRepository;
         this.secondaryCategoryRepository = secondaryCategoryRepository;
         this.categoryRepository = categoryRepository;
         this.productPropertyRepository = productPropertyRepository;
+        this.mediaFileRepository = mediaFileRepository;
         this.mediaFileService = mediaFileService;
     }
 
@@ -54,11 +55,11 @@ public class ProductServiceImpl implements ProductService {
 
         addProductDTO.getProperties()
                 .forEach(property -> {
-                    if (!property.getName().isBlank() || !property.getValue().isBlank()) {
+                   if (!property.getName().isBlank() || !property.getValue().isBlank()) {
                         ProductProperty productProperty = new ProductProperty();
                         productProperty
-                                .setName(property.getName())
-                                .setValue(property.getValue());
+                                .setName(property.getName().trim())
+                                .setValue(property.getValue().trim());
 
                         product.getProperties().add(productProperty);
 
@@ -66,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
                     }
                 });
 
-        List<File> images = List.of(
+        List<MultipartFile> images = List.of(
                 addProductDTO.getFirstImage(),
                 addProductDTO.getSecondImage(),
                 addProductDTO.getThirdImage(),
@@ -77,9 +78,8 @@ public class ProductServiceImpl implements ProductService {
         Set<String> urls = new HashSet<>();
 
         images.forEach(image -> {
-            File file = new File(Path.of(image.getPath()).toUri());
-            System.out.println();
-            String url = this.mediaFileService.upload(file, ImageType.PRODUCT, product.getName());
+
+            String url = this.mediaFileService.upload(image, ImageType.PRODUCT, product.getName());
             urls.add(url);
         });
 
@@ -87,6 +87,7 @@ public class ProductServiceImpl implements ProductService {
             MediaFile mediaFile = new MediaFile();
             mediaFile.setUrl(url);
 
+            this.mediaFileService.save(mediaFile);
             product.getImagesUrls().add(mediaFile);
         });
 

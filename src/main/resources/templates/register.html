@@ -14,7 +14,8 @@
         <form
             th:action="@{/register}"
             th:method="post"
-            th:object="${userRegisterDTO}">
+            th:object="${userRegisterDTO}"
+            enctype="multipart/form-data">
             <div class="collect-name-container">
                 <div class="collect-data-container">
                     <label for="input-first-name">First Name</label>
@@ -85,7 +86,7 @@
                             placeholder="Confirm Password">
                 </div>
 
-                <small th:if="${#fields.hasErrors('password')}" id="notMatchingPasswordError"
+                <small th:if="${#fields.hasErrors('confirmPassword')}" id="notMatchingPasswordError"
                        class="not-matching-password-error">The password must matching!</small>
             </div>
 
@@ -131,6 +132,16 @@
 
             <small th:if="${#fields.hasErrors('userRole')}" id="userRoleEmptyError"
                    class="user-role-empty-error">User role must not be empty!</small>
+
+            <div class="collect-data-container">
+                <label for="input-user-profile-picture">Role</label>
+                <input
+                        th:field="*{profilePicture}"
+                        th:errorclass="error"
+                        name="input-user-profile-picture"
+                        type="file"
+                        id="input-user-profile-picture">
+            </div>
 
             <button class="register-button" type="submit">Register</button>
         </form>

@@ -2,7 +2,9 @@ package org.example.finalprojectmyshop.mediaFile.service.impl;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.*;
+import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
 import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
+import org.example.finalprojectmyshop.mediaFile.repository.MediaFileRepository;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,10 +17,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +27,10 @@ public class MediaFileServiceImpl implements MediaFileService {
     private final String DOWNLOAD_URL = "https://firebasestorage.googleapis.com/v0/b/Images/o/%s?alt=media";
     private final Storage storage = this.initStorage();
 
-    public MediaFileServiceImpl() throws IOException {
+    private final MediaFileRepository mediaFileRepository;
+
+    public MediaFileServiceImpl(MediaFileRepository mediaFileRepository) throws IOException {
+        this.mediaFileRepository = mediaFileRepository;
     }
 
 
@@ -38,7 +40,9 @@ public class MediaFileServiceImpl implements MediaFileService {
 
         this.storage.create(blobInfo, Files.readAllBytes(file.toPath()));
 
-        return String.format(DOWNLOAD_URL, URLEncoder.encode(fileName, StandardCharsets.UTF_8));
+//        return String.format(DOWNLOAD_URL, URLEncoder.encode(fileName, StandardCharsets.UTF_8));
+        fileName = fileName.split("/")[1];
+        return fileName;
     }
 
     private File convertToFile(MultipartFile multipartFile, String fileName) {
@@ -57,12 +61,12 @@ public class MediaFileServiceImpl implements MediaFileService {
     }
 
     @Override
-    public String upload(File file, ImageType type) throws IOException {
+    public String upload(MultipartFile multipartFile, ImageType type) {
         try {
-//            String fileName = multipartFile.getOriginalFilename();
-//            fileName = UUID.randomUUID().toString().concat(this.getExtension(fileName));
+            String fileName = multipartFile.getOriginalFilename();
+            fileName = UUID.randomUUID().toString().concat(this.getExtension(fileName));
 
-//            File file = this.convertToFile(multipartFile, fileName);
+            File file = this.convertToFile(multipartFile, fileName);
 
             String url = this.uploadFile(file, ImageType.USER.getCloudFolderPath() + file.getName());
             file.delete();
@@ -70,41 +74,55 @@ public class MediaFileServiceImpl implements MediaFileService {
             return url;
         } catch (IOException e) {
             e.printStackTrace();
-            throw new IOException("Image/s couldn't upload, Something went wrong");
+            return "Image couldn't upload, Something went wrong";
         }
     }
 
     @Override
-    public String upload(File file, ImageType type, String productName) {
+    public String upload(MultipartFile multipartFile, ImageType type, String productName) {
         try {
-            String url = this.uploadFile(file, ImageType.PRODUCT.getCloudFolderPath() + productName + file.getName());
+            String fileName = multipartFile.getOriginalFilename();
+            fileName = UUID.randomUUID().toString().concat(this.getExtension(fileName));
 
+            File file = this.convertToFile(multipartFile, fileName);
+
+            String url = this.uploadFile(file, ImageType.PRODUCT.getCloudFolderPath() + productName + file.getName());
             file.delete();
 
             return url;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return "Images couldn't upload, Something went wrong";
         }
 
     }
 
     @Override
-    public void downloadFile(String fileName, ImageType type) {
+    public String downloadFile(String fileName, ImageType type) {
+        String fileCloudPath = type.getCloudFolderPath().concat(fileName);
+        String localFolderPath = type.getLocalFolderPath().concat(fileName);
+        Blob blob = this.storage.get(BUCKER_NAME, fileCloudPath);
+        blob.downloadTo(Paths.get("C:\\Users\\mitak\\Desktop\\FinalProject-MyShop\\src\\main\\resources\\static\\img\\" + localFolderPath));
 
-        if (type == ImageType.USER) {
-            String filePath = type.getCloudFolderPath().concat(fileName);
-            String folderPath = type.getLocalFolderPath().concat(fileName);
+        return fileName;
+    }
 
-            Blob blob = this.storage.get(BUCKER_NAME, filePath);
-            blob.downloadTo(Paths.get("C:\\Users\\mitak\\Desktop\\FinalProject-MyShop\\src\\main\\resources\\static\\img\\" + folderPath));
-        } else if (type == ImageType.PRODUCT) {
-            String cloudFilePath = type.getCloudFolderPath().concat(fileName);
-            String productLocalFolderPath = type.getLocalFolderPath() + fileName.split("/")[0] + "/";
-//            String localFolderPath = type.getLocalFolderPath() + productLocalFolderPath + "/";
+    @Override
+    public String downloadFile(String fileName, ImageType type, String productName) {
+        String cloudFilePath = type.getCloudFolderPath().concat(fileName);
+        String productLocalFolderPath = type.getLocalFolderPath() + fileName.split("/")[0] + "/";
+//        String localFolderPath = type.getLocalFolderPath() + productLocalFolderPath + "/";
 
-            Blob blob = this.storage.get(BUCKER_NAME, cloudFilePath);
-            blob.downloadTo(Paths.get("C:\\Users\\mitak\\Desktop\\FinalProject-MyShop\\src\\main\\resources\\static\\img\\" + productLocalFolderPath + fileName));
-        }
+        Blob blob = this.storage.get(BUCKER_NAME, cloudFilePath);
+        blob.downloadTo(Paths.get("C:\\Users\\mitak\\Desktop\\FinalProject-MyShop\\src\\main\\resources\\static\\img\\" + productLocalFolderPath + fileName));
+
+//        String filePath =
+        String filePathAndName = String.format("%s/%s", productName, fileName);
+        return fileName;
+    }
+
+    @Override
+    public void save(MediaFile mediaFile) {
+        this.mediaFileRepository.save(mediaFile);
     }
 
     private Storage initStorage() throws IOException {

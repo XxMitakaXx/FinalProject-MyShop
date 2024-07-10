@@ -15,6 +15,7 @@
                 th:action="@{/add-product}"
                 th:method="post"
                 th:object="${addProductDTO}"
+                enctype="multipart/form-data"
                 id="add-product">
             <div class="collecting-data-container">
                 <label for="name-input">Name</label>
@@ -87,6 +88,7 @@
                             th:errorclass="error"
                             name="urls-input"
                             type="file"
+                            accept="/image/*"
                             id="first-image-input"
                             placeholder="Upload image">
                 </div>
@@ -100,6 +102,7 @@
                             th:errorclass="error"
                             name="second-image-input"
                             type="file"
+                            accept="/image/*"
                             id="second-image-input"
                             placeholder="Upload image">
                 </div>
@@ -114,6 +117,7 @@
                             th:errorclass="error"
                             name="third-image-input"
                             type="file"
+                            accept="/image/*"
                             id="third-image-input"
                             placeholder="Upload image">
                 </div>
@@ -127,6 +131,7 @@
                             th:errorclass="error"
                             name="fourth-image-input"
                             type="file"
+                            accept="/image/*"
                             id="fourth-image-input"
                             placeholder="Upload image">
                 </div>
@@ -140,11 +145,11 @@
                             th:errorclass="error"
                             name="fifth-image-input"
                             type="file"
+                            accept="/image/*"
                             id="fifth-image-input"
                             placeholder="Upload image">
                 </div>
             </div>
-
 
             <div class="collecting-data-container">
                 <label for="category-input">Category</label>

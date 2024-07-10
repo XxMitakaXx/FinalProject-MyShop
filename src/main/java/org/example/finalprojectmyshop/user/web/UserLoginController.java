@@ -1,6 +1,7 @@
 package org.example.finalprojectmyshop.user.web;
 
 import jakarta.validation.Valid;
+import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
 import org.example.finalprojectmyshop.user.models.dtos.UserLoginDTO;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
@@ -63,9 +64,17 @@ public class UserLoginController {
         if (!success) {
             redirectAttributes.addFlashAttribute("userLoginDTO", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserLoginDTO", bindingResult);
-
             return "redirect:/login";
         }
+
+        String url = this.userService.downloadProfileImage(this.currentUser.getUser().getProfilePicture());
+        String imagePath = String.format(
+                "img/%s%s",
+                ImageType.USER.getLocalFolderPath(),
+                url
+        );
+
+        redirectAttributes.addFlashAttribute("imagePath", imagePath);
 
         return "redirect:/";
     }

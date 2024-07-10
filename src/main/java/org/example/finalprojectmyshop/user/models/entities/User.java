@@ -8,6 +8,7 @@ import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.entities.Review;
 import org.example.finalprojectmyshop.user.models.entities.enums.Status;
 import org.example.finalprojectmyshop.product.models.entities.Warranty;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -60,7 +61,7 @@ public class User {
     private Status status;
 
     @OneToOne
-    private MediaFile profileImage;
+    private MediaFile profilePicture;
 
     public User() {
         this.addresses = new HashSet<>();
@@ -180,6 +181,14 @@ public class User {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public MediaFile getProfilePicture() {
+        return this.profilePicture;
+    }
+
+    public void setProfilePicture(MediaFile profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }
 

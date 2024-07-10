@@ -18,7 +18,7 @@ public class Product {
     @Column(nullable = false)
     private double price;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @OneToMany

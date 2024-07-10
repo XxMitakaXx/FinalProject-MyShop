@@ -25,7 +25,7 @@
     gap: 1em;
 }
 
-.category-products a {
+.category-products button {
     text-decoration: none;
     color: #000000;
 }

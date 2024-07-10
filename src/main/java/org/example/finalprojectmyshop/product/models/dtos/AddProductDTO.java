@@ -2,6 +2,7 @@ package org.example.finalprojectmyshop.product.models.dtos;
 
 import jakarta.validation.constraints.*;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,15 +21,15 @@ public class AddProductDTO {
 
     private List<AddProductPropertyDTO> properties;
 
-    private File firstImage;
+    private MultipartFile firstImage;
 
-    private File secondImage;
+    private MultipartFile secondImage;
 
-    private File thirdImage;
+    private MultipartFile thirdImage;
 
-    private File fourthImage;
+    private MultipartFile fourthImage;
 
-    private File fifthImage;
+    private MultipartFile fifthImage;
 
     private SecondaryCategoryName secondaryCategoryName;
 
@@ -71,43 +72,43 @@ public class AddProductDTO {
         this.properties = properties;
     }
 
-    public File getFirstImage() {
+    public MultipartFile getFirstImage() {
         return this.firstImage;
     }
 
-    public void setFirstImage(File firstImage) {
+    public void setFirstImage(MultipartFile firstImage) {
         this.firstImage = firstImage;
     }
 
-    public File getSecondImage() {
+    public MultipartFile getSecondImage() {
         return this.secondImage;
     }
 
-    public void setSecondImage(File secondImage) {
+    public void setSecondImage(MultipartFile secondImage) {
         this.secondImage = secondImage;
     }
 
-    public File getThirdImage() {
+    public MultipartFile getThirdImage() {
         return this.thirdImage;
     }
 
-    public void setThirdImage(File thirdImage) {
+    public void setThirdImage(MultipartFile thirdImage) {
         this.thirdImage = thirdImage;
     }
 
-    public File getFourthImage() {
+    public MultipartFile getFourthImage() {
         return this.fourthImage;
     }
 
-    public void setFourthImage(File fourthImage) {
+    public void setFourthImage(MultipartFile fourthImage) {
         this.fourthImage = fourthImage;
     }
 
-    public File getFifthImage() {
+    public MultipartFile getFifthImage() {
         return this.fifthImage;
     }
 
-    public void setFifthImage(File fifthImage) {
+    public void setFifthImage(MultipartFile fifthImage) {
         this.fifthImage = fifthImage;
     }
 

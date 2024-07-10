@@ -1,15 +1,13 @@
 package org.example.finalprojectmyshop.mediaFile.service;
 
+import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
 import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Set;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface MediaFileService {
-
-//    String upload(MultipartFile multipartFile);
-    String upload(File file, ImageType type) throws IOException;
-    String upload(File file, ImageType type, String productName);
-    void downloadFile(String fileName, ImageType type);
+    String upload(MultipartFile multipartFile, ImageType type);
+    String upload(MultipartFile multipartFile, ImageType type, String productName);
+    String downloadFile(String fileName, ImageType type);
+    String downloadFile(String fileName, ImageType type, String productName);
+    void save(MediaFile mediaFile);
 }

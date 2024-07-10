@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.example.finalprojectmyshop.user.models.entities.enums.UserRole;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -35,6 +36,8 @@ public class UserRegisterDTO {
     private LocalDate birthDate;
 
     private UserRole userRole;
+
+    private MultipartFile profilePicture;
 
     public UserRegisterDTO() {}
 
@@ -100,5 +103,13 @@ public class UserRegisterDTO {
 
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
+    }
+
+    public MultipartFile getProfilePicture() {
+        return this.profilePicture;
+    }
+
+    public void setProfilePicture(MultipartFile profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }
