@@ -1,6 +1,6 @@
 .navbar {
     max-height: 4em;
-    max-width: 100%;
+    width: 100%;
     /*background: var(--primary-color);*/
     display: flex;
     flex-direction: row;

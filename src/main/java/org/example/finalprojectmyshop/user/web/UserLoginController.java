@@ -67,14 +67,8 @@ public class UserLoginController {
             return "redirect:/login";
         }
 
-        String url = this.userService.downloadProfileImage(this.currentUser.getUser().getProfilePicture());
-        String imagePath = String.format(
-                "img/%s%s",
-                ImageType.USER.getLocalFolderPath(),
-                url
-        );
+       this.userService.downloadProfileImage(this.currentUser.getUser().getProfilePicture());
 
-        redirectAttributes.addFlashAttribute("imagePath", imagePath);
 
         return "redirect:/";
     }

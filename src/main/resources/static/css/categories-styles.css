@@ -8,10 +8,12 @@
     justify-content: start;
     position: absolute;
     top: 100px;
+    left: 0;
     overflow-y: scroll;
     overflow-x: hidden;
     transform: translateX(-100%);
     transition: transform 0.3s;
+    z-index: 1;
 }
 
 .hide {

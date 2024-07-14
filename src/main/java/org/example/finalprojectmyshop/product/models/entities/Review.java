@@ -12,14 +12,20 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "rating")
-    private int mark;
+    private String title;
 
-    @Column(name = "date")
+    @OneToOne
+    private Rating rating;
+
+    private String description;
+
     private Date date;
 
     @ManyToOne
     private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Product product;
 
     public Review() {}
 
@@ -31,12 +37,29 @@ public class Review {
         this.id = id;
     }
 
-    public int getMark() {
-        return this.mark;
+    public String getTitle() {
+        return this.title;
     }
 
-    public void setMark(int mark) {
-        this.mark = mark;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Rating getRating() {
+        return this.rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
+
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getDate() {
@@ -53,5 +76,13 @@ public class Review {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Product getProduct() {
+        return this.product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

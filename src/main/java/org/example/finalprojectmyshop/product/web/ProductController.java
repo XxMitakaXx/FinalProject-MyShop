@@ -26,7 +26,7 @@ public class ProductController {
     public AddProductDTO addProductDTO() {
         AddProductDTO addProductDTO = new AddProductDTO();
 
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 40; i++) {
             addProductDTO.getProperties().add(new AddProductPropertyDTO());
         }
 

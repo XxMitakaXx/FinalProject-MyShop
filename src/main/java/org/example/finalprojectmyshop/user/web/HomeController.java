@@ -17,12 +17,11 @@ import java.util.Set;
 public class HomeController {
 
     private final CategoryService categoryService;
-    private final MediaFileService mediaFileService;
     private Set<CategoryAndRandomProductsDTO> categories = new HashSet<>();
 
-    public HomeController(CategoryService categoryService, MediaFileService mediaFileService) {
+    public HomeController(CategoryService categoryService) {
         this.categoryService = categoryService;
-        this.mediaFileService = mediaFileService;
+
     }
 
     @GetMapping("/")

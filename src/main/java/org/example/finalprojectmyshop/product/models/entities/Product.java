@@ -18,11 +18,11 @@ public class Product {
     @Column(nullable = false)
     private double price;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String description;
+    @Column(name = "discount_price")
+    private double discountPrice;
 
     @OneToMany
-    private Set<ProductProperty> properties;
+    private List<ProductProperty> properties;
 
 //    private String color;
 
@@ -38,8 +38,8 @@ public class Product {
     @Column(nullable = false)
     private boolean available;
 
-    @OneToMany
-    private Set<Rating> ratings;
+    @OneToMany(mappedBy = "product")
+    private Set<Review> reviews;
 
     @Column(name = "express_ship", nullable = false)
     private boolean expressShip;
@@ -51,9 +51,9 @@ public class Product {
     private int quantity;
 
     public Product() {
-        this.properties = new HashSet<>();
+        this.properties = new ArrayList<>();
         this.images = new HashSet<>();
-        this.ratings = new HashSet<>();
+        this.reviews = new HashSet<>();
     }
 
     public long getId() {
@@ -86,14 +86,16 @@ public class Product {
         return this;
     }
 
-    public String getDescription() {
-        return this.description;
+    public double getDiscountPrice() {
+        return this.discountPrice;
     }
 
-    public Product setDescription(String description) {
-        this.description = description;
+    public void setDiscountPrice(double discountPrice) {
+        this.discountPrice = discountPrice;
+    }
 
-        return this;
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
 //    public String getColor() {
@@ -105,11 +107,11 @@ public class Product {
 //    }
 
 
-    public Set<ProductProperty> getProperties() {
+    public List<ProductProperty> getProperties() {
         return this.properties;
     }
 
-    public Product setProperties(Set<ProductProperty> properties) {
+    public Product setProperties(List<ProductProperty> properties) {
         this.properties = properties;
 
         return this;
@@ -147,12 +149,12 @@ public class Product {
         return this.quantity > 0;
     }
 
-    public Set<Rating> getRatings() {
-        return this.ratings;
+    public Set<Review> getReviews() {
+        return this.reviews;
     }
 
-    public Product setRatings(Set<Rating> ratings) {
-        this.ratings = ratings;
+    public Product setReviews(Set<Review> ratings) {
+        this.reviews = ratings;
 
         return this;
     }

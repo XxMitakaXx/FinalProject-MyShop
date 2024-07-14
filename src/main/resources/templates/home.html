@@ -10,8 +10,8 @@
     <link rel="stylesheet" th:href="@{css/cart-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/second-navbar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/categories-styles.css}" />
-    <link rel="stylesheet" th:href="@{css/suggest-product-by-category-styles.css}" />
-    <link rel="stylesheet" th:href="@{css/footer-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/suggest-product-by-category-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer-styles.css}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script th:src="@{/js/profileContext.js}" defer></script>
     <script th:src="@{/js/cartContext.js}" defer></script>
@@ -19,9 +19,10 @@
     <title>My Shop</title>
 </head>
 <body>
-   <nav th:replace="~{fragments/navbar}"></nav>
-
+    <nav th:replace="~{fragments/navbar}"></nav>
     <nav th:replace="~{fragments/second-navbar}"></nav>
+    <nav th:replace="~{fragments/categories-navbar}"></nav>
+
 
 
     <div class="categories-suggestion-container">
@@ -86,7 +87,6 @@
         </div>
     </div>
 
-    <nav th:replace="~{fragments/categories-navbar}"></nav>
     <footer th:replace="~{fragments/footer}"></footer>
 </body>
 </html>

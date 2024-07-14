@@ -1,0 +1,327 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.product-main-container {
+    height: 50em;
+    width: 100em;
+    position: relative;
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4em;
+}
+
+.product-photo-container {
+    position: absolute;
+    top: 4em;
+    left: 6em;
+}
+
+.product-photo-container .product-main-photo {
+    width: 500px;
+    transition: 0.3s;
+}
+
+.product-photo-container .product-photo-view {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-photo-container .product-photo-view img {
+    width: 70px;
+    cursor: pointer;
+    border: 1px solid #5454c5;
+}
+
+.product-info {
+    height: 10em;
+    width: 34em;
+    position: absolute;
+    right: 1em;
+    top: 8em;
+    /* border: 1px solid #5454c5; */
+}
+
+.product-info .original-price {
+    color: #aaaaaa;
+    font-size: 1.2em;
+    text-decoration: line-through;
+}
+
+.product-info .product-price {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 2em;
+    position: absolute;
+    top: 0.8em;
+}
+
+.product-info .product-available {
+    font-size: 1em;
+    position: absolute;
+    top: 1.5em;
+}
+
+.product-info .product-rate {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    position: absolute;
+    bottom: 0;
+    font-size: 1.2em;
+}
+
+.product-actions {
+    height: 10em;
+    width: 40em;
+    /* border: 1px solid #5454c5; */
+    position: absolute;
+    bottom: 8em;
+    right: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-actions form {
+    height: 33%;
+    width: 70%;
+}
+.product-actions form button {
+    height: 100%;
+    width: 100%;
+    background: #639cd9;
+    border: none;
+    border-radius: 0.6em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.product-actions form button p {
+    color: #ffffff;
+    font-size: 1.5em;
+}
+
+.product-actions form button span {
+    font-size: 3em;
+    padding: 0.5em;
+    position: absolute;
+    left: 0;
+    border-bottom-right-radius: 1.5em;
+    color: #ffffff;
+    background: #5454c5;
+}
+
+.product-description {
+}
+
+.product-properties-table {
+    margin-top: 1em;
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.product-properties-table tr td {
+    text-align: start;
+    padding: 0.5em;
+}
+
+.product-properties-table tr td:nth-child(2n) {
+    width: 60%;
+}
+
+.product-properties-table tr:nth-child(2n) {
+    background: #dcedff;
+}
+
+.product-reviews {
+    margin-top: 4em;
+    padding: 2em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4em;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-reviews .product-review-title {
+    font-size: 2.5em;
+}
+
+.product-reviews .product-rates {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-reviews .product-rates .product-rate-resume {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-reviews .product-rates .product-rate-resume .product-rating {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.product-reviews .product-rates .product-rate-resume .product-stars .star {
+    font-size: 1.2em;
+}
+
+.product-reviews .product-rates .product-rate-schema {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-reviews .product-rates .product-rate-schema .product-rate-schema-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0.2em;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-reviews .product-rates .product-rate-schema .product-rate-schema-row .star {
+    font-size: 1em;
+    color: #ff9c1a;
+}
+
+.product-reviews .product-rates .product-rate-schema .product-rate-schema-row .product-rate-bar {
+    height: 1em;
+    width: 100%;
+    background: #f0f0f0;
+    border-radius: 0.5em;
+}
+
+.product-reviews .product-rates .product-rate-schema .product-rate-schema-row .product-rate-bar .product-rate-bar-rate {
+    height: 100%;
+    width: 50%;
+    background: #83c583;
+    border-radius: 0.5em;
+}
+
+.product-reviews .product-rates .product-add-review {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-reviews .product-add-review form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.product-reviews .product-add-review form .add-review-button {
+    font-size: 1em;
+    color: #ffffff;
+    background: #5454c5;
+    height: 3em;
+    width: 30%;
+    border: none;
+    border-radius: 0.2em;
+    cursor: pointer;
+}
+
+.product-reviews-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-reviews-container .product-review {
+    height: 12em;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    gap: 4em;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #5454c5;
+}
+
+.product-reviews-container .review-user-data {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: start;
+}
+
+.product-reviews-container .product-review .review-user-data .review-user-image {
+    width: 3em;
+}
+
+.product-reviews-container .product-review .review-user-data .review-user-name {
+    font-size: 1.2em;
+}
+
+.product-reviews-container .product-review .review-user-data .comment-add-date {
+    color: #999999;
+    font-size: 1em;
+}
+
+.product-reviews-container .review-content {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: start;
+}
+
+.product-reviews-container .review-content .review-title {
+    font-size: 1.5em;
+}
+
+.product-reviews-container .review-content .review-text {
+    width: 100px;
+}
+
+.category-suggestion {
+    /* width: 90em; */
+    text-align: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ececec;
+}

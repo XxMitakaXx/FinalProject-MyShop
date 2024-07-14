@@ -2,20 +2,17 @@ package org.example.finalprojectmyshop.product.service.impl;
 
 import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
 import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
-import org.example.finalprojectmyshop.mediaFile.repository.MediaFileRepository;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
-import org.example.finalprojectmyshop.product.models.dtos.AddProductDTO;
-import org.example.finalprojectmyshop.product.models.entities.Product;
-import org.example.finalprojectmyshop.product.models.entities.ProductProperty;
-import org.example.finalprojectmyshop.product.models.entities.SecondaryCategory;
+import org.example.finalprojectmyshop.product.models.dtos.*;
+import org.example.finalprojectmyshop.product.models.entities.*;
 import org.example.finalprojectmyshop.product.repository.CategoryRepository;
 import org.example.finalprojectmyshop.product.repository.ProductPropertyRepository;
 import org.example.finalprojectmyshop.product.repository.ProductRepository;
 import org.example.finalprojectmyshop.product.repository.SecondaryCategoryRepository;
 import org.example.finalprojectmyshop.product.service.ProductService;
+import org.example.finalprojectmyshop.user.models.entities.User;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
-import org.example.finalprojectmyshop.user.service.impl.UserServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,7 +51,6 @@ public class ProductServiceImpl implements ProductService {
         product
                 .setName(addProductDTO.getName().trim())
                 .setPrice(addProductDTO.getPrice())
-                .setDescription(addProductDTO.getDescription().trim())
                 .setSecondaryCategory(category)
                 .setExpressShip(true)
                 .setLeasing(true)
@@ -132,5 +128,145 @@ public class ProductServiceImpl implements ProductService {
             this.userService.save(this.currentUser.getUser());
         }
 
+    }
+
+    @Override
+    public ProductDetailsDTO findById(long id) {
+        Optional<Product> byId = this.productRepository.findById(id);
+
+        if (byId.isEmpty()) {
+            return null;
+        }
+
+        Product product = byId.get();
+        ProductDetailsDTO productDetailsDTO = toProductDetailsDTO(product);
+
+        return productDetailsDTO;
+    }
+
+    @Override
+    public Product findProductEntityById(long id) {
+        Optional<Product> optional = this.productRepository.findById(id);
+        if (optional.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return optional.get();
+    }
+
+    private ProductDetailsDTO toProductDetailsDTO(Product product) {
+        ProductDetailsDTO productDetailsDTO = new ProductDetailsDTO();
+
+        productDetailsDTO.setId(product.getId());
+        productDetailsDTO.setName(product.getName());
+        productDetailsDTO.setMainImageUrl(product.getMainImage().getUrl());
+        this.mediaFileService.downloadFile(product.getMainImage().getUrl(), ImageType.PRODUCT, product.getName());
+
+        product.getImages()
+                .forEach(image -> {
+                    productDetailsDTO.getImagesUrls().add(image.getUrl());
+                    this.mediaFileService.downloadFile(image.getUrl(), ImageType.PRODUCT, product.getName());
+                });
+
+        productDetailsDTO.setDiscountPrice(product.getDiscountPrice());
+
+        product.getReviews()
+                .forEach(review -> {
+                    ReviewDataDTO reviewDataDTO = toReviewDataDTO(review);
+                    productDetailsDTO.getReviews().add(reviewDataDTO);
+                });
+
+        Double productRating = product.getReviews()
+                .stream()
+                .map(Review::getRating)
+                .collect(Collectors.toSet())
+                .stream()
+                .map(Rating::getRating)
+                .reduce(0.0, Double::sum);
+        productDetailsDTO.setRating(productRating);
+
+        productDetailsDTO.setReviewsCount(product.getReviews().size());
+
+        int fiveStarsReviewCount = product.getReviews()
+                .stream()
+                .filter(review -> review.getRating().getRating() > 4.5)
+                .collect(Collectors.toSet())
+                .size();
+
+        productDetailsDTO.setFiveStarsReviewsCount(fiveStarsReviewCount);
+
+        int fourStarsReviewCount = product.getReviews()
+                .stream()
+                .filter(review -> review.getRating().getRating() >= 4.0 && review.getRating().getRating() < 4.5)
+                .collect(Collectors.toSet())
+                .size();
+
+        productDetailsDTO.setFourStarsReviewsCount(fourStarsReviewCount);
+
+        int threeStarsReviewCount = product.getReviews()
+                .stream()
+                .filter(review -> review.getRating().getRating() >= 3.0 && review.getRating().getRating() < 4.0)
+                .collect(Collectors.toSet())
+                .size();
+
+        productDetailsDTO.setThreeStarsReviewsCount(threeStarsReviewCount);
+
+        int twoStarsReviewCount = product.getReviews()
+                .stream()
+                .filter(review -> review.getRating().getRating() >= 2.0 && review.getRating().getRating() < 3.0)
+                .collect(Collectors.toSet())
+                .size();
+
+        productDetailsDTO.setTwoStarsReviewsCount(twoStarsReviewCount);
+
+        int oneStarsReviewCount = product.getReviews()
+                .stream()
+                .filter(review -> review.getRating().getRating() >= 1 && review.getRating().getRating() < 2.0)
+                .collect(Collectors.toSet())
+                .size();
+
+        productDetailsDTO.setOneStarsReviewsCount(oneStarsReviewCount);
+
+        product.getProperties()
+                .forEach(productProperty -> {
+                    ProductDetailsPropertyDTO productDetailsPropertyDTO = this.toProductDetailsPropertyDTO(productProperty);
+                    productDetailsDTO.getProperties().add(productDetailsPropertyDTO);
+                });
+
+        productDetailsDTO.setAvailable(product.isAvailable());
+
+        return productDetailsDTO;
+    }
+
+    private ReviewDataDTO toReviewDataDTO(Review review) {
+        ReviewDataDTO reviewDataDTO = new ReviewDataDTO();
+
+        reviewDataDTO.setTitle(reviewDataDTO.getTitle());
+        reviewDataDTO.setText(reviewDataDTO.getText());
+        reviewDataDTO.setPostDate(review.getDate().toString());
+
+        ReviewUserDataDTO reviewUserDataDTO = toReviewUserDataDTO(review.getUser());
+        reviewDataDTO.setUserData(reviewUserDataDTO);
+
+        return reviewDataDTO;
+    }
+
+    private ReviewUserDataDTO toReviewUserDataDTO(User user) {
+        ReviewUserDataDTO reviewUserDataDTO = new ReviewUserDataDTO();
+
+        reviewUserDataDTO.setFullName(user.getFirstName() + " " + user.getLastName());
+        reviewUserDataDTO.setProfilePictureUrl(user.getProfilePicture().getUrl());
+        this.mediaFileService.downloadFile(user.getProfilePicture().getUrl(), ImageType.USER);
+
+        return reviewUserDataDTO;
+    }
+
+    private ProductDetailsPropertyDTO toProductDetailsPropertyDTO(ProductProperty productProperty) {
+        ProductDetailsPropertyDTO productDetailsPropertyDTO = new ProductDetailsPropertyDTO();
+
+        productDetailsPropertyDTO.setName(productProperty.getName());
+        productDetailsPropertyDTO.setValue(productProperty.getValue());
+
+        return productDetailsPropertyDTO;
     }
 }

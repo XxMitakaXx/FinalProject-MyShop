@@ -7,6 +7,7 @@ import org.example.finalprojectmyshop.product.models.dtos.RandomProductsDTO;
 import org.example.finalprojectmyshop.product.models.entities.Category;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.entities.Rating;
+import org.example.finalprojectmyshop.product.models.entities.Review;
 import org.example.finalprojectmyshop.product.repository.CategoryRepository;
 import org.example.finalprojectmyshop.product.service.CategoryService;
 import org.springframework.stereotype.Service;
@@ -92,8 +93,11 @@ public class CategoryServiceImpl implements CategoryService {
         productDTO.setPriceBeforePoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[0]));
         productDTO.setPriceAfterPoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[1]));
 
-        if (!product.getRatings().isEmpty()) {
-            double rating = product.getRatings()
+        if (!product.getReviews().isEmpty()) {
+            double rating = product.getReviews()
+                    .stream()
+                    .map(Review::getRating)
+                    .collect(Collectors.toSet())
                     .stream()
                     .map(Rating::getRating)
                     .reduce(0.0, Double::sum);
@@ -101,7 +105,7 @@ public class CategoryServiceImpl implements CategoryService {
             productDTO.setRating(rating);
         }
 
-        productDTO.setReviewsCount(product.getRatings().size());
+        productDTO.setReviewsCount(product.getReviews().size());
 
         return productDTO;
     }

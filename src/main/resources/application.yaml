@@ -21,10 +21,10 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-#  thymeleaf:
-#    check-template-location: true
-#    cache: false
-#    prefix: file:./src/main/resources/templates/
-#    resources:
-#      static-locations: file:./src/main/resources/static/
-#      cache-period: 0
+  thymeleaf:
+    check-template-location: true
+    cache: false
+    prefix: file:./src/main/resources/templates/
+    resources:
+      static-locations: file:./src/main/resources/static/
+      cache-period: 0

@@ -16,9 +16,6 @@ public class AddProductDTO {
     @Positive
     private double price;
 
-    @Size(min = 10, max = 500)
-    private String description;
-
     private List<AddProductPropertyDTO> properties;
 
     private MultipartFile firstImage;
@@ -54,14 +51,6 @@ public class AddProductDTO {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public List<AddProductPropertyDTO> getProperties() {
