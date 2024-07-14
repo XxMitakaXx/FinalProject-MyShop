@@ -8,7 +8,6 @@ import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.entities.Review;
 import org.example.finalprojectmyshop.user.models.entities.enums.Status;
 import org.example.finalprojectmyshop.product.models.entities.Warranty;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -42,8 +41,11 @@ public class User {
     @ManyToMany()
     private Set<Address> addresses;
 
-    @ManyToMany
-    private Set<Product> wishlist;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Product> productsInCart;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Product> favorites;
 
     @OneToMany
     private Set<Order> orders;
@@ -65,7 +67,8 @@ public class User {
 
     public User() {
         this.addresses = new HashSet<>();
-        this.wishlist = new HashSet<>();
+        this.productsInCart = new HashSet<>();
+        this.favorites = new HashSet<>();
         this.roles = new HashSet<>();
         this.reviews = new HashSet<>();
         this.warranties = new HashSet<>();
@@ -135,12 +138,20 @@ public class User {
         this.addresses = addresses;
     }
 
-    public Set<Product> getWishlist() {
-        return this.wishlist;
+    public Set<Product> getProductsInCart() {
+        return this.productsInCart;
     }
 
-    public void setWishlist(Set<Product> wishlist) {
-        this.wishlist = wishlist;
+    public void setProductsInCart(Set<Product> cart) {
+        this.productsInCart = cart;
+    }
+
+    public Set<Product> getFavorites() {
+        return this.favorites;
+    }
+
+    public void setFavorites(Set<Product> wishlist) {
+        this.favorites = wishlist;
     }
 
     public Set<Order> getOrders() {

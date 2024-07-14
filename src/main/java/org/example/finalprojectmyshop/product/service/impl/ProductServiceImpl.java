@@ -13,12 +13,17 @@ import org.example.finalprojectmyshop.product.repository.ProductPropertyReposito
 import org.example.finalprojectmyshop.product.repository.ProductRepository;
 import org.example.finalprojectmyshop.product.repository.SecondaryCategoryRepository;
 import org.example.finalprojectmyshop.product.service.ProductService;
+import org.example.finalprojectmyshop.user.service.UserService;
+import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
+import org.example.finalprojectmyshop.user.service.impl.UserServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -27,16 +32,18 @@ public class ProductServiceImpl implements ProductService {
     private final SecondaryCategoryRepository secondaryCategoryRepository;
     private final CategoryRepository categoryRepository;
     private final ProductPropertyRepository productPropertyRepository;
-    private final MediaFileRepository mediaFileRepository;
+    private final UserService userService;
     private final MediaFileService mediaFileService;
+    private final CurrentUser currentUser;
 
-    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, CategoryRepository categoryRepository, ProductPropertyRepository productPropertyRepository, MediaFileRepository mediaFileRepository, MediaFileService mediaFileService) {
+    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, CategoryRepository categoryRepository, ProductPropertyRepository productPropertyRepository, UserService userService, MediaFileService mediaFileService, CurrentUser currentUser) {
         this.productRepository = productRepository;
         this.secondaryCategoryRepository = secondaryCategoryRepository;
         this.categoryRepository = categoryRepository;
         this.productPropertyRepository = productPropertyRepository;
-        this.mediaFileRepository = mediaFileRepository;
+        this.userService = userService;
         this.mediaFileService = mediaFileService;
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -67,6 +74,14 @@ public class ProductServiceImpl implements ProductService {
                     }
                 });
 
+        String mainImageUrl = this.mediaFileService.upload(addProductDTO.getFirstImage(), ImageType.PRODUCT, product.getName());
+        MediaFile mainImage = new MediaFile();
+        mainImage.setUrl(mainImageUrl);
+        this.mediaFileService.save(mainImage);
+
+        product.setMainImage(mainImage);
+
+
         List<MultipartFile> images = List.of(
                 addProductDTO.getFirstImage(),
                 addProductDTO.getSecondImage(),
@@ -88,9 +103,34 @@ public class ProductServiceImpl implements ProductService {
             mediaFile.setUrl(url);
 
             this.mediaFileService.save(mediaFile);
-            product.getImagesUrls().add(mediaFile);
+            product.getImages().add(mediaFile);
         });
 
+        category.getProducts().add(product);
+
         this.productRepository.save(product);
+        this.secondaryCategoryRepository.save(category);
+    }
+
+    @Override
+    public void addProductToFavorites(long id) {
+        Optional<Product> optional = this.productRepository.findById(id);
+
+        if (optional.isEmpty()) {
+            return;
+        }
+
+        Product product = optional.get();
+        boolean contains = this.currentUser.getUser().getFavorites()
+                .stream()
+                .map(Product::getId)
+                .collect(Collectors.toSet())
+                .contains(product.getId());
+
+        if (!contains) {
+            this.currentUser.getUser().getFavorites().add(product);
+            this.userService.save(this.currentUser.getUser());
+        }
+
     }
 }

@@ -26,8 +26,11 @@ public class Product {
 
 //    private String color;
 
+    @OneToOne
+    private MediaFile mainImage;
+
     @OneToMany
-    private Set<MediaFile> imagesUrls;
+    private Set<MediaFile> images;
 
     @ManyToOne
     private SecondaryCategory secondaryCategory;
@@ -49,7 +52,7 @@ public class Product {
 
     public Product() {
         this.properties = new HashSet<>();
-        this.imagesUrls = new HashSet<>();
+        this.images = new HashSet<>();
         this.ratings = new HashSet<>();
     }
 
@@ -112,12 +115,20 @@ public class Product {
         return this;
     }
 
-    public Set<MediaFile> getImagesUrls() {
-        return this.imagesUrls;
+    public MediaFile getMainImage() {
+        return this.mainImage;
     }
 
-    public Product setImagesUrls(Set<MediaFile> imagesUrls) {
-        this.imagesUrls = imagesUrls;
+    public void setMainImage(MediaFile mainImage) {
+        this.mainImage = mainImage;
+    }
+
+    public Set<MediaFile> getImages() {
+        return this.images;
+    }
+
+    public Product setImages(Set<MediaFile> imagesUrls) {
+        this.images = imagesUrls;
 
         return this;
     }

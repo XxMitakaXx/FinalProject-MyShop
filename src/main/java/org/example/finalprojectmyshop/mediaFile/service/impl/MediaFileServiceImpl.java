@@ -25,6 +25,7 @@ public class MediaFileServiceImpl implements MediaFileService {
 
     private final String BUCKER_NAME = "onlineshopfinalprojectapp.appspot.com";
     private final String DOWNLOAD_URL = "https://firebasestorage.googleapis.com/v0/b/Images/o/%s?alt=media";
+//    private final String GET_IMAGE_URL = "https://firebasestorage.googleapis.com/v0/b/onlineshopfinalprojectapp.appspot.com/o/product-images%2Fhgfhfhfhgfh%2F%s.jpg?alt=media&token=%s", imageName, accessToken;
     private final Storage storage = this.initStorage();
 
     private final MediaFileRepository mediaFileRepository;
@@ -34,14 +35,19 @@ public class MediaFileServiceImpl implements MediaFileService {
     }
 
 
-    private String uploadFile(File file, String fileName) throws IOException {
+    private String uploadFile(File file, String fileName, ImageType type) throws IOException {
         BlobId blobId = BlobId.of(BUCKER_NAME, fileName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
 
         this.storage.create(blobInfo, Files.readAllBytes(file.toPath()));
 
 //        return String.format(DOWNLOAD_URL, URLEncoder.encode(fileName, StandardCharsets.UTF_8));
-        fileName = fileName.split("/")[1];
+
+        if (type == ImageType.USER) {
+            fileName = fileName.split("/")[1];
+        } else if (type == ImageType.PRODUCT) {
+            fileName = fileName.split("/")[2];
+        }
         return fileName;
     }
 
@@ -68,7 +74,7 @@ public class MediaFileServiceImpl implements MediaFileService {
 
             File file = this.convertToFile(multipartFile, fileName);
 
-            String url = this.uploadFile(file, ImageType.USER.getCloudFolderPath() + file.getName());
+            String url = this.uploadFile(file, ImageType.USER.getCloudFolderPath() + file.getName(), ImageType.USER);
             file.delete();
 
             return url;
@@ -86,7 +92,7 @@ public class MediaFileServiceImpl implements MediaFileService {
 
             File file = this.convertToFile(multipartFile, fileName);
 
-            String url = this.uploadFile(file, ImageType.PRODUCT.getCloudFolderPath() + productName + file.getName());
+            String url = this.uploadFile(file, ImageType.PRODUCT.getCloudFolderPath() + productName + "/" + file.getName(), ImageType.PRODUCT);
             file.delete();
 
             return url;
@@ -108,16 +114,19 @@ public class MediaFileServiceImpl implements MediaFileService {
 
     @Override
     public String downloadFile(String fileName, ImageType type, String productName) {
-        String cloudFilePath = type.getCloudFolderPath().concat(fileName);
-        String productLocalFolderPath = type.getLocalFolderPath() + fileName.split("/")[0] + "/";
+        String cloudFilePath = type.getCloudFolderPath() + productName + "/" + fileName;
+        String productLocalFolderPath = type.getLocalFolderPath() + productName + "/";
 //        String localFolderPath = type.getLocalFolderPath() + productLocalFolderPath + "/";
+
+        File file = new File("C:\\Users\\mitak\\Desktop\\FinalProject-MyShop\\src\\main\\resources\\static\\img\\products\\" + productName);
+        file.mkdir();
 
         Blob blob = this.storage.get(BUCKER_NAME, cloudFilePath);
         blob.downloadTo(Paths.get("C:\\Users\\mitak\\Desktop\\FinalProject-MyShop\\src\\main\\resources\\static\\img\\" + productLocalFolderPath + fileName));
 
 //        String filePath =
         String filePathAndName = String.format("%s/%s", productName, fileName);
-        return fileName;
+        return filePathAndName;
     }
 
     @Override

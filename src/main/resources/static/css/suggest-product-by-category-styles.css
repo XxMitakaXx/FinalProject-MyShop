@@ -45,6 +45,11 @@
     box-shadow: 1px 1px 5px #eeeeee;
 }
 
+.category-product a {
+    color: #000000;
+    text-decoration: none;
+}
+
 .category-product .category-product-info {
     display: flex;
     flex-direction: column;
@@ -96,7 +101,7 @@
     cursor: pointer;
 }
 
-.category-product-stars span.active {
+.category-product-stars span.gold-star {
     color: #ff9c1a;
 }
 
@@ -127,6 +132,7 @@
 .category-product .category-product-content .category-product-add-to-cart-button {
     color: #ffffff;
     background: var(--third-color);
+    border: none;
     border-radius: 10px;
     padding: 0.5em;
     cursor: pointer;

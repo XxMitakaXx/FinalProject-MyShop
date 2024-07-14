@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Controller
@@ -17,6 +18,7 @@ public class HomeController {
 
     private final CategoryService categoryService;
     private final MediaFileService mediaFileService;
+    private Set<CategoryAndRandomProductsDTO> categories = new HashSet<>();
 
     public HomeController(CategoryService categoryService, MediaFileService mediaFileService) {
         this.categoryService = categoryService;
@@ -25,7 +27,11 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        Set<CategoryAndRandomProductsDTO> categories = this.categoryService.getCategoriesWithRandomProducts();
+
+        if (categories.isEmpty()) {
+            this.categories = this.categoryService.getCategoriesWithRandomProducts();
+        }
+
         model.addAttribute("categories", categories);
 
         return "home";

@@ -1,5 +1,7 @@
 package org.example.finalprojectmyshop.product.service.impl;
 
+import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
+import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
 import org.example.finalprojectmyshop.product.models.dtos.CategoryAndRandomProductsDTO;
 import org.example.finalprojectmyshop.product.models.dtos.RandomProductsDTO;
 import org.example.finalprojectmyshop.product.models.entities.Category;
@@ -12,14 +14,17 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final MediaFileService mediaFileService;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, MediaFileService mediaFileService) {
         this.categoryRepository = categoryRepository;
+        this.mediaFileService = mediaFileService;
     }
 
     @Override
@@ -56,9 +61,14 @@ public class CategoryServiceImpl implements CategoryService {
 
                             secondaryCategory.getProducts()
                                     .forEach(product -> {
-                                        if (product.getId() == productId) {
-                                            RandomProductsDTO productDTO = this.mapToRandomProductDTO(product);
+                                        boolean contains = categoryDto.getProducts()
+                                                .stream()
+                                                .map(RandomProductsDTO::getId)
+                                                .collect(Collectors.toSet())
+                                                .contains(product.getId());
 
+                                        if (!contains) {
+                                            RandomProductsDTO productDTO = this.mapToRandomProductDTO(product);
                                             categoryDto.getProducts().add(productDTO);
                                         }
                                     });
@@ -74,13 +84,13 @@ public class CategoryServiceImpl implements CategoryService {
         productDTO.setId(product.getId());
         productDTO.setName(product.getName());
 
-        String url = product.getImagesUrls()
-                .stream()
-                .findFirst()
-                .orElse(null).getUrl();
+        String url = product.getMainImage().getUrl();
 
         productDTO.setImageUrl(url);
-        productDTO.setPrice(product.getPrice());
+        this.mediaFileService.downloadFile(url, ImageType.PRODUCT, product.getName());
+
+        productDTO.setPriceBeforePoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[0]));
+        productDTO.setPriceAfterPoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[1]));
 
         if (!product.getRatings().isEmpty()) {
             double rating = product.getRatings()

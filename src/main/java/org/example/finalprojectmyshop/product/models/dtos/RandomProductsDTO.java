@@ -4,7 +4,8 @@ public class RandomProductsDTO {
     private long id;
     private String name;
     private String imageUrl;
-    private double price;
+    private int priceBeforePoint;
+    private int priceAfterPoint;
     private double rating;
     private int reviewsCount;
 
@@ -34,12 +35,20 @@ public class RandomProductsDTO {
         this.imageUrl = imageUrl;
     }
 
-    public double getPrice() {
-        return this.price;
+    public int getPriceBeforePoint() {
+        return this.priceBeforePoint;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPriceBeforePoint(int priceBeforePoint) {
+        this.priceBeforePoint = priceBeforePoint;
+    }
+
+    public int getPriceAfterPoint() {
+        return this.priceAfterPoint;
+    }
+
+    public void setPriceAfterPoint(int priceAfterPoint) {
+        this.priceAfterPoint = priceAfterPoint;
     }
 
     public double getRating() {

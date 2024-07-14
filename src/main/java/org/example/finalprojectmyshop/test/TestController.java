@@ -15,16 +15,8 @@
 //        this.mediaFileService = mediaFileService;
 //    }
 //
-//    @GetMapping("/")
+//    @GetMapping("/test")
 //    public String index() {
-////        File file = new File("C:/Users/mitak/Desktop/FinalProject-MyShop/src/main/resources/static/img/products/iphone-15-pro");
-//
-//
-//        String fileName = "iphone-15-pro";
-//
-//        this.mediaFileService.downloadFile(fileName, ImageType.PRODUCT);
-//
-////        this.mediaFileService.upload(file, ImageType.PRODUCT);
-//        return "home";
+//        return "product-details";
 //    }
 //}

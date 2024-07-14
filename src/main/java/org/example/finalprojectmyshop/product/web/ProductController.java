@@ -5,20 +5,21 @@ import org.example.finalprojectmyshop.product.models.dtos.AddProductDTO;
 import org.example.finalprojectmyshop.product.models.dtos.AddProductPropertyDTO;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
 import org.example.finalprojectmyshop.product.service.ProductService;
+import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProductController {
 
     private final ProductService productService;
+    private final CurrentUser currentUser;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CurrentUser currentUser) {
         this.productService = productService;
+        this.currentUser = currentUser;
     }
 
     @ModelAttribute("addProductDTO")
@@ -58,6 +59,18 @@ public class ProductController {
 
         this.productService.save(addProductDTO);
 
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/add-to-favorites/{id}")
+    private String processAddProductToFavorites(@PathVariable("id") long id) {
+
+        if (!this.currentUser.isLoggedIn()) {
+            return "redirect:/login";
+        }
+
+        this.productService.addProductToFavorites(id);
 
         return "redirect:/";
     }

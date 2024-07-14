@@ -70,4 +70,9 @@ public class UserServiceImpl implements UserService {
 
         return fileName;
     }
+
+    @Override
+    public void save(User user) {
+        this.userRepository.save(user);
+    }
 }

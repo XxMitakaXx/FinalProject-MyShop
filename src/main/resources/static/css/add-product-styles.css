@@ -9,7 +9,7 @@
 
 .add-product-container h1 {
     font-size: 40px;
-    color: #5454c5;
+    color: var(--secondary-color);
 }
 
 .add-product-container form {
@@ -34,7 +34,7 @@
 .add-product-container form .collecting-data-container label {
     font-size: 20px;
     padding: 0.5em;
-    color: #5454c5;
+    color: var(--secondary-color);
 }
 
 .add-product-container form .collecting-data-container input {
@@ -44,7 +44,7 @@
     border-radius: 0.6em;
     outline: none;
     font-size: 16px;
-    color: #5454c5;
+    color: var(--secondary-color);
     padding: 1em;
     transition: 0.3s;
 }
@@ -55,7 +55,7 @@
     border: 2px solid #cecece;
     border-radius: 0.6em;
     font-size: 16px;
-    color: #5454c5;
+    color: var(--secondary-color);
     resize: none;
     outline: none;
     box-sizing: border-box;
@@ -83,9 +83,9 @@
 
 .add-product-container #add-property-button {
     width: 100%;
-    color: #ffffff;
+    color: var(--primary-color);
     font-size: 13px;
-    background: #5454c5;
+    background: var(--secondary-color);
     border: none;
     border-radius: 0.6em;
     padding: 0.5em;
@@ -93,7 +93,7 @@
 
 .add-product-container .collecting-data-table tr th {
     padding: 1em;
-    color: #5454c5;
+    color: var(--secondary-color);
     font-size: 20px;
 }
 
@@ -104,7 +104,7 @@
     border-radius: 0.6em;
     outline: none;
     font-size: 12px;
-    color: #5454c5;
+    color: var(--secondary-color);
     padding: 1em;
     transition: 0.3s;
 }
@@ -127,8 +127,8 @@
 }
 
 .add-product-container .collecting-data-container input[type="file"]::file-selector-button {
-    color: #ffffff;
-    background: #5454c5;
+    color: var(--primary-color);
+    background: var(--secondary-color);
     padding: 0.3em 1em;
     border: none;
     border-radius: 0.3em;
@@ -141,7 +141,7 @@
     border-radius: 0.6em;
     outline: none;
     font-size: 16px;
-    color: #5454c5;
+    color: var(--secondary-color);
     padding: 1em;
     transition: 0.3s;
 }
@@ -165,15 +165,15 @@ form .collecting-data-container textarea::placeholder {
 }
 
 form .collecting-data-container input:focus {
-    border: 2px solid #5454c5;
+    border: 2px solid var(--secondary-color);
 }
 
 form .collecting-data-container textarea:focus {
-    border: 2px solid #5454c5;
+    border: 2px solid var(--secondary-color);
 }
 
 form .collecting-data-container select:focus {
-    border: 2px solid #5454c5;
+    border: 2px solid var(--secondary-color);
 }
 
 .categories-container {
@@ -188,11 +188,11 @@ form .collecting-data-container select:focus {
 .add-product-button {
     height: 3em;
     width: 100%;
-    border: 2px solid #5454c5;
+    border: 2px solid var(--secondary-color);
     border-radius: 0.6em;
     font-size: 20px;
-    color: #ffffff;
-    background: #5454c5;
+    color: var(--primary-color);
+    background: var(--secondary-color);
     cursor: pointer;
     transition: 0.3s;
 }
