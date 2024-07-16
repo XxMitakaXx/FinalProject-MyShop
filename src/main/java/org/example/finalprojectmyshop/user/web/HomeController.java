@@ -1,14 +1,10 @@
 package org.example.finalprojectmyshop.user.web;
 
-import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
-import org.example.finalprojectmyshop.product.models.dtos.CategoryAndRandomProductsDTO;
-import org.example.finalprojectmyshop.product.models.entities.Category;
+import org.example.finalprojectmyshop.product.models.dtos.exports.CategoryAndRandomProductsDTO;
 import org.example.finalprojectmyshop.product.service.CategoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashSet;
 import java.util.Set;

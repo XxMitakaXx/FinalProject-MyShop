@@ -13,10 +13,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-//@RequestMapping("/users")
+@RequestMapping("/users")
 public class UserRegisterController {
 
     private final UserService userService;
@@ -57,10 +58,10 @@ public class UserRegisterController {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userRegisterDTO", data);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserRegisterDTO");
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserRegisterDTO", bindingResult);
 
 //            return "redirect:/users/register";
-            return "redirect:/register";
+            return "redirect:/users/register";
         }
 
         if (!data.getPassword().equals(data.getConfirmPassword())) {
@@ -68,12 +69,12 @@ public class UserRegisterController {
             redirectAttributes.addFlashAttribute("userRegisterDTO", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserRegisterDTO", bindingResult);
 
-            return "redirect:/register";
+            return "redirect:/users/register";
         }
 
         this.userService.register(data);
 
-        return "redirect:/login";
+        return "redirect:/users/login";
     }
 
 }

@@ -1,10 +1,10 @@
-package org.example.finalprojectmyshop.product.models.dtos;
+package org.example.finalprojectmyshop.product.models.dtos.exports;
 
-public class AddProductPropertyDTO {
+public class ProductDetailsPropertyDTO {
     private String name;
     private String value;
 
-    public AddProductPropertyDTO() {}
+    public ProductDetailsPropertyDTO() {}
 
     public String getName() {
         return this.name;

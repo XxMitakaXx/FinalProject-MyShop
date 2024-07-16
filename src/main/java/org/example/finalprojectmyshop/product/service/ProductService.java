@@ -1,7 +1,7 @@
 package org.example.finalprojectmyshop.product.service;
 
-import org.example.finalprojectmyshop.product.models.dtos.AddProductDTO;
-import org.example.finalprojectmyshop.product.models.dtos.ProductDetailsDTO;
+import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductDTO;
+import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsDTO;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 
 public interface ProductService {

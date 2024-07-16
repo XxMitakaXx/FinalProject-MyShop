@@ -1,6 +1,6 @@
 package org.example.finalprojectmyshop.product.service.impl;
 
-import org.example.finalprojectmyshop.product.models.dtos.AddReviewDTO;
+import org.example.finalprojectmyshop.product.models.dtos.imports.AddReviewDTO;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.entities.Rating;
 import org.example.finalprojectmyshop.product.models.entities.Review;

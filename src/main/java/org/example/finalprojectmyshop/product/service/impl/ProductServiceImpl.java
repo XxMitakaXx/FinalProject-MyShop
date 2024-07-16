@@ -3,7 +3,11 @@ package org.example.finalprojectmyshop.product.service.impl;
 import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
 import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
-import org.example.finalprojectmyshop.product.models.dtos.*;
+import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsDTO;
+import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsPropertyDTO;
+import org.example.finalprojectmyshop.product.models.dtos.exports.ReviewDataDTO;
+import org.example.finalprojectmyshop.product.models.dtos.exports.ReviewUserDataDTO;
+import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductDTO;
 import org.example.finalprojectmyshop.product.models.entities.*;
 import org.example.finalprojectmyshop.product.repository.CategoryRepository;
 import org.example.finalprojectmyshop.product.repository.ProductPropertyRepository;
@@ -182,7 +186,7 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toSet())
                 .stream()
                 .map(Rating::getRating)
-                .reduce(0.0, Double::sum);
+                .reduce(0.0, Double::sum) / product.getReviews().size();
         productDetailsDTO.setRating(productRating);
 
         productDetailsDTO.setReviewsCount(product.getReviews().size());
@@ -241,8 +245,8 @@ public class ProductServiceImpl implements ProductService {
     private ReviewDataDTO toReviewDataDTO(Review review) {
         ReviewDataDTO reviewDataDTO = new ReviewDataDTO();
 
-        reviewDataDTO.setTitle(reviewDataDTO.getTitle());
-        reviewDataDTO.setText(reviewDataDTO.getText());
+        reviewDataDTO.setTitle(review.getTitle());
+        reviewDataDTO.setText(review.getDescription());
         reviewDataDTO.setPostDate(review.getDate().toString());
 
         ReviewUserDataDTO reviewUserDataDTO = toReviewUserDataDTO(review.getUser());

@@ -1,10 +1,9 @@
-package org.example.finalprojectmyshop.product.models.dtos;
+package org.example.finalprojectmyshop.product.models.dtos.imports;
 
 import jakarta.validation.constraints.*;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -15,7 +15,7 @@ body {
 }
 
 .product-main-container {
-    height: 50em;
+    height: 55em;
     width: 100em;
     position: relative;
     padding: 2em;
@@ -27,7 +27,7 @@ body {
 
 .product-photo-container {
     position: absolute;
-    top: 4em;
+    top: 7em;
     left: 6em;
 }
 
@@ -55,7 +55,7 @@ body {
     width: 34em;
     position: absolute;
     right: 1em;
-    top: 8em;
+    top: 11em;
     /* border: 1px solid #5454c5; */
 }
 
@@ -291,6 +291,7 @@ body {
 
 .product-reviews-container .product-review .review-user-data .review-user-image {
     width: 3em;
+    border-radius: 50%;
 }
 
 .product-reviews-container .product-review .review-user-data .review-user-name {
@@ -306,7 +307,6 @@ body {
     width: 70%;
     display: flex;
     flex-direction: column;
-    gap: 1em;
     justify-content: center;
     align-items: start;
 }
@@ -315,8 +315,19 @@ body {
     font-size: 1.5em;
 }
 
+.product-reviews-container .review-content .product-stars .star {
+    margin-top: 0.5em;
+    font-size: 1em;
+}
+
+.gold-star {
+    color: #ff9c1a;
+}
+
+
 .product-reviews-container .review-content .review-text {
-    width: 100px;
+    margin-top: 1em;
+    width: 100%;
 }
 
 .category-suggestion {

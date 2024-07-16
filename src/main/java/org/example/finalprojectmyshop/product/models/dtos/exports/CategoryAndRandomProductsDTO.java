@@ -1,6 +1,4 @@
-package org.example.finalprojectmyshop.product.models.dtos;
-
-import org.example.finalprojectmyshop.product.models.entities.Product;
+package org.example.finalprojectmyshop.product.models.dtos.exports;
 
 import java.util.HashSet;
 import java.util.Set;

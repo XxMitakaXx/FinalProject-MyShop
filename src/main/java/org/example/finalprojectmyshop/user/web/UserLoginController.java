@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-//@RequestMapping("/users")
+@RequestMapping("/users")
 public class UserLoginController {
 
     private final UserService userService;
@@ -56,7 +56,7 @@ public class UserLoginController {
             redirectAttributes.addFlashAttribute("userLoginDTO", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserLoginDTO", bindingResult);
 
-            return "redirect:/login";
+            return "redirect:/users/login";
         }
 
         boolean success = this.userService.login(data);
@@ -64,7 +64,7 @@ public class UserLoginController {
         if (!success) {
             redirectAttributes.addFlashAttribute("userLoginDTO", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserLoginDTO", bindingResult);
-            return "redirect:/login";
+            return "redirect:/users/login";
         }
 
        this.userService.downloadProfileImage(this.currentUser.getUser().getProfilePicture());

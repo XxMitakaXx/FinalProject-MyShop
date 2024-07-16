@@ -1,4 +1,4 @@
-package org.example.finalprojectmyshop.product.models.dtos;
+package org.example.finalprojectmyshop.product.models.dtos.imports;
 
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -46,7 +46,9 @@ public class AddReviewDTO {
         return this.productId;
     }
 
-    public void setProductId(long productId) {
+    public AddReviewDTO setProductId(long productId) {
         this.productId = productId;
+
+        return this;
     }
 }

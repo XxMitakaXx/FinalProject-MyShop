@@ -1,8 +1,8 @@
 package org.example.finalprojectmyshop.product.web;
 
 import jakarta.validation.Valid;
-import org.example.finalprojectmyshop.product.models.dtos.AddProductDTO;
-import org.example.finalprojectmyshop.product.models.dtos.AddProductPropertyDTO;
+import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductDTO;
+import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductPropertyDTO;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
 import org.example.finalprojectmyshop.product.service.ProductService;
 import org.example.finalprojectmyshop.user.service.impl.CurrentUser;

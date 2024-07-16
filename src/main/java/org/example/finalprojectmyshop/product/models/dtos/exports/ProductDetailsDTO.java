@@ -1,4 +1,4 @@
-package org.example.finalprojectmyshop.product.models.dtos;
+package org.example.finalprojectmyshop.product.models.dtos.exports;
 
 import java.util.ArrayList;
 import java.util.HashSet;

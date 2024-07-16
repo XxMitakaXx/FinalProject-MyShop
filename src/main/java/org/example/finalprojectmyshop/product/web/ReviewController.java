@@ -1,20 +1,25 @@
 package org.example.finalprojectmyshop.product.web;
 
 import jakarta.validation.Valid;
-import org.example.finalprojectmyshop.product.models.dtos.AddReviewDTO;
+import org.example.finalprojectmyshop.product.models.dtos.imports.AddReviewDTO;
 import org.example.finalprojectmyshop.product.service.ReviewService;
+import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ReviewController {
 
     private final ReviewService reviewService;
+    private final CurrentUser currentUser;
 
-    public ReviewController(ReviewService reviewService) {
+    public ReviewController(ReviewService reviewService, CurrentUser currentUser) {
         this.reviewService = reviewService;
+        this.currentUser = currentUser;
     }
 
     @ModelAttribute("addReviewDTO")
@@ -22,17 +27,27 @@ public class ReviewController {
         return new AddReviewDTO();
     }
 
-    @PostMapping("/add-review-form/{id}")
-    public String viewAddReview(@PathVariable("id") long id) {
-        this.addReviewDTO().setProductId(id);
-        return "add-review";
-    }
 
     @PostMapping("/add-review")
-    public String addReview(@Valid AddReviewDTO addReviewDTO) {
+    public String addReview(
+            @Valid AddReviewDTO addReviewDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+
+        if (!this.currentUser.isLoggedIn()) {
+            return "redirect:/users/login";
+        }
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("addReviewDTO", addReviewDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.AddReviewDTO", bindingResult);
+
+            return "redirect:/product-details/" + addReviewDTO.getProductId();
+        }
 
         this.reviewService.save(addReviewDTO);
 
-        return "redirect:/product-details/" + addReviewDTO.getProductId();
+        return "/product-details/" + addReviewDTO.getProductId();
     }
 }

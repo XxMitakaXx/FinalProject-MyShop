@@ -2,8 +2,8 @@ package org.example.finalprojectmyshop.product.service.impl;
 
 import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
-import org.example.finalprojectmyshop.product.models.dtos.CategoryAndRandomProductsDTO;
-import org.example.finalprojectmyshop.product.models.dtos.RandomProductsDTO;
+import org.example.finalprojectmyshop.product.models.dtos.exports.CategoryAndRandomProductsDTO;
+import org.example.finalprojectmyshop.product.models.dtos.exports.RandomProductsDTO;
 import org.example.finalprojectmyshop.product.models.entities.Category;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.entities.Rating;

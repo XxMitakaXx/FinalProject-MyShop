@@ -13,3 +13,7 @@
     /*background: var(--primary-color);*/
     /*color: var(--secondary-color);*/
 }
+
+.block-scroll {
+    overflow: hidden;
+}

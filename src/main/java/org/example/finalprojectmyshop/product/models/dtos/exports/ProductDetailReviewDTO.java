@@ -1,4 +1,4 @@
-package org.example.finalprojectmyshop.product.models.dtos;
+package org.example.finalprojectmyshop.product.models.dtos.exports;
 
 public class ProductDetailReviewDTO {
     private double rating;

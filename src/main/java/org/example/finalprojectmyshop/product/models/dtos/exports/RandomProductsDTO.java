@@ -1,4 +1,4 @@
-package org.example.finalprojectmyshop.product.models.dtos;
+package org.example.finalprojectmyshop.product.models.dtos.exports;
 
 public class RandomProductsDTO {
     private long id;

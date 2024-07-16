@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{css/index.css}" />
-    <link rel="stylesheet" th:href="@{css/login-styles.css}" />
-    <link rel="stylesheet" th:href="@{css/footer-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" th:href="@{/css/login-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer-styles.css}" />
     <title>My Shop</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
         <h1>Login</h1>
 
         <form
-            th:action="@{/login}"
+            th:action="@{/users/login}"
             th:method="post"
             th:object="${userLoginDTO}">
             <div class="data-collecting-container">
@@ -39,7 +39,7 @@
             <button class="login-button" type="submit">Login</button>
         </form>
 
-        <a th:href="@{/register}" class="do-not-have-account-button">Don't have an account ?</a>
+        <a th:href="@{/users/register}" class="do-not-have-account-button">Don't have an account ?</a>
 
     </div>
 

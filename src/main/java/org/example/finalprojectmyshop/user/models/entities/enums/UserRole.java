@@ -2,8 +2,7 @@ package org.example.finalprojectmyshop.user.models.entities.enums;
 
 public enum UserRole {
     USER("User"),
-    MODERATOR("Moderator"),
-    ADMIN("Admin");
+    ADMINISTRATOR("Administrator");
 
     private String value;
 
