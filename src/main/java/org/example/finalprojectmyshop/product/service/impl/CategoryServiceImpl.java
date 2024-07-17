@@ -100,9 +100,11 @@ public class CategoryServiceImpl implements CategoryService {
                     .collect(Collectors.toSet())
                     .stream()
                     .map(Rating::getRating)
-                    .reduce(0.0, Double::sum);
+                    .reduce(0.0, Double::sum) / product.getReviews().size();
 
             productDTO.setRating(rating);
+        } else {
+            productDTO.setRating(0.0);
         }
 
         productDTO.setReviewsCount(product.getReviews().size());

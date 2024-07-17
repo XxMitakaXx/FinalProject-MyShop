@@ -9,7 +9,7 @@ public class AddReviewDTO {
     private String title;
 
     @Positive
-    private double rating;
+    private Double rating;
 
     @Size(min = 10, max = 100)
     private String description;
@@ -26,11 +26,11 @@ public class AddReviewDTO {
         this.title = title;
     }
 
-    public double getRating() {
+    public Double getRating() {
         return this.rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

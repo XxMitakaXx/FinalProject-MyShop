@@ -5,6 +5,7 @@ public class ReviewDataDTO {
     private String text;
     private String postDate;
     private ReviewUserDataDTO userData;
+    private double rating;
 
     public ReviewDataDTO() {}
 
@@ -38,5 +39,13 @@ public class ReviewDataDTO {
 
     public void setUserData(ReviewUserDataDTO userData) {
         this.userData = userData;
+    }
+
+    public double getRating() {
+        return this.rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 }

@@ -164,6 +164,8 @@ public class ProductServiceImpl implements ProductService {
         productDetailsDTO.setId(product.getId());
         productDetailsDTO.setName(product.getName());
         productDetailsDTO.setMainImageUrl(product.getMainImage().getUrl());
+        productDetailsDTO.setOriginalPrice(product.getPrice());
+        productDetailsDTO.setDiscountPrice(product.getDiscountPrice());
         this.mediaFileService.downloadFile(product.getMainImage().getUrl(), ImageType.PRODUCT, product.getName());
 
         product.getImages()
@@ -180,14 +182,19 @@ public class ProductServiceImpl implements ProductService {
                     productDetailsDTO.getReviews().add(reviewDataDTO);
                 });
 
-        Double productRating = product.getReviews()
+        double productRating = product.getReviews()
                 .stream()
                 .map(Review::getRating)
                 .collect(Collectors.toSet())
                 .stream()
                 .map(Rating::getRating)
                 .reduce(0.0, Double::sum) / product.getReviews().size();
-        productDetailsDTO.setRating(productRating);
+
+        if (productRating > 0) {
+            productDetailsDTO.setRating(productRating);
+        } else {
+            productDetailsDTO.setRating(0.0);
+        }
 
         productDetailsDTO.setReviewsCount(product.getReviews().size());
 
@@ -251,6 +258,8 @@ public class ProductServiceImpl implements ProductService {
 
         ReviewUserDataDTO reviewUserDataDTO = toReviewUserDataDTO(review.getUser());
         reviewDataDTO.setUserData(reviewUserDataDTO);
+
+        reviewDataDTO.setRating(review.getRating().getRating());
 
         return reviewDataDTO;
     }

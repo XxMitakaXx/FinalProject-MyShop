@@ -43,7 +43,7 @@
 
             <div class="product-info">
 <!--                <p class="original-price" th:if="${product.getDiscountPrice() != null}" th:text="${product.getOriginalPrice()}">2329.99 LV.</p>-->
-                <p class="product-price" th:texr="${product.getOriginalPrice()}">2222.99 LV.</p>
+                <p class="product-price" th:text="${product.originalPrice + ' LV'}">2222.99 LV.</p>
 
                 <div class="product-rate">
                     <div class="product-stars">
@@ -254,16 +254,16 @@
                 <div class="review-content">
                     <h3 class="review-title" th:text="${review.title}">Review Title</h3>
                     <div class="product-stars">
-                        <span class="star material-symbols-outlined gold-star" th:if="${product.rating >= 1}">stars</span>
-                         <span class="star material-symbols-outlined" th:unless="${product.rating >= 1}">stars</span>
-                        <span class="star material-symbols-outlined gold-star" th:if="${product.rating >= 2}">stars</span>
-                         <span class="star material-symbols-outlined" th:unless="${product.rating >= 2}">stars</span>
-                        <span class="star material-symbols-outlined gold-star" th:if="${product.rating >= 3}">stars</span>
-                         <span class="star material-symbols-outlined " th:unless="${product.rating >= 3}">stars</span>
-                        <span class="star material-symbols-outlined gold-star" th:if="${product.rating >= 4}">stars</span>
-                         <span class="star material-symbols-outlined" th:unless="${product.rating >= 4}">stars</span>
-                        <span class="star material-symbols-outlined gold-star" th:if="${product.rating >= 4.5}">stars</span>
-                         <span class="star material-symbols-outlined" th:unless="${product.rating >= 4.5}">stars</span>
+                        <span class="star material-symbols-outlined gold-star" th:if="${review.rating >= 1}">stars</span>
+                         <span class="star material-symbols-outlined" th:unless="${review.rating >= 1}">stars</span>
+                        <span class="star material-symbols-outlined gold-star" th:if="${review.rating >= 2}">stars</span>
+                         <span class="star material-symbols-outlined" th:unless="${review.rating >= 2}">stars</span>
+                        <span class="star material-symbols-outlined gold-star" th:if="${review.rating >= 3}">stars</span>
+                         <span class="star material-symbols-outlined " th:unless="${review.rating >= 3}">stars</span>
+                        <span class="star material-symbols-outlined gold-star" th:if="${review.rating >= 4}">stars</span>
+                         <span class="star material-symbols-outlined" th:unless="${review.rating >= 4}">stars</span>
+                        <span class="star material-symbols-outlined gold-star" th:if="${review.rating >= 4.5}">stars</span>
+                         <span class="star material-symbols-outlined" th:unless="${review.rating >= 4.5}">stars</span>
                     </div>
                     <p class="review-text" th:text="${review.text}">fsjfpemfpsmefpmpsofmffsjfpemfpsmefpmpsofmffsjfpemfpsmefpmpsofmffsjfpemfpsmefpmpsofmffsjfpemfpsmefpmpsofmffsjfpemfpsmefpmpsofmf</p>
                 </div>
@@ -284,7 +284,7 @@
                     </button>
                 </form>
 
-                <a th:href="@{product-details/{id}/(id=*{product.id})}">
+                <a th:href="@{/product-details/{id}(id=*{product.id})}">
 
                     <div class="category-product-info">
                         <div class="image-container">

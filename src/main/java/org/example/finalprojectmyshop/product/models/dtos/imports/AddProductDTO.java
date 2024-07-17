@@ -13,7 +13,7 @@ public class AddProductDTO {
     private String name;
 
     @Positive
-    private double price;
+    private Double price;
 
     private List<AddProductPropertyDTO> properties;
 
@@ -44,11 +44,11 @@ public class AddProductDTO {
         this.name = name;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return this.price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

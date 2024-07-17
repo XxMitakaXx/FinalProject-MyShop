@@ -1,24 +1,31 @@
 package org.example.finalprojectmyshop.product.web;
 
 import jakarta.validation.Valid;
+import org.example.finalprojectmyshop.product.models.dtos.exports.CategoryAndRandomProductsDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductPropertyDTO;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
+import org.example.finalprojectmyshop.product.service.CategoryService;
 import org.example.finalprojectmyshop.product.service.ProductService;
 import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Set;
 
 @Controller
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
     private final CurrentUser currentUser;
 
-    public ProductController(ProductService productService, CurrentUser currentUser) {
+    public ProductController(ProductService productService, CategoryService categoryService, CurrentUser currentUser) {
         this.productService = productService;
+        this.categoryService = categoryService;
         this.currentUser = currentUser;
     }
 
@@ -47,18 +54,20 @@ public class ProductController {
     public String processAddProduct(
             @Valid AddProductDTO addProductDTO,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes
-    ) {
+            RedirectAttributes redirectAttributes,
+            Model model ) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addProductDTO", addProductDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.AddProductDTO", bindingResult);
-            return "redirect:/add-product";
+            return "redirect:/";
         }
 
 
         this.productService.save(addProductDTO);
 
+        Set<CategoryAndRandomProductsDTO> categories = this.categoryService.getCategoriesWithRandomProducts();
+        model.addAttribute("categories", categories);
 
         return "redirect:/";
     }

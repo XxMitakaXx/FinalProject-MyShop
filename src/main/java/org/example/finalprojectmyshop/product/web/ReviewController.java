@@ -48,6 +48,6 @@ public class ReviewController {
 
         this.reviewService.save(addReviewDTO);
 
-        return "/product-details/" + addReviewDTO.getProductId();
+        return "redirect:http://localhost:8080/product-details/" + addReviewDTO.getProductId();
     }
 }

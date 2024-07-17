@@ -94,6 +94,8 @@ public class Product {
         this.discountPrice = discountPrice;
     }
 
+
+
     public void setAvailable(boolean available) {
         this.available = available;
     }
@@ -146,7 +148,11 @@ public class Product {
     }
 
     public boolean isAvailable() {
-        return this.quantity > 0;
+        boolean isAvailable = this.quantity > 0;
+
+        this.setAvailable(available);
+
+        return isAvailable;
     }
 
     public Set<Review> getReviews() {

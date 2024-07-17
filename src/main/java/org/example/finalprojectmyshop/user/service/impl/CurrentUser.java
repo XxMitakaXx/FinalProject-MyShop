@@ -16,7 +16,7 @@ public class CurrentUser {
         return this.user
                 .getRoles()
                 .stream()
-                .anyMatch(role -> role.getRole().equals(UserRole.ADMIN));
+                .anyMatch(role -> role.getRole().equals(UserRole.ADMINISTRATOR));
     }
 
     public User getUser() {
