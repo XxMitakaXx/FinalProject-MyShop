@@ -5,26 +5,28 @@ import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
 import org.example.finalprojectmyshop.user.models.dtos.UserLoginDTO;
 import org.example.finalprojectmyshop.user.models.dtos.UserRegisterDTO;
+import org.example.finalprojectmyshop.user.models.entities.Role;
 import org.example.finalprojectmyshop.user.models.entities.User;
 import org.example.finalprojectmyshop.user.repository.UserRepository;
+import org.example.finalprojectmyshop.user.service.RoleService;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
-
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleService roleService;
     private final MediaFileService mediaFileService;
     private final CurrentUser currentUser;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, CurrentUser currentUser, MediaFileService mediaFileService, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService, CurrentUser currentUser, MediaFileService mediaFileService, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
         this.currentUser = currentUser;
         this.mediaFileService = mediaFileService;
         this.modelMapper = modelMapper;
@@ -42,6 +44,12 @@ public class UserServiceImpl implements UserService {
         this.mediaFileService.save(mediaFile);
 
         user.setProfilePicture(mediaFile);
+
+        Role role = new Role();
+        role.setRole(userRegisterDTO.getUserRole());
+        user.getRoles().add(role);
+
+        this.roleService.save(role);
 
         this.userRepository.save(user);
     }

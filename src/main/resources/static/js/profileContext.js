@@ -1,13 +1,13 @@
 const profileLink = document.getElementById("profile-link");
 const profileContext = document.getElementById("profile-context");
-const contextMenu = document.getElementById("context");
+const profileContextMenu = document.getElementById("inner-profile-context");
 
 profileLink.addEventListener("mouseover", () => {
-    contextMenu.style.visibility = "visible";
-    contextMenu.style.transform = "translateY(0)";
+    profileContextMenu.style.visibility = "visible";
+    profileContextMenu.style.transform = "translateY(0)";
 });
 
 document.addEventListener("click", () => {
-    contextMenu.style.visibility = "hidden";
-    contextMenu.style.transform = "translateY(10px)";
+    profileContextMenu.style.visibility = "hidden";
+    profileContextMenu.style.transform = "translateY(10px)";
 });

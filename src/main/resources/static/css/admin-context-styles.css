@@ -1,4 +1,4 @@
-.profile-context {
+.admin-context {
     width: 6em;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
     /*border: 1px solid white;*/
 }
 
-.profile-link {
+.admin-link {
     padding: 0;
     margin: 0.5em;
     border: none;
@@ -18,12 +18,12 @@
     overflow: hidden;
 }
 
-.profile-link .profile-image {
-    height: inherit;
-    width: inherit;
+.admin-link span.admin-icon {
+    color: var(--third-color);
+    font-size: 2.5em;
 }
 
-.inner-profile-context {
+.inner-admin-context {
     width: 7em;
     margin-top: 75px;
     padding-left: 0;
@@ -38,7 +38,7 @@
     z-index: 1;
 }
 
-.inner-profile-context::before {
+.inner-admin-context::before {
     content: '';
     background: var(--primary-color);
     height: 1.4em;
@@ -65,7 +65,7 @@ button.context-label {
     cursor: pointer;
 }
 
-.inner-profile-context .context-link {
+.inner-admin-context .context-link {
     color: var(--secondary-color);
     background: var(--primary-color);
     list-style-type: none;
@@ -75,6 +75,6 @@ button.context-label {
     cursor: pointer;
 }
 
-.inner-profile-context .context-link:hover {
+.inner-admin-context .context-link:hover {
     background: #dedede;
 }

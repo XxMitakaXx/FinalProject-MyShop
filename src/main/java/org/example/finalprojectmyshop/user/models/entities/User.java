@@ -56,7 +56,7 @@ public class User {
     @OneToMany
     private Set<Warranty> warranties;
 
-    @ManyToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     @Enumerated(EnumType.STRING)

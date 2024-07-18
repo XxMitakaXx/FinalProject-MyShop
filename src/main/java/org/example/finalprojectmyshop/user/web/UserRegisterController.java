@@ -21,12 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserRegisterController {
 
     private final UserService userService;
-    private final MediaFileService mediaFileService;
     private final CurrentUser currentUser;
 
-    public UserRegisterController(UserService userService, MediaFileService mediaFileService, CurrentUser currentUser) {
+    public UserRegisterController(UserService userService, CurrentUser currentUser) {
         this.userService = userService;
-        this.mediaFileService = mediaFileService;
         this.currentUser = currentUser;
     }
 

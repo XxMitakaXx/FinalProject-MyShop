@@ -1,6 +1,6 @@
 <nav th:fragment="navbar" class="navbar">
     <a href="/" class="navbar-brand">
-        <img src="http://localhost:8080/img/istockphoto-1356820159-612x612.jpg" alt="Shop Picture" class="logo">
+        <img src="/img/istockphoto-1356820159-612x612.jpg" alt="Shop Picture" class="logo">
     </a>
 
     <form>
@@ -14,13 +14,50 @@
 <!--        <span class="material-symbols-outlined">admin_panel_settings</span>-->
 <!--    </div>-->
 
+    <div class="admin-context" th:if="${@currentUser.isAdmin()}">
+        <a class="admin-link" id="admin-link" href="#" type="button">
+           <span class="material-symbols-outlined admin-icon">admin_panel_settings</span>
+        </a>
+
+        <ul class="inner-admin-context" id="inner-admin-context">
+            <li class="context-link">
+                <a class="context-label" th:href="@{/add-product}">Add Product</a>
+            </li>
+            <li class="context-link">
+                <a class="context-label">Favorites</a>
+            </li>
+            <li class="context-link">
+                <a class="context-label">My profile</a>
+            </li>
+            <li class="context-link">
+                <a class="context-label">My cards</a>
+            </li>
+            <li class="context-link">
+                <a class="context-label">My warranties</a>
+            </li>
+            <li class="context-link">
+                <a class="context-label">My reviews</a>
+            </li>
+            <li class="context-link">
+                <a class="context-label">Addresses for delivery</a>
+            </li>
+            <li class="context-link">
+                <form
+                        th:action="@{/users/logout}"
+                        th:method="post">
+                    <button class="context-label" type="submit">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
     <div class="profile-context">
         <a class="profile-link" id="profile-link" href="#" type="button">
             <img th:unless="${@currentUser.isLoggedIn()}" class="profile-image" src="data:image/jpeg;base64,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" alt="profile-picture">
             <img th:if="${@currentUser.isLoggedIn()}" class="profile-image" th:src="@{'/img/user/' + ${@currentUser.getUser().getProfilePicture().getUrl()}}" alt="profile-picture">
         </a>
 
-        <ul th:unless="${@currentUser.isLoggedIn()}" class="context" id="context">
+        <ul th:unless="${@currentUser.isLoggedIn()}" class="inner-profile-context" id="inner-profile-context">
             <li class="context-link">
                 <a class="context-label" th:href="@{/users/login}">Login</a>
             </li>
@@ -29,7 +66,7 @@
             </li>
         </ul>
 
-        <ul th:if="${@currentUser.isLoggedIn()}" class="context" id="context">
+        <ul th:if="${@currentUser.isLoggedIn()}" class="inner-profile-context" id="inner-profile-context">
             <li class="context-link">
                 <a class="context-label">My orders</a>
             </li>

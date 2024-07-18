@@ -13,6 +13,8 @@ public class CurrentUser {
     }
 
     public boolean isAdmin() {
+        if (this.user == null) return false;
+
         return this.user
                 .getRoles()
                 .stream()
