@@ -8,7 +8,6 @@ import org.example.finalprojectmyshop.product.repository.ReviewRepository;
 import org.example.finalprojectmyshop.product.service.ProductService;
 import org.example.finalprojectmyshop.product.service.RatingService;
 import org.example.finalprojectmyshop.product.service.ReviewService;
-import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

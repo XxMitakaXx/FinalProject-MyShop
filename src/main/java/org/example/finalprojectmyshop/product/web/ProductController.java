@@ -7,7 +7,6 @@ import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductProp
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
 import org.example.finalprojectmyshop.product.service.CategoryService;
 import org.example.finalprojectmyshop.product.service.ProductService;
-import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

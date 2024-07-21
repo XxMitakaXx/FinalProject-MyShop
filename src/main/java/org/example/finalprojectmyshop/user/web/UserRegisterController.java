@@ -1,12 +1,9 @@
 package org.example.finalprojectmyshop.user.web;
 
 import jakarta.validation.Valid;
-import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
 import org.example.finalprojectmyshop.user.models.dtos.UserRegisterDTO;
 import org.example.finalprojectmyshop.user.models.entities.enums.UserRole;
 import org.example.finalprojectmyshop.user.service.UserService;
-import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
-import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,11 +18,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserRegisterController {
 
     private final UserService userService;
-    private final CurrentUser currentUser;
 
-    public UserRegisterController(UserService userService, CurrentUser currentUser) {
+    public UserRegisterController(UserService userService) {
         this.userService = userService;
-        this.currentUser = currentUser;
     }
 
     @ModelAttribute("userRegisterDTO")
@@ -35,10 +30,6 @@ public class UserRegisterController {
 
     @GetMapping("/register")
     public String viewRegister(Model model) {
-        if (this.currentUser.isLoggedIn()) {
-            return "redirect:/";
-        }
-
         model.addAttribute("roles", UserRole.values());
 
         return "register";
@@ -50,9 +41,6 @@ public class UserRegisterController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
-        if (this.currentUser.isLoggedIn()) {
-            return "redirect:/";
-        }
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userRegisterDTO", data);

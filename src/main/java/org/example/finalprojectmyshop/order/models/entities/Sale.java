@@ -2,7 +2,7 @@ package org.example.finalprojectmyshop.order.models.entities;
 
 import jakarta.persistence.*;
 import org.example.finalprojectmyshop.product.models.entities.Product;
-import org.example.finalprojectmyshop.user.models.entities.User;
+import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 
 import java.util.Date;
 import java.util.Set;
@@ -20,7 +20,7 @@ public class Sale {
     private String description;
 
     @ManyToOne
-    private User buyer;
+    private UserEntity buyer;
 
     @ManyToMany
     private Set<Product> products;
@@ -54,11 +54,11 @@ public class Sale {
         this.description = description;
     }
 
-    public User getBuyer() {
+    public UserEntity getBuyer() {
         return this.buyer;
     }
 
-    public void setBuyer(User buyer) {
+    public void setBuyer(UserEntity buyer) {
         this.buyer = buyer;
     }
 

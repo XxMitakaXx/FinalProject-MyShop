@@ -15,7 +15,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -65,7 +65,7 @@ public class User {
     @OneToOne
     private MediaFile profilePicture;
 
-    public User() {
+    public UserEntity() {
         this.addresses = new HashSet<>();
         this.productsInCart = new HashSet<>();
         this.favorites = new HashSet<>();

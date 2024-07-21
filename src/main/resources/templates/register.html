@@ -119,28 +119,28 @@
                    class="birth-date-empty-error">Birth date must not be empty!</small>
 
             <div class="collect-data-container">
-                <label for="input-user-role">Role</label>
+                <label for="input-userEntity-role">Role</label>
                 <select
                         th:field="*{userRole}"
                         th:errorclass="error"
-                        name="input-user-role"
-                        id="input-user-role">
+                        name="input-userEntity-role"
+                        id="input-userEntity-role">
                     <option value="option">Select Role</option>
                     <option th:each="role: ${roles}" th:value="${role}" th:text="${role}">Option</option>
                 </select>
             </div>
 
             <small th:if="${#fields.hasErrors('userRole')}" id="userRoleEmptyError"
-                   class="user-role-empty-error">User role must not be empty!</small>
+                   class="userEntity-role-empty-error">User role must not be empty!</small>
 
             <div class="collect-data-container">
-                <label for="input-user-profile-picture">Role</label>
+                <label for="input-userEntity-profile-picture">Role</label>
                 <input
                         th:field="*{profilePicture}"
                         th:errorclass="error"
-                        name="input-user-profile-picture"
+                        name="input-userEntity-profile-picture"
                         type="file"
-                        id="input-user-profile-picture">
+                        id="input-userEntity-profile-picture">
             </div>
 
             <button class="register-button" type="submit">Register</button>

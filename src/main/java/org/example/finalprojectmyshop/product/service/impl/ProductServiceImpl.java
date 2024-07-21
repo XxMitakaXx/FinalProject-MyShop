@@ -14,9 +14,8 @@ import org.example.finalprojectmyshop.product.repository.ProductPropertyReposito
 import org.example.finalprojectmyshop.product.repository.ProductRepository;
 import org.example.finalprojectmyshop.product.repository.SecondaryCategoryRepository;
 import org.example.finalprojectmyshop.product.service.ProductService;
-import org.example.finalprojectmyshop.user.models.entities.User;
+import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 import org.example.finalprojectmyshop.user.service.UserService;
-import org.example.finalprojectmyshop.user.service.impl.CurrentUser;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -264,12 +263,12 @@ public class ProductServiceImpl implements ProductService {
         return reviewDataDTO;
     }
 
-    private ReviewUserDataDTO toReviewUserDataDTO(User user) {
+    private ReviewUserDataDTO toReviewUserDataDTO(UserEntity userEntity) {
         ReviewUserDataDTO reviewUserDataDTO = new ReviewUserDataDTO();
 
-        reviewUserDataDTO.setFullName(user.getFirstName() + " " + user.getLastName());
-        reviewUserDataDTO.setProfilePictureUrl(user.getProfilePicture().getUrl());
-        this.mediaFileService.downloadFile(user.getProfilePicture().getUrl(), ImageType.USER);
+        reviewUserDataDTO.setFullName(userEntity.getFirstName() + " " + userEntity.getLastName());
+        reviewUserDataDTO.setProfilePictureUrl(userEntity.getProfilePicture().getUrl());
+        this.mediaFileService.downloadFile(userEntity.getProfilePicture().getUrl(), ImageType.USER);
 
         return reviewUserDataDTO;
     }

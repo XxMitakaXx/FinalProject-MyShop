@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
 import org.example.finalprojectmyshop.order.models.enums.OrderPaymentStatus;
 import org.example.finalprojectmyshop.product.models.entities.Product;
-import org.example.finalprojectmyshop.user.models.entities.User;
+import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 
 import java.util.Date;
 import java.util.Set;
@@ -26,7 +26,7 @@ public class Order {
     private Address address;
 
     @ManyToOne
-    private User buyer;
+    private UserEntity buyer;
 
     @ManyToMany
     private Set<Product> products;
@@ -74,11 +74,11 @@ public class Order {
         this.address = address;
     }
 
-    public User getBuyer() {
+    public UserEntity getBuyer() {
         return this.buyer;
     }
 
-    public void setBuyer(User buyer) {
+    public void setBuyer(UserEntity buyer) {
         this.buyer = buyer;
     }
 

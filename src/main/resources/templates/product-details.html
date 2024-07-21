@@ -245,9 +245,9 @@
 
         <div class="product-reviews-container">
             <div th:each="review : ${product.reviews}" class="product-review">
-                <div class="review-user-data">
-                    <img class="review-user-image" th:src="${'/img/user/' + review.userData.getProfilePictureUrl()}" alt="user image">
-                    <p class="review-user-name" th:text="${review.userData.fullName}">User name</p>
+                <div class="review-userEntity-data">
+                    <img class="review-userEntity-image" th:src="${'/img/userEntity/' + review.userData.getProfilePictureUrl()}" alt="userEntity image">
+                    <p class="review-userEntity-name" th:text="${review.userData.fullName}">User name</p>
                     <p class="comment-add-date" th:text="${review.postDate}">09.10.2023</p>
                 </div>
 

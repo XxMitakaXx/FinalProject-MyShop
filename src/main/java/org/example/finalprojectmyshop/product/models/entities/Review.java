@@ -1,7 +1,7 @@
 package org.example.finalprojectmyshop.product.models.entities;
 
 import jakarta.persistence.*;
-import org.example.finalprojectmyshop.user.models.entities.User;
+import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 
 import java.util.Date;
 
@@ -22,7 +22,7 @@ public class Review {
     private Date date;
 
     @ManyToOne
-    private User user;
+    private UserEntity userEntity;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Product product;
@@ -70,12 +70,12 @@ public class Review {
         this.date = date;
     }
 
-    public User getUser() {
-        return this.user;
+    public UserEntity getUser() {
+        return this.userEntity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     public Product getProduct() {
