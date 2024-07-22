@@ -2,6 +2,8 @@ package org.example.finalprojectmyshop.user.web;
 
 import org.example.finalprojectmyshop.product.models.dtos.exports.CategoryAndRandomProductsDTO;
 import org.example.finalprojectmyshop.product.service.CategoryService;
+import org.example.finalprojectmyshop.user.models.user.MyShopUserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,14 +23,14 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model, @AuthenticationPrincipal MyShopUserDetails user) {
 
         if (categories.isEmpty()) {
             this.categories = this.categoryService.getCategoriesWithRandomProducts();
         }
 
         model.addAttribute("categories", categories);
-
+        model.addAttribute("user", user);
         return "home";
     }
 
