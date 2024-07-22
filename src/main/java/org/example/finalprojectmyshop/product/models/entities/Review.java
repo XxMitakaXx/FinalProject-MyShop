@@ -22,7 +22,7 @@ public class Review {
     private Date date;
 
     @ManyToOne
-    private UserEntity userEntity;
+    private UserEntity user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Product product;
@@ -71,11 +71,11 @@ public class Review {
     }
 
     public UserEntity getUser() {
-        return this.userEntity;
+        return this.user;
     }
 
     public void setUser(UserEntity userEntity) {
-        this.userEntity = userEntity;
+        this.user = userEntity;
     }
 
     public Product getProduct() {

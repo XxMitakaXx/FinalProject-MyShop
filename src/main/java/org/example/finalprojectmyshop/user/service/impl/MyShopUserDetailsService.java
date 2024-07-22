@@ -1,7 +1,12 @@
 package org.example.finalprojectmyshop.user.service.impl;
 
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
+import org.example.finalprojectmyshop.user.models.entities.UserRoleEntity;
+import org.example.finalprojectmyshop.user.models.entities.enums.UserRole;
+import org.example.finalprojectmyshop.user.models.user.MyShopUserDetails;
 import org.example.finalprojectmyshop.user.repository.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,12 +31,17 @@ public class MyShopUserDetailsService implements UserDetailsService {
     }
 
     private static UserDetails map(UserEntity user) {
-        return User
-                .withUsername(user.getEmail())
-                .password(user.getPassword())
-                .authorities(List.of())
-                .disabled(false)
-                .build();
+        return new MyShopUserDetails(
+                user.getFirstName(),
+                user.getPassword(),
+                user.getRoles().stream().map(UserRoleEntity::getRole).map(MyShopUserDetailsService::map).toList(),
+                user.getFirstName(),
+                user.getLastName()
+        );
+    }
+
+    private static GrantedAuthority map(UserRole role) {
+        return new SimpleGrantedAuthority("ROLE_" + role);
     }
 
 }

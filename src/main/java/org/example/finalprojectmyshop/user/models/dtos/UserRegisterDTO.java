@@ -2,9 +2,7 @@ package org.example.finalprojectmyshop.user.models.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import org.example.finalprojectmyshop.user.models.entities.enums.UserRole;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
@@ -34,8 +32,6 @@ public class UserRegisterDTO {
     private String phoneNumber;
 
     private LocalDate birthDate;
-
-    private UserRole userRole;
 
     private MultipartFile profilePicture;
 
@@ -95,14 +91,6 @@ public class UserRegisterDTO {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public UserRole getUserRole() {
-        return this.userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
     }
 
     public MultipartFile getProfilePicture() {

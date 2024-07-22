@@ -5,7 +5,7 @@ import org.example.finalprojectmyshop.user.models.entities.enums.UserRole;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class UserRoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -13,7 +13,7 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    public Role() {}
+    public UserRoleEntity() {}
 
     public long getId() {
         return this.id;

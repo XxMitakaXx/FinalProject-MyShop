@@ -34,16 +34,14 @@ public class ProductServiceImpl implements ProductService {
     private final ProductPropertyRepository productPropertyRepository;
     private final UserService userService;
     private final MediaFileService mediaFileService;
-    private final CurrentUser currentUser;
 
-    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, CategoryRepository categoryRepository, ProductPropertyRepository productPropertyRepository, UserService userService, MediaFileService mediaFileService, CurrentUser currentUser) {
+    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, CategoryRepository categoryRepository, ProductPropertyRepository productPropertyRepository, UserService userService, MediaFileService mediaFileService) {
         this.productRepository = productRepository;
         this.secondaryCategoryRepository = secondaryCategoryRepository;
         this.categoryRepository = categoryRepository;
         this.productPropertyRepository = productPropertyRepository;
         this.userService = userService;
         this.mediaFileService = mediaFileService;
-        this.currentUser = currentUser;
     }
 
     @Override
@@ -113,23 +111,23 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void addProductToFavorites(long id) {
-        Optional<Product> optional = this.productRepository.findById(id);
-
-        if (optional.isEmpty()) {
-            return;
-        }
-
-        Product product = optional.get();
-        boolean contains = this.currentUser.getUser().getFavorites()
-                .stream()
-                .map(Product::getId)
-                .collect(Collectors.toSet())
-                .contains(product.getId());
-
-        if (!contains) {
-            this.currentUser.getUser().getFavorites().add(product);
-            this.userService.save(this.currentUser.getUser());
-        }
+//        Optional<Product> optional = this.productRepository.findById(id);
+//
+//        if (optional.isEmpty()) {
+//            return;
+//        }
+//
+//        Product product = optional.get();
+//        boolean contains = this.currentUser.getUser().getFavorites()
+//                .stream()
+//                .map(Product::getId)
+//                .collect(Collectors.toSet())
+//                .contains(product.getId());
+//
+//        if (!contains) {
+//            this.currentUser.getUser().getFavorites().add(product);
+//            this.userService.save(this.currentUser.getUser());
+//        }
 
     }
 

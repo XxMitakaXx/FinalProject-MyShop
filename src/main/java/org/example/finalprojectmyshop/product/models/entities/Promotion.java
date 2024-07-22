@@ -16,7 +16,11 @@ public class Promotion {
     private String title;
 
     @ManyToMany
-    private List<Product> products;
+    @JoinTable(
+            name = "promotions_products",
+            joinColumns = @JoinColumn(name = "promotion_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )private List<Product> products;
 
     @Column(name = "start_date", nullable = false)
     private Timestamp startDate;

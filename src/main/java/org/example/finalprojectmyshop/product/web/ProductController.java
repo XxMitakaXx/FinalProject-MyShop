@@ -7,6 +7,8 @@ import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductProp
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
 import org.example.finalprojectmyshop.product.service.CategoryService;
 import org.example.finalprojectmyshop.product.service.ProductService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,12 +22,10 @@ public class ProductController {
 
     private final ProductService productService;
     private final CategoryService categoryService;
-    private final CurrentUser currentUser;
 
-    public ProductController(ProductService productService, CategoryService categoryService, CurrentUser currentUser) {
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
         this.categoryService = categoryService;
-        this.currentUser = currentUser;
     }
 
     @ModelAttribute("addProductDTO")
@@ -54,7 +54,7 @@ public class ProductController {
             @Valid AddProductDTO addProductDTO,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
-            Model model ) {
+            Model model) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addProductDTO", addProductDTO);
@@ -72,9 +72,9 @@ public class ProductController {
     }
 
     @PostMapping("/add-to-favorites/{id}")
-    private String processAddProductToFavorites(@PathVariable("id") long id) {
+    private String processAddProductToFavorites(@PathVariable("id") long id, @AuthenticationPrincipal UserDetails userDetails) {
 
-        if (!this.currentUser.isLoggedIn()) {
+        if (userDetails == null) {
             return "redirect:/login";
         }
 

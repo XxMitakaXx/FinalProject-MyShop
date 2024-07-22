@@ -39,12 +39,25 @@ public class UserEntity {
     private LocalDate birthDate;
 
     @ManyToMany()
-    private Set<Address> addresses;
+    @JoinTable(
+            name = "users_addresses",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id")
+    )private Set<Address> addresses;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Product> productsInCart;
+    @JoinTable(
+            name = "users_cart_products",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "cart_product_id")
+    )private Set<Product> productsInCart;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_favorites",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "favorite_id")
+    )
     private Set<Product> favorites;
 
     @OneToMany
@@ -56,8 +69,13 @@ public class UserEntity {
     @OneToMany
     private Set<Warranty> warranties;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<UserRoleEntity> userRoleEntities;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -69,7 +87,7 @@ public class UserEntity {
         this.addresses = new HashSet<>();
         this.productsInCart = new HashSet<>();
         this.favorites = new HashSet<>();
-        this.roles = new HashSet<>();
+        this.userRoleEntities = new HashSet<>();
         this.reviews = new HashSet<>();
         this.warranties = new HashSet<>();
     }
@@ -178,12 +196,12 @@ public class UserEntity {
         this.warranties = warranties;
     }
 
-    public Set<Role> getRoles() {
-        return this.roles;
+    public Set<UserRoleEntity> getRoles() {
+        return this.userRoleEntities;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Set<UserRoleEntity> userRoleEntities) {
+        this.userRoleEntities = userRoleEntities;
     }
 
     public Status getStatus() {

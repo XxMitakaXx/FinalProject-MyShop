@@ -118,20 +118,20 @@
             <small th:if="${#fields.hasErrors('birthDate')}" id="birthDateEmptyError"
                    class="birth-date-empty-error">Birth date must not be empty!</small>
 
-            <div class="collect-data-container">
-                <label for="input-userEntity-role">Role</label>
-                <select
-                        th:field="*{userRole}"
-                        th:errorclass="error"
-                        name="input-userEntity-role"
-                        id="input-userEntity-role">
-                    <option value="option">Select Role</option>
-                    <option th:each="role: ${roles}" th:value="${role}" th:text="${role}">Option</option>
-                </select>
-            </div>
+<!--            <div class="collect-data-container">-->
+<!--                <label for="input-userEntity-userRoleEntity">Role</label>-->
+<!--                <select-->
+<!--                        th:field="*{userRole}"-->
+<!--                        th:errorclass="error"-->
+<!--                        name="input-userEntity-userRoleEntity"-->
+<!--                        id="input-userEntity-userRoleEntity">-->
+<!--                    <option value="option">Select Role</option>-->
+<!--                    <option th:each="userRoleEntity: ${userRoleEntities}" th:value="${userRoleEntity}" th:text="${userRoleEntity}">Option</option>-->
+<!--                </select>-->
+<!--            </div>-->
 
-            <small th:if="${#fields.hasErrors('userRole')}" id="userRoleEmptyError"
-                   class="userEntity-role-empty-error">User role must not be empty!</small>
+<!--            <small th:if="${#fields.hasErrors('userRole')}" id="userRoleEmptyError"-->
+<!--                   class="userEntity-userRoleEntity-empty-error">User userRoleEntity must not be empty!</small>-->
 
             <div class="collect-data-container">
                 <label for="input-userEntity-profile-picture">Role</label>

@@ -12,27 +12,24 @@
         <h1>Login</h1>
 
         <form
-            th:action="@{/users/login}"
             th:method="post"
-            th:object="${userLoginDTO}">
+            th:action="@{/users/login}">
             <div class="data-collecting-container">
-                <label for="email-input">Email</label>
+                <label for="email">Email</label>
                 <input
-                        th:field="*{email}"
                         th:errorclass="error"
-                        name="email-input"
+                        name="email"
                         type="text"
-                        id="email-input"
+                        id="email"
                         placeholder="Email">
             </div>
             <div class="data-collecting-container">
-                <label for="password-input">Password</label>
+                <label for="password">Password</label>
                 <input
-                        th:field="*{password}"
                         th:errerclass="error"
-                        name="password-input"
+                        name="password"
                         type="password"
-                        id="password-input"
+                        id="password"
                         placeholder="Password">
             </div>
 

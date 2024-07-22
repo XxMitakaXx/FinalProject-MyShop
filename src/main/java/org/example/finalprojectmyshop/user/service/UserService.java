@@ -9,4 +9,5 @@ public interface UserService {
     void register(UserRegisterDTO userRegisterDTO);
     String downloadProfileImage(MediaFile profilePicture);
     void save(UserEntity userEntity);
+    UserEntity findUserByEmail(String email);
 }

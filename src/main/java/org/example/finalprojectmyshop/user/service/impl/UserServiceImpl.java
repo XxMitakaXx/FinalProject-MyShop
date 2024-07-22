@@ -3,12 +3,12 @@ package org.example.finalprojectmyshop.user.service.impl;
 import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
 import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
-import org.example.finalprojectmyshop.user.models.dtos.UserLoginDTO;
 import org.example.finalprojectmyshop.user.models.dtos.UserRegisterDTO;
-import org.example.finalprojectmyshop.user.models.entities.Role;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
+import org.example.finalprojectmyshop.user.models.entities.UserRoleEntity;
+import org.example.finalprojectmyshop.user.models.entities.enums.UserRole;
 import org.example.finalprojectmyshop.user.repository.UserRepository;
-import org.example.finalprojectmyshop.user.service.RoleService;
+import org.example.finalprojectmyshop.user.service.UserRoleService;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,14 +20,14 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final RoleService roleService;
+    private final UserRoleService userRoleService;
     private final MediaFileService mediaFileService;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, RoleService roleService, MediaFileService mediaFileService, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, UserRoleService userRoleService, MediaFileService mediaFileService, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.roleService = roleService;
+        this.userRoleService = userRoleService;
         this.mediaFileService = mediaFileService;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
@@ -45,11 +45,8 @@ public class UserServiceImpl implements UserService {
 
         userEntity.setProfilePicture(mediaFile);
 
-        Role role = new Role();
-        role.setRole(userRegisterDTO.getUserRole());
+        UserRoleEntity role = this.userRoleService.findByRole(UserRole.USER);
         userEntity.getRoles().add(role);
-
-        this.roleService.save(role);
 
         this.userRepository.save(userEntity);
     }
@@ -64,5 +61,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(UserEntity userEntity) {
         this.userRepository.save(userEntity);
+    }
+
+    @Override
+    public UserEntity findUserByEmail(String email) {
+        Optional<UserEntity> optional = this.userRepository.findByEmail(email);
+
+        if (optional.isEmpty()) {
+            // TODO throw error
+        }
+
+        return optional.get();
     }
 }
