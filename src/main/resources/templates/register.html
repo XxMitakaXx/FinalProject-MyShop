@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
@@ -134,7 +134,7 @@
 <!--                   class="userEntity-userRoleEntity-empty-error">User userRoleEntity must not be empty!</small>-->
 
             <div class="collect-data-container">
-                <label for="input-userEntity-profile-picture">Role</label>
+                <label for="input-userEntity-profile-picture">Image</label>
                 <input
                         th:field="*{profilePicture}"
                         th:errorclass="error"
