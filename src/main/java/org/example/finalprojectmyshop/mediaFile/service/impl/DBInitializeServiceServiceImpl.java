@@ -17,7 +17,7 @@ public class DBInitializeServiceServiceImpl implements DBInitializeService {
     @Override
     public void initialize() {
         try {
-            FileInputStream serviceAccount = new FileInputStream("C:\\Users\\Mitaka\\IdeaProjects\\FinalProject-MyShop\\src\\main\\resources\\onlineshopfinalprojectapp-firebase-adminsdk-2tda6-578fc3bc5d.json");
+            FileInputStream serviceAccount = new FileInputStream("C:\\Users\\mitak\\Desktop\\FinalProject-MyShop\\src\\main\\resources\\onlineshopfinalprojectapp-firebase-adminsdk-2tda6-578fc3bc5d.json");
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))

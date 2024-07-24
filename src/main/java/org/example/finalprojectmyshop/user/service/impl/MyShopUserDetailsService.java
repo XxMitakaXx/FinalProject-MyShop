@@ -34,7 +34,7 @@ public class MyShopUserDetailsService implements UserDetailsService {
 
     private static UserDetails map(UserEntity user) {
         return new MyShopUserDetails(
-                user.getFirstName(),
+                user.getEmail(),
                 user.getPassword(),
                 user.getRoles().stream().map(UserRoleEntity::getRole).map(MyShopUserDetailsService::map).toList(),
                 user.getFirstName(),
