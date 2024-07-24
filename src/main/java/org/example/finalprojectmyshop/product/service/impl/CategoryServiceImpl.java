@@ -84,11 +84,8 @@ public class CategoryServiceImpl implements CategoryService {
         RandomProductsDTO productDTO = new RandomProductsDTO();
         productDTO.setId(product.getId());
         productDTO.setName(product.getName());
+        productDTO.setImageUrl(product.getMainImage().getImageUrl());
 
-        String url = product.getMainImage().getUrl();
-
-        productDTO.setImageUrl(url);
-        this.mediaFileService.downloadFile(url, ImageType.PRODUCT, product.getName());
 
         productDTO.setPriceBeforePoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[0]));
         productDTO.setPriceAfterPoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[1]));

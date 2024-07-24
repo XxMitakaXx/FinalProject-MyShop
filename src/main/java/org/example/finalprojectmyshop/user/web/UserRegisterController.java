@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+
 @Controller
 @RequestMapping("/users")
 public class UserRegisterController {
@@ -40,7 +42,7 @@ public class UserRegisterController {
             @Valid UserRegisterDTO data,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
-    ) {
+    ) throws IOException {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userRegisterDTO", data);

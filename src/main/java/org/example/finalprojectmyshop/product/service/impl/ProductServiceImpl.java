@@ -1,7 +1,8 @@
 package org.example.finalprojectmyshop.product.service.impl;
 
-import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
+import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
 import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
+import org.example.finalprojectmyshop.mediaFile.service.ImagesHelperService;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsPropertyDTO;
@@ -19,6 +20,7 @@ import org.example.finalprojectmyshop.user.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -30,22 +32,18 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final SecondaryCategoryRepository secondaryCategoryRepository;
-    private final CategoryRepository categoryRepository;
     private final ProductPropertyRepository productPropertyRepository;
-    private final UserService userService;
-    private final MediaFileService mediaFileService;
+    private final ImagesHelperService imagesHelperService;
 
-    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, CategoryRepository categoryRepository, ProductPropertyRepository productPropertyRepository, UserService userService, MediaFileService mediaFileService) {
+    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, ProductPropertyRepository productPropertyRepository, ImagesHelperService imagesHelperService) {
         this.productRepository = productRepository;
         this.secondaryCategoryRepository = secondaryCategoryRepository;
-        this.categoryRepository = categoryRepository;
         this.productPropertyRepository = productPropertyRepository;
-        this.userService = userService;
-        this.mediaFileService = mediaFileService;
+        this.imagesHelperService = imagesHelperService;
     }
 
     @Override
-    public void save(AddProductDTO addProductDTO) {
+    public void save(AddProductDTO addProductDTO) throws IOException {
        SecondaryCategory category = this.secondaryCategoryRepository.findByName(addProductDTO.getSecondaryCategoryName());
 
         Product product = new Product();
@@ -71,12 +69,8 @@ public class ProductServiceImpl implements ProductService {
                     }
                 });
 
-        String mainImageUrl = this.mediaFileService.upload(addProductDTO.getFirstImage(), ImageType.PRODUCT, product.getName());
-        MediaFile mainImage = new MediaFile();
-        mainImage.setUrl(mainImageUrl);
-        this.mediaFileService.save(mainImage);
-
-        product.setMainImage(mainImage);
+        MediaFileEntity mediaFile = this.imagesHelperService.saveImage(addProductDTO.getFirstImage());
+        product.setMainImage(mediaFile);
 
 
         List<MultipartFile> images = List.of(
@@ -87,20 +81,13 @@ public class ProductServiceImpl implements ProductService {
                 addProductDTO.getFifthImage()
         );
 
-        Set<String> urls = new HashSet<>();
-
         images.forEach(image -> {
-
-            String url = this.mediaFileService.upload(image, ImageType.PRODUCT, product.getName());
-            urls.add(url);
-        });
-
-        urls.forEach(url -> {
-            MediaFile mediaFile = new MediaFile();
-            mediaFile.setUrl(url);
-
-            this.mediaFileService.save(mediaFile);
-            product.getImages().add(mediaFile);
+            try {
+                MediaFileEntity mediaFile1 = this.imagesHelperService.saveImage(image);
+                product.getImages().add(mediaFile1);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
 
         category.getProducts().add(product);
@@ -160,15 +147,13 @@ public class ProductServiceImpl implements ProductService {
 
         productDetailsDTO.setId(product.getId());
         productDetailsDTO.setName(product.getName());
-        productDetailsDTO.setMainImageUrl(product.getMainImage().getUrl());
+        productDetailsDTO.setMainImageUrl(product.getMainImage().getImageUrl());
         productDetailsDTO.setOriginalPrice(product.getPrice());
         productDetailsDTO.setDiscountPrice(product.getDiscountPrice());
-        this.mediaFileService.downloadFile(product.getMainImage().getUrl(), ImageType.PRODUCT, product.getName());
 
         product.getImages()
                 .forEach(image -> {
-                    productDetailsDTO.getImagesUrls().add(image.getUrl());
-                    this.mediaFileService.downloadFile(image.getUrl(), ImageType.PRODUCT, product.getName());
+                    productDetailsDTO.getImagesUrls().add(image.getImageUrl());
                 });
 
         productDetailsDTO.setDiscountPrice(product.getDiscountPrice());
@@ -265,8 +250,7 @@ public class ProductServiceImpl implements ProductService {
         ReviewUserDataDTO reviewUserDataDTO = new ReviewUserDataDTO();
 
         reviewUserDataDTO.setFullName(userEntity.getFirstName() + " " + userEntity.getLastName());
-        reviewUserDataDTO.setProfilePictureUrl(userEntity.getProfilePicture().getUrl());
-        this.mediaFileService.downloadFile(userEntity.getProfilePicture().getUrl(), ImageType.USER);
+        reviewUserDataDTO.setProfilePictureUrl(userEntity.getProfilePicture().getImageUrl());
 
         return reviewUserDataDTO;
     }

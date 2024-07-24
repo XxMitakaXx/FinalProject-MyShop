@@ -55,10 +55,7 @@ public class SecondaryCategoryServiceImpl implements SecondaryCategoryService {
         randomProductsDTO.setId(product.getId());
         randomProductsDTO.setName(product.getName());
 
-        String url = product.getMainImage().getUrl();
-
-        randomProductsDTO.setImageUrl(url);
-        this.mediaFileService.downloadFile(url, ImageType.PRODUCT, product.getName());
+        randomProductsDTO.setImageUrl(product.getMainImage().getImageUrl());
 
         randomProductsDTO.setPriceBeforePoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[0]));
         randomProductsDTO.setPriceAfterPoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[1]));

@@ -25,9 +25,8 @@ dependencies {
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     implementation 'org.springframework.boot:spring-boot-devtools'
 
-    implementation 'com.google.firebase:firebase-admin:9.3.0'
-    implementation 'org.jetbrains:annotations:24.0.0'
-//    implementation 'com.google.firebase:firebase-core:21.1.1'
+    implementation 'com.cloudinary:cloudinary-core:1.39.0'
+    implementation 'com.cloudinary:cloudinary-http44:1.39.0'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

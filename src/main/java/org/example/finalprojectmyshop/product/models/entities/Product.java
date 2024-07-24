@@ -1,7 +1,7 @@
 package org.example.finalprojectmyshop.product.models.entities;
 
 import jakarta.persistence.*;
-import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
+import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
 
 import java.util.*;
 
@@ -27,10 +27,10 @@ public class Product {
 //    private String color;
 
     @OneToOne
-    private MediaFile mainImage;
+    private MediaFileEntity mainImage;
 
     @OneToMany
-    private Set<MediaFile> images;
+    private Set<MediaFileEntity> images;
 
     @ManyToOne
     private SecondaryCategory secondaryCategory;
@@ -119,19 +119,19 @@ public class Product {
         return this;
     }
 
-    public MediaFile getMainImage() {
+    public MediaFileEntity getMainImage() {
         return this.mainImage;
     }
 
-    public void setMainImage(MediaFile mainImage) {
+    public void setMainImage(MediaFileEntity mainImage) {
         this.mainImage = mainImage;
     }
 
-    public Set<MediaFile> getImages() {
+    public Set<MediaFileEntity> getImages() {
         return this.images;
     }
 
-    public Product setImages(Set<MediaFile> imagesUrls) {
+    public Product setImages(Set<MediaFileEntity> imagesUrls) {
         this.images = imagesUrls;
 
         return this;

@@ -1,141 +1,38 @@
 package org.example.finalprojectmyshop.mediaFile.service.impl;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.storage.*;
-import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
-import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
+import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
 import org.example.finalprojectmyshop.mediaFile.repository.MediaFileRepository;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
 public class MediaFileServiceImpl implements MediaFileService {
 
-    private final String BUCKER_NAME = "onlineshopfinalprojectapp.appspot.com";
-    private final String DOWNLOAD_URL = "https://firebasestorage.googleapis.com/v0/b/Images/o/%s?alt=media";
-//    private final String GET_IMAGE_URL = "https://firebasestorage.googleapis.com/v0/b/onlineshopfinalprojectapp.appspot.com/o/product-images%2Fhgfhfhfhgfh%2F%s.jpg?alt=media&token=%s", imageName, accessToken;
-    private final Storage storage = this.initStorage();
-
     private final MediaFileRepository mediaFileRepository;
 
-    public MediaFileServiceImpl(MediaFileRepository mediaFileRepository) throws IOException {
+    public MediaFileServiceImpl(MediaFileRepository mediaFileRepository) {
         this.mediaFileRepository = mediaFileRepository;
     }
 
-
-    private String uploadFile(File file, String fileName, ImageType type) throws IOException {
-        BlobId blobId = BlobId.of(BUCKER_NAME, fileName);
-        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
-
-        this.storage.create(blobInfo, Files.readAllBytes(file.toPath()));
-
-//        return String.format(DOWNLOAD_URL, URLEncoder.encode(fileName, StandardCharsets.UTF_8));
-
-        if (type == ImageType.USER) {
-            fileName = fileName.split("/")[1];
-        } else if (type == ImageType.PRODUCT) {
-            fileName = fileName.split("/")[2];
-        }
-        return fileName;
-    }
-
-    private File convertToFile(MultipartFile multipartFile, String fileName) {
-        File tempFile = new File(fileName);
-        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-            fos.write(multipartFile.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return tempFile;
-    }
-
-    private String getExtension(String fileName) {
-        return fileName.substring(fileName.lastIndexOf("."));
+    @Override
+    public Optional<MediaFileEntity> getMediaFileById(long id) {
+        return this.mediaFileRepository.findById(id);
     }
 
     @Override
-    public String upload(MultipartFile multipartFile, ImageType type) {
-        try {
-            String fileName = multipartFile.getOriginalFilename();
-            fileName = UUID.randomUUID().toString().concat(this.getExtension(fileName));
-
-            File file = this.convertToFile(multipartFile, fileName);
-
-            String url = this.uploadFile(file, ImageType.USER.getCloudFolderPath() + file.getName(), ImageType.USER);
-            file.delete();
-
-            return url;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "Image couldn't upload, Something went wrong";
-        }
-    }
-
-    @Override
-    public String upload(MultipartFile multipartFile, ImageType type, String productName) {
-        try {
-            String fileName = multipartFile.getOriginalFilename();
-            fileName = UUID.randomUUID().toString().concat(this.getExtension(fileName));
-
-            File file = this.convertToFile(multipartFile, fileName);
-
-            String url = this.uploadFile(file, ImageType.PRODUCT.getCloudFolderPath() + productName + "/" + file.getName(), ImageType.PRODUCT);
-            file.delete();
-
-            return url;
-        } catch (IOException e) {
-            return "Images couldn't upload, Something went wrong";
-        }
-
-    }
-
-    @Override
-    public String downloadFile(String fileName, ImageType type) {
-        String fileCloudPath = type.getCloudFolderPath().concat(fileName);
-        String localFolderPath = type.getLocalFolderPath().concat(fileName);
-        Blob blob = this.storage.get(BUCKER_NAME, fileCloudPath);
-        blob.downloadTo(Paths.get("C:\\Users\\mitak\\Desktop\\FinalProject-MyShop\\src\\main\\resources\\static\\img\\" + localFolderPath));
-
-        return fileName;
-    }
-
-    @Override
-    public String downloadFile(String fileName, ImageType type, String productName) {
-        String cloudFilePath = type.getCloudFolderPath() + productName + "/" + fileName;
-        String productLocalFolderPath = type.getLocalFolderPath() + productName + "/";
-//        String localFolderPath = type.getLocalFolderPath() + productLocalFolderPath + "/";
-
-        File file = new File("C:\\Users\\mitak\\Desktop\\FinalProject-MyShop\\src\\main\\resources\\static\\img\\products\\" + productName);
-        file.mkdir();
-
-        Blob blob = this.storage.get(BUCKER_NAME, cloudFilePath);
-        blob.downloadTo(Paths.get("C:\\Users\\mitak\\Desktop\\FinalProject-MyShop\\src\\main\\resources\\static\\img\\" + productLocalFolderPath + fileName));
-
-//        String filePath =
-        String filePathAndName = String.format("%s/%s", productName, fileName);
-        return filePathAndName;
-    }
-
-    @Override
-    public void save(MediaFile mediaFile) {
+    public void save(MediaFileEntity mediaFile) {
         this.mediaFileRepository.save(mediaFile);
     }
 
-    private Storage initStorage() throws IOException {
-        InputStream inputStream = MediaFileService.class.getClassLoader().getResourceAsStream("onlineshopfinalprojectapp-firebase-adminsdk-2tda6-578fc3bc5d.json");
-        GoogleCredentials credentials = GoogleCredentials.fromStream(inputStream);
-        Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+    @Override
+    public void deleteById(long id) {
+        this.mediaFileRepository.deleteById(id);
+    }
 
-        return storage;
+    @Override
+    public boolean existsById(long id) {
+        return this.mediaFileRepository.existsById(id);
     }
 }

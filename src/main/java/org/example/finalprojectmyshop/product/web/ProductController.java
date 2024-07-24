@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.Set;
 
 @Controller
@@ -54,7 +55,7 @@ public class ProductController {
             @Valid AddProductDTO addProductDTO,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
-            Model model) {
+            Model model) throws IOException {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addProductDTO", addProductDTO);

@@ -1,7 +1,7 @@
 package org.example.finalprojectmyshop.user.models.entities;
 
 import jakarta.persistence.*;
-import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFile;
+import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
 import org.example.finalprojectmyshop.order.models.entities.Address;
 import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.product.models.entities.Product;
@@ -81,7 +81,7 @@ public class UserEntity {
     private Status status;
 
     @OneToOne
-    private MediaFile profilePicture;
+    private MediaFileEntity profilePicture;
 
     public UserEntity() {
         this.addresses = new HashSet<>();
@@ -212,11 +212,11 @@ public class UserEntity {
         this.status = status;
     }
 
-    public MediaFile getProfilePicture() {
+    public MediaFileEntity getProfilePicture() {
         return this.profilePicture;
     }
 
-    public void setProfilePicture(MediaFile profilePicture) {
+    public void setProfilePicture(MediaFileEntity profilePicture) {
         this.profilePicture = profilePicture;
     }
 }
