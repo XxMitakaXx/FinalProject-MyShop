@@ -16,6 +16,8 @@ import java.util.List;
 
 public class MyShopUserDetailsService implements UserDetailsService {
 
+    private static final String ROLE_PREFIX = "ROLE_";
+
     private final UserRepository userRepository;
 
     public MyShopUserDetailsService(UserRepository userRepository) {
@@ -41,7 +43,7 @@ public class MyShopUserDetailsService implements UserDetailsService {
     }
 
     private static GrantedAuthority map(UserRole role) {
-        return new SimpleGrantedAuthority("ROLE_" + role);
+        return new SimpleGrantedAuthority(ROLE_PREFIX + role);
     }
 
 }

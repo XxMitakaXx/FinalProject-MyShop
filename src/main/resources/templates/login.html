@@ -13,10 +13,13 @@
 
         <form
             th:method="post"
-            th:action="@{/users/login}">
+            th:action="@{/users/login}"
+            th:object="${loginData}">
+            <div class="login-error-message" th:if="${showErrorMessage}" th:text="'Invalid username or password"></div>
             <div class="data-collecting-container">
                 <label for="email">Email</label>
                 <input
+                        th:field="*{email}"
                         name="email"
                         type="text"
                         id="email"
@@ -25,6 +28,7 @@
             <div class="data-collecting-container">
                 <label for="password">Password</label>
                 <input
+                        th:field="*{password}"
                         name="password"
                         type="password"
                         id="password"
