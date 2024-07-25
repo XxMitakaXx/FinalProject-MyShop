@@ -4,6 +4,7 @@ import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
 import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
 import org.example.finalprojectmyshop.mediaFile.service.ImagesHelperService;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
+import org.example.finalprojectmyshop.order.models.entities.ProductInCartEntity;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsPropertyDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ReviewDataDTO;
@@ -17,6 +18,7 @@ import org.example.finalprojectmyshop.product.repository.SecondaryCategoryReposi
 import org.example.finalprojectmyshop.product.service.ProductService;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 import org.example.finalprojectmyshop.user.service.UserService;
+import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,12 +36,14 @@ public class ProductServiceImpl implements ProductService {
     private final SecondaryCategoryRepository secondaryCategoryRepository;
     private final ProductPropertyRepository productPropertyRepository;
     private final ImagesHelperService imagesHelperService;
+    private final UserHelperService userHelperService;
 
-    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, ProductPropertyRepository productPropertyRepository, ImagesHelperService imagesHelperService) {
+    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, ProductPropertyRepository productPropertyRepository, ImagesHelperService imagesHelperService, UserHelperService userHelperService) {
         this.productRepository = productRepository;
         this.secondaryCategoryRepository = secondaryCategoryRepository;
         this.productPropertyRepository = productPropertyRepository;
         this.imagesHelperService = imagesHelperService;
+        this.userHelperService = userHelperService;
     }
 
     @Override
@@ -119,6 +123,32 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void addProductToCart(long id) {
+        Product product = this.productRepository.findById(id).get();
+
+        UserEntity user = this.userHelperService.getUser();
+
+        boolean contain = user
+                .getCart()
+                .getProductsInCart()
+                .stream()
+                .map(productInCartEntity -> productInCartEntity.getProduct().getId())
+                .anyMatch(productInCartEntityId -> productInCartEntityId.equals(product.getId()));
+
+        if (!contain) {
+            user.getCart().getProductsInCart().forEach(productInCart -> {
+                if (productInCart.getProduct().getId() == product.getId()) {
+                    ProductInCartEntity productInCartEntity = productInCart;
+                    productInCartEntity.setCount(productInCartEntity.getCount() + 1);
+
+                    user.getCart().getProductsInCart().remove(productInCartEntity);
+                    user.getCart().getProductsInCart().add(productInCartEntity);
+                }
+            });
+        }
+    }
+
+    @Override
     public ProductDetailsDTO findById(long id) {
         Optional<Product> byId = this.productRepository.findById(id);
 
@@ -127,7 +157,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         Product product = byId.get();
-        ProductDetailsDTO productDetailsDTO = toProductDetailsDTO(product);
+        ProductDetailsDTO productDetailsDTO = this.toProductDetailsDTO(product);
 
         return productDetailsDTO;
     }

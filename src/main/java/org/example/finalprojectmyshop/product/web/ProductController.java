@@ -83,4 +83,16 @@ public class ProductController {
 
         return "redirect:/";
     }
+
+    @PostMapping("/add-product-to-cart/{id}")
+    public String processAddProductToCart(@PathVariable("id") long id, @AuthenticationPrincipal UserDetails userDetails) {
+
+        if (userDetails == null) {
+            return "redirect:/login";
+        }
+
+        this.productService.addProductToCart(id);
+
+        return "redirect:/";
+    }
 }

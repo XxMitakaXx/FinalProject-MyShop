@@ -20,102 +20,71 @@
 </head>
 <body>
 
-    <nav th:replace="~{fragments/navbar}"></nav>
-    <nav th:replace="~{fragments/second-navbar}"></nav>
-    <nav th:replace="~{fragments/categories-navbar}"></nav>
+<nav th:replace="~{fragments/navbar}"></nav>
+<nav th:replace="~{fragments/second-navbar}"></nav>
+<nav th:replace="~{fragments/categories-navbar}"></nav>
 
-    <div class="content-container">
-        <div class="order-data-container">
-            <h2>Data for order</h2>
+<form class="content-container"
+    th:method="post"
+    th:action="@{#}"
+    th:object="${cartData}">
+    <div class="order-data-container">
+        <h2>Data for order</h2>
 
-            <div class="price-for-products-container">
-                <p>Price for products:</p>
-                <p>2222<sup>99</sup> LV.</p>
-            </div>
-
-            <div class="price-for-delivery-container">
-                <p>Price for delivery:</p>
-                <p>10<sup>99</sup> LV.</p>
-            </div>
-
-            <div class="sum-container">
-                <p>SUM:</p>
-                <p class="order-info-sum-price">3300<sup>99</sup> LV.</p>
-            </div>
-
-            <button class="continue-button" type="submit"><span class="material-symbols-outlined">double_arrow</span> Continue</button>
+        <div class="price-for-product-container">
+            <p>Price for product:</p>
+            <p th:text="${cartData.priceBeforePointForProducts}">2222<sup th:text="${cartData.priceAfterPointForProducts}">99</sup> LV.</p>
         </div>
 
-        <div class="products-in-cart-container">
-            <h2 class="products-title">Products in shopping cart</h2>
+        <div class="price-for-delivery-container">
+            <p>Price for delivery:</p>
+            <p th:text="${cartData.priceBeforePointForDelivery}">10<sup th:text="${cartData.priceAfterForDelivery}">99</sup> LV.</p>
+        </div>
 
-            <div class="product-in-cart-container">
-                <div class="left-side-info">
-                    <div class="product-title-image-conatiner">
-                        <h3>Playstation 5 slim</h3>
-                        <img src="data:image/jpeg;base64,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">
-                    </div>
+        <div class="sum-container">
+            <p>SUM:</p>
+            <p class="order-info-sum-price" th:text="${cartData.priceBeforePointForSum}">3300<sup th:text="${cartData.priceAfterPointForSum}">99</sup> LV.</p>
+        </div>
 
-                    <div class="leasing-express-ship-container">
-                        <div class="product-checks">
-                            <p>Express ship</p>
-                            <span class="material-symbols-outlined">check</span>
-                        </div>
-                        <div class="product-checks">
-                            <p>Leasing</p>
-                            <span class="material-symbols-outlined">check</span>
-                        </div>
-                    </div>
-                </div>
+        <button class="continue-button" type="submit"><span class="material-symbols-outlined">double_arrow</span> Continue</button>
+    </div>
 
-                <div class="right-side-info">
-                    <p>1999<sup>99</sup>LV</p>
-                    <div class="count-container">
-                        <button>
-                            <span class="material-symbols-outlined">add</span>
-                        </button>
-                        <p>1</p>
-                        <button>
-                            <span class="material-symbols-outlined">remove</span>
-                        </button>
-                    </div>
-                    <a href="#">Delete</a>
+    <div class="products-in-cart-container">
+        <h2 class="product-title">Products in shopping cart</h2>
+
+        <div th:each="product : ${cartData.productsInCart} " class="product-in-cart-container">
+            <div class="left-side-info">
+                <div class="product-title-image-container">
+                    <h3 th:text="${product.product.name}">Playstation 5 slim</h3>
+                    <img th:src="@{${product.product.mainImage.imageUrl}}">
                 </div>
             </div>
-            <div class="product-in-cart-container">
-                <div class="left-side-info">
-                    <div class="product-title-image-conatiner">
-                        <h3>Playstation 5 slim</h3>
-                        <img src="data:image/jpeg;base64,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">
-                    </div>
 
-                    <div class="leasing-express-ship-container">
-                        <div class="product-checks">
-                            <p>Express ship</p>
-                            <span class="material-symbols-outlined">check</span>
-                        </div>
-                        <div class="product-checks">
-                            <p>Leasing</p>
-                            <span class="material-symbols-outlined">check</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="right-side-info">
-                    <p>1999<sup>99</sup>LV</p>
-                    <div class="count-container">
+            <div class="right-side-info">
+                <p th:text="${product.priceBeforePoint}">1999<sup th:text="${product.priceAfterPoint}">99</sup>LV</p>
+                <div class="count-container">
+                    <form
+                        th:method="post"
+                        th:action="@{increase-product-count/{id}(id=*{product.id})}">
                         <button>
                             <span class="material-symbols-outlined">add</span>
                         </button>
-                        <p>1</p>
+                    </form>
+
+                    <p>1</p>
+
+                    <form
+                            th:method="post"
+                            th:action="@{decrease-product-count/{id}(id=*{product.id})}">
                         <button>
                             <span class="material-symbols-outlined">remove</span>
                         </button>
-                    </div>
-                    <a href="#">Delete</a>
+                    </form>
                 </div>
+                <a href="#">Delete</a>
             </div>
         </div>
     </div>
+</form>
 </body>
 </html>

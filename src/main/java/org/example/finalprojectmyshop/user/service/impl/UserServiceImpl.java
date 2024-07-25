@@ -4,6 +4,9 @@ import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
 import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
 import org.example.finalprojectmyshop.mediaFile.service.ImagesHelperService;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
+import org.example.finalprojectmyshop.order.models.entities.CartEntity;
+import org.example.finalprojectmyshop.order.repository.CartRepository;
+import org.example.finalprojectmyshop.order.service.CartService;
 import org.example.finalprojectmyshop.user.models.dtos.UserRegisterDTO;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 import org.example.finalprojectmyshop.user.models.entities.UserRoleEntity;
@@ -24,13 +27,15 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserRoleService userRoleService;
     private final ImagesHelperService imagesHelperService;
+    private final CartRepository cartRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, UserRoleService userRoleService, ImagesHelperService imagesHelperService, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, UserRoleService userRoleService, ImagesHelperService imagesHelperService, CartRepository cartRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userRoleService = userRoleService;
         this.imagesHelperService = imagesHelperService;
+        this.cartRepository = cartRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
     }
@@ -41,8 +46,11 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(this.passwordEncoder.encode(userEntity.getPassword()));
 
         MediaFileEntity mediaFile = this.imagesHelperService.saveImage(userRegisterDTO.getProfilePicture());
-
         userEntity.setProfilePicture(mediaFile);
+
+        CartEntity cart = new CartEntity();
+        this.cartRepository.save(cart);
+        userEntity.setCart(cart);
 
         UserRoleEntity role = this.userRoleService.findByRole(UserRole.USER);
         userEntity.getRoles().add(role);

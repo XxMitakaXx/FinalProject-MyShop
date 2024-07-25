@@ -3,6 +3,7 @@ package org.example.finalprojectmyshop.user.models.entities;
 import jakarta.persistence.*;
 import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
 import org.example.finalprojectmyshop.order.models.entities.Address;
+import org.example.finalprojectmyshop.order.models.entities.CartEntity;
 import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.entities.Review;
@@ -45,12 +46,8 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "address_id")
     )private Set<Address> addresses;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users_cart_products",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "cart_product_id")
-    )private Set<Product> productsInCart;
+    @OneToOne
+    private CartEntity cart;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -85,7 +82,6 @@ public class UserEntity {
 
     public UserEntity() {
         this.addresses = new HashSet<>();
-        this.productsInCart = new HashSet<>();
         this.favorites = new HashSet<>();
         this.userRoleEntities = new HashSet<>();
         this.reviews = new HashSet<>();
@@ -156,12 +152,20 @@ public class UserEntity {
         this.addresses = addresses;
     }
 
-    public Set<Product> getProductsInCart() {
-        return this.productsInCart;
+    public CartEntity getCart() {
+        return this.cart;
     }
 
-    public void setProductsInCart(Set<Product> cart) {
-        this.productsInCart = cart;
+    public void setCart(CartEntity cart) {
+        this.cart = cart;
+    }
+
+    public Set<UserRoleEntity> getUserRoleEntities() {
+        return userRoleEntities;
+    }
+
+    public void setUserRoleEntities(Set<UserRoleEntity> userRoleEntities) {
+        this.userRoleEntities = userRoleEntities;
     }
 
     public Set<Product> getFavorites() {

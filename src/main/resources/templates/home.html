@@ -44,7 +44,7 @@
 
                     <form
                             th:method="get"
-                            th:action="@{/users/loginollolo}"
+                            th:action="@{/users/login}"
                             sec:authorize="!isAuthenticated()">
                         <button type="submit" class="category-product-add-to-favorite-button">
                             <span class="material-symbols-outlined">favorite</span>
@@ -88,7 +88,7 @@
 
                         <form
                             th:method="post"
-                            th:action="@{/add-product-to-favorites/{id}(id=*{product.id})}"
+                            th:action="@{/add-product-to-cart/{id}(id=*{product.id})}"
                             sec:authorize="isAuthenticated()">
                             <button class="category-product-add-to-cart-button" type="submit">
                                 <span class="cart-icon material-symbols-outlined">shopping_cart</span>

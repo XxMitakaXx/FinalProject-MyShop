@@ -11,7 +11,7 @@ body {
 }
 
 .products-in-cart-container {
-    margin-top: 1em;
+    margin-top: 3em;
     margin-right: 30em;
     margin-bottom: 5em;
     display: flex;
@@ -51,7 +51,7 @@ body {
     /* border: 1px solid; */
 }
 
-.product-in-cart-container .left-side-info .product-title-image-conatiner {
+.product-in-cart-container .left-side-info .product-title-image-container {
     margin-top: 2em;
     display: flex;
     flex-direction: column;
@@ -59,12 +59,12 @@ body {
     gap: 2em;
 }
 
-.product-in-cart-container .left-side-info .product-title-image-conatiner h3 {
+.product-in-cart-container .left-side-info .product-title-image-container h3 {
     font-size: 1.5em;
 }
 
 
-.product-in-cart-container .left-side-info .product-title-image-conatiner img {
+.product-in-cart-container .left-side-info .product-title-image-container img {
     width: 10em;
 }
 
@@ -104,7 +104,7 @@ body {
     flex-direction: row;
 }
 
-.product-in-cart-container .right-side-info .count-container button {
+.product-in-cart-container .right-side-info .count-container form button {
     color: #ffffff;
     background: blue;
     height: 2.5em;
@@ -136,7 +136,7 @@ body {
     flex-direction: column;
     gap: 0.6em;
     position: absolute;
-    top: 1em;
+    top: 8em;
     right: 7em;
 }
 
@@ -151,18 +151,18 @@ body {
     align-items: start;
 }
 
-.order-data-container .sum-conatiner {
+.order-data-container .sum-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 0.3em;
 }
 
-.order-data-container .sum-conatiner p {
+.order-data-container .sum-container p {
     font-size: 1.1em;
 }
 
-.order-data-container .sum-conatiner p.order-info-sum-price {
+.order-data-container .sum-container p.order-info-sum-price {
     font-size: 1.4em;
 }
 
