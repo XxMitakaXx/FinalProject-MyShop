@@ -17,8 +17,6 @@ public class Sale {
     @Column(nullable = false)
     private Date date;
 
-    private String description;
-
     @ManyToOne
     private UserEntity buyer;
 
@@ -44,14 +42,6 @@ public class Sale {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public UserEntity getBuyer() {

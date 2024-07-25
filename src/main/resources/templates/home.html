@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
@@ -7,8 +7,8 @@
     <link rel="stylesheet" th:href="@{/css/navbar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/search-bar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/admin-context-styles.css}" />
-    <link rel="stylesheet" th:href="@{/css/profile-context-styles.css}" />
     <link rel="stylesheet" th:href="@{css/cart-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/profile-context-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/second-navbar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/categories-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/suggest-product-by-category-styles.css}" />
@@ -35,7 +35,17 @@
                 <div th:each="product : ${category.products}" class="category-product" data-star-rate="5">
                     <form
                         th:method="post"
-                        th:action="@{/add-to-favorites/{id}(id=*{product.id})}">
+                        th:action="@{/add-to-favorites/{id}(id=*{product.id})}"
+                        sec:authorize="isAuthenticated()">
+                        <button type="submit" class="category-product-add-to-favorite-button">
+                            <span class="material-symbols-outlined">favorite</span>
+                        </button>
+                    </form>
+
+                    <form
+                            th:method="get"
+                            th:action="@{/users/loginollolo}"
+                            sec:authorize="!isAuthenticated()">
                         <button type="submit" class="category-product-add-to-favorite-button">
                             <span class="material-symbols-outlined">favorite</span>
                         </button>
@@ -78,7 +88,17 @@
 
                         <form
                             th:method="post"
-                            th:action="@{/add-product-to-favorites{id}(id=*{product.id})}">
+                            th:action="@{/add-product-to-favorites/{id}(id=*{product.id})}"
+                            sec:authorize="isAuthenticated()">
+                            <button class="category-product-add-to-cart-button" type="submit">
+                                <span class="cart-icon material-symbols-outlined">shopping_cart</span>
+                            </button>
+                        </form>
+
+                        <form
+                                th:method="get"
+                                th:action="@{/users/login}"
+                                sec:authorize="!isAuthenticated()">
                             <button class="category-product-add-to-cart-button" type="submit">
                                 <span class="cart-icon material-symbols-outlined">shopping_cart</span>
                             </button>
