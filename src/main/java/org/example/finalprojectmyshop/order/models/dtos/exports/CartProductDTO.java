@@ -4,8 +4,8 @@ public class CartProductDTO {
     private long id;
     private String name;
     private String imageUrl;
-    private int priceBeforePoint;
-    private int priceAfterPoint;
+    private double price;
+    private int count;
 
     public CartProductDTO() {
 
@@ -35,19 +35,19 @@ public class CartProductDTO {
         this.imageUrl = imageUrl;
     }
 
-    public int getPriceBeforePoint() {
-        return this.priceBeforePoint;
+    public double getPrice() {
+        return this.price;
     }
 
-    public void setPriceBeforePoint(int priceBeforePoint) {
-        this.priceBeforePoint = priceBeforePoint;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public int getPriceAfterPoint() {
-        return this.priceAfterPoint;
+    public int getCount() {
+        return this.count;
     }
 
-    public void setPriceAfterPoint(int priceAfterPoint) {
-        this.priceAfterPoint = priceAfterPoint;
+    public void setCount(int count) {
+        this.count = count;
     }
 }

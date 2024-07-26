@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/search-bar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{css/cart-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/profile-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/second-navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/categories-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer-styles.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script th:src="@{/js/adminContext.js}" defer></script>
+    <script th:src="@{/js/profileContext.js}" defer></script>
+    <script th:src="@{/js/cartContext.js}" defer></script>
+    <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
+    <script th:src="@{/js/collecting-order-data}" defer></script>
+    <title>My Shop</title>
+</head>
+<body>
+    <nav th:replace="~{fragments/navbar}"></nav>
+    <nav th:replace="~{fragments/second-navbar}"></nav>
+    <nav th:replace="~{fragments/categories-navbar}"></nav>
+
+    <h1>Info for order</h1>
+
+    <form
+
+            class="content-container">
+        <div class="order-data-collecting-container">
+            <div class="collecting-data-container">
+                <label for="location">Location</label>
+
+                <select class="user-address">
+                    <option value="">Choose Address</option>
+                    <option value="Address 1">Address 1</option>
+                    <option value="Address 2">Address 2</option>
+                    <option value="Address 3">Address 3</option>
+                </select>
+
+                <input name="location" id="location" type="text"  placeholder="Address">
+            </div>
+
+            <div class="collecting-data-container">
+                <label for="collecting-place">Collecting place</label>
+
+                <select name="collecting-place" id="collecting-place">
+                    <option value="">Choose Collecting Place</option>
+                    <option value="value">At your address</option>
+                    <option value="value">Ekont</option>
+                    <option value="value">Speedy</option>
+                </select>
+            </div>
+
+                <div class="order-info-container">
+                    <div class="pricing-content">
+                        <h2><span class="material-symbols-outlined">payments</span> Due amout</h2>
+                        <div class="prices-container">
+                            <div class="price-container">
+                                <p>Products price</p>
+                                <p>2000.00 LV.</p>
+                            </div>
+                            <div class="price-container">
+                                <p>Delivery price</p>
+                                <p>0.00 LV.</p>
+                            </div>
+                        </div>
+
+                        <div class="sum-container">
+                            <p>SUM: price</p>
+                            <p>2000.00 LV.</p>
+                        </div>
+                    </div>
+
+                    <button type="submit">FINISH ORDER</button>
+                </div>
+    </form>
+</body>
+</html>

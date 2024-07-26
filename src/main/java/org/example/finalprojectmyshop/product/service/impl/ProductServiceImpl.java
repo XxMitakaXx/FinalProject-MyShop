@@ -4,7 +4,10 @@ import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
 import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
 import org.example.finalprojectmyshop.mediaFile.service.ImagesHelperService;
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
+import org.example.finalprojectmyshop.order.models.entities.CartEntity;
 import org.example.finalprojectmyshop.order.models.entities.ProductInCartEntity;
+import org.example.finalprojectmyshop.order.service.CartService;
+import org.example.finalprojectmyshop.order.service.ProductInCartService;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsPropertyDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ReviewDataDTO;
@@ -36,14 +39,20 @@ public class ProductServiceImpl implements ProductService {
     private final SecondaryCategoryRepository secondaryCategoryRepository;
     private final ProductPropertyRepository productPropertyRepository;
     private final ImagesHelperService imagesHelperService;
+    private final UserService userService;
     private final UserHelperService userHelperService;
+    private final CartService cartService;
+    private final ProductInCartService productInCartService;
 
-    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, ProductPropertyRepository productPropertyRepository, ImagesHelperService imagesHelperService, UserHelperService userHelperService) {
+    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, ProductPropertyRepository productPropertyRepository, ImagesHelperService imagesHelperService, UserService userService, UserHelperService userHelperService, CartService cartService, ProductInCartService productInCartService) {
         this.productRepository = productRepository;
         this.secondaryCategoryRepository = secondaryCategoryRepository;
         this.productPropertyRepository = productPropertyRepository;
         this.imagesHelperService = imagesHelperService;
+        this.userService = userService;
         this.userHelperService = userHelperService;
+        this.cartService = cartService;
+        this.productInCartService = productInCartService;
     }
 
     @Override
@@ -136,15 +145,52 @@ public class ProductServiceImpl implements ProductService {
                 .anyMatch(productInCartEntityId -> productInCartEntityId.equals(product.getId()));
 
         if (!contain) {
-            user.getCart().getProductsInCart().forEach(productInCart -> {
-                if (productInCart.getProduct().getId() == product.getId()) {
-                    ProductInCartEntity productInCartEntity = productInCart;
-                    productInCartEntity.setCount(productInCartEntity.getCount() + 1);
+            ProductInCartEntity productInCartEntity = new ProductInCartEntity();
+            productInCartEntity.setProduct(product);
+            productInCartEntity.setCount(1);
+            this.productInCartService.save(productInCartEntity);
 
-                    user.getCart().getProductsInCart().remove(productInCartEntity);
-                    user.getCart().getProductsInCart().add(productInCartEntity);
-                }
-            });
+            CartEntity cart = user.getCart();
+            cart.getProductsInCart().add(productInCartEntity);
+            this.cartService.save(cart);
+
+            user.setCart(cart);
+
+            this.userService.save(user);
+        }
+    }
+
+    @Override
+    public void deleteProductFromCart(long id) {
+        ProductInCartEntity product = this.productInCartService.findById(id);
+
+        UserEntity user = this.userHelperService.getUser();
+
+        boolean contain = false;
+
+        Set<ProductInCartEntity> productsInCart = user.getCart().getProductsInCart();
+        for (ProductInCartEntity productInCartEntity : productsInCart) {
+            if (Integer.parseInt(String.valueOf(productInCartEntity.getId())) == Integer.parseInt(String.valueOf(product.getId()))) {
+                contain = true;
+            }
+        }
+
+        if (contain) {
+            CartEntity cart = user.getCart();
+
+            Set<ProductInCartEntity> productInCartEntities = cart.getProductsInCart()
+                    .stream()
+                    .filter(productInCartEntity -> Integer.parseInt(String.valueOf(productInCartEntity.getId())) != Integer.parseInt(String.valueOf(product.getId())))
+                    .collect(Collectors.toSet());
+
+            cart.setProductsInCart(productInCartEntities);
+            this.cartService.save(cart);
+
+            user.setCart(cart);
+
+            this.userService.save(user);
+
+            this.productInCartService.deleteById(id);
         }
     }
 

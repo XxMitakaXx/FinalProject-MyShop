@@ -33,56 +33,64 @@
 
         <div class="price-for-product-container">
             <p>Price for product:</p>
-            <p th:text="${cartData.priceBeforePointForProducts}">2222<sup th:text="${cartData.priceAfterPointForProducts}">99</sup> LV.</p>
+            <p th:text="${cartData.priceForProducts + ' LV.'}">2222.99 LV.</p>
         </div>
 
         <div class="price-for-delivery-container">
             <p>Price for delivery:</p>
-            <p th:text="${cartData.priceBeforePointForDelivery}">10<sup th:text="${cartData.priceAfterForDelivery}">99</sup> LV.</p>
+            <p th:text="${cartData.priceForDelivery + ' LV.'}">10.99 LV.</p>
         </div>
 
         <div class="sum-container">
             <p>SUM:</p>
-            <p class="order-info-sum-price" th:text="${cartData.priceBeforePointForSum}">3300<sup th:text="${cartData.priceAfterPointForSum}">99</sup> LV.</p>
+            <p class="order-info-sum-price" th:text="${cartData.priceForSum + ' LV.'}">3300.99 LV.</p>
         </div>
 
         <button class="continue-button" type="submit"><span class="material-symbols-outlined">double_arrow</span> Continue</button>
     </div>
 
-    <div class="products-in-cart-container">
+    <div class="products-in-cart-container" >
         <h2 class="product-title">Products in shopping cart</h2>
 
-        <div th:each="product : ${cartData.productsInCart} " class="product-in-cart-container">
+        <div th:each="product : ${cartData.productsInCart}" th:if="${cartData.productsInCart.size() > 0}" class="product-in-cart-container">
             <div class="left-side-info">
                 <div class="product-title-image-container">
-                    <h3 th:text="${product.product.name}">Playstation 5 slim</h3>
-                    <img th:src="@{${product.product.mainImage.imageUrl}}">
+                    <h3 th:text="${product.name}">Playstation 5 slim</h3>
+                    <img th:src="@{${product.imageUrl}}">
                 </div>
             </div>
 
             <div class="right-side-info">
-                <p th:text="${product.priceBeforePoint}">1999<sup th:text="${product.priceAfterPoint}">99</sup>LV</p>
+                <p th:text="${product.price + ' LV.'}">1999.99 LV</p>
                 <div class="count-container">
                     <form
-                        th:method="post"
-                        th:action="@{increase-product-count/{id}(id=*{product.id})}">
-                        <button>
+                            th:method="post"
+                            th:action="@{/increase-product-count/{id}(id=${product.id})}">
+                        <button class="product-count-button" type="submit">
                             <span class="material-symbols-outlined">add</span>
                         </button>
                     </form>
 
-                    <p>1</p>
+                    <p th:text="${product.count}">1</p>
 
                     <form
                             th:method="post"
-                            th:action="@{decrease-product-count/{id}(id=*{product.id})}">
-                        <button>
+                            th:action="@{/decrease-product-count/{id}(id=${product.id})}">
+                        <button class="product-count-button" type="submit">
                             <span class="material-symbols-outlined">remove</span>
                         </button>
                     </form>
                 </div>
-                <a href="#">Delete</a>
+                <form
+                    th:method="post"
+                    th:action="@{/delete-product-from-cart/{id}(id=${product.id})}">
+                    <button class="delete-product-button" type="submit">Delete</button>
+                </form>
             </div>
+        </div>
+
+        <div th:if="${!(cartData.productsInCart.size() > 0)}" class="product-in-cart-container">
+            <h2>Cart is empty.</h2>
         </div>
     </div>
 </form>

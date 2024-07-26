@@ -1,0 +1,136 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+}
+
+h1 {
+    color: #5454c5;
+    font-size: 3em;
+}
+
+.content-container {
+    height: 50em;
+    width: 80em;
+    display: flex;
+    position: relative;
+}
+
+.order-data-collecting-container {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 6em;
+}
+
+.collecting-data-container {
+    height: 8em;
+    width: 80%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.collecting-data-container label {
+    color: #5454c5;
+    font-size: 2em;
+}
+
+.collecting-data-container input {
+    height: 100%;
+    width: 100%;
+    border: 2px solid #cecece;
+    /* border: none; */
+    /* border-bottom: 1px solid #5454c5; */
+    border-radius: 0.6em;
+    outline: none;
+    font-size: 16px;
+    color: #5454c5;
+    padding: 1em;
+}
+
+.collecting-data-container select {
+    height: 100%;
+    width: 100%;
+    border: 2px solid #cecece;
+    /* border: none; */
+    /* border-bottom: 1px solid #5454c5; */
+    border-radius: 0.6em;
+    outline: none;
+    font-size: 16px;
+    color: #5454c5;
+    padding: 1em;
+    cursor: pointer;
+}
+
+.order-info-container {
+    height: 20em;
+    width: 20em;
+    position: absolute;
+    top: 3.3em;
+    right: 2em;
+}
+
+.order-info-container .pricing-content {
+    height: 70%;
+}
+
+.order-info-container h2 {
+    height: 2em;
+    width: 100%;
+    color: #5454c5;
+    background: #f3f3f3;
+    padding: 0.3em;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 0.4em;
+}
+
+.order-info-container h2 span {
+    font-size: 1em;
+}
+
+.order-info-container .prices-container {
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-top: 1.5em;
+}
+
+.order-info-container .prices-container .price-container {
+    padding: 0 1em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-info-container .sum-container {
+    height: 3em;
+    width: 100%;
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
+    padding: 0 1em;
+}
+
+
+.order-info-container button {
+    height: 3em;
+    width: 100%;
+    color: #ffffff;
+    background: #5454c5;
+    font-size: 1em;
+    border: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+.order-info-container button:hover {
+
+}

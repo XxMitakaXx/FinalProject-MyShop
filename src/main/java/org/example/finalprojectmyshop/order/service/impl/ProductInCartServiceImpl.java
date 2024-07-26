@@ -23,4 +23,9 @@ public class ProductInCartServiceImpl implements ProductInCartService {
     public ProductInCartEntity findById(long id) {
         return this.productInCartRepository.findById(id).get();
     }
+
+    @Override
+    public void deleteById(long id) {
+        this.productInCartRepository.deleteById(id);
+    }
 }

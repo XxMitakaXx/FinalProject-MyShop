@@ -7,12 +7,9 @@ import java.util.Set;
 
 public class CartDataDTO {
     Set<CartProductDTO> productsInCart;
-    private int priceBeforePointForProducts;
-    private int priceAfterPointForProducts;
-    private int priceBeforePointForDelivery;
-    private int priceAfterForDelivery;
-    private int priceBeforePointForSum;
-    private int priceAfterPointForSum;
+    private double priceForProducts;
+    private double priceForDelivery;
+    private double priceForSum;
 
     public CartDataDTO() {
         this.productsInCart = new HashSet<>();
@@ -26,51 +23,27 @@ public class CartDataDTO {
         this.productsInCart = productsInCart;
     }
 
-    public double getPriceBeforePointForProducts() {
-        return this.priceBeforePointForProducts;
+    public double getPriceForProducts() {
+        return this.priceForProducts;
     }
 
-    public void setPriceBeforePointForProducts(int priceBeforePointForProducts) {
-        this.priceBeforePointForProducts = priceBeforePointForProducts;
+    public void setPriceForProducts(double priceForProducts) {
+        this.priceForProducts = priceForProducts;
     }
 
-    public double getPriceAfterPointForProducts() {
-        return this.priceAfterPointForProducts;
+    public double getPriceForDelivery() {
+        return this.priceForDelivery;
     }
 
-    public void setPriceAfterPointForProducts(int priceAfterPointForProducts) {
-        this.priceAfterPointForProducts = priceAfterPointForProducts;
+    public void setPriceForDelivery(double priceForDelivery) {
+        this.priceForDelivery = priceForDelivery;
     }
 
-    public int getPriceBeforePointForDelivery() {
-        return this.priceBeforePointForDelivery;
+    public double getPriceForSum() {
+        return this.priceForSum;
     }
 
-    public void setPriceBeforePointForDelivery(int priceBeforePointForDelivery) {
-        this.priceBeforePointForDelivery = priceBeforePointForDelivery;
-    }
-
-    public int getPriceAfterForDelivery() {
-        return this.priceAfterForDelivery;
-    }
-
-    public void setPriceAfterForDelivery(int priceAfterForDelivery) {
-        this.priceAfterForDelivery = priceAfterForDelivery;
-    }
-
-    public int getPriceBeforePointForSum() {
-        return this.priceBeforePointForSum;
-    }
-
-    public void setPriceBeforePointForSum(int priceBeforePointForSum) {
-        this.priceBeforePointForSum = priceBeforePointForSum;
-    }
-
-    public int getPriceAfterPointForSum() {
-        return this.priceAfterPointForSum;
-    }
-
-    public void setPriceAfterPointForSum(int priceAfterPointForSum) {
-        this.priceAfterPointForSum = priceAfterPointForSum;
+    public void setPriceForSum(double priceForSum) {
+        this.priceForSum = priceForSum;
     }
 }

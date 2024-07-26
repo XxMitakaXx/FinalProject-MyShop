@@ -10,6 +10,7 @@ public interface ProductService {
     void save(AddProductDTO addProductDTO) throws IOException;
     void addProductToFavorites(long id);
     void addProductToCart(long id);
+    void deleteProductFromCart(long id);
     ProductDetailsDTO findById(long id);
     Product findProductEntityById(long id);
 }
