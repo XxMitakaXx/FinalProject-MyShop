@@ -41,13 +41,18 @@ public class CartController {
 
     @PostMapping("/increase-product-count/{id}")
     private String increaseProductCount(@PathVariable long id, RedirectAttributes redirectAttributes) {
-        CartEntity cart = this.userHelperService.getUser().getCart();
+        UserEntity user = this.userHelperService.getUser();
+        CartEntity cart = user.getCart();
         ProductInCartEntity productInCart = this.productInCartService.findById(id);
         productInCart.setCount(productInCart.getCount() + 1);
         this.productInCartService.save(productInCart);
 
         cart.getProductsInCart().remove(productInCart);
         cart.getProductsInCart().add(productInCart);
+        this.cartService.save(cart);
+
+        user.setCart(cart);
+        this.userService.save(user);
 
         CartDataDTO cartDataDTO = this.cartService.loadData();
         redirectAttributes.addFlashAttribute("cartData", cartDataDTO);
@@ -61,8 +66,8 @@ public class CartController {
         CartEntity cart = user.getCart();
         ProductInCartEntity productInCart = this.productInCartService.findById(id);
 
-        if (productInCart.getCount() > 2) {
-            productInCart.setCount(productInCart.getCount() + 1);
+        if (productInCart.getCount() > 1) {
+            productInCart.setCount(productInCart.getCount() - 1);
             this.productInCartService.save(productInCart);
 
             cart.getProductsInCart().remove(productInCart);

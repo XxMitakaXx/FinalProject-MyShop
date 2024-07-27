@@ -24,7 +24,7 @@
 <nav th:replace="~{fragments/second-navbar}"></nav>
 <nav th:replace="~{fragments/categories-navbar}"></nav>
 
-<form class="content-container"
+<div class="content-container"
     th:method="post"
     th:action="@{#}"
     th:object="${cartData}">
@@ -46,7 +46,7 @@
             <p class="order-info-sum-price" th:text="${cartData.priceForSum + ' LV.'}">3300.99 LV.</p>
         </div>
 
-        <button class="continue-button" type="submit"><span class="material-symbols-outlined">double_arrow</span> Continue</button>
+        <a class="continue-button" th:href="@{/collecting-order-details}"><span class="material-symbols-outlined">double_arrow</span> Continue</a>
     </div>
 
     <div class="products-in-cart-container" >
@@ -63,6 +63,10 @@
             <div class="right-side-info">
                 <p th:text="${product.price + ' LV.'}">1999.99 LV</p>
                 <div class="count-container">
+                    <form
+                            th:method="post"
+                            th:action="@{/increase-product-count/{id}(id=${product.id})}">
+                    </form>
                     <form
                             th:method="post"
                             th:action="@{/increase-product-count/{id}(id=${product.id})}">
@@ -93,6 +97,6 @@
             <h2>Cart is empty.</h2>
         </div>
     </div>
-</form>
+</div>
 </body>
 </html>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" th:href="@{/css/collecting-order-details-styles.css}">
     <link rel="stylesheet" th:href="@{/css/navbar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/search-bar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/admin-context-styles.css}" />
@@ -16,7 +17,7 @@
     <script th:src="@{/js/profileContext.js}" defer></script>
     <script th:src="@{/js/cartContext.js}" defer></script>
     <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
-    <script th:src="@{/js/collecting-order-data}" defer></script>
+    <script th:src="@{/js/collecting-order-data.js}" defer></script>
     <title>My Shop</title>
 </head>
 <body>
@@ -30,8 +31,38 @@
 
             class="content-container">
         <div class="order-data-collecting-container">
-            <div class="collecting-data-container">
-                <label for="location">Location</label>
+
+            <div class="collect-personal-data-container">
+                <div class="collecting-data-container">
+                    <label for="first-and-last-name">First and last name</label>
+                    <input
+                            name="first-and-last-name"
+                            type="text"
+                            id="first-and-last-name"
+                            placeholder="First and last names">
+                </div>
+
+                <div class="collecting-data-container">
+                    <label for="phone-number">Phone</label>
+                    <input
+                            name="phone-number"
+                            type="text"
+                            id="phone-number"
+                            placeholder="Phone number">
+                </div>
+            </div>
+
+            <div class="collecting-data-container collecting-location">
+                <label for="city">City/Village</label>
+
+                <select class="user-address" id="city">
+                    <option value="">Choose City/Village</option>
+                    <option value="Address 1">Plovdiv</option>
+                    <option value="Address 2">Burgas</option>
+                    <option value="Address 3">Sofia</option>
+                </select>
+
+                <label for="address">Address</label>
 
                 <select class="user-address">
                     <option value="">Choose Address</option>
@@ -40,7 +71,7 @@
                     <option value="Address 3">Address 3</option>
                 </select>
 
-                <input name="location" id="location" type="text"  placeholder="Address">
+                <input name="address" id="address" type="text"  placeholder="Address">
             </div>
 
             <div class="collecting-data-container">

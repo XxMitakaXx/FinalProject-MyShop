@@ -1,9 +1,7 @@
 package org.example.finalprojectmyshop.product.service.impl;
 
 import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
-import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
 import org.example.finalprojectmyshop.mediaFile.service.ImagesHelperService;
-import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
 import org.example.finalprojectmyshop.order.models.entities.CartEntity;
 import org.example.finalprojectmyshop.order.models.entities.ProductInCartEntity;
 import org.example.finalprojectmyshop.order.service.CartService;
@@ -14,7 +12,6 @@ import org.example.finalprojectmyshop.product.models.dtos.exports.ReviewDataDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ReviewUserDataDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductDTO;
 import org.example.finalprojectmyshop.product.models.entities.*;
-import org.example.finalprojectmyshop.product.repository.CategoryRepository;
 import org.example.finalprojectmyshop.product.repository.ProductPropertyRepository;
 import org.example.finalprojectmyshop.product.repository.ProductRepository;
 import org.example.finalprojectmyshop.product.repository.SecondaryCategoryRepository;
@@ -26,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;

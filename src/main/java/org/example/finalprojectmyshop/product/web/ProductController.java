@@ -93,7 +93,7 @@ public class ProductController {
 
         this.productService.addProductToCart(id);
 
-        return "redirect:/";
+        return "redirect:/cart";
     }
 
     @PostMapping("/delete-product-from-cart/{id}")
