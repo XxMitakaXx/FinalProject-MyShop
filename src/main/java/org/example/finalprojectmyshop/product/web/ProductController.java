@@ -67,7 +67,7 @@ public class ProductController {
         this.productService.save(addProductDTO);
 
         Set<CategoryAndRandomProductsDTO> categories = this.categoryService.getCategoriesWithRandomProducts();
-        model.addAttribute("categories", categories);
+        redirectAttributes.addFlashAttribute("categories", categories);
 
         return "redirect:/";
     }

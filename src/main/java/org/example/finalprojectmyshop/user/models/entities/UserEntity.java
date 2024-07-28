@@ -57,7 +57,7 @@ public class UserEntity {
     )
     private Set<Product> favorites;
 
-    @OneToMany
+    @OneToMany(mappedBy = "buyer")
     private Set<Order> orders;
 
     @OneToMany(mappedBy = "user")

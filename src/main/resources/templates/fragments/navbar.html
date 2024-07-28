@@ -68,7 +68,7 @@
 
         <ul sec:authorize="isAuthenticated()" class="inner-profile-context" id="inner-profile-context">
             <li class="context-link">
-                <a class="context-label">My orders</a>
+                <a th:href="@{/user-orders}" class="context-label">My orders</a>
             </li>
             <li class="context-link">
                 <a class="context-label">Favorites</a>

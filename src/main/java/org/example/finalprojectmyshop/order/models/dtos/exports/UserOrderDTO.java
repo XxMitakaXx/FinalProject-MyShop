@@ -1,58 +1,41 @@
-package org.example.finalprojectmyshop.order.models.dtos.imports;
+package org.example.finalprojectmyshop.order.models.dtos.exports;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
-import org.example.finalprojectmyshop.order.models.dtos.exports.CartProductDTO;
+import jakarta.persistence.*;
 import org.example.finalprojectmyshop.order.models.enums.CollectingPlace;
+import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
+import org.example.finalprojectmyshop.product.models.entities.Product;
+import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class OrderDetailsDTO {
-
-    @NotNull
-    @NotEmpty
-    @Size(min = 2, max = 50)
+public class UserOrderDTO {
+    private long id;
     private String firstAndLastName;
-
-    @NotNull
-    @NotEmpty
-    @Size(min = 10, max = 10)
     private String phoneNumber;
-
-    @NotNull
-    @NotEmpty
     private String cityVillage;
-
-    @NotNull
-    @NotEmpty
-    @Size(min = 2, max = 50)
     private String address;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
     private CollectingPlace collectingPlace;
-
-    private Set<CartProductDTO> productsInCart;
-
-    @NotNull
-    @PositiveOrZero
     private double priceForProducts;
-
-    @NotNull
-    @PositiveOrZero
     private double priceForDelivery;
+    //private double priceForSum;
+    //private Date date;
+    private UserEntity buyer;
+    private Set<Product> products;
+    //private OrderLogisticStatus logisticStatus;
+    private boolean isPicked;
 
-    @NotNull
-    @PositiveOrZero
-    private double priceForSum;
+    public UserOrderDTO() {
+        this.products = new HashSet<>();
+    }
 
-    public OrderDetailsDTO() {
-        this.productsInCart = new HashSet<>();
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getFirstAndLastName() {
@@ -95,14 +78,6 @@ public class OrderDetailsDTO {
         this.collectingPlace = collectingPlace;
     }
 
-    public Set<CartProductDTO> getProductsInCart() {
-        return this.productsInCart;
-    }
-
-    public void setProductsInCart(Set<CartProductDTO> productsInCart) {
-        this.productsInCart = productsInCart;
-    }
-
     public double getPriceForProducts() {
         return this.priceForProducts;
     }
@@ -125,5 +100,45 @@ public class OrderDetailsDTO {
 
     public void setPriceForSum(double priceForSum) {
         this.priceForSum = priceForSum;
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public UserEntity getBuyer() {
+        return this.buyer;
+    }
+
+    public void setBuyer(UserEntity buyer) {
+        this.buyer = buyer;
+    }
+
+    public Set<Product> getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    public OrderLogisticStatus getLogisticStatus() {
+        return this.logisticStatus;
+    }
+
+    public void setLogisticStatus(OrderLogisticStatus logisticStatus) {
+        this.logisticStatus = logisticStatus;
+    }
+
+    public boolean isPicked() {
+        return this.logisticStatus == OrderLogisticStatus.RECEIVED;
+    }
+
+    public void setPicked(boolean picked) {
+        isPicked = picked;
     }
 }

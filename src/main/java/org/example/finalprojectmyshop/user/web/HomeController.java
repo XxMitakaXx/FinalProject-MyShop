@@ -31,6 +31,7 @@ public class HomeController {
 
         model.addAttribute("categories", categories);
         model.addAttribute("user", user);
+
         return "home";
     }
 

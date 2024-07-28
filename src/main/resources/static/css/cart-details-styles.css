@@ -27,7 +27,7 @@ body {
 }
 
 .product-in-cart-container {
-    background: #ffffff;
+    background: var(--primary-color);
     height: 22em;
     width: 60em;
     /* border: 1px solid; */
@@ -135,7 +135,7 @@ body {
 .order-data-container {
     height: 17em;
     width: 22em;
-    background: #ffffff;
+    background: var(--primary-color);
     border-radius: 0.6em;
     padding: 1em;
     display: flex;
@@ -176,6 +176,7 @@ body {
     font-size: 1.2em;
     color: var(--primary-color);
     background: var(--secondary-color);
+    text-decoration: none;
     margin-top: 0.8em;
     padding: 0.5em;
     border: none;

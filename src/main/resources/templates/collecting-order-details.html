@@ -28,7 +28,9 @@
     <h1>Info for order</h1>
 
     <form
-
+            th:method="post"
+            th:action="@{/collecting-order-details}"
+            th:object="${orderDetailsDTO}"
             class="content-container">
         <div class="order-data-collecting-container">
 
@@ -36,6 +38,7 @@
                 <div class="collecting-data-container">
                     <label for="first-and-last-name">First and last name</label>
                     <input
+                            th:field="*{firstAndLastName}"
                             name="first-and-last-name"
                             type="text"
                             id="first-and-last-name"
@@ -45,6 +48,7 @@
                 <div class="collecting-data-container">
                     <label for="phone-number">Phone</label>
                     <input
+                            th:field="*{phoneNumber}"
                             name="phone-number"
                             type="text"
                             id="phone-number"
@@ -55,33 +59,38 @@
             <div class="collecting-data-container collecting-location">
                 <label for="city">City/Village</label>
 
-                <select class="user-address" id="city">
-                    <option value="">Choose City/Village</option>
-                    <option value="Address 1">Plovdiv</option>
-                    <option value="Address 2">Burgas</option>
-                    <option value="Address 3">Sofia</option>
-                </select>
+                <input
+                        th:field="*{cityVillage}"
+                        name="city"
+                        id="city"
+                        type="text"
+                        placeholder="City/Village">
 
                 <label for="address">Address</label>
 
+                <!-- TODO -->
                 <select class="user-address">
                     <option value="">Choose Address</option>
-                    <option value="Address 1">Address 1</option>
-                    <option value="Address 2">Address 2</option>
-                    <option value="Address 3">Address 3</option>
+                    <option th:each="address : ${@userHelperService.user.addresses}" th:value="${address.address}" th:text="${address.address}">Address 1</option>
                 </select>
 
-                <input name="address" id="address" type="text"  placeholder="Address">
+                <input
+                        th:field="*{address}"
+                        name="address"
+                        id="address"
+                        type="text"
+                        placeholder="Address">
             </div>
 
             <div class="collecting-data-container">
                 <label for="collecting-place">Collecting place</label>
 
-                <select name="collecting-place" id="collecting-place">
+                <select
+                        th:field="*{collectingPlace}"
+                        name="collecting-place"
+                        id="collecting-place">
                     <option value="">Choose Collecting Place</option>
-                    <option value="value">At your address</option>
-                    <option value="value">Ekont</option>
-                    <option value="value">Speedy</option>
+                    <option th:each="collectingPlace : ${collectingPlaces}" th:value="${collectingPlace}" th:text="${collectingPlace.value}">At your address</option>
                 </select>
             </div>
 
@@ -91,22 +100,23 @@
                         <div class="prices-container">
                             <div class="price-container">
                                 <p>Products price</p>
-                                <p>2000.00 LV.</p>
+                                <p th:text="${cartDataDTO.getPriceForProducts()}">2000.00 LV.</p>
                             </div>
                             <div class="price-container">
                                 <p>Delivery price</p>
-                                <p>0.00 LV.</p>
+                                <p th:text="${cartDataDTO.getPriceForDelivery()}">0.00 LV.</p>
                             </div>
                         </div>
 
                         <div class="sum-container">
                             <p>SUM: price</p>
-                            <p>2000.00 LV.</p>
+                            <p th:text="${cartDataDTO.getPriceForSum()}">2000.00 LV.</p>
                         </div>
                     </div>
 
                     <button type="submit">FINISH ORDER</button>
                 </div>
+        </div>
     </form>
 </body>
 </html>
