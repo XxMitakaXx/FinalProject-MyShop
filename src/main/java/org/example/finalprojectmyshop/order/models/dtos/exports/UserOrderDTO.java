@@ -20,7 +20,7 @@ public class UserOrderDTO {
     private double priceForProducts;
     private double priceForDelivery;
     //private double priceForSum;
-    //private Date date;
+    //private Date orderDate;
     private UserEntity buyer;
     private Set<Product> products;
     //private OrderLogisticStatus logisticStatus;

@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
         order.setPriceForProducts(cartDataDTO.getPriceForProducts());
         order.setPriceForDelivery(cartDataDTO.getPriceForDelivery());
         order.setPriceForSum(cartDataDTO.getPriceForSum());
-        order.setDate(new Date());
+        order.setOrderDate(new Date());
 
         UserEntity user = this.userHelperService.getUser();
         order.setBuyer(user);

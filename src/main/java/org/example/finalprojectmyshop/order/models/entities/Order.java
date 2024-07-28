@@ -42,8 +42,8 @@ public class Order {
     @Column(name = "price_for_sum", nullable = false)
     private double priceForSum;
 
-    @Column(name = "date", nullable = false)
-    private Date date;
+    @Column(name = "order-date", nullable = false)
+    private Date orderDate;
 
     @ManyToOne
     private UserEntity buyer;
@@ -135,12 +135,12 @@ public class Order {
         this.priceForSum = priceForSum;
     }
 
-    public Date getDate() {
-        return this.date;
+    public Date getOrderDate() {
+        return this.orderDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setOrderDate(Date date) {
+        this.orderDate = date;
     }
 
     public UserEntity getBuyer() {
