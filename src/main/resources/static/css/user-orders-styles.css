@@ -12,6 +12,7 @@ h1 {
 
 .user-orders {
     margin-bottom: 5em;
+    min-height: 30em;
     height: 100%;
     width: 60em;
     /*border: 1px solid var(--secondary-color);*/

@@ -27,6 +27,7 @@ public class AddProductDTO {
 
     private MultipartFile fifthImage;
 
+    @NotNull
     private SecondaryCategoryName secondaryCategoryName;
 
     @PositiveOrZero

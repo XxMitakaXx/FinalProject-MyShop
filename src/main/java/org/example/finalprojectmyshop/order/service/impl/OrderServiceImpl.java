@@ -1,17 +1,19 @@
 package org.example.finalprojectmyshop.order.service.impl;
 
-import org.example.finalprojectmyshop.order.models.dtos.exports.UserOrderDetailsDTO;
-import org.example.finalprojectmyshop.order.models.dtos.exports.CartDataDTO;
-import org.example.finalprojectmyshop.order.models.dtos.exports.OrderDetailsProductDTO;
-import org.example.finalprojectmyshop.order.models.dtos.exports.UserOrderDTO;
+import org.example.finalprojectmyshop.order.models.dtos.exports.*;
 import org.example.finalprojectmyshop.order.models.dtos.imports.OrderDetailsDTO;
+import org.example.finalprojectmyshop.order.models.entities.CartEntity;
 import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.order.models.entities.ProductInCartEntity;
+import org.example.finalprojectmyshop.order.models.entities.ProductInOrderEntity;
 import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
 import org.example.finalprojectmyshop.order.repository.OrderRepository;
 import org.example.finalprojectmyshop.order.service.CartService;
 import org.example.finalprojectmyshop.order.service.OrderService;
 import org.example.finalprojectmyshop.order.service.ProductInCartService;
+import org.example.finalprojectmyshop.order.service.ProductInOrderService;
+import org.example.finalprojectmyshop.product.models.entities.Product;
+import org.example.finalprojectmyshop.product.service.ProductService;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
@@ -30,13 +32,17 @@ public class OrderServiceImpl implements OrderService {
     private final UserHelperService userHelperService;
     private final UserService userService;
     private final ProductInCartService productInCartService;
+    private final ProductService productService;
+    private final ProductInOrderService productInOrderService;
 
-    public OrderServiceImpl(OrderRepository orderRepository, CartService cartService, UserHelperService userHelperService, UserService userService, ProductInCartService productInCartService) {
+    public OrderServiceImpl(OrderRepository orderRepository, CartService cartService, UserHelperService userHelperService, UserService userService, ProductInCartService productInCartService, ProductService productService, ProductInOrderService productInOrderService) {
         this.orderRepository = orderRepository;
         this.cartService = cartService;
         this.userHelperService = userHelperService;
         this.userService = userService;
         this.productInCartService = productInCartService;
+        this.productService = productService;
+        this.productInOrderService = productInOrderService;
     }
 
     @Override
@@ -46,7 +52,6 @@ public class OrderServiceImpl implements OrderService {
 
         order.setFirstAndLastName(orderDetailsDTO.getFirstAndLastName());
         order.setPhoneNumber(orderDetailsDTO.getPhoneNumber());
-        order.setCityVillage(orderDetailsDTO.getCityVillage());
         order.setCityVillage(orderDetailsDTO.getCityVillage());
         order.setAddress(orderDetailsDTO.getAddress());
         order.setCollectingPlace(orderDetailsDTO.getCollectingPlace());
@@ -58,22 +63,48 @@ public class OrderServiceImpl implements OrderService {
         UserEntity user = this.userHelperService.getUser();
         order.setBuyer(user);
 
-        Set<ProductInCartEntity> products = cartDataDTO.getProductsInCart()
+        Set<ProductInOrderEntity> productInOrderEntities = cartDataDTO.getProductsInCart()
                 .stream()
                 .map(productInCart -> {
-                    ProductInCartEntity productInCartEntity = this.productInCartService.findById(productInCart.getId());
-
-                    return productInCartEntity;
+                    Product product = this.productService.findProductEntityById(productInCart.getId());
+                    ProductInOrderEntity productInOrderEntity = this.toProductInOrderEntity(product, productInCart);
+                    this.productInOrderService.save(productInOrderEntity);
+                    return productInOrderEntity;
                 })
                 .collect(Collectors.toSet());
 
-        order.setProducts(products);
+        order.setProducts(productInOrderEntities);
         order.setLogisticStatus(OrderLogisticStatus.SHIPPED);
 
 
         this.orderRepository.save(order);
         user.getOrders().add(order);
         this.userService.save(user);
+
+        CartEntity cartEntity = new CartEntity();
+        this.cartService.save(cartEntity);
+        user.setCart(cartEntity);
+        this.userService.save(user);
+
+        this.deleteCart(user.getCart());
+    }
+
+    private ProductInOrderEntity toProductInOrderEntity(Product product, CartProductDTO productInCart) {
+        ProductInOrderEntity productInOrderEntity = new ProductInOrderEntity();
+        productInOrderEntity.setId(product.getId());
+        productInOrderEntity.setProduct(product);
+        productInOrderEntity.setCount(productInCart.getCount());
+
+        return productInOrderEntity;
+    }
+
+    private void deleteCart(CartEntity cartEntity) {
+        cartEntity.getProductsInCart()
+                .forEach(productInCartEntity -> {
+                    this.productInCartService.deleteById(productInCartEntity.getId());
+                });
+
+        this.cartService.deleteById(cartEntity.getId());
     }
 
     @Override
@@ -135,11 +166,11 @@ public class OrderServiceImpl implements OrderService {
         return userOrderDetailsDTO;
     }
 
-    private OrderDetailsProductDTO toOrderDetailsProductDTO(ProductInCartEntity productInCartEntity) {
+    private OrderDetailsProductDTO toOrderDetailsProductDTO(ProductInOrderEntity productInOrderEntity) {
         OrderDetailsProductDTO orderDetailsProductDTO = new OrderDetailsProductDTO();
 
-        orderDetailsProductDTO.setProduct(productInCartEntity.getProduct());
-        orderDetailsProductDTO.setCount(productInCartEntity.getCount());
+        orderDetailsProductDTO.setProduct(productInOrderEntity.getProduct());
+        orderDetailsProductDTO.setCount(productInOrderEntity.getCount());
 
         return orderDetailsProductDTO;
     }

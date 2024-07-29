@@ -52,7 +52,7 @@ public class Order {
     private UserEntity buyer;
 
     @OneToMany
-    private Set<ProductInCartEntity> products;
+    private Set<ProductInOrderEntity> products;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "logistic_status")
@@ -162,11 +162,11 @@ public class Order {
         this.buyer = buyer;
     }
 
-    public Set<ProductInCartEntity> getProducts() {
+    public Set<ProductInOrderEntity> getProducts() {
         return this.products;
     }
 
-    public void setProducts(Set<ProductInCartEntity> products) {
+    public void setProducts(Set<ProductInOrderEntity> products) {
         this.products = products;
     }
 

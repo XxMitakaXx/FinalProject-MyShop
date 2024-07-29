@@ -30,6 +30,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public void deleteById(long id) {
+        this.cartRepository.deleteById(id);
+    }
+
+    @Override
     public CartDataDTO loadData() {
         CartDataDTO cartDataDTO = new CartDataDTO();
 
