@@ -1,7 +1,5 @@
 package org.example.finalprojectmyshop.order.models.dtos.exports;
 
-import org.example.finalprojectmyshop.order.models.entities.ProductInCartEntity;
-
 import java.util.HashSet;
 import java.util.Set;
 

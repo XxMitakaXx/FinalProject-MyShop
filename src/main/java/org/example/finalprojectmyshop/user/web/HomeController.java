@@ -24,10 +24,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model, @AuthenticationPrincipal MyShopUserDetails user) {
-
-        if (categories.isEmpty()) {
-            this.categories = this.categoryService.getCategoriesWithRandomProducts();
-        }
+        this.categories = this.categoryService.getCategoriesWithRandomProducts();
 
         model.addAttribute("categories", categories);
         model.addAttribute("user", user);

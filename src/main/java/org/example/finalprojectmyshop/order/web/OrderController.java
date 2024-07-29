@@ -2,6 +2,8 @@ package org.example.finalprojectmyshop.order.web;
 
 import jakarta.validation.Valid;
 import org.example.finalprojectmyshop.order.models.dtos.exports.CartDataDTO;
+import org.example.finalprojectmyshop.order.models.dtos.exports.UserOrderDTO;
+import org.example.finalprojectmyshop.order.models.dtos.exports.UserOrderDetailsDTO;
 import org.example.finalprojectmyshop.order.models.dtos.imports.OrderDetailsDTO;
 import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.order.models.enums.CollectingPlace;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -55,8 +58,6 @@ public class OrderController {
             RedirectAttributes redirectAttributes
     ) {
 
-        this.orderService.save(orderDetailsDTO);
-
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("orderDetailsDTO", orderDetailsDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.orderDetailsDTO", bindingResult);
@@ -64,16 +65,33 @@ public class OrderController {
             return "redirect:/collecting-order-details";
         }
 
-        // TODO
-        return "redirect:/";
+        this.orderService.save(orderDetailsDTO);
+
+        return "redirect:/user-orders";
     }
 
     @GetMapping("/user-orders")
     public String viewUserOrders(Model model) {
-        Set<Order> userOrders = this.userHelperService.getUser().getOrders();
+        Set<UserOrderDTO> userOrders = this.orderService.getUserOrders();
 
         model.addAttribute("userOrders", userOrders);
 
         return "user-orders";
     }
+
+    @GetMapping("user-order-details/{id}")
+    public String viewUserOrderDetails(@PathVariable long id, Model model) {
+        UserOrderDetailsDTO orderDetails = this.orderService.findOrderDetails(id);
+
+        model.addAttribute("orderDetails", orderDetails);
+
+        return "user-order-details";
+    }
+
+//    @GetMapping("users-order")
+//    public String viewUsersOrders(Model model) {
+//
+//
+//
+//    }
 }

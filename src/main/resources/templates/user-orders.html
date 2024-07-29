@@ -28,9 +28,39 @@
 
     <div class="user-orders">
         <div th:each="order : ${userOrders}" class="user-order">
-            <div class="order-">
+            <div class="order-info">
+                <div class="order-data">
+                    <div class="order-data-left-side">
+                        <span class="material-symbols-outlined">schedule</span>
+                        <p>Date of registration</p>
+                    </div>
+                    <p th:text="${order.orderDate}"></p>
+                </div>
 
+                <div class="order-data">
+                    <div class="order-data-left-side">
+                        <span class="material-symbols-outlined">payments</span>
+                        <p>Due sum</p>
+                    </div>
+                    <p th:text="${order.priceForSum + ' LV.'}"></p>
+                </div>
+
+                <div class="order-data">
+                    <div class="order-data-left-side">
+                        <span class="material-symbols-outlined">search</span>
+                        <p>Status</p>
+                    </div>
+                    <p th:text="${order.logisticStatus}"></p>
+                </div>
+
+                <div class="order-data">
+                    <p>Delivered on</p>
+                    <p th:if="${order.isPicked()}" th:text="${order.deliveryDate}"></p>
+                    <p th:unless="${order.isPicked()}">Will be delivered soon</p>
+                </div>
             </div>
+
+            <a class="view-order-button" th:href="@{/user-order-details/{id}(id=${order.id})}">View Order</a>
         </div>
     </div>
 

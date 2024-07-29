@@ -46,7 +46,8 @@
             <p class="order-info-sum-price" th:text="${cartData.priceForSum + ' LV.'}">3300.99 LV.</p>
         </div>
 
-        <a class="continue-button" th:href="@{/collecting-order-details}"><span class="material-symbols-outlined">double_arrow</span> Continue</a>
+        <a class="continue-button" th:if="${cartData.productsInCart.size > 0}" th:href="@{/collecting-order-details}"><span class="material-symbols-outlined">double_arrow</span> Continue</a>
+        <a class="continue-button-deactivated" th:unless="${cartData.productsInCart.size > 0}"><span class="material-symbols-outlined">double_arrow</span> Continue</a>
     </div>
 
     <div class="products-in-cart-container" >
@@ -61,7 +62,7 @@
             </div>
 
             <div class="right-side-info">
-                <p th:text="${product.price + ' LV.'}">1999.99 LV</p>
+                <p th:text="${(product.price * product.count) + ' LV.'}">1999.99 LV</p>
                 <div class="count-container">
                     <form
                             th:method="post"

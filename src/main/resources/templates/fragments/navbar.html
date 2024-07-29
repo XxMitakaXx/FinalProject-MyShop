@@ -1,4 +1,4 @@
-<nav th:fragment="navbar" class="navbar" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<nav th:fragment="navbar" class="navbar">
     <a href="/" class="navbar-brand">
         <img src="/images/istockphoto-1356820159-612x612.jpg" alt="Shop Picture" class="logo">
     </a>
@@ -24,7 +24,7 @@
                 <a class="context-label" th:href="@{/add-product}">Add Product</a>
             </li>
             <li class="context-link">
-                <a class="context-label">Favorites</a>
+                <a class="context-label" >View Clients Orders</a>
             </li>
             <li class="context-link">
                 <a class="context-label">My profile</a>
@@ -98,41 +98,60 @@
         </ul>
     </div>
 
-    <div class="cart-context">
-        <a class="cart-button" id="cart-button" th:href="@{/cart}">
-            <span class="cart-icon material-symbols-outlined">shopping_cart</span>
-        </a>
+    <a class="cart-button" id="cart-button" th:href="@{/cart}">
+        <span class="cart-icon material-symbols-outlined">shopping_cart</span>
+    </a>
+<!--    <div class="cart-context">-->
+<!--        <a class="cart-button" id="cart-button" th:href="@{/cart}">-->
+<!--            <span class="cart-icon material-symbols-outlined">shopping_cart</span>-->
+<!--        </a>-->
 
-        <div class="info" id="info">
-            <ul class="product-list">
-                <li class="product-link" id="product-link">
-                    <a href="#">
-                        <img class="product-image" src="data:image/jpeg;base64,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" alt="product">
-                        <p class="product-name">Product Name</p>
-                        <div class="product-price-and-quantity-container">
-                            <p class="product-quantity">x1</p>
-                            <p class="product-price">1699<sup>99</sup>ЛВ.</p>
-                        </div>
-                        <a class="remove-from-cart-button" id="remove-from-cart-button" href="#test">
-                            <span class="material-symbols-outlined">close</span>
-                        </a>
-                    </a>
-                </li>
-            </ul>
+<!--        <div class="info" id="info">-->
+<!--            <div th:if="${@userHelperService.user != null">-->
+<!--                <ul class="product-list">-->
+<!--                    <li th:each="product : ${@userHelperService.user.cart.productsInCart}" class="product-link" id="product-link">-->
+<!--                        <a th:href="@{product-details/{id}(id=*{product.product.id})}">-->
+<!--                            <img class="product-image" th:src="@{${product.product.mainImage.imageUrl}}" alt="product">-->
+<!--                            <p class="product-name" th:text="${product.product.name}">Product Name</p>-->
+<!--                            <div class="product-price-and-quantity-container">-->
+<!--                                <p class="product-quantity" th:text="${'x' + product.count}">x1</p>-->
+<!--                                <p class="product-price" th:text="${product.product.price}">1699.99 ЛВ.</p>-->
+<!--                            </div>-->
 
-            <div class="product-summary">
-                <p class="product-summary-quantity">TOTAL: 1 products</p>
-                <p class="product-summary-price">1699<sup>99</sup>ЛВ.</p>
-            </div>
+<!--                            <form-->
+<!--                                th:method="post"-->
+<!--                                th:action="@{/delete-product-from-cart/{id}(id=${product.id})}">-->
+<!--                                <button class="remove-from-cart-button" id="remove-from-cart-button" th:href="@{/delete-product-from-cart/{id}(id=${product.id})}">-->
+<!--                                    <span class="material-symbols-outlined">close</span>-->
+<!--                                </button>-->
+<!--                            </form>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </ul>-->
 
-            <div class="view-buy-cart-container">
-                <a class="view-cart-button" href="#">VIEW CART</a>
-                <a class="buy-cart-button" href="#">BUY</a>
-            </div>
 
-            <!--                    &lt;!&ndash; <div class="empty-cart">-->
-            <!--                        <p class="empty-cart-text">Your cart is empty</p>-->
-            <!--                    </div> &ndash;&gt;-->
-        </div>
-    </div>
+<!--                <div class="product-summary">-->
+<!--                    <p class="product-summary-quantity">TOTAL: 1 products</p>-->
+<!--                    <p class="product-summary-price">1699<sup>99</sup> ЛВ.</p>-->
+<!--                </div>-->
+
+<!--            </div>-->
+
+<!--            <div th:unless="${@userHelperService.user != null && @userHelperService.user.cart.productsInCart.size > 0}">-->
+<!--                <ul class="cart-is-empty" id="product-link">-->
+<!--                    <li>Cart is empty</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+
+<!--            <div class="view-buy-cart-container">-->
+<!--                <a class="view-cart-button" th:href="@{/cart}">VIEW CART</a>-->
+<!--                <a class="buy-cart-button" th:if="${@userHelperService.user.cart.productsInCart.size > 0}" th:href="@{/collecting-order-details}">BUY</a>-->
+<!--                <a class="buy-cart-button-deactivated" th:unless="${@userHelperService.user.cart.productsInCart.size > 0}">BUY</a>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash;                    &lt;!&ndash; <div class="empty-cart">&ndash;&gt;-->
+<!--            &lt;!&ndash;                        <p class="empty-cart-text">Your cart is empty</p>&ndash;&gt;-->
+<!--            &lt;!&ndash;                    </div> &ndash;&gt;&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
 </nav>

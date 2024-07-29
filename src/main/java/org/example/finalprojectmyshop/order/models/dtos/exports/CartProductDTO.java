@@ -7,9 +7,7 @@ public class CartProductDTO {
     private double price;
     private int count;
 
-    public CartProductDTO() {
-
-    }
+    public CartProductDTO() {}
 
     public long getId() {
         return this.id;

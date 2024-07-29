@@ -1,77 +1,26 @@
-package org.example.finalprojectmyshop.order.models.entities;
+package org.example.finalprojectmyshop.order.models.dtos.exports;
 
-import jakarta.persistence.*;
 import org.example.finalprojectmyshop.order.models.enums.CollectingPlace;
-import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
-import org.example.finalprojectmyshop.product.models.entities.Product;
-import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "orders")
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(name = "first_and_last_name", nullable = false)
+public class UserOrderDetailsDTO {
     private String firstAndLastName;
-
-    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
-
-    @Column(name = "city_village", nullable = false)
     private String cityVillage;
-
-    @Column(name = "address", nullable = false)
     private String address;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "collecting_place", nullable = false)
     private CollectingPlace collectingPlace;
-
-    @Column(name = "price_for_products", nullable = false)
     private double priceForProducts;
-
-    @Column(name = "price_for_delivery", nullable = false)
     private double priceForDelivery;
-
-    @Column(name = "price_for_sum", nullable = false)
     private double priceForSum;
-
-    @Column(name = "order-date", nullable = false)
     private Date orderDate;
-
-    @Column(name = "delivery-date")
     private Date deliveryDate;
+    private Set<OrderDetailsProductDTO> products;
 
-    @ManyToOne
-    private UserEntity buyer;
-
-    @OneToMany
-    private Set<ProductInCartEntity> products;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "logistic_status")
-    private OrderLogisticStatus logisticStatus;
-
-
-    @Column(name = "is_picked", nullable = false)
-    private boolean isPicked;
-
-    public Order() {
+    public UserOrderDetailsDTO() {
         this.products = new HashSet<>();
-    }
-
-    public long getId() {
-        return this.id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getFirstAndLastName() {
@@ -142,8 +91,8 @@ public class Order {
         return this.orderDate;
     }
 
-    public void setOrderDate(Date date) {
-        this.orderDate = date;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
     public Date getDeliveryDate() {
@@ -154,35 +103,11 @@ public class Order {
         this.deliveryDate = deliveryDate;
     }
 
-    public UserEntity getBuyer() {
-        return this.buyer;
-    }
-
-    public void setBuyer(UserEntity buyer) {
-        this.buyer = buyer;
-    }
-
-    public Set<ProductInCartEntity> getProducts() {
+    public Set<OrderDetailsProductDTO> getProducts() {
         return this.products;
     }
 
-    public void setProducts(Set<ProductInCartEntity> products) {
+    public void setProducts(Set<OrderDetailsProductDTO> products) {
         this.products = products;
-    }
-
-    public OrderLogisticStatus getLogisticStatus() {
-        return this.logisticStatus;
-    }
-
-    public void setLogisticStatus(OrderLogisticStatus logisticStatus) {
-        this.logisticStatus = logisticStatus;
-    }
-
-    public boolean isPicked() {
-        return this.logisticStatus == OrderLogisticStatus.RECEIVED;
-    }
-
-    public void setPicked(boolean picked) {
-        isPicked = picked;
     }
 }

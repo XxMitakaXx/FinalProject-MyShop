@@ -11,17 +11,67 @@ h1 {
 }
 
 .user-orders {
-    height: 45em;
+    margin-bottom: 5em;
+    height: 100%;
     width: 60em;
-    border: 1px solid var(--secondary-color);
+    /*border: 1px solid var(--secondary-color);*/
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1em;
 }
 
-.user-order {
+.user-orders .user-order {
     padding: 2em;
-    height: 3em;
+    height: 15em;
     width: 100%;
+    border: 1px solid #f1f1f1;
+    border-radius: 0.6em;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    box-shadow: 2px 2px 5px #cbcbcb;
+}
+
+.user-orders .user-order .order-info {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.user-orders .user-order .order-info .order-data {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-orders .user-order .order-info .order-data .order-data-left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.user-orders .user-order .view-order-button {
+    padding: 1em 2em 2em 2em;
+    height: 3em;
+    color: var(--secondary-color);
+    background: var(--primary-color);
+    text-decoration: none;
     border: 1px solid var(--secondary-color);
+    border-radius: 0.6em;
+    position: absolute;
+    right: 2em;
+    transition: background 0.3s;
+}
+
+.user-orders .user-order .view-order-button:hover {
+    color: var(--primary-color);
+    background: var(--secondary-color);
 }
