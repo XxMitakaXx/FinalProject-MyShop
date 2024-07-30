@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="product-actions">
+            <div class="product-actions" sec:authorize="isAuthenticated()">
                 <form
                     th:method="post"
                     th:action="@{/add-product-to-cart/{id}(id=*{product.id})}">
@@ -83,6 +83,25 @@
                 <form
                     th:method="post"
                     th:action="@{/add-to-favorites/{id}(id=*{product.id})}">
+                    <button type="submit">
+                        <span class="material-symbols-outlined">favorite</span>
+                        <p>Add To Favorites</p>
+                    </button>
+                </form>
+            </div>
+
+            <div class="product-actions" sec:authorize="!isAuthenticated()">
+                <form
+                        th:method="post"
+                        th:action="@{/users/login}">
+                    <button type="submit">
+                        <span class="cart-icon material-symbols-outlined">shopping_cart</span>
+                        <p>Add To Cart</p>
+                    </button>
+                </form>
+                <form
+                        th:method="post"
+                        th:action="@{/users/login}">
                     <button type="submit">
                         <span class="material-symbols-outlined">favorite</span>
                         <p>Add To Favorites</p>

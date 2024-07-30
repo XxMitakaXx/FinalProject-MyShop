@@ -112,13 +112,10 @@ public class OrderServiceImpl implements OrderService {
         user.setCart(cartEntity);
         this.userService.save(user);
 
-
         this.cartService.save(cart);
         this.cartService.deleteById(cart.getId());
 
-
         productInCartEntitiesIds.forEach(this.productInCartService::deleteById);
-
     }
 
     @Override

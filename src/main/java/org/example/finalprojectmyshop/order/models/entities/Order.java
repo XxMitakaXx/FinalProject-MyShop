@@ -42,10 +42,10 @@ public class Order {
     @Column(name = "price_for_sum", nullable = false)
     private double priceForSum;
 
-    @Column(name = "order-date", nullable = false)
+    @Column(name = "order_date", nullable = false)
     private Date orderDate;
 
-    @Column(name = "delivery-date")
+    @Column(name = "delivery_date")
     private Date deliveryDate;
 
     @ManyToOne

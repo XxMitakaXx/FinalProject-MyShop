@@ -39,7 +39,7 @@ public class CartController {
         return "cart-details";
     }
 
-    @PostMapping("/increase-product-count/{id}")
+    @GetMapping("/increase-product-count/{id}")
     private String increaseProductCount(@PathVariable long id, RedirectAttributes redirectAttributes) {
         UserEntity user = this.userHelperService.getUser();
         CartEntity cart = user.getCart();
