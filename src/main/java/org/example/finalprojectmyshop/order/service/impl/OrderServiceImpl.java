@@ -66,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
         Set<ProductInOrderEntity> productInOrderEntities = cartDataDTO.getProductsInCart()
                 .stream()
                 .map(productInCart -> {
-                    Product product = this.productService.findProductEntityById(productInCart.getId());
+                    Product product = this.productService.findProductEntityById(productInCart.getProductId());
                     ProductInOrderEntity productInOrderEntity = this.toProductInOrderEntity(product, productInCart);
                     this.productInOrderService.save(productInOrderEntity);
                     return productInOrderEntity;
@@ -81,30 +81,44 @@ public class OrderServiceImpl implements OrderService {
         user.getOrders().add(order);
         this.userService.save(user);
 
-        CartEntity cartEntity = new CartEntity();
-        this.cartService.save(cartEntity);
-        user.setCart(cartEntity);
-        this.userService.save(user);
-
-        this.deleteCart(user.getCart());
+        this.deleteCart();
     }
 
     private ProductInOrderEntity toProductInOrderEntity(Product product, CartProductDTO productInCart) {
         ProductInOrderEntity productInOrderEntity = new ProductInOrderEntity();
-        productInOrderEntity.setId(product.getId());
         productInOrderEntity.setProduct(product);
         productInOrderEntity.setCount(productInCart.getCount());
 
         return productInOrderEntity;
     }
 
-    private void deleteCart(CartEntity cartEntity) {
-        cartEntity.getProductsInCart()
+    private void deleteCart() {
+        UserEntity user = this.userHelperService.getUser();
+        CartEntity cart = user.getCart();
+
+        Set<Long> productInCartEntitiesIds = cart.getProductsInCart()
+                .stream()
+                .map(ProductInCartEntity::getId)
+                .collect(Collectors.toSet());
+
+        user.getCart().getProductsInCart()
                 .forEach(productInCartEntity -> {
-                    this.productInCartService.deleteById(productInCartEntity.getId());
+                    cart.getProductsInCart().remove(productInCartEntity);
                 });
 
-        this.cartService.deleteById(cartEntity.getId());
+
+        CartEntity cartEntity = new CartEntity();
+        this.cartService.save(cartEntity);
+        user.setCart(cartEntity);
+        this.userService.save(user);
+
+
+        this.cartService.save(cart);
+        this.cartService.deleteById(cart.getId());
+
+
+        productInCartEntitiesIds.forEach(this.productInCartService::deleteById);
+
     }
 
     @Override

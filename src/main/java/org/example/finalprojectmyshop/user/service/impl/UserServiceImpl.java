@@ -1,12 +1,9 @@
 package org.example.finalprojectmyshop.user.service.impl;
 
 import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
-import org.example.finalprojectmyshop.mediaFile.models.enums.ImageType;
 import org.example.finalprojectmyshop.mediaFile.service.ImagesHelperService;
-import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
 import org.example.finalprojectmyshop.order.models.entities.CartEntity;
 import org.example.finalprojectmyshop.order.repository.CartRepository;
-import org.example.finalprojectmyshop.order.service.CartService;
 import org.example.finalprojectmyshop.user.models.dtos.UserRegisterDTO;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 import org.example.finalprojectmyshop.user.models.entities.UserRoleEntity;

@@ -6,6 +6,7 @@ public class CartProductDTO {
     private String imageUrl;
     private double price;
     private int count;
+    private long productId;
 
     public CartProductDTO() {}
 
@@ -47,5 +48,13 @@ public class CartProductDTO {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public long getProductId() {
+        return this.productId;
+    }
+
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 }
