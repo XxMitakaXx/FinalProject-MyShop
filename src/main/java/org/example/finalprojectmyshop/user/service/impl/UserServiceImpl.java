@@ -16,7 +16,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -69,5 +72,10 @@ public class UserServiceImpl implements UserService {
         }
 
         return optional.get();
+    }
+
+    @Override
+    public Set<UserEntity> findAllUsers() {
+        return new HashSet<>(this.userRepository.findAll());
     }
 }

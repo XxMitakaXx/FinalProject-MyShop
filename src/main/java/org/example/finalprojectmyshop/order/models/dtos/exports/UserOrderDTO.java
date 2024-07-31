@@ -5,7 +5,7 @@ import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
 import java.util.Date;
 
 public class UserOrderDTO {
-    private long id;;
+    private long id;
     private double priceForSum;
     private Date orderDate;
     private Date deliveryDate;

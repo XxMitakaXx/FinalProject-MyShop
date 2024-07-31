@@ -67,7 +67,7 @@ public class SecondaryCategoryServiceImpl implements SecondaryCategoryService {
                     .collect(Collectors.toSet())
                     .stream()
                     .map(Rating::getRating)
-                    .reduce(0.0, Double::sum);
+                    .reduce(0.0, Double::sum) / product.getReviews().size();
 
             randomProductsDTO.setRating(rating);
         }

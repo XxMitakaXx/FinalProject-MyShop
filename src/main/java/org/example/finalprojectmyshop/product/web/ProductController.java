@@ -96,7 +96,7 @@ public class ProductController {
         return "redirect:/cart";
     }
 
-    @PostMapping("/delete-product-from-cart/{id}")
+    @DeleteMapping("/delete-product-from-cart/{id}")
     public String processDeleteProductFromCart(@PathVariable("id") long id, @AuthenticationPrincipal UserDetails userDetails) {
 
         if (userDetails == null) {

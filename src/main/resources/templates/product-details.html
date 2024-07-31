@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
@@ -92,7 +92,7 @@
 
             <div class="product-actions" sec:authorize="!isAuthenticated()">
                 <form
-                        th:method="post"
+                        th:method="get"
                         th:action="@{/users/login}">
                     <button type="submit">
                         <span class="cart-icon material-symbols-outlined">shopping_cart</span>
@@ -100,7 +100,7 @@
                     </button>
                 </form>
                 <form
-                        th:method="post"
+                        th:method="get"
                         th:action="@{/users/login}">
                     <button type="submit">
                         <span class="material-symbols-outlined">favorite</span>
@@ -109,18 +109,6 @@
                 </form>
             </div>
         </div>
-
-        <!-- <div class="product-description">Dynamic Island
-            Always-On дисплей
-            ProMotion технология с адаптивна честота на опресняване до 120Hz
-            HDR дисплей
-            True Tone
-            Широка цветова гама (P3)
-            Haptic Touch
-            2 000 000:1 контраст (стандартно)
-            1000 нита максимална яркост (стандартно); 1600 нита пикова яркост (HDR); 2000 нита пикова яркост (на открито)
-            Олеофобично покритие срещу отпечатъци
-            Едновременна поддръжка на множество езици и символи</div> -->
     </div>
 
     <table class="product-properties-table">
@@ -159,7 +147,7 @@
                     <span class="star material-symbols-outlined gold-star">stars</span>
 
                     <div class="product-rate-bar">
-                        <div th:if="${product.fiveStarsReviewsCount > 0}" th:style="${'width: ' + (product.fiveStarsReviewsCount / product.reviewsCount) * 100 + '%'}" class="product-rate-bar-rate"></div>
+                        <div th:if="${product.fiveStarsReviewsCount > 0}" th:style="${'width: ' + (product.fiveStarsReviewsCount / product.reviewsCount) * 100 + '%;'}" class="product-rate-bar-rate"></div>
                     </div>
                     <p class="product-rate-review-count" th:text="${product.fiveStarsReviewsCount}">(8)</p>
                 </div>
@@ -168,7 +156,7 @@
                     <span class="star material-symbols-outlined gold-star">stars</span>
 
                     <div class="product-rate-bar">
-                        <div th:if="${product.fourStarsReviewsCount > 0}" th:style="${'width: ' + (product.fourStarsReviewsCount / product.reviewsCount) * 100} + '%'" class="product-rate-bar-rate"></div>
+                        <div th:if="${product.fourStarsReviewsCount > 0}" th:style="${'width: ' + (product.fourStarsReviewsCount / product.reviewsCount) * 100 + '%;'}" class="product-rate-bar-rate"></div>
                     </div>
                     <p class="product-rate-review-count" th:text="${product.fourStarsReviewsCount}">(8)</p>
                 </div>
@@ -177,7 +165,7 @@
                     <span class="star material-symbols-outlined gold-star">stars</span>
 
                     <div class="product-rate-bar">
-                        <div class="product-rate-bar-rate" th:if="${product.threeStarsReviewsCount > 0}" th:style="${'width: ' + (product.threeStarsReviewsCount / product.reviewsCount) * 100} + '%'"></div>
+                        <div class="product-rate-bar-rate" th:if="${product.threeStarsReviewsCount > 0}" th:style="${'width: ' + (product.threeStarsReviewsCount / product.reviewsCount) * 100 + '%;'}"></div>
                     </div>
                     <p class="product-rate-review-count" th:text="${product.threeStarsReviewsCount}">(8)</p>
                 </div>
@@ -186,7 +174,7 @@
                     <span class="star material-symbols-outlined gold-star">stars</span>
 
                     <div class="product-rate-bar">
-                        <div class="product-rate-bar-rate" th:if="${product.twoStarsReviewsCount > 0}" th:style="${'width: ' + (product.twoStarsReviewsCount / product.reviewsCount) * 100} + '%'"></div>
+                        <div class="product-rate-bar-rate" th:if="${product.twoStarsReviewsCount > 0}" th:style="${'width: ' + (product.twoStarsReviewsCount / product.reviewsCount) * 100 + '%;'}"></div>
                     </div>
                     <p class="product-rate-review-count" th:text="${product.twoStarsReviewsCount}">(8)</p>
                 </div>
@@ -194,7 +182,7 @@
                     <p class="row-star-count">1</p>
                     <span class="star material-symbols-outlined gold-star">stars</span>
                     <div class="product-rate-bar">
-                        <div class="product-rate-bar-rate" th:if="${product.oneStarsReviewsCount > 0}" th:style="${'width: ' + (product.oneStarsReviewsCount / product.reviewsCount) * 100} + '%'"></div>
+                        <div class="product-rate-bar-rate" th:if="${product.oneStarsReviewsCount > 0}" th:style="${'width: ' + ((product.oneStarsReviewsCount / product.reviewsCount) * 100) + '%;'}"></div>
                     </div>
                     <p class="product-rate-review-count" th:text="${product.oneStarsReviewsCount}">(8)</p>
                 </div>
@@ -202,73 +190,27 @@
 
             <div class="product-add-review">
                 <h2>Have an opinion for this product ?</h2>
-<!--                <form-->
-<!--                    th:method="post"-->
-<!--                    th:action="@{/add-review-form/{id}(id=*{product.id})}">-->
+                <form
+                    th:method="get"
+                    th:action="@{/add-review/{id}(id=*{product.id})}"
+                    sec:authorize="isAuthenticated()">
                     <button class="add-review-button" type="submit">Add review</button>
-<!--                </form>-->
-            </div>
-        </div>
+                </form>
 
-        <div class="form-blur-background-container">
-            <div class="form-container">
-                <button class="hide-add-review-form-button" type="button">
-                    <span class="material-symbols-outlined">arrow_back_ios</span>
-                </button>
-                <h1>Add Review</h1>
-
-<!--                <form-->
-<!--                        th:method="post"-->
-<!--                        th:action="@{/add-review}"-->
-<!--                        th:object="${addReviewDTO}">-->
-<!--                    <div class="collect-data-container">-->
-<!--                        <label for="input-title">Title</label>-->
-<!--                        <input-->
-<!--                                th:field="*{title}"-->
-<!--                                name="input-title"-->
-<!--                                type="text"-->
-<!--                                id="input-title">-->
-<!--                    </div>-->
-
-<!--                    <div class="collect-data-container">-->
-<!--                        <label for="input-rating">Rating</label>-->
-<!--                        <input-->
-<!--                                th:field="*{rating}"-->
-<!--                                name="input-rating"-->
-<!--                                type="number"-->
-<!--                                id="input-rating"-->
-<!--                                step="0.1"-->
-<!--                                min="0"-->
-<!--                                max="5">-->
-<!--                    </div>-->
-
-<!--                    <div class="collect-data-container">-->
-<!--                        <label for="input-description">Description</label>-->
-<!--                        <input-->
-<!--                                th:field="*{description}"-->
-<!--                                name="input-description"-->
-<!--                                type="text"-->
-<!--                                id="input-description"-->
-<!--                                placeholder="Description">-->
-<!--                    </div>-->
-
-<!--                    <input-->
-<!--                            name="productId"-->
-<!--                            class="product-id-input-hidden"-->
-<!--                            type="number"-->
-<!--                            id="productId"-->
-<!--                            th:value="${product.id}">-->
-
-<!--                    <button class="add-review-button" type="submit">Add Review</button>-->
-<!--                </form>-->
+                <form
+                        th:method="get"
+                        th:action="@{/users/login}"
+                        sec:authorize="!isAuthenticated()">
+                    <button class="add-review-button" type="submit">Add review</button>
+                </form>
             </div>
         </div>
 
         <div class="product-reviews-container">
             <div th:each="review : ${product.reviews}" class="product-review">
-                <div class="review-userEntity-data">
-                    <img class="review-userEntity-image" th:src="${review.userData.getProfilePictureUrl()}" alt="userEntity image">
-                    <p class="review-userEntity-name" th:text="${review.userData.fullName}">User name</p>
+                <div class="review-user-data">
+                    <img class="review-user-image" th:src="${review.userData.getProfilePictureUrl()}" alt="userEntity image">
+                    <p class="review-user-name" th:text="${review.userData.fullName}">User name</p>
                     <p class="comment-add-date" th:text="${review.postDate}">09.10.2023</p>
                 </div>
 
@@ -315,7 +257,7 @@
                     </button>
                 </form>
 
-                <a th:href="@{product-details/{id}(id=*{product.id})}">
+                <a th:href="@{http://localhost:8080/product-details/{id}(id=*{product.id})}">
 
                     <div class="category-product-info">
                         <div class="image-container">

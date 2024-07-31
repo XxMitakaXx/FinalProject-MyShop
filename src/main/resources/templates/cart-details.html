@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
@@ -64,12 +64,15 @@
             <div class="right-side-info">
                 <p th:text="${(product.price * product.count) + ' LV.'}">1999.99 LV</p>
                 <div class="count-container">
+<!--                    <form-->
+<!--                            th:method="post"-->
+<!--                            th:action="@{/increase-product-count/{id}(id=${product.id})}">-->
+<!--                        <button class="product-count-button" type="submit">-->
+<!--                            <span class="material-symbols-outlined">add</span>-->
+<!--                        </button>-->
+<!--                    </form>-->
                     <form
-                            th:method="post"
-                            th:action="@{/increase-product-count/{id}(id=${product.id})}">
-                    </form>
-                    <form
-                            th:method="post"
+                            th:method="put"
                             th:action="@{/increase-product-count/{id}(id=${product.id})}">
                         <button class="product-count-button" type="submit">
                             <span class="material-symbols-outlined">add</span>
@@ -79,7 +82,7 @@
                     <p th:text="${product.count}">1</p>
 
                     <form
-                            th:method="post"
+                            th:method="put"
                             th:action="@{/decrease-product-count/{id}(id=${product.id})}">
                         <button class="product-count-button" type="submit">
                             <span class="material-symbols-outlined">remove</span>
@@ -87,7 +90,7 @@
                     </form>
                 </div>
                 <form
-                    th:method="post"
+                    th:method="delete"
                     th:action="@{/delete-product-from-cart/{id}(id=${product.id})}">
                     <button class="delete-product-button" type="submit">Delete</button>
                 </form>

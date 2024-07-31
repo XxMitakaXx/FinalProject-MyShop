@@ -12,9 +12,7 @@ public class AddReviewDTO {
     private Double rating;
 
     @Size(min = 10, max = 100)
-    private String description;
-
-    private long productId;
+    private String description;;
 
     public AddReviewDTO() {}
 
@@ -40,15 +38,5 @@ public class AddReviewDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public long getProductId() {
-        return this.productId;
-    }
-
-    public AddReviewDTO setProductId(long productId) {
-        this.productId = productId;
-
-        return this;
     }
 }

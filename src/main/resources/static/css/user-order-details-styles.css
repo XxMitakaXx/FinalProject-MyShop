@@ -3,26 +3,71 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: var(--secondary-color);
 }
 
 h1 {
+    padding: 1em 0;
     color: var(--secondary-color);
     font-size: 3rem;
 }
 
 .order-details {
+    margin-bottom: 5em;
+    padding: 2em;
     width: 70%;
-    border: 1px solid var(--secondary-color);
+    border: 1px solid #efefef;
+    border-radius: 0.6em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-shadow: 2px 2px 2px #cbcbcb;
 }
 
 .order-details .order-detail {
+    height: 4em;
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+}
+
+.order-details .order-detail .order-detail-left-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.order-details .order-detail .ordered-products-container {
+    width: 100%;
+}
+
+.order-details .ordered-products-container .ordered-product {
+    height: 13em;
+    width: 80em;
+    color: var(--secondary-color);
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    border: 1px solid #efefef;
+    border-radius: 0.6em;
+    box-shadow: 2px 2px 2px #cbcbcb;
+}
+
+.order-details .ordered-products-container .ordered-product .ordered-product-image {
+    width: 10em;
+}
+
+.order-details .ordered-products-container .ordered-product .ordered-product-info {
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
     gap: 1em;
 }

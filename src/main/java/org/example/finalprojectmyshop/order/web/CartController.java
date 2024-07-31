@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -39,7 +40,7 @@ public class CartController {
         return "cart-details";
     }
 
-    @GetMapping("/increase-product-count/{id}")
+    @PutMapping("/increase-product-count/{id}")
     private String increaseProductCount(@PathVariable long id, RedirectAttributes redirectAttributes) {
         UserEntity user = this.userHelperService.getUser();
         CartEntity cart = user.getCart();
@@ -60,7 +61,7 @@ public class CartController {
         return "redirect:/cart";
     }
 
-    @PostMapping("/decrease-product-count/{id}")
+    @PutMapping("/decrease-product-count/{id}")
     private String decreaseProductCount(@PathVariable long id, RedirectAttributes redirectAttributes) {
         UserEntity user = this.userHelperService.getUser();
         CartEntity cart = user.getCart();

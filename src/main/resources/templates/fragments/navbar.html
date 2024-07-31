@@ -1,4 +1,4 @@
-<nav th:fragment="navbar" class="navbar">
+<nav th:fragment="navbar" class="navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
     <a href="/" class="navbar-brand">
         <img src="/images/istockphoto-1356820159-612x612.jpg" alt="Shop Picture" class="logo">
     </a>
@@ -10,10 +10,6 @@
         </div>
     </form>
 
-<!--    <div th:if="">-->
-<!--        <span class="material-symbols-outlined">admin_panel_settings</span>-->
-<!--    </div>-->
-
     <div class="admin-context" sec:authorize="hasRole('ADMINISTRATOR')">
         <a class="admin-link" id="admin-link" href="#" type="button">
            <span class="material-symbols-outlined admin-icon">admin_panel_settings</span>
@@ -24,7 +20,7 @@
                 <a class="context-label" th:href="@{/add-product}">Add Product</a>
             </li>
             <li class="context-link">
-                <a class="context-label" >View Clients Orders</a>
+                <a class="context-label" th:href="@{/users-orders}">View Clients Orders</a>
             </li>
             <li class="context-link">
                 <a class="context-label">My profile</a>

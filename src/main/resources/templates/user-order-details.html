@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script th:src="@{/js/adminContext.js}" defer></script>
     <script th:src="@{/js/profileContext.js}" defer></script>
-    <script th:src="@{/js/cartContext.js}" defer></script>
     <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
     <title>My Shop</title>
 </head>
@@ -109,20 +108,16 @@
             <p th:text="${orderDetails.orderDate}"></p>
         </div>
 
-        <div class="order-detail">
-            <div class="order-detail-left-side">
-                <span class="material-symbols-outlined">schedule</span>
-                <p>Delivery date</p>
-            </div>
-
-            <p th:if="${orderDetails.deliveryDate != null}" th:text="${orderDetails.deliveryDate}"></p>
-            <p th:unless="${orderDetails.deliveryDate != null}">Will be delivered soon.</p>
-        </div>
-
         <div class="ordered-products-container">
-            <div th:each="product : ${orderDetails.products}">
-                <p th:text="${product.product.name}"></p>
-            </div>
+            <a th:each="product : ${orderDetails.products}" th:href="@{http://localhost:8080/product-details/{id}(id=*{product.product.id})}" class="ordered-product">
+                <img th:src="@{${product.product.mainImage.imageUrl}}" class="ordered-product-image" alt="product" />
+
+                <div class="ordered-product-info">
+                    <p th:text="${product.product.name}"></p>
+                    <p th:text="${product.product.price}"></p>
+                </div>
+
+            </a>
         </div>
     </div>
 

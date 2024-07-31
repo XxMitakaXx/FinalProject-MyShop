@@ -51,8 +51,13 @@ public class Order {
     @ManyToOne
     private UserEntity buyer;
 
-    @OneToMany
-    private Set<ProductInOrderEntity> products;
+    @ManyToMany
+    @JoinTable(
+            name = "orders_products",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> products;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "logistic_status")
@@ -162,11 +167,11 @@ public class Order {
         this.buyer = buyer;
     }
 
-    public Set<ProductInOrderEntity> getProducts() {
+    public Set<Product> getProducts() {
         return this.products;
     }
 
-    public void setProducts(Set<ProductInOrderEntity> products) {
+    public void setProducts(Set<Product> products) {
         this.products = products;
     }
 
