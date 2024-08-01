@@ -15,8 +15,4 @@ public enum OrderLogisticStatus {
     public String getValue() {
         return this.value;
     }
-
-    public boolean isProcessing() {
-        return this == OrderLogisticStatus.PROCESSING;
-    }
 }
