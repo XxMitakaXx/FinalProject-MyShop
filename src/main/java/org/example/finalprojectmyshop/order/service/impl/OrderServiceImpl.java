@@ -150,6 +150,20 @@ public class OrderServiceImpl implements OrderService {
                 .collect(Collectors.toSet());
     }
 
+    @Override
+    public String orderLogisticStatus(UserOrderDTO userOrderDTO) {
+
+        if (userOrderDTO.getLogisticStatus() == OrderLogisticStatus.PROCESSING) {
+            return "PROCESSING";
+        } else if (userOrderDTO.getLogisticStatus() == OrderLogisticStatus.SHIPPED) {
+            return "SHIPPED";
+        } else if (userOrderDTO.getLogisticStatus() == OrderLogisticStatus.IN_OFFICE) {
+            return "IN_OFFICE";
+        } else {
+            return "RECEIVED";
+        }
+    }
+
     private UserOrderDTO toUserOrderDTO(Order order) {
         UserOrderDTO userOrderDTO = new UserOrderDTO();
 

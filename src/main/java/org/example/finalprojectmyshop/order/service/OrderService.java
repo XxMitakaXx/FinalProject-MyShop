@@ -11,4 +11,5 @@ public interface OrderService {
     Set<UserOrderDTO> getUserOrders();
     UserOrderDetailsDTO findOrderDetails(long id);
     Set<UserOrderDTO> findUsersOrders();
+    String orderLogisticStatus(UserOrderDTO userOrderDTO);
 }

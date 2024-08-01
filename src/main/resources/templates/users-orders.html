@@ -64,7 +64,7 @@
             <form
                 th:method="get"
                 th:action="@{/users/login}"
-                th:if="${order.logisticStatus == PROCESSING}">
+                th:if="${@OrderService.getOrderLogisticStatus(order).equals('Processing')}">
                 <button type="submit"></button>
             </form>
 
