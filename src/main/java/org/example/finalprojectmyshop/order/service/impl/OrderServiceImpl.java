@@ -183,6 +183,8 @@ public class OrderServiceImpl implements OrderService {
 
         userOrderDetailsDTO.setProducts(productDTOS);
 
+        userOrderDetailsDTO.setOrderLogisticStatus(order.getLogisticStatus());
+
         return userOrderDetailsDTO;
     }
 

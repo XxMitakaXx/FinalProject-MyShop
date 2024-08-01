@@ -147,7 +147,7 @@
                     <span class="star material-symbols-outlined gold-star">stars</span>
 
                     <div class="product-rate-bar">
-                        <div th:if="${product.fiveStarsReviewsCount > 0}" th:style="${'width: ' + (product.fiveStarsReviewsCount / product.reviewsCount) * 100 + '%;'}" class="product-rate-bar-rate"></div>
+                        <div th:if="${product.fiveStarsReviewsCount > 0}" th:style="${'width: ' + product.fiveStarPercent + '%;'}" class="product-rate-bar-rate"></div>
                     </div>
                     <p class="product-rate-review-count" th:text="${product.fiveStarsReviewsCount}">(8)</p>
                 </div>
@@ -156,7 +156,7 @@
                     <span class="star material-symbols-outlined gold-star">stars</span>
 
                     <div class="product-rate-bar">
-                        <div th:if="${product.fourStarsReviewsCount > 0}" th:style="${'width: ' + (product.fourStarsReviewsCount / product.reviewsCount) * 100 + '%;'}" class="product-rate-bar-rate"></div>
+                        <div th:if="${product.fourStarsReviewsCount > 0}" th:style="${'width: ' + product.fourStarPercent + '%;'}" class="product-rate-bar-rate"></div>
                     </div>
                     <p class="product-rate-review-count" th:text="${product.fourStarsReviewsCount}">(8)</p>
                 </div>
@@ -165,7 +165,7 @@
                     <span class="star material-symbols-outlined gold-star">stars</span>
 
                     <div class="product-rate-bar">
-                        <div class="product-rate-bar-rate" th:if="${product.threeStarsReviewsCount > 0}" th:style="${'width: ' + (product.threeStarsReviewsCount / product.reviewsCount) * 100 + '%;'}"></div>
+                        <div class="product-rate-bar-rate" th:if="${product.threeStarsReviewsCount > 0}" th:style="${'width: ' + product.threeStarPercent + '%;'}"></div>
                     </div>
                     <p class="product-rate-review-count" th:text="${product.threeStarsReviewsCount}">(8)</p>
                 </div>
@@ -174,7 +174,7 @@
                     <span class="star material-symbols-outlined gold-star">stars</span>
 
                     <div class="product-rate-bar">
-                        <div class="product-rate-bar-rate" th:if="${product.twoStarsReviewsCount > 0}" th:style="${'width: ' + (product.twoStarsReviewsCount / product.reviewsCount) * 100 + '%;'}"></div>
+                        <div class="product-rate-bar-rate" th:if="${product.twoStarsReviewsCount > 0}" th:style="${'width: ' + product.twoStarPercent + '%;'}"></div>
                     </div>
                     <p class="product-rate-review-count" th:text="${product.twoStarsReviewsCount}">(8)</p>
                 </div>
@@ -182,7 +182,7 @@
                     <p class="row-star-count">1</p>
                     <span class="star material-symbols-outlined gold-star">stars</span>
                     <div class="product-rate-bar">
-                        <div class="product-rate-bar-rate" th:if="${product.oneStarsReviewsCount > 0}" th:style="${'width: ' + ((product.oneStarsReviewsCount / product.reviewsCount) * 100) + '%;'}"></div>
+                        <div class="product-rate-bar-rate" th:if="${product.oneStarsReviewsCount > 0}" th:style="${'width: ' + product.oneStarPercent + '%;'}"></div>
                     </div>
                     <p class="product-rate-review-count" th:text="${product.oneStarsReviewsCount}">(8)</p>
                 </div>

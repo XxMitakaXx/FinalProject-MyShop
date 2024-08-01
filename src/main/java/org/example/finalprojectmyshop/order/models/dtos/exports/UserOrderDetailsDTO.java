@@ -1,6 +1,7 @@
 package org.example.finalprojectmyshop.order.models.dtos.exports;
 
 import org.example.finalprojectmyshop.order.models.enums.CollectingPlace;
+import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -18,6 +19,7 @@ public class UserOrderDetailsDTO {
     private Date orderDate;
     private Date deliveryDate;
     private Set<OrderDetailsProductDTO> products;
+    private OrderLogisticStatus orderLogisticStatus;
 
     public UserOrderDetailsDTO() {
         this.products = new HashSet<>();
@@ -109,5 +111,13 @@ public class UserOrderDetailsDTO {
 
     public void setProducts(Set<OrderDetailsProductDTO> products) {
         this.products = products;
+    }
+
+    public OrderLogisticStatus getOrderLogisticStatus() {
+        return this.orderLogisticStatus;
+    }
+
+    public void setOrderLogisticStatus(OrderLogisticStatus orderLogisticStatus) {
+        this.orderLogisticStatus = orderLogisticStatus;
     }
 }

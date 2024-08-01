@@ -50,7 +50,7 @@
                         <span class="material-symbols-outlined">search</span>
                         <p>Status</p>
                     </div>
-                    <p th:text="${order.logisticStatus}"></p>
+                    <p th:text="${order.logisticStatus.value}"></p>
                 </div>
 
                 <div class="order-data">
@@ -61,6 +61,26 @@
             </div>
 
             <a th:href="@{/users-orders-details/{id}(id=${order.id})}" class="view-order-button">View Order</a>
+            <form
+                th:method="get"
+                th:action="@{/users/login}"
+                th:if="${order.logisticStatus == PROCESSING}">
+                <button type="submit"></button>
+            </form>
+
+<!--            <form-->
+<!--                    th:method="put"-->
+<!--                    th:action="@{}">-->
+<!--                <button type="submit"></button>-->
+<!--            </form>-->
+
+<!--            <form-->
+<!--                    th:method="put"-->
+<!--                    th:action="@{}">-->
+<!--                <button type="submit"></button>-->
+<!--            </form>-->
+
+<!--            </form>-->
         </div>
     </div>
 

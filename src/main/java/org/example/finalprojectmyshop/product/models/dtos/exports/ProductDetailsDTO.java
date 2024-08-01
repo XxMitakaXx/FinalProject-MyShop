@@ -20,6 +20,11 @@ public class ProductDetailsDTO {
     private int threeStarsReviewsCount;
     private int twoStarsReviewsCount;
     private int oneStarsReviewsCount;
+    private double fiveStarPercent;
+    private double fourStarPercent;
+    private double threeStarPercent;
+    private double twoStarPercent;
+    private double oneStarPercent;
     private Set<ProductDetailsPropertyDTO> properties;
     private boolean isAvailable;
 
@@ -139,6 +144,46 @@ public class ProductDetailsDTO {
 
     public void setOneStarsReviewsCount(int oneStarsReviewsCount) {
         this.oneStarsReviewsCount = oneStarsReviewsCount;
+    }
+
+    public double getFiveStarPercent() {
+        return this.fiveStarPercent;
+    }
+
+    public void setFiveStarPercent(double fiveStarPercent) {
+        this.fiveStarPercent = fiveStarPercent;
+    }
+
+    public double getFourStarPercent() {
+        return this.fourStarPercent;
+    }
+
+    public void setFourStarPercent(double fourStarPercent) {
+        this.fourStarPercent = fourStarPercent;
+    }
+
+    public double getThreeStarPercent() {
+        return this.threeStarPercent;
+    }
+
+    public void setThreeStarPercent(double threeStarPercent) {
+        this.threeStarPercent = threeStarPercent;
+    }
+
+    public double getTwoStarPercent() {
+        return this.twoStarPercent;
+    }
+
+    public void setTwoStarPercent(double twoStarPercent) {
+        this.twoStarPercent = twoStarPercent;
+    }
+
+    public double getOneStarPercent() {
+        return this.oneStarPercent;
+    }
+
+    public void setOneStarPercent(double oneStarPercent) {
+        this.oneStarPercent = oneStarPercent;
     }
 
     public Set<ProductDetailsPropertyDTO> getProperties() {

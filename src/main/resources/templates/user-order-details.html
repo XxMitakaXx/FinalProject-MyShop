@@ -78,7 +78,7 @@
                 <p>Price for products</p>
             </div>
 
-            <p th:text="${orderDetails.priceForProducts}"></p>
+            <p th:text="${orderDetails.priceForProducts + ' LV.'}"></p>
         </div>
 
         <div class="order-detail">
@@ -87,7 +87,7 @@
                 <p>Price for delivery</p>
             </div>
 
-            <p th:text="${orderDetails.priceForDelivery}"></p>
+            <p th:text="${orderDetails.priceForDelivery + ' LV.'}"></p>
         </div>
 
         <div class="order-detail">
@@ -96,7 +96,7 @@
                 <p>Sum</p>
             </div>
 
-            <p th:text="${orderDetails.priceForSum}"></p>
+            <p th:text="${orderDetails.priceForSum + ' LV.'}"></p>
         </div>
 
         <div class="order-detail">
@@ -114,7 +114,7 @@
 
                 <div class="ordered-product-info">
                     <p th:text="${product.product.name}"></p>
-                    <p th:text="${product.product.price}"></p>
+                    <p th:text="${product.product.price + ' LV.'}"></p>
                 </div>
 
             </a>

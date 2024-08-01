@@ -7,6 +7,7 @@ import org.example.finalprojectmyshop.order.models.dtos.exports.UserOrderDetails
 import org.example.finalprojectmyshop.order.models.dtos.imports.OrderDetailsDTO;
 import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.order.models.enums.CollectingPlace;
+import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
 import org.example.finalprojectmyshop.order.service.CartService;
 import org.example.finalprojectmyshop.order.service.OrderService;
 import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
@@ -25,6 +26,7 @@ public class OrderController {
     private final OrderService orderService;
     private final UserHelperService userHelperService;
     private final CollectingPlace[] collectingPlaces = CollectingPlace.values();
+    private final OrderLogisticStatus[] orderLogisticStatuses = OrderLogisticStatus.values();
 
     public OrderController(CartService cartService, OrderService orderService, UserHelperService userHelperService) {
         this.cartService = cartService;
@@ -76,7 +78,7 @@ public class OrderController {
         return "user-orders";
     }
 
-    @GetMapping("user-order-details/{id}")
+    @GetMapping("/user-order-details/{id}")
     public String viewUserOrderDetails(@PathVariable long id, Model model) {
         UserOrderDetailsDTO orderDetails = this.orderService.findOrderDetails(id);
 
@@ -85,7 +87,7 @@ public class OrderController {
         return "user-order-details";
     }
 
-    @GetMapping("users-orders")
+    @GetMapping("/users-orders")
     public String viewUsersOrders(Model model) {
 
         Set<UserOrderDTO> usersOrders = this.orderService.findUsersOrders();
@@ -95,7 +97,7 @@ public class OrderController {
         return "users-orders";
     }
 
-    @GetMapping("users-orders-details/{id}")
+    @GetMapping("/users-orders-details/{id}")
     public String viewUsersOrdersDetails(@PathVariable long id, Model model) {
         UserOrderDetailsDTO orderDetails = this.orderService.findOrderDetails(id);
 

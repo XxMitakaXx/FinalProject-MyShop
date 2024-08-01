@@ -236,13 +236,14 @@ public class ProductServiceImpl implements ProductService {
                     productDetailsDTO.getReviews().add(reviewDataDTO);
                 });
 
+        int reviewCount = product.getReviews().size();
         double productRating = product.getReviews()
                 .stream()
                 .map(Review::getRating)
                 .collect(Collectors.toSet())
                 .stream()
                 .map(Rating::getRating)
-                .reduce(0.0, Double::sum) / product.getReviews().size();
+                .reduce(0.0, Double::sum) / reviewCount;
 
         if (productRating > 0) {
             productDetailsDTO.setRating(productRating);
@@ -250,7 +251,7 @@ public class ProductServiceImpl implements ProductService {
             productDetailsDTO.setRating(0.0);
         }
 
-        productDetailsDTO.setReviewsCount(product.getReviews().size());
+        productDetailsDTO.setReviewsCount(reviewCount);
 
         int fiveStarsReviewCount = product.getReviews()
                 .stream()
@@ -260,6 +261,9 @@ public class ProductServiceImpl implements ProductService {
 
         productDetailsDTO.setFiveStarsReviewsCount(fiveStarsReviewCount);
 
+        double fiveStarPercent = ((double) fiveStarsReviewCount / reviewCount) * 100;
+        productDetailsDTO.setFiveStarPercent(fiveStarPercent);
+
         int fourStarsReviewCount = product.getReviews()
                 .stream()
                 .filter(review -> review.getRating().getRating() >= 4.0 && review.getRating().getRating() < 4.5)
@@ -267,6 +271,9 @@ public class ProductServiceImpl implements ProductService {
                 .size();
 
         productDetailsDTO.setFourStarsReviewsCount(fourStarsReviewCount);
+
+        double fourStarPercent = ((double) fourStarsReviewCount / reviewCount) * 100;
+        productDetailsDTO.setFourStarPercent(fourStarPercent);
 
         int threeStarsReviewCount = product.getReviews()
                 .stream()
@@ -276,6 +283,9 @@ public class ProductServiceImpl implements ProductService {
 
         productDetailsDTO.setThreeStarsReviewsCount(threeStarsReviewCount);
 
+        double threeStarPercent = ((double) threeStarsReviewCount / reviewCount) * 100;
+        productDetailsDTO.setThreeStarPercent(threeStarPercent);
+
         int twoStarsReviewCount = product.getReviews()
                 .stream()
                 .filter(review -> review.getRating().getRating() >= 2.0 && review.getRating().getRating() < 3.0)
@@ -284,6 +294,9 @@ public class ProductServiceImpl implements ProductService {
 
         productDetailsDTO.setTwoStarsReviewsCount(twoStarsReviewCount);
 
+        double twoStarPercent = ((double) twoStarsReviewCount / reviewCount) * 100;
+        productDetailsDTO.setTwoStarPercent(twoStarPercent);
+
         int oneStarsReviewCount = product.getReviews()
                 .stream()
                 .filter(review -> review.getRating().getRating() >= 1 && review.getRating().getRating() < 2.0)
@@ -291,6 +304,9 @@ public class ProductServiceImpl implements ProductService {
                 .size();
 
         productDetailsDTO.setOneStarsReviewsCount(oneStarsReviewCount);
+
+        double oneStarPercent = ((double) oneStarsReviewCount / reviewCount) * 100;
+        productDetailsDTO.setOneStarPercent(oneStarPercent);
 
         product.getProperties()
                 .forEach(productProperty -> {
