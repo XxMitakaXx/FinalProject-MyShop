@@ -5,8 +5,6 @@ import org.example.finalprojectmyshop.product.models.dtos.imports.AddReviewDTO;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.service.ProductService;
 import org.example.finalprojectmyshop.product.service.ReviewService;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,13 +45,8 @@ public class ReviewController {
             @PathVariable("id") long id,
             @Valid AddReviewDTO addReviewDTO,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes,
-            @AuthenticationPrincipal UserDetails userDetails
+            RedirectAttributes redirectAttributes
             ) {
-
-        if (userDetails == null) {
-            return "redirect:/users/login";
-        }
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addReviewDTO", addReviewDTO);
@@ -65,5 +58,10 @@ public class ReviewController {
         this.reviewService.save(addReviewDTO, id);
 
         return "redirect:http://localhost:8080/product-details/" + id;
+    }
+
+    @GetMapping("/reviews")
+    public String viewReview(Model model) {
+        this.reviewService.findAll();
     }
 }

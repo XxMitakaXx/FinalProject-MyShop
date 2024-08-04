@@ -76,6 +76,11 @@ public class OrderServiceImpl implements OrderService {
         this.deleteCart();
     }
 
+    @Override
+    public void save(Order order) {
+        this.orderRepository.save(order);
+    }
+
     private ProductInOrderEntity toProductInOrderEntity(Product product, CartProductDTO productInCart) {
         ProductInOrderEntity productInOrderEntity = new ProductInOrderEntity();
         productInOrderEntity.setProduct(product);
@@ -136,13 +141,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Set<UserOrderDTO> findUsersOrders() {
-        Set<Order> orders = new HashSet<>();
-        userService.findAllUsers()
-                .forEach(user -> {
-                    Set<Order> userOrders = user.getOrders();
-
-                    orders.addAll(userOrders);
-                });
+        Set<Order> orders = this.orderRepository.findOrdersForDelivery();
 
         return orders
                 .stream()
@@ -162,6 +161,19 @@ public class OrderServiceImpl implements OrderService {
         } else {
             return "RECEIVED";
         }
+    }
+
+    @Override
+    public Order findOrderEntity(long id) {
+        Optional<Order> optional = this.orderRepository.findById(id);
+
+        if (optional.isEmpty()) {
+            return new Order();
+        }
+
+        Order order = optional.get();
+
+        return order;
     }
 
     private UserOrderDTO toUserOrderDTO(Order order) {

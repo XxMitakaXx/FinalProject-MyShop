@@ -2,13 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
     <link rel="stylesheet" th:href="@{/css/favorites-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/search-bar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{css/cart-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/profile-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/second-navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/categories-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer-styles.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script th:src="@{/js/adminContext.js}" defer></script>
+    <script th:src="@{/js/profileContext.js}" defer></script>
+    <script th:src="@{/js/cartContext.js}" defer></script>
+    <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
     <title>My Shop</title>
 </head>
 <body>
-    <nav th:replace="~{fragments/navbar}"></nav>
-    <nav th:replace="~{fragments/second-navbar}"></nav>
+        <nav th:replace="~{fragments/navbar}"></nav>
+        <nav th:replace="~{fragments/second-navbar}"></nav>
+        <nav th:replace="~{fragments/categories-navbar}"></nav>
 
+        <div class="align-container">
+            <h1>My Favorite Products</h1>
 
+            <div th:if="${userFavorites.size() > 0}" class="favorite-products-container">
+                <a th:each="product : ${userFavorites}" th:href="@{/product-details/{id}(id=*{product.id})}" class="favorite-product">
+                    <img th:src="@{${product.imageUrl}}" class="favorite-product-image" alt="product" />
+
+                    <div class="favorite-product-info">
+                        <p th:text="${product.name}"></p>
+                        <p th:text="${product.price + ' LV.'}"></p>
+                    </div>
+
+                    <form
+                            th:method="post"
+                            th:action="@{/add-product-to-cart/{id}(id=*{product.id})}">
+                        <button class="add-to-cart-button" type="submit">
+                            <span class="cart-icon material-symbols-outlined">shopping_cart</span>
+                        </button>
+                    </form>
+
+                    <form
+                            th:method="delete"
+                            th:action="@{/delete-product-from-favorites/{id}(id=*{product.id})}">
+                        <button class="delete-from-favorites-button" type="submit">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </form>
+                </a>
+            </div>
+
+            <div th:unless="${userFavorites.size() > 0}" class="user-have-no-favorite-products-container">
+                <h2>You have no favorite products</h2>
+            </div>
+        </div>
+
+        <footer th:replace="~{fragments/footer}"></footer>
 </body>
 </html>

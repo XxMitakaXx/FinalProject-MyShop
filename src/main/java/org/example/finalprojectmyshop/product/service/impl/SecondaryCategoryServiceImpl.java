@@ -10,6 +10,7 @@ import org.example.finalprojectmyshop.product.models.entities.SecondaryCategory;
 import org.example.finalprojectmyshop.product.repository.SecondaryCategoryRepository;
 import org.example.finalprojectmyshop.product.service.ProductService;
 import org.example.finalprojectmyshop.product.service.SecondaryCategoryService;
+import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -19,12 +20,12 @@ public class SecondaryCategoryServiceImpl implements SecondaryCategoryService {
 
     private final SecondaryCategoryRepository secondaryCategoryRepository;
     private final ProductService productService;
-    private final MediaFileService mediaFileService;
+    private final UserHelperService userHelperService;
 
-    public SecondaryCategoryServiceImpl(SecondaryCategoryRepository secondaryCategoryRepository, ProductService productService, MediaFileService mediaFileService) {
+    public SecondaryCategoryServiceImpl(SecondaryCategoryRepository secondaryCategoryRepository, ProductService productService, UserHelperService userHelperService) {
         this.secondaryCategoryRepository = secondaryCategoryRepository;
         this.productService = productService;
-        this.mediaFileService = mediaFileService;
+        this.userHelperService = userHelperService;
     }
 
     @Override
@@ -56,8 +57,7 @@ public class SecondaryCategoryServiceImpl implements SecondaryCategoryService {
 
         randomProductsDTO.setImageUrl(product.getMainImage().getImageUrl());
 
-        randomProductsDTO.setPriceBeforePoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[0]));
-        randomProductsDTO.setPriceAfterPoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[1]));
+        randomProductsDTO.setPrice(product.getPrice());
 
         if (!product.getReviews().isEmpty()) {
             double rating = product.getReviews()
@@ -72,6 +72,17 @@ public class SecondaryCategoryServiceImpl implements SecondaryCategoryService {
         }
 
         randomProductsDTO.setReviewsCount(product.getReviews().size());
+
+        try {
+            boolean isFavorite = this.userHelperService.getUser().getFavorites()
+                    .stream()
+                    .map(Product::getId)
+                    .anyMatch(productId -> productId == product.getId());
+
+            randomProductsDTO.setFavorite(isFavorite);
+        } catch (Exception ex) {
+            randomProductsDTO.setFavorite(false);
+        }
 
         return randomProductsDTO;
     }

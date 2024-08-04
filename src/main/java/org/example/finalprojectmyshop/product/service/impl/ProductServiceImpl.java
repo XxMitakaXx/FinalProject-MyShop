@@ -6,10 +6,7 @@ import org.example.finalprojectmyshop.order.models.entities.CartEntity;
 import org.example.finalprojectmyshop.order.models.entities.ProductInCartEntity;
 import org.example.finalprojectmyshop.order.service.CartService;
 import org.example.finalprojectmyshop.order.service.ProductInCartService;
-import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsDTO;
-import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsPropertyDTO;
-import org.example.finalprojectmyshop.product.models.dtos.exports.ReviewDataDTO;
-import org.example.finalprojectmyshop.product.models.dtos.exports.ReviewUserDataDTO;
+import org.example.finalprojectmyshop.product.models.dtos.exports.*;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductDTO;
 import org.example.finalprojectmyshop.product.models.entities.*;
 import org.example.finalprojectmyshop.product.repository.ProductPropertyRepository;
@@ -23,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -107,24 +105,46 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void addProductToFavorites(long id) {
-//        Optional<Product> optional = this.productRepository.findById(id);
-//
-//        if (optional.isEmpty()) {
-//            return;
-//        }
-//
-//        Product product = optional.get();
-//        boolean contains = this.currentUser.getUser().getFavorites()
-//                .stream()
-//                .map(Product::getId)
-//                .collect(Collectors.toSet())
-//                .contains(product.getId());
-//
-//        if (!contains) {
-//            this.currentUser.getUser().getFavorites().add(product);
-//            this.userService.save(this.currentUser.getUser());
-//        }
+        UserEntity user = this.userHelperService.getUser();
+        Optional<Product> optional = this.productRepository.findById(id);
 
+        if (optional.isPresent()) {
+            Product productEntity = optional.get();
+
+            boolean contain = user
+                    .getFavorites()
+                    .stream()
+                    .map(Product::getId)
+                    .anyMatch(productInCartEntityId -> productInCartEntityId.equals(productEntity.getId()));
+
+            if (!contain) {
+                user.getFavorites().add(productEntity);
+
+                this.userService.save(user);
+            }
+        }
+    }
+
+    @Override
+    public void deleteProductFromFavorites(long id) {
+        UserEntity user = this.userHelperService.getUser();
+        Optional<Product> optional = this.productRepository.findById(id);
+
+        if (optional.isPresent()) {
+            Product productEntity = optional.get();
+
+            boolean contain = user
+                    .getFavorites()
+                    .stream()
+                    .map(Product::getId)
+                    .anyMatch(productInCartEntityId -> productInCartEntityId.equals(productEntity.getId()));
+
+            if (contain) {
+                user.getFavorites().remove(productEntity);
+
+                this.userService.save(user);
+            }
+        }
     }
 
     @Override
@@ -168,6 +188,7 @@ public class ProductServiceImpl implements ProductService {
         for (ProductInCartEntity productInCartEntity : productsInCart) {
             if (Integer.parseInt(String.valueOf(productInCartEntity.getId())) == Integer.parseInt(String.valueOf(product.getId()))) {
                 contain = true;
+                break;
             }
         }
 
@@ -212,6 +233,29 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return optional.get();
+    }
+
+    @Override
+    public Set<FavoriteProductDTO> findFavoriteProducts() {
+        UserEntity user = this.userHelperService.getUser();
+
+        Set<FavoriteProductDTO> favoritesProducts = user.getFavorites()
+                .stream()
+                .map(this::toFavoriteProductDTO)
+                .collect(Collectors.toSet());
+
+        return favoritesProducts;
+    }
+
+    private FavoriteProductDTO toFavoriteProductDTO(Product product) {
+        FavoriteProductDTO favoriteProductDTO = new FavoriteProductDTO();
+
+        favoriteProductDTO.setId(product.getId());
+        favoriteProductDTO.setImageUrl(product.getMainImage().getImageUrl());
+        favoriteProductDTO.setName(product.getName());
+        favoriteProductDTO.setPrice(product.getPrice());
+
+        return favoriteProductDTO;
     }
 
     private ProductDetailsDTO toProductDetailsDTO(Product product) {

@@ -39,7 +39,7 @@ public class UserEntity {
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(
             name = "users_addresses",
             joinColumns = @JoinColumn(name = "user_id"),

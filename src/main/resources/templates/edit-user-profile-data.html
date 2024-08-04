@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" th:href="@{/css/edit-user-profile-data-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/search-bar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{css/cart-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/profile-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/second-navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/categories-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/suggest-product-by-category-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer-styles.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script th:src="@{/js/adminContext.js}" defer></script>
+    <script th:src="@{/js/profileContext.js}" defer></script>
+    <script th:src="@{/js/cartContext.js}" defer></script>
+    <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
+    <title>My Shop</title>
+</head>
+<body>
+    <nav th:replace="~{fragments/navbar}"></nav>
+    <nav th:replace="~{fragments/second-navbar}"></nav>
+    <nav th:replace="~{fragments/categories-navbar}"></nav>
+
+    <div class="form-container">
+        <h1>Edit Profile Data</h1>
+
+        <form
+                th:action="@{/edit-user-profile-data}"
+                th:method="put"
+                th:object="${userEditProfileDataDTO}"
+                enctype="multipart/form-data"
+                class="edit-user-profile-data-form">
+            <div class="collect-name-container">
+                <div class="collect-data-container">
+                    <label for="input-first-name">First Name</label>
+                    <input
+                            th:field="*{firstName}"
+                            th:value="*{firstName}"
+                            name="input-first-name"
+                            type="text"
+                            id="input-first-name"
+                            placeholder="First Name">
+                </div>
+
+                <small th:if="${#fields.hasErrors('firstName')}" id="firstNameLengthError"
+                       th:errorclass="error"
+                       class="first-name-length-error" th:class="${#fields.hasErrors('firstName')}" th:error="*{firstName}">First name length must be between 2 and 20 characters!</small>
+
+                <div class="collect-data-container">
+                    <label for="input-last-name">Last Name</label>
+                    <input
+                            th:field="*{lastName}"
+                            th:errorclass="error"
+                            th:value="*{lastName}"
+                            name="input-last-name"
+                            type="text"
+                            id="input-last-name"
+                            placeholder="Last Name">
+                </div>
+
+                <small th:if="${#fields.hasErrors('lastName')}" id="lastNameLengthError"
+                       class="last-name-length-error">Last name must be between 2 and 20 characters!</small>
+            </div>
+
+            <div class="collect-data-container">
+                <label for="input-email">Email</label>
+                <input
+                        th:field="*{email}"
+                        th:errorclass="error"
+                        th:value="*{email}"
+                        name="input-email"
+                        type="email"
+                        id="input-email"
+                        placeholder="Email">
+            </div>
+
+            <small th:if="${#fields.hasErrors('email')}" id="emailUniqueError"
+                   class="email-unique-error">This is associated with other account!</small>
+
+            <div class="collect-data-container">
+                <label for="input-phone-number">Phone Number</label>
+                <input
+                        th:field="*{phoneNumber}"
+                        th:errorclass="error"
+                        th:value="*{phoneNumber}"
+                        name="input-phone-number"
+                        type="tel"
+                        id="input-phone-number"
+                        placeholder="Phone Number">
+            </div>
+
+            <small th:if="${#fields.hasErrors('phoneNumber')}" id="phoneNumberLengthError"
+                   class="phone-number-length-error">Phone number must max 10 digits!</small>
+
+            <div class="collect-data-container">
+                <label for="input-birth-date">Birth Date</label>
+                <input
+                        th:field="*{birthDate}"
+                        th:errorclass="error"
+                        th:value="*{birthDate}"
+                        name="input-birth-date"
+                        type="date"
+                        id="input-birth-date"
+                        placeholder="Birth Date">
+            </div>
+
+            <small th:if="${#fields.hasErrors('birthDate')}" id="birthDateEmptyError"
+                   class="birth-date-empty-error">Birth date must not be empty!</small>
+
+            <div class="collect-data-container">
+                <label for="input-userEntity-profile-picture">Image</label>
+                <input
+                        th:field="*{profilePicture}"
+                        th:errorclass="error"
+                        th:value="*{profilePicture}"
+                        name="input-userEntity-profile-picture"
+                        type="file"
+                        id="input-userEntity-profile-picture">
+            </div>
+
+            <button class="apply-changes-button" type="submit">Apply Changes</button>
+        </form>
+    </div>
+
+    <footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>

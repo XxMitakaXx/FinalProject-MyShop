@@ -10,6 +10,7 @@ import org.example.finalprojectmyshop.order.models.enums.CollectingPlace;
 import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
 import org.example.finalprojectmyshop.order.service.CartService;
 import org.example.finalprojectmyshop.order.service.OrderService;
+import org.example.finalprojectmyshop.order.service.SaleService;
 import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,13 +26,15 @@ public class OrderController {
     private final CartService cartService;
     private final OrderService orderService;
     private final UserHelperService userHelperService;
+    private final SaleService saleService;
     private final CollectingPlace[] collectingPlaces = CollectingPlace.values();
     private final OrderLogisticStatus[] orderLogisticStatuses = OrderLogisticStatus.values();
 
-    public OrderController(CartService cartService, OrderService orderService, UserHelperService userHelperService) {
+    public OrderController(CartService cartService, OrderService orderService, UserHelperService userHelperService, SaleService saleService) {
         this.cartService = cartService;
         this.orderService = orderService;
         this.userHelperService = userHelperService;
+        this.saleService = saleService;
     }
 
     @ModelAttribute("orderDetailsDTO")
@@ -104,5 +107,37 @@ public class OrderController {
         model.addAttribute("orderDetails", orderDetails);
 
         return "user-order-details";
+    }
+
+    @PutMapping("/move-order-to-shipped/{id}")
+    public String processMoveOrderToShipped(@PathVariable("id") long id) {
+
+        Order order = this.orderService.findOrderEntity(id);
+        order.setLogisticStatus(OrderLogisticStatus.SHIPPED);
+        this.orderService.save(order);
+
+        return "redirect:/users-orders";
+    }
+
+    @PutMapping("/move-order-to-in-office/{id}")
+    public String processMoveOrderToInOffice(@PathVariable("id") long id) {
+
+        Order order = this.orderService.findOrderEntity(id);
+        order.setLogisticStatus(OrderLogisticStatus.IN_OFFICE);
+        this.orderService.save(order);
+
+        return "redirect:/users-orders";
+    }
+
+    @PutMapping("/move-order-to-received/{id}")
+    public String processMoveOrderToReceived(@PathVariable("id") long id) {
+
+        Order order = this.orderService.findOrderEntity(id);
+        order.setLogisticStatus(OrderLogisticStatus.RECEIVED);
+        this.orderService.save(order);
+
+        this.saleService.save(order);
+
+        return "redirect:/users-orders";
     }
 }

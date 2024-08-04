@@ -4,10 +4,10 @@ public class RandomProductsDTO {
     private long id;
     private String name;
     private String imageUrl;
-    private int priceBeforePoint;
-    private int priceAfterPoint;
+    private double price;
     private double rating;
     private int reviewsCount;
+    private boolean isFavorite;
 
     public RandomProductsDTO() {}
 
@@ -35,20 +35,12 @@ public class RandomProductsDTO {
         this.imageUrl = imageUrl;
     }
 
-    public int getPriceBeforePoint() {
-        return this.priceBeforePoint;
+    public double getPrice() {
+        return this.price;
     }
 
-    public void setPriceBeforePoint(int priceBeforePoint) {
-        this.priceBeforePoint = priceBeforePoint;
-    }
-
-    public int getPriceAfterPoint() {
-        return this.priceAfterPoint;
-    }
-
-    public void setPriceAfterPoint(int priceAfterPoint) {
-        this.priceAfterPoint = priceAfterPoint;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public double getRating() {
@@ -65,5 +57,13 @@ public class RandomProductsDTO {
 
     public void setReviewsCount(int reviewsCount) {
         this.reviewsCount = reviewsCount;
+    }
+
+    public boolean isFavorite() {
+        return this.isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 }

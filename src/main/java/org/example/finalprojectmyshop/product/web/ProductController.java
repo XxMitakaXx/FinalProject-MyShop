@@ -2,11 +2,16 @@ package org.example.finalprojectmyshop.product.web;
 
 import jakarta.validation.Valid;
 import org.example.finalprojectmyshop.product.models.dtos.exports.CategoryAndRandomProductsDTO;
+import org.example.finalprojectmyshop.product.models.dtos.exports.FavoriteProductDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductPropertyDTO;
+import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
 import org.example.finalprojectmyshop.product.service.CategoryService;
 import org.example.finalprojectmyshop.product.service.ProductService;
+import org.example.finalprojectmyshop.user.models.entities.UserEntity;
+import org.example.finalprojectmyshop.user.service.UserService;
+import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -23,10 +28,14 @@ public class ProductController {
 
     private final ProductService productService;
     private final CategoryService categoryService;
+    private final UserHelperService userHelperService;
+    private final UserService userService;
 
-    public ProductController(ProductService productService, CategoryService categoryService) {
+    public ProductController(ProductService productService, CategoryService categoryService, UserHelperService userHelperService, UserService userService) {
         this.productService = productService;
         this.categoryService = categoryService;
+        this.userHelperService = userHelperService;
+        this.userService = userService;
     }
 
     @ModelAttribute("addProductDTO")
@@ -72,24 +81,8 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @PostMapping("/add-to-favorites/{id}")
-    private String processAddProductToFavorites(@PathVariable("id") long id, @AuthenticationPrincipal UserDetails userDetails) {
-
-        if (userDetails == null) {
-            return "redirect:/login";
-        }
-
-        this.productService.addProductToFavorites(id);
-
-        return "redirect:/";
-    }
-
     @PostMapping("/add-product-to-cart/{id}")
-    public String processAddProductToCart(@PathVariable("id") long id, @AuthenticationPrincipal UserDetails userDetails) {
-
-        if (userDetails == null) {
-            return "redirect:/login";
-        }
+    public String processAddProductToCart(@PathVariable("id") long id) {
 
         this.productService.addProductToCart(id);
 
@@ -97,14 +90,32 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete-product-from-cart/{id}")
-    public String processDeleteProductFromCart(@PathVariable("id") long id, @AuthenticationPrincipal UserDetails userDetails) {
-
-        if (userDetails == null) {
-            return "redirect:/login";
-        }
-
+    public String processDeleteProductFromCart(@PathVariable("id") long id) {
         this.productService.deleteProductFromCart(id);
 
         return "redirect:/cart";
+    }
+
+    @GetMapping("/user-favorites")
+    public String viewUserFavorites(Model model) {
+        Set<FavoriteProductDTO> favorites = this.productService.findFavoriteProducts();
+
+        model.addAttribute("userFavorites", favorites);
+
+        return "favorites";
+    }
+
+    @PostMapping("/add-product-to-favorites/{id}")
+    public String processAddProductToFavorites(@PathVariable("id") long id) {
+        this.productService.addProductToFavorites(id);
+
+        return "redirect:/user-favorites";
+    }
+
+    @DeleteMapping("/delete-product-from-favorites/{id}")
+    public String processDeleteProductFromFavorite(@PathVariable("id") long id) {
+        this.productService.deleteProductFromFavorites(id);
+
+        return "redirect:/user-favorites";
     }
 }

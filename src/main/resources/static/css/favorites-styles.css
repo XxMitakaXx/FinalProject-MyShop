@@ -1,0 +1,107 @@
+.align-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    margin: 1em 0;
+    color: var(--secondary-color);
+    font-size: 3em;
+}
+
+.favorite-products-container {
+    min-height: 30em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.favorite-product {
+    height: 13em;
+    width: 80em;
+    color: var(--secondary-color);
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    border: 1px solid #efefef;
+    border-radius: 0.6em;
+    box-shadow: 2px 2px 2px #cbcbcb;
+    position: relative;
+}
+
+.favorite-products-container .favorite-product .favorite-product-image {
+    width: 10em;
+}
+
+.favorite-products-container .favorite-product .favorite-product-info {
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.add-to-cart-button {
+    padding: 1em;
+    height: 5em;
+    width: 8em;
+    color: var(--primary-color);
+    background: var(--third-color);
+    border: none;
+    border-radius: 0.6em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    cursor: pointer;
+}
+
+.add-to-cart-button span {
+    font-size: 3em;
+}
+
+.delete-from-favorites-button {
+     padding: 1em;
+     height: 5em;
+     width: 8em;
+     color: var(--primary-color);
+     background: #ff0000;
+     border: none;
+     border-radius: 0.6em;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     position: absolute;
+     bottom: 1em;
+     right: 1em;
+     cursor: pointer;
+ }
+
+ .delete-from-favorites-button span {
+     font-size: 3em;
+ }
+
+.user-have-no-favorite-products-container {
+    margin-bottom: 5em;
+    height: 30em;
+    width: 60em;
+    background: var(--primary-color);
+    box-shadow: 2px 2px 5px #cbcbcb;
+    border-radius: 0.6em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-have-no-favorite-products-container h2 {
+    color: var(--secondary-color);
+    font-size: 3em;
+}

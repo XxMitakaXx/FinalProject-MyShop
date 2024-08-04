@@ -5,6 +5,7 @@ import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,12 +22,22 @@ public class Sale {
     private UserEntity buyer;
 
     @ManyToMany
+    @JoinTable(
+            name = "sales_products",
+            joinColumns = @JoinColumn(name = "sale_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private Set<Product> products;
 
-    @ManyToOne
-    private Address address;
+    @Column(nullable = false)
+    private String cityVillage;
 
-    public Sale() {}
+    @Column(nullable = false)
+    private String address;
+
+    public Sale() {
+        this.products = new HashSet<>();
+    }
 
     public long getId() {
         return this.id;
@@ -60,11 +71,19 @@ public class Sale {
         this.products = products;
     }
 
-    public Address getAddress() {
+    public String getCityVillage() {
+        return this.cityVillage;
+    }
+
+    public void setCityVillage(String cityVillage) {
+        this.cityVillage = cityVillage;
+    }
+
+    public String getAddress() {
         return this.address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 }

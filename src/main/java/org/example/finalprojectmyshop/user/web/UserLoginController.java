@@ -25,7 +25,9 @@ public class UserLoginController {
     }
 
     @GetMapping("/login-error")
-    public String viewLoginError(Model model, RedirectAttributes redirectAttributes) {
+    public String viewLoginError(
+            Model model,
+            RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("showErrorMessage", true);
 
         return "redirect:/users/login";

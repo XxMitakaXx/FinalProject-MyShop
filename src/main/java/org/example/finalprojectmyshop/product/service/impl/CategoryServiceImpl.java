@@ -9,6 +9,7 @@ import org.example.finalprojectmyshop.product.models.entities.Rating;
 import org.example.finalprojectmyshop.product.models.entities.Review;
 import org.example.finalprojectmyshop.product.repository.CategoryRepository;
 import org.example.finalprojectmyshop.product.service.CategoryService;
+import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -20,11 +21,11 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final MediaFileService mediaFileService;
+    private final UserHelperService userHelperService;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository, MediaFileService mediaFileService) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, UserHelperService userHelperService) {
         this.categoryRepository = categoryRepository;
-        this.mediaFileService = mediaFileService;
+        this.userHelperService = userHelperService;
     }
 
     @Override
@@ -86,8 +87,7 @@ public class CategoryServiceImpl implements CategoryService {
         productDTO.setImageUrl(product.getMainImage().getImageUrl());
 
 
-        productDTO.setPriceBeforePoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[0]));
-        productDTO.setPriceAfterPoint(Integer.parseInt(String.valueOf(product.getPrice()).split("\\.")[1]));
+        productDTO.setPrice(product.getPrice());
 
         if (!product.getReviews().isEmpty()) {
             double rating = product.getReviews()
@@ -104,6 +104,17 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         productDTO.setReviewsCount(product.getReviews().size());
+
+        try {
+            boolean isFavorite = this.userHelperService.getUser().getFavorites()
+                    .stream()
+                    .map(Product::getId)
+                    .anyMatch(productId -> productId == product.getId());
+
+            productDTO.setFavorite(isFavorite);
+        } catch (Exception ex) {
+            productDTO.setFavorite(false);
+        }
 
         return productDTO;
     }

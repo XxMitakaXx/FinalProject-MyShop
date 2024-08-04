@@ -82,7 +82,7 @@
                 </form>
                 <form
                     th:method="post"
-                    th:action="@{/add-to-favorites/{id}(id=*{product.id})}">
+                    th:action="@{/add-product-to-favorites/{id}(id=*{product.id})}">
                     <button type="submit">
                         <span class="material-symbols-outlined">favorite</span>
                         <p>Add To Favorites</p>
@@ -241,9 +241,20 @@
             <div th:each="product : ${category.products}" class="category-product" data-star-rate="5">
                 <form
                         th:method="post"
-                        th:action="@{/add-to-favorites/{id}(id=*{product.id})}"
-                        sec:authorize="isAuthenticated()">
+                        th:action="@{/add-product-to-favorites/{id}(id=*{product.id})}"
+                        sec:authorize="isAuthenticated()"
+                        th:unless="${product.isFavorite}">
                     <button type="submit" class="category-product-add-to-favorite-button">
+                        <span class="material-symbols-outlined">favorite</span>
+                    </button>
+                </form>
+
+                <form
+                        th:method="delete"
+                        th:action="@{/delete-product-from-favorites/{id}(id=*{product.id})}"
+                        sec:authorize="isAuthenticated()"
+                        th:if="${product.isFavorite}">
+                    <button type="submit" class="category-product-add-to-favorite-button-added-product">
                         <span class="material-symbols-outlined">favorite</span>
                     </button>
                 </form>
@@ -256,8 +267,7 @@
                         <span class="material-symbols-outlined">favorite</span>
                     </button>
                 </form>
-
-                <a th:href="@{http://localhost:8080/product-details/{id}(id=*{product.id})}">
+                <a th:href="@{/product-details/{id}(id=*{product.id})}">
 
                     <div class="category-product-info">
                         <div class="image-container">
@@ -290,7 +300,7 @@
                 </a>
 
                 <div class="category-product-content">
-                    <p class="category-product-price" th:text="${product.priceBeforePoint + '.' + product.priceAfterPoint + ' LV'}">1567.99LV.</p>
+                    <p class="category-product-price" th:text="${product.price + ' LV'}">1567.99LV.</p>
 
                     <form
                             th:method="post"

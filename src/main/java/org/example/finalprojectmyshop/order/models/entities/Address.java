@@ -9,20 +9,22 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "person_name")
+    @Column(name = "person_name", nullable = false)
     private String personName;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "region")
+    @Column(nullable = false)
     private String region;
 
-    @Column(name = "city")
-    private String city;
+    @Column(name = "city_village", nullable = false)
+    private String cityVillage;
 
-    @Column(name = "address")
+    @Column(nullable = false)
     private String address;
+
+    private double sum;
 
     public Address() {}
 
@@ -58,12 +60,12 @@ public class Address {
         this.region = region;
     }
 
-    public String getCity() {
-        return this.city;
+    public String getCityVillage() {
+        return this.cityVillage;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityVillage(String cityVillage) {
+        this.cityVillage = cityVillage;
     }
 
     public String getAddress() {
@@ -72,5 +74,13 @@ public class Address {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public double getSum() {
+        return this.sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
     }
 }

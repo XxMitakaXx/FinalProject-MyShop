@@ -148,3 +148,15 @@
     right: 0;
     cursor: pointer;
 }
+
+.category-product .category-product-add-to-favorite-button-added-product {
+    padding: 0.5em;
+    color: #ff0000;
+    background: var(--primary-color);
+    border-radius: 50%;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}

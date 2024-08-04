@@ -79,6 +79,27 @@ h1 {
     background: var(--secondary-color);
 }
 
+.user-orders .user-order form .order-status-forward-button {
+    padding: 1em 2em 2em 2em;
+    height: 3em;
+    font-size: 1em;
+    color: var(--secondary-color);
+    background: var(--primary-color);
+    text-decoration: none;
+    border: 1px solid var(--secondary-color);
+    border-radius: 0.6em;
+    position: absolute;
+    bottom: 2em;
+    right: 2em;
+    transition: background 0.3s;
+    cursor: pointer;
+}
+
+.user-orders .user-order form .order-status-forward-button:hover {
+    color: var(--primary-color);
+    background: var(--secondary-color);
+}
+
 .users-have-no-orders-container {
     margin-bottom: 5em;
     height: 30em;
