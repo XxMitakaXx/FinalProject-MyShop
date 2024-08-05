@@ -1,0 +1,140 @@
+body {
+    background: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    margin: 1em 0;
+    color: var(--secondary-color);
+    font-size: 3em;
+}
+
+.product-reviews-container {
+    margin-bottom: 4em;
+    min-height: 30em;
+    width: 80em;
+    background: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-reviews-container .product-review {
+    height: 12em;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    gap: 4em;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #5454c5;
+    position: relative;
+}
+
+.product-reviews-container .review-user-data {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: start;
+}
+
+.product-reviews-container .product-review .review-user-data .review-user-image {
+    width: 3em;
+    border-radius: 50%;
+}
+
+.product-reviews-container .product-review .review-user-data .review-user-name {
+    font-size: 1.2em;
+}
+
+.product-reviews-container .product-review .review-user-data .comment-add-date {
+    color: #999999;
+    font-size: 1em;
+}
+
+.product-reviews-container .review-content {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.product-reviews-container .review-content .review-title {
+    font-size: 1.5em;
+}
+
+.product-reviews-container .review-content .product-stars .star {
+    margin-top: 0.5em;
+    font-size: 1em;
+}
+
+.gold-star {
+    color: #ff9c1a;
+}
+
+
+.product-reviews-container .review-content .review-text {
+    margin-top: 1em;
+    width: 100%;
+}
+
+.product-reviews-container .product-review .review-product-container {
+    height: 100%;
+    width: 100%;
+    color: var(--secondary-color);
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.product-reviews-container .product-review .review-product-container .review-product-image {
+    height: 10em;
+    width: 10em;
+}
+
+.product-reviews-container .product-review .review-product-container .review-product-name {
+    margin: 2em 0.5em;
+    font-size: 1.2em;
+}
+
+.delete-review-button {
+    padding: 0.3em;
+    color: var(--primary-color);
+    background: #ff0000;
+    border: none;
+    border-radius: 0.3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    cursor: pointer;
+}
+
+.delete-review-button span {
+    font-size: 2em;
+}
+
+.user-have-no-reviews-container {
+    margin-bottom: 5em;
+    height: 30em;
+    width: 60em;
+    background: var(--primary-color);
+    box-shadow: 2px 2px 5px #cbcbcb;
+    border-radius: 0.6em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-have-no-reviews-container h2 {
+    color: var(--secondary-color);
+    font-size: 3em;
+}

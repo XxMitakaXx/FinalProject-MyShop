@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
-    <link rel="stylesheet" th:href="@{/css/review-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/delete-product-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/navbar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/search-bar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/admin-context-styles.css}" />
@@ -19,14 +19,41 @@
     <script th:src="@{/js/cartContext.js}" defer></script>
     <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
     <title>My Shop</title>
+    <link rel="stylesheet" href="../static/css/delete-product-styles.css">
 </head>
 <body>
     <nav th:replace="~{fragments/navbar}"></nav>
     <nav th:replace="~{fragments/second-navbar}"></nav>
     <nav th:replace="~{fragments/categories-navbar}"></nav>
+<h1>Delete Product/s</h1>
 
+    <form
+        th:method="get"
+        th:action="@{/find-products-for-delete}"
+        th:object="${searchProductForDeleteDTO}">
+        <div class="search">
+            <button type="submit" ><span class="search-icon material-symbols-outlined">search</span></button>
+            <input
+                    th:field="*{name}"
+                    class="search-input"
+                    type="search"
+                    placeholder="Search">
+        </div>
+    </form>
 
+    <div class="founded-products-container">
+        <div th:each="product : ${foundedProductsForDeleteDTO.foundedProducts}" class="founded-product">
+            <img th:src="@{${product.imageUrl}}" class="founded-product-image" alt="product">
+            <h2 th:text="${product.name}" class="founded-product-name"></h2>
 
+            <form
+                th:method="delete"
+                th:action="@{/delete-product/{id}(id=${product.id})}">
+                <a th:href="@{/product-details/{id}(id=${product.id})}" class="view-product-details-button">View Details</a>
+                <button class="delete-product-button" type="submit">Delete Product</button>
+            </form>
+        </div>
+    </div>
 
     <footer th:replace="~{fragments/footer}"></footer>
 </body>

@@ -108,6 +108,15 @@
             <p th:text="${orderDetails.orderDate}"></p>
         </div>
 
+        <div class="order-detail">
+            <div class="order-detail-left-side">
+                <span class="material-symbols-outlined">schedule</span>
+                <p>Date of delivery</p>
+            </div>
+
+            <p th:text="${orderDetails.deliveryDate}"></p>
+        </div>
+
         <div class="ordered-products-container">
             <a th:each="product : ${orderDetails.products}" th:href="@{http://localhost:8080/product-details/{id}(id=*{product.product.id})}" class="ordered-product">
                 <img th:src="@{${product.product.mainImage.imageUrl}}" class="ordered-product-image" alt="product" />

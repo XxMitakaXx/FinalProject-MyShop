@@ -1,6 +1,7 @@
 package org.example.finalprojectmyshop.product.web;
 
 import jakarta.validation.Valid;
+import org.example.finalprojectmyshop.product.models.dtos.exports.ReviewDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddReviewDTO;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.service.ProductService;
@@ -8,11 +9,10 @@ import org.example.finalprojectmyshop.product.service.ReviewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Set;
 
 @Controller
 public class ReviewController {
@@ -41,7 +41,7 @@ public class ReviewController {
     }
 
     @PostMapping("/add-review/{id}")
-    public String addReview(
+    public String processAddReview(
             @PathVariable("id") long id,
             @Valid AddReviewDTO addReviewDTO,
             BindingResult bindingResult,
@@ -60,8 +60,19 @@ public class ReviewController {
         return "redirect:http://localhost:8080/product-details/" + id;
     }
 
-    @GetMapping("/reviews")
+    @DeleteMapping("/delete-review/{id}")
+    public String processDeleteReview(@PathVariable("id") long id) {
+        this.reviewService.deleteReview(id);
+
+        return "redirect:/user-reviews";
+    }
+
+    @GetMapping("/user-reviews")
     public String viewReview(Model model) {
-        this.reviewService.findAll();
+        Set<ReviewDTO> userReviews = this.reviewService.findAll();
+
+        model.addAttribute("userReviews", userReviews);
+
+        return "user-reviews";
     }
 }

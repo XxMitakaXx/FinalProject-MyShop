@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Date;
 import java.util.Set;
 
 @Controller
@@ -134,6 +135,7 @@ public class OrderController {
 
         Order order = this.orderService.findOrderEntity(id);
         order.setLogisticStatus(OrderLogisticStatus.RECEIVED);
+        order.setDeliveryDate(new Date());
         this.orderService.save(order);
 
         this.saleService.save(order);

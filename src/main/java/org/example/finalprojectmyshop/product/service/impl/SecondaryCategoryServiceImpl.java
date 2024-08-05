@@ -7,6 +7,7 @@ import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.entities.Rating;
 import org.example.finalprojectmyshop.product.models.entities.Review;
 import org.example.finalprojectmyshop.product.models.entities.SecondaryCategory;
+import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
 import org.example.finalprojectmyshop.product.repository.SecondaryCategoryRepository;
 import org.example.finalprojectmyshop.product.service.ProductService;
 import org.example.finalprojectmyshop.product.service.SecondaryCategoryService;
@@ -29,6 +30,11 @@ public class SecondaryCategoryServiceImpl implements SecondaryCategoryService {
     }
 
     @Override
+    public void save(SecondaryCategory secondaryCategory) {
+        this.secondaryCategoryRepository.save(secondaryCategory);
+    }
+
+    @Override
     public ProductDetailsSecondaryCategoryDTO findCategoryByProductId(long id) {
         Product product = this.productService.findProductEntityById(id);
         SecondaryCategory secondaryCategory = this.secondaryCategoryRepository.findByName(product.getSecondaryCategory().getName());
@@ -36,6 +42,11 @@ public class SecondaryCategoryServiceImpl implements SecondaryCategoryService {
         ProductDetailsSecondaryCategoryDTO productDetailsSecondaryCategoryDTO = this.toProductDetailsSecondaryCategoryDTO(secondaryCategory);
 
         return productDetailsSecondaryCategoryDTO;
+    }
+
+    @Override
+    public SecondaryCategory findSecondaryCategoryEntityByName(SecondaryCategoryName name) {
+        return this.secondaryCategoryRepository.findByName(name);
     }
 
     private ProductDetailsSecondaryCategoryDTO toProductDetailsSecondaryCategoryDTO(SecondaryCategory category) {

@@ -4,6 +4,8 @@ import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.order.models.entities.Sale;
 import org.example.finalprojectmyshop.order.repository.SaleRepository;
 import org.example.finalprojectmyshop.order.service.SaleService;
+import org.example.finalprojectmyshop.product.models.entities.Product;
+import org.example.finalprojectmyshop.product.service.ProductService;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.example.finalprojectmyshop.user.service.impl.UserHelperService;

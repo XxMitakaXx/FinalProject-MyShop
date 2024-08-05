@@ -3,17 +3,16 @@ package org.example.finalprojectmyshop.product.web;
 import jakarta.validation.Valid;
 import org.example.finalprojectmyshop.product.models.dtos.exports.CategoryAndRandomProductsDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.FavoriteProductDTO;
+import org.example.finalprojectmyshop.product.models.dtos.exports.FoundedProductsForDeleteDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductPropertyDTO;
-import org.example.finalprojectmyshop.product.models.entities.Product;
+import org.example.finalprojectmyshop.product.models.dtos.imports.SearchProductForDeleteDTO;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
+import org.example.finalprojectmyshop.product.service.AdvancedProductService;
 import org.example.finalprojectmyshop.product.service.CategoryService;
 import org.example.finalprojectmyshop.product.service.ProductService;
-import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,12 +26,14 @@ import java.util.Set;
 public class ProductController {
 
     private final ProductService productService;
+    private final AdvancedProductService advancedProductService;
     private final CategoryService categoryService;
     private final UserHelperService userHelperService;
     private final UserService userService;
 
-    public ProductController(ProductService productService, CategoryService categoryService, UserHelperService userHelperService, UserService userService) {
+    public ProductController(ProductService productService, AdvancedProductService advancedProductService, CategoryService categoryService, UserHelperService userHelperService, UserService userService) {
         this.productService = productService;
+        this.advancedProductService = advancedProductService;
         this.categoryService = categoryService;
         this.userHelperService = userHelperService;
         this.userService = userService;
@@ -89,9 +90,37 @@ public class ProductController {
         return "redirect:/cart";
     }
 
+    @GetMapping("/delete-product")
+    public String processDeleteProduct(Model model) {
+        SearchProductForDeleteDTO searchProductForDeleteDTO = new SearchProductForDeleteDTO();
+        model.addAttribute("searchProductForDeleteDTO", searchProductForDeleteDTO);
+
+        FoundedProductsForDeleteDTO foundedProductsForDeleteDTO = new FoundedProductsForDeleteDTO();
+        model.addAttribute("foundedProductsForDeleteDTO", foundedProductsForDeleteDTO);
+
+        return "delete-product";
+    }
+
+    @GetMapping("/find-products-for-delete")
+    public String processFindProductsForDelete(SearchProductForDeleteDTO searchProductForDeleteDTO, Model model) {
+        model.addAttribute("searchProductForDeleteDTO", searchProductForDeleteDTO);
+
+        FoundedProductsForDeleteDTO foundedProductsForDeleteDTO = this.productService.searchProductsForDelete(searchProductForDeleteDTO.getName());
+        model.addAttribute("foundedProductsForDeleteDTO", foundedProductsForDeleteDTO);
+
+        return "delete-product";
+    }
+
+    @DeleteMapping("/delete-product/{id}")
+    public String processDeleteProduct(@PathVariable("id") long id, Model model) {
+        this.advancedProductService.deleteProduct(id);
+
+        return "redirect:/delete-product";
+    }
+
     @DeleteMapping("/delete-product-from-cart/{id}")
     public String processDeleteProductFromCart(@PathVariable("id") long id) {
-        this.productService.deleteProductFromCart(id);
+        this.productService.deleteProductFromCartByProduct(id);
 
         return "redirect:/cart";
     }

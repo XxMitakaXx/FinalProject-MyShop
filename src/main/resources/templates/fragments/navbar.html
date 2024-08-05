@@ -20,6 +20,9 @@
                 <a class="context-label" th:href="@{/add-product}">Add Product</a>
             </li>
             <li class="context-link">
+                <a class="context-label" th:href="@{/delete-product}">Delete Product</a>
+            </li>
+            <li class="context-link">
                 <a class="context-label" th:href="@{/users-orders}">View Clients Orders</a>
             </li>
             <li class="context-link">
@@ -79,7 +82,7 @@
                 <a class="context-label">My warranties</a>
             </li>
             <li class="context-link">
-                <a class="context-label">My reviews</a>
+                <a th:href="@{/user-reviews}" class="context-label">My reviews</a>
             </li>
             <li class="context-link">
                 <a class="context-label">Addresses for delivery</a>

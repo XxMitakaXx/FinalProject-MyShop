@@ -24,8 +24,6 @@ public class Product {
     @OneToMany
     private List<ProductProperty> properties;
 
-//    private String color;
-
     @OneToOne
     private MediaFileEntity mainImage;
 

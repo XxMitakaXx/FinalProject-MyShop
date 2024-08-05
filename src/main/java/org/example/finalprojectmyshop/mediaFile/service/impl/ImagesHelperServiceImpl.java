@@ -28,10 +28,22 @@ public class ImagesHelperServiceImpl implements ImagesHelperService {
         MediaFileEntity mediaFile = new MediaFileEntity();
         mediaFile
                 .setImageUrl((String) savedImageData.get("url"))
-                .setImageId((String) savedImageData.get("public_key"));
+                .setImageId((String) savedImageData.get("public_id"));
 
         this.mediaFileService.save(mediaFile);
 
         return mediaFile;
     }
+
+    @Override
+    public void deleteImage(MediaFileEntity mediaFileEntity) {
+        try {
+            this.cloudinaryService.delete(mediaFileEntity.getImageId());
+            this.mediaFileService.deleteById(mediaFileEntity.getId());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
 }

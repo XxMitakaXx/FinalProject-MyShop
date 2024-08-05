@@ -1,0 +1,136 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    padding: 1em 0;
+    color: var(--secondary-color);
+    font-size: 3em;
+}
+
+.search {
+    --padding: 1em;
+
+    /*width: max-content;*/
+    display: flex;
+    align-items: center;
+    padding: var(--padding);
+    border-radius: 28px;
+    background: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    height: 2.3em;
+    width: 25em;
+    transition: background 0.25s;
+}
+
+.search:focus-within {
+    background: #f1f1f1;
+}
+
+.search .search-input {
+    font-size: 16px;
+    font-family: 'Lexend', sans-serif;
+    color: var(--secondary-color);
+    margin-left: var(--padding);
+    outline: none;
+    border: none;
+    background: transparent;
+    flex: 1;
+}
+
+.search button {
+    background: transparent;
+    border: none;
+}
+
+.search-icon {
+    background: transparent;
+    cursor: pointer;
+}
+
+/*.search-icon:active {*/
+/*    background: #f1f1f1;*/
+/*}*/
+
+.search .search-input::placeholder,
+.search .search-icon {
+    color: var(--secondary-color);
+}
+
+
+.navbar .search-field-form {
+    border-radius: 0.8em;
+    overflow: hidden;
+
+    border: 1px solid black;
+}
+
+.navbar .search-field-form .search-field {
+    width: 30em;
+    height: 3em;
+    border: none;
+    outline: none;
+}
+
+.navbar .search-field-form .magnifying-glass-button {
+    height: 2em;
+    width: 2em;
+}
+
+.founded-products-container {
+    margin-top: 4em;
+    min-height: 30em;
+    width: 80em;
+}
+
+.founded-products-container .founded-product {
+    height: 15em;
+    width: 100%;
+    border-radius: 0.6em;
+    box-shadow: 2px 2px 5px #cbcbcb;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.founded-products-container .founded-product .founded-product-image {
+    height: 100%;
+}
+
+.founded-products-container .founded-product .founded-product-name {
+    color: var(--secondary-color);
+    position: absolute;
+    top: 1em;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.founded-products-container .founded-product .delete-product-button {
+    width: 30em;
+    padding: 0.5em;
+    font-size: 1em;
+    color: var(--primary-color);
+    background: #ff0000;
+    border: none;
+    border-radius: 0.6em;
+    position: absolute;
+    bottom: 1em;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.founded-products-container .founded-product .view-product-details-button {
+    padding: 1em;
+    font-size: 1.2em;
+    text-decoration: none;
+    color: var(--primary-color);
+    background: var(--secondary-color);
+    border-radius: 0.6em;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}

@@ -61,6 +61,11 @@ public class OrderServiceImpl implements OrderService {
         UserEntity user = this.userHelperService.getUser();
         order.setBuyer(user);
 
+        cartDataDTO.getProductsInCart()
+                .forEach(product -> {
+                    this.productService.decreaseProductQuantity(product.getProductId(), product.getCount());
+                });
+
         Set<Product> productInOrderEntities = cartDataDTO.getProductsInCart()
                 .stream()
                 .map(productInCart -> this.productService.findProductEntityById(productInCart.getProductId()))

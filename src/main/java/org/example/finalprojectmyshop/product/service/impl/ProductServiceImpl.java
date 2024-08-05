@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -104,6 +103,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void save(Product product) {
+        this.productRepository.save(product);
+    }
+
+    @Override
+    public void deleteProductById(long id) {
+        this.productRepository.deleteById(id);
+    }
+
+    @Override
     public void addProductToFavorites(long id) {
         UserEntity user = this.userHelperService.getUser();
         Optional<Product> optional = this.productRepository.findById(id);
@@ -153,14 +162,14 @@ public class ProductServiceImpl implements ProductService {
 
         UserEntity user = this.userHelperService.getUser();
 
-        boolean contain = user
+        boolean containInCart = user
                 .getCart()
                 .getProductsInCart()
                 .stream()
                 .map(productInCartEntity -> productInCartEntity.getProduct().getId())
                 .anyMatch(productInCartEntityId -> productInCartEntityId.equals(product.getId()));
 
-        if (!contain) {
+        if (!containInCart) {
             ProductInCartEntity productInCartEntity = new ProductInCartEntity();
             productInCartEntity.setProduct(product);
             productInCartEntity.setCount(1);
@@ -172,12 +181,23 @@ public class ProductServiceImpl implements ProductService {
 
             user.setCart(cart);
 
+
+            boolean containInFavorites = user
+                    .getFavorites()
+                    .stream()
+                    .map(Product::getId)
+                    .anyMatch(productInFavorites -> productInFavorites.equals(product.getId()));
+
+            if (containInFavorites) {
+                user.getFavorites().remove(product);
+            }
+
             this.userService.save(user);
         }
     }
 
     @Override
-    public void deleteProductFromCart(long id) {
+    public void deleteProductFromCartByProduct(long id) {
         ProductInCartEntity product = this.productInCartService.findById(id);
 
         UserEntity user = this.userHelperService.getUser();
@@ -228,11 +248,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findProductEntityById(long id) {
         Optional<Product> optional = this.productRepository.findById(id);
-        if (optional.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-
-        return optional.get();
+        return optional.orElseGet(Product::new);
     }
 
     @Override
@@ -245,6 +261,47 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toSet());
 
         return favoritesProducts;
+    }
+
+    @Override
+    public void decreaseProductQuantity(long productId, int quantity) {
+        Optional<Product> optional = this.productRepository.findById(productId);
+
+        if (optional.isPresent()) {
+            Product product = optional.get();
+
+            if (product.getQuantity() <= quantity) {
+                product.setQuantity(0);
+            } else {
+                product.setQuantity(product.getQuantity() - quantity);
+            }
+
+            this.productRepository.save(product);
+        }
+    }
+
+    @Override
+    public FoundedProductsForDeleteDTO searchProductsForDelete(String name) {
+        Set<Product> foundedProductEntities = this.productRepository.findProductsByName(name);
+
+        FoundedProductsForDeleteDTO foundedProductsForDeleteDTO = new FoundedProductsForDeleteDTO();
+
+        foundedProductEntities.forEach(product -> {
+            FoundedProductForDeleteDTO foundedProductForDeleteDTO = this.toFoundedProductFroDeleteDTO(product);
+            foundedProductsForDeleteDTO.getFoundedProducts().add(foundedProductForDeleteDTO);
+        });
+
+        return foundedProductsForDeleteDTO;
+    }
+
+    private FoundedProductForDeleteDTO toFoundedProductFroDeleteDTO(Product product) {
+        FoundedProductForDeleteDTO foundedProductForDeleteDTO = new FoundedProductForDeleteDTO();
+
+        foundedProductForDeleteDTO.setId(product.getId());
+        foundedProductForDeleteDTO.setName(product.getName());
+        foundedProductForDeleteDTO.setImageUrl(product.getMainImage().getImageUrl());
+
+        return foundedProductForDeleteDTO;
     }
 
     private FavoriteProductDTO toFavoriteProductDTO(Product product) {

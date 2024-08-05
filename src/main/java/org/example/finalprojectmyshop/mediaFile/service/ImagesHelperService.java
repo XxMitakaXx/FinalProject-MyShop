@@ -7,4 +7,5 @@ import java.io.IOException;
 
 public interface ImagesHelperService {
     MediaFileEntity saveImage(MultipartFile multipartFile) throws IOException;
+    void deleteImage(MediaFileEntity mediaFileEntity);
 }
