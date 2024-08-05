@@ -49,7 +49,8 @@ public class AdvancedProductServiceImpl implements AdvancedProductService {
         secondaryCategory.getProducts().remove(product);
         this.secondaryCategoryService.save(secondaryCategory);
 
-        List<ProductProperty> productProperties = product.getProperties();
+        List<ProductProperty> productProperties = new ArrayList<>();
+        product.getProperties().forEach(productProperty -> productProperties.add(productProperty));
         productProperties.forEach(productProperty -> {
             product.getProperties().remove(productProperty);
             this.productService.save(product);
