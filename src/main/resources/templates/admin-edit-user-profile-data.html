@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/navbar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/search-bar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/admin-context-styles.css}" />
-    <link rel="stylesheet" th:href="@{css/cart-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/cart-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/profile-context-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/second-navbar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/categories-styles.css}" />
@@ -70,7 +70,6 @@
             <label for="input-email">Email</label>
             <input
                     th:field="*{email}"
-                    th:errorclass="error"
                     th:value="*{email}"
                     name="input-email"
                     type="email"
@@ -85,7 +84,6 @@
             <label for="input-phone-number">Phone Number</label>
             <input
                     th:field="*{phoneNumber}"
-                    th:errorclass="error"
                     th:value="*{phoneNumber}"
                     name="input-phone-number"
                     type="tel"
@@ -100,7 +98,6 @@
             <label for="input-birth-date">Birth Date</label>
             <input
                     th:field="*{birthDate}"
-                    th:errorclass="error"
                     th:value="*{birthDate}"
                     name="input-birth-date"
                     type="date"
@@ -115,7 +112,6 @@
             <label for="input-userEntity-profile-picture">Image</label>
             <input
                     th:field="*{profilePicture}"
-                    th:errorclass="error"
                     th:value="*{profilePicture}"
                     name="input-userEntity-profile-picture"
                     type="file"
