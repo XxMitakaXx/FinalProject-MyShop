@@ -37,7 +37,7 @@ public class UserEntity {
     private String phoneNumber;
 
     @Column(name = "birth_date", nullable = false)
-    private LocalDate birthDate;
+    private LocalDate birthdate;
 
     @ManyToMany
     @JoinTable(
@@ -136,12 +136,12 @@ public class UserEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDate getBirthDate() {
-        return this.birthDate;
+    public LocalDate getBirthdate() {
+        return this.birthdate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthdate(LocalDate birthDate) {
+        this.birthdate = birthDate;
     }
 
     public Set<Address> getAddresses() {

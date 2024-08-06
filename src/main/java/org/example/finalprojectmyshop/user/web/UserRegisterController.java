@@ -1,7 +1,7 @@
 package org.example.finalprojectmyshop.user.web;
 
 import jakarta.validation.Valid;
-import org.example.finalprojectmyshop.user.models.dtos.UserRegisterDTO;
+import org.example.finalprojectmyshop.user.models.dtos.imports.UserRegisterDTO;
 import org.example.finalprojectmyshop.user.models.entities.enums.UserRole;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -46,7 +46,7 @@ public class UserRegisterController {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userRegisterDTO", data);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserRegisterDTO", bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterDTO", bindingResult);
 
             return "redirect:/users/register";
         }
@@ -54,7 +54,7 @@ public class UserRegisterController {
         if (!data.getPassword().equals(data.getConfirmPassword())) {
             // TODO handle error
             redirectAttributes.addFlashAttribute("userRegisterDTO", data);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserRegisterDTO", bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterDTO", bindingResult);
 
             return "redirect:/users/register";
         }

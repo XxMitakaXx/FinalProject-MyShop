@@ -1,4 +1,5 @@
 .align-container {
+    background: #f8f8f8;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -15,6 +16,7 @@ h1 {
 .favorite-products-container {
     min-height: 30em;
     width: 100%;
+    background: var(--primary-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -94,6 +96,7 @@ h1 {
     height: 30em;
     width: 60em;
     background: var(--primary-color);
+    border: 1px solid #f1f1f1;
     box-shadow: 2px 2px 5px #cbcbcb;
     border-radius: 0.6em;
     display: flex;

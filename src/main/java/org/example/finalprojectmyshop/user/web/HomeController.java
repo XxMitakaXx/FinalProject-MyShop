@@ -19,7 +19,6 @@ public class HomeController {
 
     public HomeController(CategoryService categoryService) {
         this.categoryService = categoryService;
-
     }
 
     @GetMapping("/")

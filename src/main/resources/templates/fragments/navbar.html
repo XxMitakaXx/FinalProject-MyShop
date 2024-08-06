@@ -26,27 +26,33 @@
                 <a class="context-label" th:href="@{/users-orders}">View Clients Orders</a>
             </li>
             <li class="context-link">
-                <a class="context-label">My profile</a>
+                <a class="context-label" th:href="@{/edit-user}">Edit user</a>
             </li>
             <li class="context-link">
-                <a class="context-label">My cards</a>
+                <a class="context-label" th:href="@{/delete-user}">Delete user</a>
             </li>
-            <li class="context-link">
-                <a class="context-label">My warranties</a>
-            </li>
-            <li class="context-link">
-                <a class="context-label">My reviews</a>
-            </li>
-            <li class="context-link">
-                <a class="context-label">Addresses for delivery</a>
-            </li>
-            <li class="context-link">
-                <form
-                        th:action="@{/users/logout}"
-                        th:method="post">
-                    <button class="context-label" type="submit">Logout</button>
-                </form>
-            </li>
+<!--            <li class="context-link">-->
+<!--                <a class="context-label">My profile</a>-->
+<!--            </li>-->
+<!--            <li class="context-link">-->
+<!--                <a class="context-label">My cards</a>-->
+<!--            </li>-->
+<!--            <li class="context-link">-->
+<!--                <a class="context-label">My warranties</a>-->
+<!--            </li>-->
+<!--            <li class="context-link">-->
+<!--                <a class="context-label">My reviews</a>-->
+<!--            </li>-->
+<!--            <li class="context-link">-->
+<!--                <a class="context-label">Addresses for delivery</a>-->
+<!--            </li>-->
+<!--            <li class="context-link">-->
+<!--                <form-->
+<!--                        th:action="@{/users/logout}"-->
+<!--                        th:method="post">-->
+<!--                    <button class="context-label" type="submit">Logout</button>-->
+<!--                </form>-->
+<!--            </li>-->
         </ul>
     </div>
 
@@ -75,18 +81,18 @@
             <li class="context-link">
                 <a th:href="@{/user-profile}" class="context-label">My profile</a>
             </li>
-            <li class="context-link">
-                <a class="context-label">My cards</a>
-            </li>
-            <li class="context-link">
-                <a class="context-label">My warranties</a>
-            </li>
+<!--            <li class="context-link">-->
+<!--                <a class="context-label">My cards</a>-->
+<!--            </li>-->
+<!--            <li class="context-link">-->
+<!--                <a class="context-label">My warranties</a>-->
+<!--            </li>-->
             <li class="context-link">
                 <a th:href="@{/user-reviews}" class="context-label">My reviews</a>
             </li>
-            <li class="context-link">
-                <a class="context-label">Addresses for delivery</a>
-            </li>
+<!--            <li class="context-link">-->
+<!--                <a class="context-label">Addresses for delivery</a>-->
+<!--            </li>-->
             <li class="context-link">
                 <form
                     th:action="@{/users/logout}"

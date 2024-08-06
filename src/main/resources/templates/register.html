@@ -1,13 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
     <link rel="stylesheet" th:href="@{/css/register-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/search-bar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/cart-styles.css}">
+    <link rel="stylesheet" th:href="@{/css/profile-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/second-navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/categories-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/suggest-product-by-category-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/footer-styles.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script th:src="@{/js/adminContext.js}" defer></script>
+    <script th:src="@{/js/profileContext.js}" defer></script>
+    <script th:src="@{/js/cartContext.js}" defer></script>
+    <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
     <title>My Shop</title>
 </head>
 <body>
+    <nav th:replace="~{fragments/navbar}"></nav>
+    <nav th:replace="~{fragments/second-navbar}"></nav>
+    <nav th:replace="~{fragments/categories-navbar}"></nav>
+
     <div class="form-container">
         <h1>Register</h1>
 
@@ -25,116 +42,88 @@
                             type="text"
                             id="input-first-name"
                             placeholder="First Name">
+                    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></div>
                 </div>
-
-                <small th:if="${#fields.hasErrors('firstName')}" id="firstNameLengthError"
-                       th:errorclass="error"
-                        class="first-name-length-error" th:class="${#fields.hasErrors('firstName')}" th:error="*{firstName}">First name length must be between 2 and 20 characters!</small>
 
                 <div class="collect-data-container">
                     <label for="input-last-name">Last Name</label>
                     <input
                             th:field="*{lastName}"
-                            th:errorclass="error"
                             name="input-last-name"
                             type="text"
                             id="input-last-name"
                             placeholder="Last Name">
-                </div>
 
-                <small th:if="${#fields.hasErrors('lastName')}" id="lastNameLengthError"
-                       class="last-name-length-error">Last name must be between 2 and 20 characters!</small>
+                    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></div>
+                </div>
             </div>
 
             <div class="collect-data-container">
                 <label for="input-email">Email</label>
                 <input
                         th:field="*{email}"
-                        th:errorclass="error"
                         name="input-email"
                         type="email"
                         id="input-email"
                         placeholder="Email">
-            </div>
 
-            <small th:if="${#fields.hasErrors('email')}" id="emailUniqueError"
-                   class="email-unique-error">This is associated with other account!</small>
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
+            </div>
 
             <div class="collect-name-container">
                 <div class="collect-data-container">
                     <label for="input-password">Password</label>
                     <input
                             th:field="*{password}"
-                            th:errorclass="error"
                             name="input-password"
                             type="password"
                             id="input-password"
                             placeholder="Password">
+
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
                 </div>
 
-                <small th:if="${#fields.hasErrors('password')}" id="passwordEmptyError"
-                       class="password-empty-error">Password must not be empty!</small>
-
                 <div class="collect-data-container">
-                    <label for="input-confirm-password">Confirm password</label>
+                    <label for="input-confirm-password">Confirm Password</label>
                     <input
                             th:field="*{confirmPassword}"
-                            th:errorclass="error"
                             name="input-confirm-password"
                             type="password"
                             id="input-confirm-password"
                             placeholder="Confirm Password">
-                </div>
 
-                <small th:if="${#fields.hasErrors('confirmPassword')}" id="notMatchingPasswordError"
-                       class="not-matching-password-error">The password must matching!</small>
+                    <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="error"></div>
+
+<!--                    <div th:if="${confirmPasswordError}" class="error">-->
+<!--                        <p>Confirm password must match the password!</p>-->
+<!--                    </div>-->
+                </div>
             </div>
 
             <div class="collect-data-container">
                 <label for="input-phone-number">Phone Number</label>
                 <input
                         th:field="*{phoneNumber}"
-                        th:errorclass="error"
                         name="input-phone-number"
                         type="tel"
                         id="input-phone-number"
                         placeholder="Phone Number">
+
+                <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="error"></div>
             </div>
 
-            <small th:if="${#fields.hasErrors('phoneNumber')}" id="phoneNumberLengthError"
-                   class="phone-number-length-error">Phone number must max 10 digits!</small>
-
             <div class="collect-data-container">
-                <label for="input-birth-date">Birth Date</label>
+                <label for="input-birth-date">Birthdate</label>
                 <input
                         th:field="*{birthDate}"
-                        th:errorclass="error"
                         name="input-birth-date"
                         type="date"
                         id="input-birth-date"
                         placeholder="Birth Date">
             </div>
 
-            <small th:if="${#fields.hasErrors('birthDate')}" id="birthDateEmptyError"
-                   class="birth-date-empty-error">Birth date must not be empty!</small>
-
-<!--            <div class="collect-data-container">-->
-<!--                <label for="input-userEntity-userRoleEntity">Role</label>-->
-<!--                <select-->
-<!--                        th:field="*{userRole}"-->
-<!--                        th:errorclass="error"-->
-<!--                        name="input-userEntity-userRoleEntity"-->
-<!--                        id="input-userEntity-userRoleEntity">-->
-<!--                    <option value="option">Select Role</option>-->
-<!--                    <option th:each="userRoleEntity: ${userRoleEntities}" th:value="${userRoleEntity}" th:text="${userRoleEntity}">Option</option>-->
-<!--                </select>-->
-<!--            </div>-->
-
-<!--            <small th:if="${#fields.hasErrors('userRole')}" id="userRoleEmptyError"-->
-<!--                   class="userEntity-userRoleEntity-empty-error">User userRoleEntity must not be empty!</small>-->
-
             <div class="collect-data-container">
-                <label for="input-userEntity-profile-picture">Image</label>
+                <label for="input-userEntity-profile-picture">Profile Picture</label>
                 <input
                         th:field="*{profilePicture}"
                         th:errorclass="error"

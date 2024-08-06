@@ -13,17 +13,17 @@
 }
 
 .add-product-container form {
-    height: 160em;
+    min-height: 160em;
     width: 40em;
     display: flex;
     flex-direction: column;
-    gap: 3em;
+    gap: 1em;
     justify-content: center;
     align-items: center;
 }
 
 .add-product-container form .collecting-data-container {
-    height: 4em;
+    min-height: 4em;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -151,11 +151,6 @@
     width: 100%;
 }
 
-.error {
-    color: red;
-    border: 2px solid red;
-}
-
 form .collecting-data-container input::placeholder {
     color: #cecece;
 }
@@ -199,8 +194,4 @@ form .collecting-data-container select:focus {
 
 .add-product-button:hover {
     background: #6262e6;
-}
-
-.error {
-
 }

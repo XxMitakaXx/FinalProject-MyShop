@@ -1,40 +1,43 @@
-package org.example.finalprojectmyshop.user.models.dtos;
+package org.example.finalprojectmyshop.user.models.dtos.imports;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
-public class UserEditProfileDataDTO {
+public class UserRegisterDTO {
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 2, max = 30)
+    @Size(min = 2, max = 20, message = "Size must be between 2 and 20!")
+    @NotBlank(message = "First name cannot be empty!")
     private String firstName;
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 2, max = 30)
+    @Size(min = 2, max = 20, message = "Size must be between 2 and 20!")
+    @NotBlank(message = "Last name cannot be empty!")
     private String lastName;
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 2, max = 30)
+    @Email(message = "Must be a well-formed email address!")
+    @NotBlank(message = "Email cannot be empty!")
     private String email;
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 2, max = 30)
+    @NotBlank(message = "Password cannot be empty!")
+    @Size(min = 2, max = 30, message = "Password must be between 2 and 30")
+    private String password;
+
+    @NotBlank(message = "Password cannot be empty!")
+    private String confirmPassword;
+
+    @Size(min = 10, max = 10, message = "Enter valid phone number!")
+    @NotBlank(message = "Phone number cannot be empty!")
     private String phoneNumber;
 
     private LocalDate birthDate;
 
-    @NotNull
     private MultipartFile profilePicture;
 
-    public UserEditProfileDataDTO() {}
+    public UserRegisterDTO() {}
 
     public String getFirstName() {
         return this.firstName;
@@ -58,6 +61,22 @@ public class UserEditProfileDataDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return this.confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getPhoneNumber() {

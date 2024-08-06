@@ -20,70 +20,70 @@
     <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
     <title>My Shop</title>
 </head>
-<body>
-    <nav th:replace="~{fragments/navbar}"></nav>
-    <nav th:replace="~{fragments/second-navbar}"></nav>
-    <nav th:replace="~{fragments/categories-navbar}"></nav>
+    <body>
+        <nav th:replace="~{fragments/navbar}"></nav>
+        <nav th:replace="~{fragments/second-navbar}"></nav>
+        <nav th:replace="~{fragments/categories-navbar}"></nav>
 
-    <h1>My Profile Info</h1>
+        <h1>My Profile Info</h1>
 
-    <div class="order-details">
-        <div class="order-detail">
-            <div class="order-detail-left-side">
-                <span class="material-symbols-outlined">person</span>
-                <p>First name</p>
+        <div class="order-details">
+            <div class="order-detail">
+                <div class="order-detail-left-side">
+                    <span class="material-symbols-outlined">person</span>
+                    <p>First name</p>
+                </div>
+
+                <p th:text="${user.firstName}"></p>
             </div>
 
-            <p th:text="${user.firstName}"></p>
-        </div>
+            <div class="order-detail">
+                <div class="order-detail-left-side">
+                    <span class="material-symbols-outlined">person</span>
+                    <p>Last name</p>
+                </div>
 
-        <div class="order-detail">
-            <div class="order-detail-left-side">
-                <span class="material-symbols-outlined">person</span>
-                <p>Last name</p>
+                <p th:text="${user.lastName}"></p>
             </div>
 
-            <p th:text="${user.lastName}"></p>
-        </div>
+            <div class="order-detail">
+                <div class="order-detail-left-side">
+                    <span class="material-symbols-outlined">alternate_email</span>
+                    <p>Email</p>
+                </div>
 
-        <div class="order-detail">
-            <div class="order-detail-left-side">
-                <span class="material-symbols-outlined">alternate_email</span>
-                <p>Email</p>
+                <p th:text="${user.email}"></p>
             </div>
 
-            <p th:text="${user.email}"></p>
-        </div>
+            <div class="order-detail">
+                <div class="order-detail-left-side">
+                    <span class="material-symbols-outlined">call</span>
+                    <p>Phone number</p>
+                </div>
 
-        <div class="order-detail">
-            <div class="order-detail-left-side">
-                <span class="material-symbols-outlined">call</span>
-                <p>Phone number</p>
+                <p th:text="${user.phoneNumber}"></p>
             </div>
 
-            <p th:text="${user.phoneNumber}"></p>
-        </div>
+            <div class="order-detail">
+                <div class="order-detail-left-side">
+                    <span class="material-symbols-outlined">celebration</span>
+                    <p>Birthdate</p>
+                </div>
 
-        <div class="order-detail">
-            <div class="order-detail-left-side">
-                <span class="material-symbols-outlined">celebration</span>
-                <p>Birth date</p>
+                <p th:text="${user.birthdate}"></p>
             </div>
 
-            <p th:text="${user.birthDate}"></p>
-        </div>
+            <div class="order-detail">
+                <div class="order-detail-left-side">
+                    <span class="material-symbols-outlined">photo</span>
+                    <p>Profile picture</p>
+                </div>
 
-        <div class="order-detail">
-            <div class="order-detail-left-side">
-                <span class="material-symbols-outlined">photo</span>
-                <p>Profile picture</p>
+                <img class="profile-picture" th:src="@{${user.profilePicture.imageUrl}}" alt="profile-picture">
             </div>
-
-            <img class="profile-picture" th:src="@{${user.profilePicture.imageUrl}}" alt="profile-picture">
+            <a th:href="@{/edit-user-profile-data}" class="user-edit-profile-button">Edit Profile Data</a>
         </div>
-        <a th:href="@{/edit-user-profile-data}" class="user-edit-profile-button">Edit Profile Data</a>
-    </div>
 
-    <footer th:replace="~{fragments/footer}"></footer>
-</body>
+        <footer th:replace="~{fragments/footer}"></footer>
+    </body>
 </html>

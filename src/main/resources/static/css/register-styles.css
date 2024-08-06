@@ -8,12 +8,13 @@
 }
 
 h1 {
+    padding: 1em 0;
     font-size: 40px;
     color: var(--secondary-color);
 }
 
 form {
-    height: 52em;
+    min-height: 52em;
     width: 40em;
     display: flex;
     flex-direction: column;
@@ -23,7 +24,7 @@ form {
 }
 
 form .collect-name-container {
-    height: 8em;
+    min-height: 8em;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -37,7 +38,7 @@ form .collect-name-container .collect-data-container input {
 }
 
 form .collect-password-container {
-    height: 8em;
+    min-height: 8em;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -52,7 +53,7 @@ form .collect-password-container .collect-data-container input {
 }
 
 form .collect-data-container {
-    height: 8em;
+    min-height: 8em;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -67,7 +68,8 @@ form .collect-data-container label {
 }
 
 form .collect-data-container input {
-    height: 56%;
+    margin-bottom: 1em;
+    height: 4em;
     width: 100%;
     border: 2px solid #cecece;
     border-radius: 0.6em;
@@ -77,9 +79,12 @@ form .collect-data-container input {
     padding: 1em;
 }
 
-.error {
-    color: red;
-    border: 2px solid red;
+form .collect-data-container input[type="file"]::file-selector-button {
+    color: var(--primary-color);
+    background: var(--secondary-color);
+    padding: 0.3em 1em;
+    border: none;
+    border-radius: 0.3em;
 }
 
 form .collect-data-container input::placeholder {
@@ -98,7 +103,7 @@ form .collect-data-container select {
 }
 
 .register-button {
-    height: 75px;
+    height: 3em;
     width: 100%;
     font-size: 20px;
     color: var(--primary-color);

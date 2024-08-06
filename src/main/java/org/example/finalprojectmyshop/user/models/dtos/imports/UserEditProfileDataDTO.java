@@ -1,41 +1,36 @@
-package org.example.finalprojectmyshop.user.models.dtos;
+package org.example.finalprojectmyshop.user.models.dtos.imports;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
-public class UserRegisterDTO {
+public class UserEditProfileDataDTO {
 
-    @Size(min = 2, max = 20)
-    @NotBlank
+    @NotEmpty(message = "Enter your first name!")
+    @Size(min = 2, max = 30, message = "Size must be between 2 and 30!")
     private String firstName;
 
-    @Size(min = 2, max = 20)
-    @NotBlank
+    @NotEmpty(message = "Enter your last name!")
+    @Size(min = 2, max = 30, message = "Size must be between 2 and 30!")
     private String lastName;
 
-    @Email
-    @NotBlank
+    @Email(message = "Must be a well-formed email address!")
+    @NotEmpty(message = "Enter your email!")
     private String email;
 
-    @NotBlank
-    private String password;
-
-    @NotBlank
-    private String confirmPassword;
-
-    @Size(max = 10)
-    @NotBlank
+    @NotEmpty(message = "Enter your phone number!")
+    @Size(min = 10, max = 10, message = "Enter valid phone number!")
     private String phoneNumber;
 
     private LocalDate birthDate;
 
     private MultipartFile profilePicture;
 
-    public UserRegisterDTO() {}
+    public UserEditProfileDataDTO() {}
 
     public String getFirstName() {
         return this.firstName;
@@ -59,22 +54,6 @@ public class UserRegisterDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return this.confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public String getPhoneNumber() {

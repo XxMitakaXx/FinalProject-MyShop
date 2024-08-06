@@ -1,0 +1,129 @@
+.form-container {
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 40px;
+    color: var(--secondary-color);
+}
+
+form.edit-user-profile-data-form {
+    height: 52em;
+    width: 40em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+form.edit-user-profile-data-form .collect-name-container {
+    height: 8em;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+form.edit-user-profile-data-form .collect-name-container .collect-data-container input {
+    height: 40%;
+}
+
+form.edit-user-profile-data-form .collect-data-container input[type="file"]::file-selector-button {
+    color: var(--primary-color);
+    background: var(--secondary-color);
+    padding: 0.3em 1em;
+    border: none;
+    border-radius: 0.3em;
+}
+
+form.edit-user-profile-data-form .collect-password-container {
+    height: 8em;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+
+}
+
+form.edit-user-profile-data-form .collect-password-container .collect-data-container input {
+    height: 40%;
+}
+
+form.edit-user-profile-data-form .collect-data-container {
+    height: 8em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+form.edit-user-profile-data-form .collect-data-container label {
+    font-size: 20px;
+    padding-bottom: 0.5em;
+    color: var(--secondary-color);
+}
+
+form.edit-user-profile-data-form .collect-data-container input {
+    height: 56%;
+    width: 100%;
+    border: 2px solid #cecece;
+    border-radius: 0.6em;
+    outline: none;
+    font-size: 16px;
+    color: var(--secondary-color);
+    padding: 1em;
+}
+
+.error {
+    color: red;
+    border: 2px solid red;
+}
+
+form.edit-user-profile-data-form .collect-data-container input::placeholder {
+    color: #cecece;
+}
+
+form.edit-user-profile-data-form .collect-data-container select {
+    height: 56%;
+    width: 100%;
+    border: 2px solid #cecece;
+    border-radius: 0.6em;
+    font-size: 16px;
+    color: var(--secondary-color);
+    padding: 0.6em;
+    outline: none;
+}
+
+.apply-changes-button {
+    height: 75px;
+    width: 100%;
+    font-size: 20px;
+    color: var(--primary-color);
+    background: var(--secondary-color);
+    border: none;
+    border-radius: 0.6em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.apply-changes-button:hover {
+    background: #6262e6;
+}
+
+.have-account-button {
+    color: var(--secondary-color);
+    font-size: 20px;
+    text-decoration: none;
+    margin: 1em;
+}

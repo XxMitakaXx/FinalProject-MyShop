@@ -44,6 +44,4 @@ public class ImagesHelperServiceImpl implements ImagesHelperService {
             ex.printStackTrace();
         }
     }
-
-
 }

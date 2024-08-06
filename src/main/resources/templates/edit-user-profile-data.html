@@ -44,63 +44,54 @@
                             type="text"
                             id="input-first-name"
                             placeholder="First Name">
-                </div>
 
-                <small th:if="${#fields.hasErrors('firstName')}" id="firstNameLengthError"
-                       th:errorclass="error"
-                       class="first-name-length-error" th:class="${#fields.hasErrors('firstName')}" th:error="*{firstName}">First name length must be between 2 and 20 characters!</small>
+<!--                    <div th:if="${emailError}" class="error"></div>-->
+                </div>
 
                 <div class="collect-data-container">
                     <label for="input-last-name">Last Name</label>
                     <input
                             th:field="*{lastName}"
-                            th:errorclass="error"
                             th:value="*{lastName}"
                             name="input-last-name"
                             type="text"
                             id="input-last-name"
                             placeholder="Last Name">
-                </div>
 
-                <small th:if="${#fields.hasErrors('lastName')}" id="lastNameLengthError"
-                       class="last-name-length-error">Last name must be between 2 and 20 characters!</small>
+                    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></div>
+                </div>
             </div>
 
             <div class="collect-data-container">
                 <label for="input-email">Email</label>
                 <input
                         th:field="*{email}"
-                        th:errorclass="error"
                         th:value="*{email}"
                         name="input-email"
                         type="email"
                         id="input-email"
                         placeholder="Email">
-            </div>
 
-            <small th:if="${#fields.hasErrors('email')}" id="emailUniqueError"
-                   class="email-unique-error">This is associated with other account!</small>
+                <div th:if="${emailError}" class="error"></div>
+            </div>
 
             <div class="collect-data-container">
                 <label for="input-phone-number">Phone Number</label>
                 <input
                         th:field="*{phoneNumber}"
-                        th:errorclass="error"
                         th:value="*{phoneNumber}"
                         name="input-phone-number"
                         type="tel"
                         id="input-phone-number"
                         placeholder="Phone Number">
-            </div>
 
-            <small th:if="${#fields.hasErrors('phoneNumber')}" id="phoneNumberLengthError"
-                   class="phone-number-length-error">Phone number must max 10 digits!</small>
+                <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="error"></div>
+            </div>
 
             <div class="collect-data-container">
                 <label for="input-birth-date">Birth Date</label>
                 <input
                         th:field="*{birthDate}"
-                        th:errorclass="error"
                         th:value="*{birthDate}"
                         name="input-birth-date"
                         type="date"
@@ -108,14 +99,10 @@
                         placeholder="Birth Date">
             </div>
 
-            <small th:if="${#fields.hasErrors('birthDate')}" id="birthDateEmptyError"
-                   class="birth-date-empty-error">Birth date must not be empty!</small>
-
             <div class="collect-data-container">
                 <label for="input-userEntity-profile-picture">Image</label>
                 <input
                         th:field="*{profilePicture}"
-                        th:errorclass="error"
                         th:value="*{profilePicture}"
                         name="input-userEntity-profile-picture"
                         type="file"

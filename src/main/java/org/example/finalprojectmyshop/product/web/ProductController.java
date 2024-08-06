@@ -69,8 +69,8 @@ public class ProductController {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addProductDTO", addProductDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.AddProductDTO", bindingResult);
-            return "redirect:/";
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addProductDTO", bindingResult);
+            return "redirect:/add-product";
         }
 
 

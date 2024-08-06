@@ -127,6 +127,7 @@ h1 {
     height: 30em;
     width: 60em;
     background: var(--primary-color);
+    border: 1px solid #f1f1f1;
     box-shadow: 2px 2px 5px #cbcbcb;
     border-radius: 0.6em;
     display: flex;

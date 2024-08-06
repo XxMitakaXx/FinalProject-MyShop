@@ -181,6 +181,11 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
+    @Override
+    public void deleteOrder(long id) {
+        this.orderRepository.deleteById(id);
+    }
+
     private UserOrderDTO toUserOrderDTO(Order order) {
         UserOrderDTO userOrderDTO = new UserOrderDTO();
 

@@ -24,6 +24,7 @@ public class Address {
     @Column(nullable = false)
     private String address;
 
+    @Column(nullable = false)
     private double sum;
 
     public Address() {}

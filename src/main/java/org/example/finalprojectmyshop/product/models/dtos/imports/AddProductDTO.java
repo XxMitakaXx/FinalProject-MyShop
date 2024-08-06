@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddProductDTO {
-    @Size(min = 2, max = 50)
-    @NotBlank
+    @Size(min = 2, max = 50, message = "Size must be between 2 and 50!")
+    @NotBlank(message = "Enter product name")
     private String name;
 
-    @Positive
-    private Double price;
+    @Positive(message = "Price must be positive number!")
+    private double price;
 
     private List<AddProductPropertyDTO> properties;
 
@@ -27,10 +27,9 @@ public class AddProductDTO {
 
     private MultipartFile fifthImage;
 
-    @NotNull
     private SecondaryCategoryName secondaryCategoryName;
 
-    @PositiveOrZero
+    @Positive(message = "Quantity must be positive number or zero!")
     private int quantity;
 
     public AddProductDTO() {

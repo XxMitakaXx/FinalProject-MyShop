@@ -81,7 +81,7 @@ h1 {
 }
 
 .founded-products-container {
-    margin-top: 4em;
+    margin: 4em 0;
     min-height: 30em;
     width: 80em;
 }
@@ -133,4 +133,20 @@ h1 {
     position: absolute;
     top: 1em;
     right: 1em;
+}
+
+.not-founded-products-container {
+    margin: 4em 0;
+    min-height: 30em;
+    width: 80em;
+    border: 1px solid #f1f1f1;
+    box-shadow: 2px 2px 5px #cbcbcb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.not-founded-products-container h2 {
+    font-size: 3em;
+    color: var(--secondary-color);
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
@@ -8,6 +8,8 @@
     <title>My Shop</title>
 </head>
 <body>
+
+
     <div class="login-container">
         <h1>Login</h1>
 
@@ -24,6 +26,8 @@
                         type="text"
                         id="email"
                         placeholder="Email">
+
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
             </div>
             <div class="data-collecting-container">
                 <label for="password">Password</label>

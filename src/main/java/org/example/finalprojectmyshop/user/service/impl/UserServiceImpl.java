@@ -4,7 +4,9 @@ import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
 import org.example.finalprojectmyshop.mediaFile.service.ImagesHelperService;
 import org.example.finalprojectmyshop.order.models.entities.CartEntity;
 import org.example.finalprojectmyshop.order.repository.CartRepository;
-import org.example.finalprojectmyshop.user.models.dtos.UserRegisterDTO;
+import org.example.finalprojectmyshop.user.models.dtos.exports.UserDetailsDTO;
+import org.example.finalprojectmyshop.user.models.dtos.imports.UserEditProfileDataDTO;
+import org.example.finalprojectmyshop.user.models.dtos.imports.UserRegisterDTO;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 import org.example.finalprojectmyshop.user.models.entities.UserRoleEntity;
 import org.example.finalprojectmyshop.user.models.entities.enums.UserRole;
@@ -17,9 +19,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -67,15 +69,67 @@ public class UserServiceImpl implements UserService {
     public UserEntity findUserByEmail(String email) {
         Optional<UserEntity> optional = this.userRepository.findByEmail(email);
 
-        if (optional.isEmpty()) {
-            // TODO throw error
-        }
+        return optional.orElseGet(UserEntity::new);
 
-        return optional.get();
     }
 
     @Override
     public Set<UserEntity> findAllUsers() {
         return new HashSet<>(this.userRepository.findAll());
+    }
+
+    @Override
+    public void editUserProfileData(UserEntity user, UserEditProfileDataDTO newData) throws IOException {
+        user.setFirstName(newData.getFirstName());
+        user.setLastName(newData.getLastName());
+        user.setEmail(newData.getEmail());
+        user.setPhoneNumber(newData.getPhoneNumber());
+        user.setBirthdate(newData.getBirthDate());
+
+        if (!newData.getProfilePicture().isEmpty()) {
+            MediaFileEntity mediaFileEntity = this.imagesHelperService.saveImage(newData.getProfilePicture());
+            user.setProfilePicture(mediaFileEntity);
+        }
+
+        this.save(user);
+    }
+
+    @Override
+    public List<UserEntity> findUsersByEmail(String email) {
+        return this.userRepository.findUsersByEmail(email);
+    }
+
+    @Override
+    public UserDetailsDTO findUserDetails(long id) {
+        Optional<UserEntity> optional = this.userRepository.findById(id);
+
+        if (optional.isPresent()) {
+            UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
+            UserEntity userEntity = optional.get();
+
+            userDetailsDTO.setFirstName(userEntity.getFirstName());
+            userDetailsDTO.setLastName(userEntity.getLastName());
+            userDetailsDTO.setEmail(userEntity.getEmail());
+            userDetailsDTO.setPhoneNumber(userEntity.getPhoneNumber());
+            userDetailsDTO.setBirthdate(userEntity.getBirthdate());
+            userDetailsDTO.setProfilePictureUrl(userEntity.getProfilePicture().getImageUrl());
+
+            return userDetailsDTO;
+        }
+
+        return new UserDetailsDTO();
+    }
+
+    @Override
+    public UserEntity findUserEntity(long id) {
+        Optional<UserEntity> optional = this.userRepository.findById(id);
+
+        return optional.orElseGet(UserEntity::new);
+
+    }
+
+    @Override
+    public void deleteUserEntity(long id) {
+        this.userRepository.deleteById(id);
     }
 }

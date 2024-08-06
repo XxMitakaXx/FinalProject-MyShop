@@ -29,6 +29,8 @@ public class Sale {
     )
     private Set<Product> products;
 
+    private double sum;
+
     @Column(nullable = false)
     private String cityVillage;
 
@@ -69,6 +71,14 @@ public class Sale {
 
     public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    public double getSum() {
+        return this.sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
     }
 
     public String getCityVillage() {

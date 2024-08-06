@@ -1,4 +1,4 @@
-package org.example.finalprojectmyshop.user.models.dtos;
+package org.example.finalprojectmyshop.user.models.dtos.imports;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -7,11 +7,10 @@ import jakarta.validation.constraints.Size;
 
 public class UserLoginDTO {
 
-    @Email
-    @Size(min = 2, max = 30)
+    @Email(message = "Must be a well-formed email address!")
+    @NotBlank(message = "Email cannot be empty!")
     private String email;
 
-    @NotNull
     @NotBlank
     @Size(min = 2, max = 30)
     private String password;

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" th:href="@{/css/edit-user-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/search-bar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{css/cart-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/profile-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/second-navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/categories-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/suggest-product-by-category-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer-styles.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script th:src="@{/js/adminContext.js}" defer></script>
+    <script th:src="@{/js/profileContext.js}" defer></script>
+    <script th:src="@{/js/cartContext.js}" defer></script>
+    <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
+    <title>My Shop</title>
+  </head>
+  <body>
+    <nav th:replace="~{fragments/navbar}"></nav>
+    <nav th:replace="~{fragments/second-navbar}"></nav>
+    <nav th:replace="~{fragments/categories-navbar}"></nav>
+
+    <h1>Edit User/s</h1>
+
+    <form
+            th:method="get"
+            th:action="@{/find-users-for-edit}"
+            th:object="${searchUserForEditDTO}">
+      <div class="search">
+        <button type="submit">
+          <span class="search-icon material-symbols-outlined">search</span>
+        </button>
+
+        <input
+                th:field="*{email}"
+                class="search-input"
+                type="search"
+                placeholder="Search">
+      </div>
+    </form>
+
+    <div th:if="${foundedUsersForEditDTO.getFoundedUsersForEditDTOS().size() > 0}" class="founded-users-container">
+      <div th:each="user : ${foundedUsersForEditDTO.foundedUsersForEditDTOS}" class="founded-user">
+        <img th:src="@{${user.profilePictureUrl}}" class="founded-user-profile-picture" alt="user">
+        <h2 th:text="${user.firstName + ' ' + user.lastName}" class="founded-user-name"></h2>
+        <a th:href="@{/edit-user-details/{id}(id=${user.id})}" class="view-user-details-button">View Details</a>
+        <a class="edit-user-button" th:href="@{/edit-user-details/{id}(id=${user.id})}">Edit User</a>
+      </div>
+    </div>
+
+    <div th:unless="${foundedUsersForEditDTO.getFoundedUsersForEditDTOS().size() > 0}" class="not-founded-users-container">
+      <h2>Search for user/s</h2>
+    </div>
+
+    <footer th:replace="~{fragments/footer}"></footer>
+  </body>
+</html>

@@ -1,11 +1,12 @@
 package org.example.finalprojectmyshop.user.web;
 
 import jakarta.validation.Valid;
-import org.example.finalprojectmyshop.mediaFile.models.entities.MediaFileEntity;
 import org.example.finalprojectmyshop.mediaFile.service.ImagesHelperService;
-import org.example.finalprojectmyshop.user.models.dtos.UserEditProfileDataDTO;
+import org.example.finalprojectmyshop.user.models.dtos.imports.UserEditProfileDataDTO;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
+import org.example.finalprojectmyshop.user.service.AdvancedUserService;
 import org.example.finalprojectmyshop.user.service.UserService;
+import org.example.finalprojectmyshop.user.service.ValidateUserHelperService;
 import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +22,12 @@ public class UserController {
 
     private final UserHelperService userHelperService;
     private final UserService userService;
-    private final ImagesHelperService imagesHelperService;
+    private final ValidateUserHelperService validateUserHelperService;
 
-    public UserController(UserHelperService userHelperService, UserService userService, ImagesHelperService imagesHelperService) {
+    public UserController(UserHelperService userHelperService, UserService userService, ValidateUserHelperService validateUserHelperService) {
         this.userHelperService = userHelperService;
         this.userService = userService;
-        this.imagesHelperService = imagesHelperService;
+        this.validateUserHelperService = validateUserHelperService;
     }
 
     @GetMapping("/user-profile")
@@ -48,7 +49,7 @@ public class UserController {
         userEditProfileDataDTO.setLastName(user.getLastName());
         userEditProfileDataDTO.setEmail(user.getEmail());
         userEditProfileDataDTO.setPhoneNumber(user.getPhoneNumber());
-        userEditProfileDataDTO.setBirthDate(user.getBirthDate());
+        userEditProfileDataDTO.setBirthDate(user.getBirthdate());
 
         model.addAttribute("user", user);
         model.addAttribute("userEditProfileDataDTO", userEditProfileDataDTO);
@@ -65,24 +66,13 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userEditProfileDataDTO", data);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserEditProfileDataDTO", bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userEditProfileDataDTO", bindingResult);
 
             return "redirect:/edit-user-profile-data";
         }
 
         UserEntity user = this.userHelperService.getUser();
-        user.setFirstName(data.getFirstName());
-        user.setLastName(data.getLastName());
-        user.setEmail(data.getEmail());
-        user.setPhoneNumber(data.getPhoneNumber());
-        user.setBirthDate(data.getBirthDate());
-
-        if (!data.getProfilePicture().isEmpty()) {
-            MediaFileEntity mediaFileEntity = this.imagesHelperService.saveImage(data.getProfilePicture());
-            user.setProfilePicture(mediaFileEntity);
-        }
-
-        this.userService.save(user);
+        this.userService.editUserProfileData(user, data);
 
         return "redirect:/user-profile";
     }

@@ -15,4 +15,5 @@ public interface OrderService {
     Set<UserOrderDTO> findUsersOrders();
     String orderLogisticStatus(UserOrderDTO userOrderDTO);
     Order findOrderEntity(long id);
+    void deleteOrder(long id);
 }

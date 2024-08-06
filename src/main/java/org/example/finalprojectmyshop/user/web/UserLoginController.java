@@ -1,8 +1,11 @@
 package org.example.finalprojectmyshop.user.web;
 
-import org.example.finalprojectmyshop.user.models.dtos.UserLoginDTO;
+import jakarta.validation.Valid;
+import org.apache.el.parser.BooleanNode;
+import org.example.finalprojectmyshop.user.models.dtos.imports.UserLoginDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +29,14 @@ public class UserLoginController {
 
     @GetMapping("/login-error")
     public String viewLoginError(
-            Model model,
+            @Valid UserLoginDTO data,
+            BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("showErrorMessage", true);
 
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginDTO", data);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
+        }
         return "redirect:/users/login";
     }
 
