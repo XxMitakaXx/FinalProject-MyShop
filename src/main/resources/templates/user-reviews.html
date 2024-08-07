@@ -25,7 +25,7 @@
     <nav th:replace="~{fragments/second-navbar}"></nav>
     <nav th:replace="~{fragments/categories-navbar}"></nav>
 
-    <h1>My Reviews</h1>
+    <h1 th:text="#{my_reviews}">My Reviews</h1>
 
     <div th:if="${userReviews.size() > 0}" class="reviews-container">
         <div class="review-container">
@@ -55,7 +55,7 @@
                     </div>
 
                     <a class="review-product-container" th:href="@{/product-details/{id}(id=*{review.product.id})}">
-                        <img class="review-product-image" th:src="@{${review.product.imageUrl}}" alt="product">
+                        <img class="review-product-image" th:src="@{${review.product.imageUrl}}" th:alt="#{product}">
                         <h2 class="review-product-name" th:text="${review.product.name}"></h2>
                     </a>
 
@@ -72,7 +72,7 @@
     </div>
 
     <div th:unless="${userReviews.size() > 0}" class="user-have-no-reviews-container">
-        <h2>You have no reviews</h2>
+        <h2 th:text="#{you_have_no_reviews}">You have no reviews</h2>
     </div>
 
     <footer th:replace="~{fragments/footer}"></footer>

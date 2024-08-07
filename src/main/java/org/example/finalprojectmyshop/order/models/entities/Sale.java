@@ -18,9 +18,6 @@ public class Sale {
     @Column(nullable = false)
     private Date date;
 
-    @ManyToOne
-    private UserEntity buyer;
-
     @ManyToMany
     @JoinTable(
             name = "sales_products",
@@ -57,13 +54,6 @@ public class Sale {
         this.date = date;
     }
 
-    public UserEntity getBuyer() {
-        return this.buyer;
-    }
-
-    public void setBuyer(UserEntity buyer) {
-        this.buyer = buyer;
-    }
 
     public Set<Product> getProducts() {
         return this.products;

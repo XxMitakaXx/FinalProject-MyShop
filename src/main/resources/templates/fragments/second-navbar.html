@@ -1,7 +1,7 @@
 <nav class="second-navbar">
     <ul class="navbar-links">
         <li class="navbar-link categories-link">
-            <button class="categories-button" id="categories-button" type="button">
+            <button class="categories-button" id="categories-button" type="button" th:text="#{second_nav_bar_categories}">
                 Categories
                 <!-- <div class="animation-container">
                     <div class="animation-row" id="first-row"></div>
@@ -11,10 +11,10 @@
             </button>
         </li>
         <li class="navbar-link">
-            <a href="#">Promotions</a>
+            <a href="#" th:text="#{second_nav_bar_promotions}">Promotions</a>
         </li>
         <li class="navbar-link">
-            <a href="#">Our Shops</a>
+            <a href="#"  th:text="#{second_nav_bar_our_shops}">Our Shops</a>
         </li>
     </ul>
 </nav>

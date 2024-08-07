@@ -25,7 +25,7 @@
     <nav th:replace="~{fragments/second-navbar}"></nav>
     <nav th:replace="~{fragments/categories-navbar}"></nav>
 
-    <h1>Delete User/s</h1>
+    <h1 th:text="#{delete_user}">Delete User/s</h1>
 
     <form
             th:method="get"
@@ -40,7 +40,7 @@
                     th:field="*{email}"
                     class="search-input"
                     type="search"
-                    placeholder="Search">
+                    th:placeholder="#{search_bar}">
         </div>
     </form>
 
@@ -48,19 +48,19 @@
         <div th:each="user : ${foundedUsersForDeleteDTO.foundedUsersForDeleteDTO}" class="founded-user">
             <img th:src="@{${user.profilePictureUrl}}" class="founded-user-profile-picture" alt="user">
             <h2 th:text="${user.firstName + ' ' + user.lastName}" class="founded-user-name"></h2>
-            <a th:href="@{/user-details/{id}(id=${user.id})}" class="view-user-details-button">View Details</a>
+            <a th:href="@{/user-details/{id}(id=${user.id})}" class="view-user-details-button" th:text="#{view_details}">View Details</a>
 
 
             <form
                     th:method="delete"
                     th:action="@{/delete-user/{id}(id=${user.id})}">
-                <button class="delete-user-button" type="submit">Delete User</button>
+                <button class="delete-user-button" type="submit" th:text="#{delete_user_button_text}">Delete User</button>
             </form>
         </div>
     </div>
 
     <div th:unless="${foundedUsersForDeleteDTO.getFoundedUsersForDeleteDTO().size() > 0}" class="not-founded-users-container">
-        <h2>Search for user/s</h2>
+        <h2 th:text="#{search_for_users}">Search for user/s</h2>
     </div>
 
     <footer th:replace="~{fragments/footer}"></footer>

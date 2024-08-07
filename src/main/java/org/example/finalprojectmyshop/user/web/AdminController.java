@@ -1,10 +1,12 @@
 package org.example.finalprojectmyshop.user.web;
 
+import org.example.finalprojectmyshop.order.models.dtos.imports.SearchProductByNameDTO;
 import org.example.finalprojectmyshop.user.models.dtos.exports.UserDetailsDTO;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
@@ -14,6 +16,11 @@ public class AdminController {
 
     public AdminController(UserService userService) {
         this.userService = userService;
+    }
+
+    @ModelAttribute("searchProductByNameDTO")
+    public SearchProductByNameDTO searchProductByNameDTO() {
+        return new SearchProductByNameDTO();
     }
 
     @GetMapping("/admin-view-user-profile-data/{id}")

@@ -17,7 +17,7 @@
     <script th:src="@{/js/profileContext.js}" defer></script>
     <script th:src="@{/js/cartContext.js}" defer></script>
     <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
-    <script th:src="@{/js/collecting-order-data.js}" defer></script>
+<!--    <script th:src="@{/js/collecting-order-data.js}" defer></script>-->
     <title>My Shop</title>
 </head>
 <body>
@@ -25,7 +25,7 @@
     <nav th:replace="~{fragments/second-navbar}"></nav>
     <nav th:replace="~{fragments/categories-navbar}"></nav>
 
-    <h1>Info for order</h1>
+    <h1 th:text="#{info_for_order}">Info for order</h1>
 
     <form
             th:method="post"
@@ -36,85 +36,96 @@
 
             <div class="collect-personal-data-container">
                 <div class="collecting-data-container">
-                    <label for="first-and-last-name">First and last name</label>
+                    <label for="first-and-last-name" th:text="#{first_and_last_name}">First and last name</label>
                     <input
                             th:field="*{firstAndLastName}"
                             name="first-and-last-name"
                             type="text"
                             id="first-and-last-name"
-                            placeholder="First and last names">
+                            th:placeholder="#{first_and_last_name}">
+
+                    <div th:if="${#fields.hasErrors('firstAndLastName')}" th:errors="*{firstAndLastName}" class="error"></div>
+
                 </div>
 
                 <div class="collecting-data-container">
-                    <label for="phone-number">Phone</label>
+                    <label for="phone-number" th:text="#{phone_number}">Phone</label>
                     <input
                             th:field="*{phoneNumber}"
                             name="phone-number"
                             type="text"
                             id="phone-number"
-                            placeholder="Phone number">
+                            th:placeholder="#{phone_number}">
+
+                    <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="error"></div>
+
                 </div>
             </div>
 
             <div class="collecting-data-container collecting-location">
-                <label for="city">City/Village</label>
+                <label for="city" th:text="#{city_village}">City/Village</label>
 
                 <input
                         th:field="*{cityVillage}"
                         name="city"
                         id="city"
                         type="text"
-                        placeholder="City/Village">
+                        th:placeholder="#{city_village}">
 
-                <label for="address">Address</label>
+                <div th:if="${#fields.hasErrors('cityVillage')}" th:errors="*{cityVillage}" class="error"></div>
+
+                <label for="address" th:text="#{address}">Address</label>
 
                 <!-- TODO -->
-                <select class="user-address">
-                    <option value="">Choose Address</option>
-                    <option th:each="address : ${@userHelperService.user.addresses}" th:value="${address.address}" th:text="${address.address}">Address 1</option>
-                </select>
+<!--                <select class="user-address">-->
+<!--                    <option value="">Choose Address</option>-->
+<!--                    <option th:each="address : ${@userHelperService.user.addresses}" th:value="${address.address}" th:text="${address.address}">Address 1</option>-->
+<!--                </select>-->
 
                 <input
                         th:field="*{address}"
                         name="address"
                         id="address"
                         type="text"
-                        placeholder="Address">
+                        th:placeholder="#{address}">
+
+                <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="error"></div>
             </div>
 
             <div class="collecting-data-container">
-                <label for="collecting-place">Collecting place</label>
+                <label for="collecting-place" th:text="#{collecting_place}">Collecting place</label>
 
                 <select
                         th:field="*{collectingPlace}"
                         name="collecting-place"
                         id="collecting-place">
-                    <option value="">Choose Collecting Place</option>
+                    <option value="" th:text="#{choose_collecting_place}">Choose Collecting Place</option>
                     <option th:each="collectingPlace : ${collectingPlaces}" th:value="${collectingPlace}" th:text="${collectingPlace.value}">At your address</option>
                 </select>
             </div>
 
                 <div class="order-info-container">
                     <div class="pricing-content">
-                        <h2><span class="material-symbols-outlined">payments</span> Due sum</h2>
+<!--                        <h2><span class="material-symbols-outlined">payments</span> Due sum</h2>-->
+                        <h2 th:text="#{capital_due_sum}">Due Sum</h2>
                         <div class="prices-container">
                             <div class="price-container">
-                                <p>Products price</p>
+                                <p th:text="#{price_for_products_in_shopping_cart}">Products price</p>
                                 <p th:text="${cartDataDTO.getPriceForProducts()}">2000.00 LV.</p>
                             </div>
                             <div class="price-container">
-                                <p>Delivery price</p>
+                                <p th:text="#{price_for_delivery_in_shopping_cart}">Delivery price</p>
                                 <p th:text="${cartDataDTO.getPriceForDelivery()}">0.00 LV.</p>
                             </div>
                         </div>
 
                         <div class="sum-container">
-                            <p>SUM: price</p>
+                            <p th:text="#{SUM}">SUM: </p>
                             <p th:text="${cartDataDTO.getPriceForSum()}">2000.00 LV.</p>
                         </div>
                     </div>
 
-                    <button type="submit">FINISH ORDER</button>
+                    <button type="submit" th:text="#{finish_order}">FINISH ORDER</button>
                 </div>
         </div>
     </form>

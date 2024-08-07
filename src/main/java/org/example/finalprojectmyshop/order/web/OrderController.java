@@ -5,6 +5,7 @@ import org.example.finalprojectmyshop.order.models.dtos.exports.CartDataDTO;
 import org.example.finalprojectmyshop.order.models.dtos.exports.UserOrderDTO;
 import org.example.finalprojectmyshop.order.models.dtos.exports.UserOrderDetailsDTO;
 import org.example.finalprojectmyshop.order.models.dtos.imports.OrderDetailsDTO;
+import org.example.finalprojectmyshop.order.models.dtos.imports.SearchProductByNameDTO;
 import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.order.models.enums.CollectingPlace;
 import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
@@ -41,6 +42,11 @@ public class OrderController {
     @ModelAttribute("orderDetailsDTO")
     public OrderDetailsDTO orderDetailsDTO() {
         return new OrderDetailsDTO();
+    }
+
+    @ModelAttribute("searchProductByNameDTO")
+    public SearchProductByNameDTO searchProductByNameDTO() {
+        return new SearchProductByNameDTO();
     }
 
     @GetMapping("/collecting-order-details")

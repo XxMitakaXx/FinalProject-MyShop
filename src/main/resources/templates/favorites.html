@@ -25,7 +25,7 @@
         <nav th:replace="~{fragments/categories-navbar}"></nav>
 
         <div class="align-container">
-            <h1>My Favorite Products</h1>
+            <h1 th:text="#{my_favorite_products}">My Favorite Products</h1>
 
             <div th:if="${userFavorites.size() > 0}" class="favorite-products-container">
                 <a th:each="product : ${userFavorites}" th:href="@{/product-details/{id}(id=*{product.id})}" class="favorite-product">
@@ -55,7 +55,7 @@
             </div>
 
             <div th:unless="${userFavorites.size() > 0}" class="user-have-no-favorite-products-container">
-                <h2>You have no favorite products</h2>
+                <h2 th:text="#{you_have_no_favorite_products}">You have no favorite products</h2>
             </div>
         </div>
 

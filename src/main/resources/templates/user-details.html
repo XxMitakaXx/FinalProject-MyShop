@@ -25,13 +25,13 @@
         <nav th:replace="~{fragments/second-navbar}"></nav>
         <nav th:replace="~{fragments/categories-navbar}"></nav>
 
-        <h1>User Profile Info</h1>
+        <h1 th:text="#{user_profile_info}">User Profile Info</h1>
 
         <div class="user-details">
             <div class="user-detail">
                 <div class="user-detail-left-side">
                     <span class="material-symbols-outlined">person</span>
-                    <p>First name</p>
+                    <p th:text="#{first_name}">First name</p>
                 </div>
 
                 <p th:text="${userDetailsDTO.firstName}"></p>
@@ -40,7 +40,7 @@
             <div class="user-detail">
                 <div class="user-detail-left-side">
                     <span class="material-symbols-outlined">person</span>
-                    <p>Last name</p>
+                    <p th:text="#{last_name}">Last name</p>
                 </div>
 
                 <p th:text="${userDetailsDTO.lastName}"></p>
@@ -49,7 +49,7 @@
             <div class="user-detail">
                 <div class="user-detail-left-side">
                     <span class="material-symbols-outlined">alternate_email</span>
-                    <p>Email</p>
+                    <p th:text="#{email}">Email</p>
                 </div>
 
                 <p th:text="${userDetailsDTO.email}"></p>
@@ -58,7 +58,7 @@
             <div class="user-detail">
                 <div class="user-detail-left-side">
                     <span class="material-symbols-outlined">call</span>
-                    <p>Phone number</p>
+                    <p th:text="#{phone_number}">Phone number</p>
                 </div>
 
                 <p th:text="${userDetailsDTO.phoneNumber}"></p>
@@ -67,7 +67,7 @@
             <div class="user-detail">
                 <div class="user-detail-left-side">
                     <span class="material-symbols-outlined">celebration</span>
-                    <p>Birthdate</p>
+                    <p th:text="#{birthdate}">Birthdate</p>
                 </div>
 
                 <p th:text="${userDetailsDTO.birthdate}"></p>
@@ -76,10 +76,10 @@
             <div class="user-detail">
                 <div class="user-detail-left-side">
                     <span class="material-symbols-outlined">photo</span>
-                    <p>Profile picture</p>
+                    <p th:text="#{profile_picture}">Profile picture</p>
                 </div>
 
-                <img class="profile-picture" th:src="@{${userDetailsDTO.profilePictureUrl}}" alt="profile-picture">
+                <img class="profile-picture" th:src="@{${userDetailsDTO.profilePictureUrl}}" th:alt="#{profile_picture}">
             </div>
         </div>
 

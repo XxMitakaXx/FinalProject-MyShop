@@ -14,23 +14,19 @@ import java.util.Set;
 
 public class OrderDetailsDTO {
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 2, max = 50)
+    @NotEmpty(message = "Enter your names!")
+    @Size(min = 2, max = 50, message = "The entered names must be with length of 2 to 50!")
     private String firstAndLastName;
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 10, max = 10)
+    @NotEmpty(message = "Enter your phone number!")
+    @Size(min = 10, max = 10, message = "Invalid phone number with valid length!")
     private String phoneNumber;
 
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Enter your city/village!")
     private String cityVillage;
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 2, max = 50)
+    @NotEmpty(message = "Enter address for delivery!")
+    @Size(min = 2, max = 50, message = "Address name length must be between 2 and 50!")
     private String address;
 
     @NotNull

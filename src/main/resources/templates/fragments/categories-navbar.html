@@ -1,149 +1,149 @@
 <nav th:fragment="categories-navbar" class="categories-navbar" id="categories-navbar">
     <div class="category">
-        <h2>Games and free time</h2>
+        <h2 th:text="#{categories-gaming-and-free-time-category-name}">Games and free time</h2>
         <ul>
             <li>
-                <a class="" href="#">
+                <a th:href="@{/find-products-by-category/GAMING}">
                     <span class="material-symbols-outlined">joystick</span>
-                    <h3>Gaming</h3>
+                    <h3 th:text="#{categories-gaming-category-name}">Gaming</h3>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/BOARD_GAMES_AND_PUZZLES}">
                     <span class="material-symbols-outlined">extension</span>
-                    <h3>Board games and puzzles</h3>
+                    <h3 th:text="#{categories-board-games-and-puzzles-category-name}">Board games and puzzles</h3>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/MUSIC_AND_MOVIES}">
                     <span class="material-symbols-outlined">movie</span>
-                    <h3>Music and movies</h3>
+                    <h3 th:text="#{categories-music-and-movies-category-name}">Music and movies</h3>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/MERCHANDISE}">
                     <span class="material-symbols-outlined">apparel</span>
-                    <h3>Merchandise</h3>
+                    <h3 th:text="#{categories-merchandice-category-name}">Merchandise</h3>
                 </a>
             </li>
         </ul>
     </div>
 
     <div class="category">
-        <h2>Bookstore</h2>
+        <h2 th:text="#{categories-bookstore-category-name}">Bookstore</h2>
         <ul>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/BOOKS_AND_TEXTBOOKS}">
                     <span class="material-symbols-outlined">menu_book</span>
-                    <h3>Books and textbooks</h3>
+                    <h3 th:text="#{categories-books_and_textbooks-category-name}">Books and textbooks</h3>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/SUPPLIES_AND_GIFTS}">
                     <span class="material-symbols-outlined">draw</span>
-                    <h3>Supplies and gifts</h3>
+                    <h3 th:text="#{categories_supplies_and_gifts_category_name}">Supplies and gifts</h3>
                 </a>
             </li>
         </ul>
     </div>
 
     <div class="category">
-        <h2>Electronics and computers</h2>
+        <h2 th:text="#{categories_electronics_and_computers_category_name}">Electronics and computers</h2>
         <ul>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/LAPTOPS_PC_AND_MONITORS}">
                     <span class="material-symbols-outlined">laptop_mac</span>
-                    <h3>Laptops, PC and monitors</h3>
+                    <h3 th:text="#{categories_laptops_PC_and_monitors_category_name}">Laptops, PC and monitors</h3>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/AUDIO_AND_HIFI}">
                     <span class="material-symbols-outlined">play_circle</span>
-                    <h3>Audio and HI-FI</h3>
+                    <h3 th:text="#{categories_audio_and_HI-FI-category-name}">Audio and HI-FI</h3>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/SMARTPHONES_AND_SMART_DEVICES}">
                     <span class="material-symbols-outlined">smartphone</span>
-                    <h3>Smartphones and smartdevices</h3>
+                    <h3 th:text="#{categories_smartphones_and_smart_device-category_name}">Smartphones and smartdevices</h3>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/TV_FOTO_AND_VIDEO}">
                     <span class="material-symbols-outlined">tv</span>
-                    <h3>TV, Foto and video</h3>
+                    <h3 th:text="#{categories_TV_foto_and_video-category-name}">TV, Foto and video</h3>
                 </a>
             </li>
         </ul>
     </div>
 
     <div class="category">
-        <h2>Kids and mothers</h2>
+        <h2 th:text="#{categories_kids_and_mothers_category_name}">Kids and mothers</h2>
         <ul>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/TOYS}">
                     <span class="material-symbols-outlined">smart_toy</span>
-                    <h3>Toys</h3>
+                    <h3 th:text="#{categories_toys_category_name}">Toys</h3>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/MOTHERS_AND_BABY}">
                     <span class="material-symbols-outlined">stroller</span>
-                    <h3>Mothers and baby</h3>
+                    <h3 th:text="#{categories_mother_and_baby_category_name}">Mothers and baby</h3>
                 </a>
             </li>
         </ul>
     </div>
 
     <div class="category">
-        <h2>Health and beauty</h2>
+        <h2 th:text="#{categories_health_and_beauty_category_name}">Health and beauty</h2>
         <ul>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/COSMETICS_AND_PERFUMES}">
                     <span class="material-symbols-outlined">health_and_beauty</span>
-                    <h3>Cosmetics and perfumes</h3>
+                    <h3 th:text="#{categories_cosmetics_and_perfumes_category_name}">Cosmetics and perfumes</h3>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/PHARMACY_AND_NUTRITIONAL_SUPPLEMENTS}">
                     <span class="material-symbols-outlined">medication_liquid</span>
-                    <h3>Pharmacy and nutritional supplements</h3>
+                    <h3 th:text="#{categories_pharmacy_and_nutritional_supplements_category_name}">Pharmacy and nutritional supplements</h3>
                 </a>
             </li>
         </ul>
     </div>
 
     <div class="category">
-        <h2>Sport and outdoor</h2>
+        <h2 th:text="#{categories_sport_and_outdoor_category_name}">Sport and outdoor</h2>
         <ul>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/SPORT_AND_CAMPING}">
                     <span class="material-symbols-outlined">sports_basketball</span>
-                    <h3>Sport and camping</h3>
+                    <h3 th:text="#{categories_sport_and_camping_category_name}">Sport and camping</h3>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/LIFESTYLE_AND_FITNESS}">
                     <span class="material-symbols-outlined">water_bottle</span>
-                    <h3>Lifestyle and fitness</h3>
+                    <h3 th:text="#{categories_lifestyle_and_fitness_category_name}">Lifestyle and fitness</h3>
                 </a>
             </li>
         </ul>
     </div>
 
     <div class="category">
-        <h2>Home and garden</h2>
+        <h2 th:text="#{categories_home_and_garden_category_name}">Home and garden</h2>
         <ul>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/FOR_HOME_AND_OFFICE}">
                     <span class="material-symbols-outlined">cottage</span>
-                    <h3>For home and office</h3>
+                    <h3 th:text="#{categories_for_home_and_office_category_name }">For home and office</h3>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/find-products-by-category/SMALL_ELECTRICAL_APPLIANCES}">
                     <span class="material-symbols-outlined">draw</span>
-                    <h3>Small electrical appliances</h3></a>
+                    <h3 th:text="#{categories_small_electrical_appliances_category_name}">Small electrical appliances</h3></a>
             </li>
         </ul>
     </div>

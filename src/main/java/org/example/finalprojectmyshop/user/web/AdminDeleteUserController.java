@@ -1,5 +1,6 @@
 package org.example.finalprojectmyshop.user.web;
 
+import org.example.finalprojectmyshop.order.models.dtos.imports.SearchProductByNameDTO;
 import org.example.finalprojectmyshop.user.models.dtos.exports.FoundedUsersForDeleteDTO;
 import org.example.finalprojectmyshop.user.models.dtos.imports.SearchUserForDeleteDTO;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
@@ -20,6 +22,11 @@ public class AdminDeleteUserController {
     public AdminDeleteUserController(AdvancedUserService advancedUserService, UserService userService) {
         this.advancedUserService = advancedUserService;
         this.userService = userService;
+    }
+
+    @ModelAttribute("searchProductByNameDTO")
+    public SearchProductByNameDTO searchProductByNameDTO() {
+        return new SearchProductByNameDTO();
     }
 
     @GetMapping("/delete-user")

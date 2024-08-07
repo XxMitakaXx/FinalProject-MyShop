@@ -1,7 +1,9 @@
 package org.example.finalprojectmyshop.user.web;
 
 import jakarta.validation.Valid;
+import org.example.finalprojectmyshop.order.models.dtos.imports.SearchProductByNameDTO;
 import org.example.finalprojectmyshop.user.models.dtos.exports.FoundedUsersForEditDTO;
+import org.example.finalprojectmyshop.user.models.dtos.imports.AdminEditUserProfileDataDTO;
 import org.example.finalprojectmyshop.user.models.dtos.imports.SearchUserForEditDTO;
 import org.example.finalprojectmyshop.user.models.dtos.imports.UserEditProfileDataDTO;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -26,6 +29,11 @@ public class AdminEditUserDataController {
     public AdminEditUserDataController(AdvancedUserService advancedUserService, UserService userService) {
         this.advancedUserService = advancedUserService;
         this.userService = userService;
+    }
+
+    @ModelAttribute("searchProductByNameDTO")
+    public SearchProductByNameDTO searchProductByNameDTO() {
+        return new SearchProductByNameDTO();
     }
 
     @GetMapping("/edit-user")
@@ -64,19 +72,19 @@ public class AdminEditUserDataController {
 
     @GetMapping("/admin-edit-user-profile-data/{id}")
     public String viewAdminEditUserProfileData(@PathVariable("id") long id, Model model) {
-        UserEditProfileDataDTO userEditProfileDataDTO = new UserEditProfileDataDTO();
+        AdminEditUserProfileDataDTO adminEditUserProfileDataDTO = new AdminEditUserProfileDataDTO();
 
         this.userService.findUserEntity(id);
         UserEntity user = this.userService.findUserEntity(id);
 
-        userEditProfileDataDTO.setFirstName(user.getFirstName());
-        userEditProfileDataDTO.setLastName(user.getLastName());
-        userEditProfileDataDTO.setEmail(user.getEmail());
-        userEditProfileDataDTO.setPhoneNumber(user.getPhoneNumber());
-        userEditProfileDataDTO.setBirthDate(user.getBirthdate());
+        adminEditUserProfileDataDTO.setFirstName(user.getFirstName());
+        adminEditUserProfileDataDTO.setLastName(user.getLastName());
+        adminEditUserProfileDataDTO.setEmail(user.getEmail());
+        adminEditUserProfileDataDTO.setPhoneNumber(user.getPhoneNumber());
+        adminEditUserProfileDataDTO.setBirthDate(user.getBirthdate());
 
         model.addAttribute("user", user);
-        model.addAttribute("userEditProfileDataDTO", userEditProfileDataDTO);
+        model.addAttribute("adminEditUserProfileDataDTO", adminEditUserProfileDataDTO);
         model.addAttribute("id", id);
 
         return "admin-edit-user-profile-data";
@@ -85,7 +93,7 @@ public class AdminEditUserDataController {
     @PutMapping("/admin-edit-user-profile-data/{id}")
     public String processAdminEditUserProfileData(
             @PathVariable("id") long id,
-            @Valid UserEditProfileDataDTO data,
+            @Valid AdminEditUserProfileDataDTO data,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) throws IOException {
@@ -98,7 +106,7 @@ public class AdminEditUserDataController {
         }
 
         UserEntity user = this.userService.findUserEntity(id);
-        this.userService.editUserProfileData(user, data);
+        this.userService.adminEditUserProfileData(user, data);
 
         return "redirect:/admin-view-user-profile-data/" + id;
     }

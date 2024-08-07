@@ -25,23 +25,24 @@
     <nav th:replace="~{fragments/categories-navbar}"></nav>
 
     <div class="form-container">
-        <h1>Add Review</h1>
+        <h1 th:text="#{add_review}">Add Review</h1>
 
         <form
             th:method="post"
             th:action="@{/add-review/{id}(id=${product.id})}"
             th:object="${addReviewDTO}">
             <div class="collect-data-container">
-                <label for="input-title">Title</label>
+                <label for="input-title" th:text="#{title}">Title</label>
                 <input
                         th:field="*{title}"
                         name="input-title"
                         type="text"
-                        id="input-title">
+                        id="input-title"
+                        th:placeholder="#{title}">
             </div>
 
             <div class="collect-data-container">
-                <label for="input-rating">Rating</label>
+                <label for="input-rating" th:text="#{rating}">Rating</label>
                 <input
                         th:field="*{rating}"
                         name="input-rating"
@@ -53,13 +54,13 @@
             </div>
 
             <div class="collect-data-container">
-                <label for="input-description">Description</label>
+                <label for="input-description" th:text="#{description}">Description</label>
                 <input
                         th:field="*{description}"
                         name="input-description"
                         type="text"
                         id="input-description"
-                        placeholder="Description">
+                        th:placeholder="#{description}">
             </div>
 
             <input
@@ -68,7 +69,7 @@
                     type="hidden"
                     id="input-id">
 
-            <button class="add-review-button" type="submit">Add Review</button>
+            <button class="add-review-button" type="submit" th:text="#{add_review}">Add Review</button>
         </form>
     </div>
 

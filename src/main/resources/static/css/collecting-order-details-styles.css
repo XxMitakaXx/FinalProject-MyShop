@@ -11,14 +11,14 @@ h1 {
 }
 
 .content-container {
-    height: 45em;
+    min-height: 45em;
     width: 80em;
     display: flex;
     position: relative;
 }
 
 .order-data-collecting-container {
-    height: 100%;
+    min-height: 30em;
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -26,7 +26,7 @@ h1 {
 }
 
 .order-data-collecting-container .collect-personal-data-container {
-    height: 8em;
+    min-height: 8em;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -36,7 +36,7 @@ h1 {
 }
 
 .order-data-collecting-container .collect-personal-data-container .collecting-data-container {
-    height: 6em;
+    min-height: 6em;
 }
 
 .order-data-collecting-container .collect-personal-data-container .collecting-data-container label {
@@ -58,7 +58,7 @@ h1 {
 }
 
 .collecting-data-container {
-    height: 20em;
+    min-height: 20em;
     width: 100%;
     /* border: 1px solid; */
     display: flex;
@@ -72,7 +72,7 @@ h1 {
 }
 
 .collecting-data-container input {
-    height: 100%;
+    height: 3.5em;
     width: 100%;
     border: 2px solid #cecece;
     /* border: none; */
@@ -96,6 +96,10 @@ h1 {
     color: var(--secondary-color);
     padding: 1em;
     cursor: pointer;
+}
+
+.collecting-location {
+    gap: 3em;
 }
 
 .order-info-container {

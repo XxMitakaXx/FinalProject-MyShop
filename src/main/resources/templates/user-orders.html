@@ -24,7 +24,7 @@
     <nav th:replace="~{fragments/second-navbar}"></nav>
     <nav th:replace="~{fragments/categories-navbar}"></nav>
 
-    <h1>My Orders</h1>
+    <h1 th:text="#{my_orders}">My Orders</h1>
 
     <div th:if="${userOrders.size() > 0}" class="user-orders">
         <div th:each="order : ${userOrders}" class="user-order">
@@ -32,7 +32,7 @@
                 <div class="order-data">
                     <div class="order-data-left-side">
                         <span class="material-symbols-outlined">schedule</span>
-                        <p>Date of registration</p>
+                        <p th:text="#{date_of_registration}">Date of registration</p>
                     </div>
                     <p th:text="${order.orderDate}"></p>
                 </div>
@@ -40,7 +40,7 @@
                 <div class="order-data">
                     <div class="order-data-left-side">
                         <span class="material-symbols-outlined">payments</span>
-                        <p>Due sum</p>
+                        <p th:text="#{due_sum}">Due sum</p>
                     </div>
                     <p th:text="${order.priceForSum + ' LV.'}"></p>
                 </div>
@@ -48,19 +48,19 @@
                 <div class="order-data">
                     <div class="order-data-left-side">
                         <span class="material-symbols-outlined">search</span>
-                        <p>Status</p>
+                        <p th:text="#{status}">Status</p>
                     </div>
                     <p th:text="${order.logisticStatus}"></p>
                 </div>
 
                 <div class="order-data">
-                    <p>Delivered on</p>
+                    <p th:text="#{delivered_on}">Delivered on</p>
                     <p th:if="${order.isPicked()}" th:text="${order.deliveryDate}"></p>
-                    <p th:unless="${order.isPicked()}">Will be delivered soon</p>
+                    <p th:unless="${order.isPicked()}" th:text="#{will_be_delivered_soon}">Will be delivered soon</p>
                 </div>
             </div>
 
-            <a th:href="@{/user-order-details/{id}(id=${order.id})}" class="view-order-button">View Order</a>
+            <a th:href="@{/user-order-details/{id}(id=${order.id})}" class="view-order-button" th:text="#{view_order}">View Order</a>
         </div>
     </div>
 

@@ -26,24 +26,24 @@
 <nav th:replace="~{fragments/categories-navbar}"></nav>
 
 <div class="form-container">
-    <h1>Edit Profile Data</h1>
+    <h1 th:text="#{edit_user_profile_data_button_text}">Edit User Profile</h1>
 
     <form
             th:action="@{${'/admin-edit-user-profile-data/' + id}}"
             th:method="put"
-            th:object="${userEditProfileDataDTO}"
+            th:object="${adminEditUserProfileDataDTO}"
             enctype="multipart/form-data"
             class="edit-user-profile-data-form">
         <div class="collect-name-container">
             <div class="collect-data-container">
-                <label for="input-first-name">First Name</label>
+                <label for="input-first-name" th:text="#{capital_first_name}">First Name</label>
                 <input
                         th:field="*{firstName}"
                         th:value="*{firstName}"
                         name="input-first-name"
                         type="text"
                         id="input-first-name"
-                        placeholder="First Name">
+                        th:placeholder="#{capital_first_name}">
             </div>
 
             <small th:if="${#fields.hasErrors('firstName')}" id="firstNameLengthError"
@@ -51,15 +51,14 @@
                    class="first-name-length-error" th:class="${#fields.hasErrors('firstName')}" th:error="*{firstName}">First name length must be between 2 and 20 characters!</small>
 
             <div class="collect-data-container">
-                <label for="input-last-name">Last Name</label>
+                <label for="input-last-name" th:text="#{capital_last_name}">Last Name</label>
                 <input
                         th:field="*{lastName}"
-                        th:errorclass="error"
                         th:value="*{lastName}"
                         name="input-last-name"
                         type="text"
                         id="input-last-name"
-                        placeholder="Last Name">
+                        th:placeholder="#{capital_last_name}">
             </div>
 
             <small th:if="${#fields.hasErrors('lastName')}" id="lastNameLengthError"
@@ -67,49 +66,48 @@
         </div>
 
         <div class="collect-data-container">
-            <label for="input-email">Email</label>
+            <label for="input-email" th:text="#{email}">Email</label>
             <input
                     th:field="*{email}"
                     th:value="*{email}"
                     name="input-email"
                     type="email"
                     id="input-email"
-                    placeholder="Email">
+                    th:placeholder="#{email}">
         </div>
 
         <small th:if="${#fields.hasErrors('email')}" id="emailUniqueError"
                class="email-unique-error">This is associated with other account!</small>
 
         <div class="collect-data-container">
-            <label for="input-phone-number">Phone Number</label>
+            <label for="input-phone-number" th:text="#{capital_phone_number}">Phone Number</label>
             <input
                     th:field="*{phoneNumber}"
                     th:value="*{phoneNumber}"
                     name="input-phone-number"
                     type="tel"
                     id="input-phone-number"
-                    placeholder="Phone Number">
+                    th:placeholder="#{capital_phone_number}">
         </div>
 
         <small th:if="${#fields.hasErrors('phoneNumber')}" id="phoneNumberLengthError"
                class="phone-number-length-error">Phone number must max 10 digits!</small>
 
         <div class="collect-data-container">
-            <label for="input-birth-date">Birth Date</label>
+            <label for="input-birth-date" th:text="#{birthdate}">Birthdate</label>
             <input
                     th:field="*{birthDate}"
                     th:value="*{birthDate}"
                     name="input-birth-date"
                     type="date"
-                    id="input-birth-date"
-                    placeholder="Birth Date">
+                    id="input-birth-date">
         </div>
 
         <small th:if="${#fields.hasErrors('birthDate')}" id="birthDateEmptyError"
                class="birth-date-empty-error">Birth date must not be empty!</small>
 
         <div class="collect-data-container">
-            <label for="input-userEntity-profile-picture">Image</label>
+            <label for="input-userEntity-profile-picture" th:text="#{capital_profile_picture}">Profile Picture</label>
             <input
                     th:field="*{profilePicture}"
                     th:value="*{profilePicture}"
@@ -118,7 +116,7 @@
                     id="input-userEntity-profile-picture">
         </div>
 
-        <button class="apply-changes-button" type="submit">Apply Changes</button>
+        <button class="apply-changes-button" type="submit" th:text="#{apply_changes}">Apply Changes</button>
     </form>
 </div>
 

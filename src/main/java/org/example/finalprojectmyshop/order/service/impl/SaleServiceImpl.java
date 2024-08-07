@@ -37,9 +37,6 @@ public class SaleServiceImpl implements SaleService {
 
         sale.setDate(new Date());
 
-        UserEntity user = this.userService.findUserByEmail(order.getBuyer().getEmail());
-        sale.setBuyer(user);
-
         order.getProducts().forEach(product -> sale.getProducts().add(product));
         sale.setSum(order.getPriceForSum());
         sale.setCityVillage(order.getCityVillage());
@@ -66,7 +63,6 @@ public class SaleServiceImpl implements SaleService {
 
         saleInfoDTO.setId(sale.getId());
         saleInfoDTO.setDate(sale.getDate());
-        saleInfoDTO.setBuyerEmail(sale.getBuyer().getEmail());
 
         sale.getProducts()
                 .forEach(product -> {

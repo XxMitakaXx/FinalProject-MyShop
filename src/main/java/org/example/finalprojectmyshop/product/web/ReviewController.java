@@ -1,6 +1,7 @@
 package org.example.finalprojectmyshop.product.web;
 
 import jakarta.validation.Valid;
+import org.example.finalprojectmyshop.order.models.dtos.imports.SearchProductByNameDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ReviewDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddReviewDTO;
 import org.example.finalprojectmyshop.product.models.entities.Product;
@@ -30,6 +31,10 @@ public class ReviewController {
         return new AddReviewDTO();
     }
 
+    @ModelAttribute("searchProductByNameDTO")
+    public SearchProductByNameDTO searchProductByNameDTO() {
+        return new SearchProductByNameDTO();
+    }
 
     @GetMapping("/add-review/{id}")
     private String viewAddReview(@PathVariable("id") long id, Model model) {

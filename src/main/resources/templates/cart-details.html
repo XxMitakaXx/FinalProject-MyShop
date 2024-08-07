@@ -29,29 +29,33 @@
     th:action="@{#}"
     th:object="${cartData}">
     <div class="order-data-container">
-        <h2>Data for order</h2>
+        <h2 th:text="#{data_for_order}">Data for order</h2>
 
         <div class="price-for-product-container">
-            <p>Price for product:</p>
+            <p th:text="#{price_for_products_in_shopping_cart}">Price for product:</p>
             <p th:text="${cartData.priceForProducts + ' LV.'}">2222.99 LV.</p>
         </div>
 
         <div class="price-for-delivery-container">
-            <p>Price for delivery:</p>
+            <p th:text="#{price_for_delivery_in_shopping_cart}">Price for delivery:</p>
             <p th:text="${cartData.priceForDelivery + ' LV.'}">10.99 LV.</p>
         </div>
 
         <div class="sum-container">
-            <p>SUM:</p>
+            <p th:text="#{SUM}">SUM:</p>
             <p class="order-info-sum-price" th:text="${cartData.priceForSum + ' LV.'}">3300.99 LV.</p>
         </div>
 
-        <a class="continue-button" th:if="${cartData.productsInCart.size > 0}" th:href="@{/collecting-order-details}"><span class="material-symbols-outlined">double_arrow</span> Continue</a>
-        <a class="continue-button-deactivated" th:unless="${cartData.productsInCart.size > 0}"><span class="material-symbols-outlined">double_arrow</span> Continue</a>
+<!--        <a class="continue-button" th:if="${cartData.productsInCart.size > 0}" th:href="@{/collecting-order-details}"><span class="material-symbols-outlined">double_arrow</span> Continue</a>-->
+<!--        <a class="continue-button-deactivated" th:unless="${cartData.productsInCart.size > 0}"><span class="material-symbols-outlined">double_arrow</span> Continue</a>-->
+
+                <a class="continue-button" th:if="${cartData.productsInCart.size > 0}" th:text="#{continue_button}">Continue</a>
+                <a class="continue-button-deactivated" th:unless="${cartData.productsInCart.size > 0}" th:text="#{continue_button}">Continue</a>
+
     </div>
 
     <div class="products-in-cart-container" >
-        <h2 class="product-title">Products in shopping cart</h2>
+        <h2 class="product-title" th:text="#{products_in_shopping_cart}">Products in shopping cart</h2>
 
         <div th:each="product : ${cartData.productsInCart}" th:if="${cartData.productsInCart.size() > 0}" class="product-in-cart-container">
             <div class="left-side-info">
@@ -92,13 +96,13 @@
                 <form
                     th:method="delete"
                     th:action="@{/delete-product-from-cart/{id}(id=${product.id})}">
-                    <button class="delete-product-button" type="submit">Delete</button>
+                    <button class="delete-product-button" type="submit" th:text="#{delete_product_from-cart_button_text}">Delete</button>
                 </form>
             </div>
         </div>
 
         <div th:if="${!(cartData.productsInCart.size() > 0)}" class="product-in-cart-container">
-            <h2>Cart is empty.</h2>
+            <h2 th:text="#{cart_is_empty}">Cart is empty</h2>
         </div>
     </div>
 </div>

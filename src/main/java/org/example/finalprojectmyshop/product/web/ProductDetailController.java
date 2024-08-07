@@ -1,5 +1,6 @@
 package org.example.finalprojectmyshop.product.web;
 
+import org.example.finalprojectmyshop.order.models.dtos.imports.SearchProductByNameDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsSecondaryCategoryDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddReviewDTO;
@@ -27,6 +28,10 @@ public class ProductDetailController {
         return new AddReviewDTO();
     }
 
+    @ModelAttribute("searchProductByNameDTO")
+    public SearchProductByNameDTO searchProductByNameDTO() {
+        return new SearchProductByNameDTO();
+    }
 
     @GetMapping("/product-details/{id}")
     public String viewProductDetails(@PathVariable("id") long id, Model model) {

@@ -24,7 +24,7 @@
     <nav th:replace="~{fragments/categories-navbar}"></nav>
 
     <div class="add-product-container">
-        <h1>Add Product</h1>
+        <h1 th:text="#{add_product}">Add Product</h1>
 
         <form
                 th:action="@{/add-product}"
@@ -33,27 +33,27 @@
                 enctype="multipart/form-data"
                 id="add-product">
             <div class="collecting-data-container">
-                <label for="name-input">Name</label>
+                <label for="name-input" th:text="#{add_product_name}">Name</label>
                 <input
                         th:field="*{name}"
                         name="name-input"
                         type="text"
                         id="name-input"
-                        placeholder="Name">
+                        th:placeholder="#{add_product_name}">
 
                 <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></div>
             </div>
 
             <div class="collecting-data-container">
-                <label for="price-input">Price</label>
+                <label for="price-input" th:text="#{add_product_price}">Price</label>
                 <input
                         th:field="*{price}"
                         name="price-input"
                         type="number"
                         min="0"
-                        step="0.1"
+                        step="0.01"
                         id="price-input"
-                        placeholder="Price">
+                        th:placeholder="#{add_product_price}">
 
                 <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error"></div>
             </div>
@@ -64,8 +64,8 @@
                         class="collecting-data-table"
                         id="collecting-data-table">
                     <tr>
-                        <th> Property</th>
-                        <th> Value</th>
+                        <th th:text="#{add_product_property}"> Property</th>
+                        <th th:text="#{add_product_value}"> Value</th>
                     </tr>
                     <tr th:each="property, itemStat : *{properties}" id="properties-table-row">
                         <td>
@@ -74,7 +74,7 @@
                                     name="property"
                                     type="text"
                                     id="property"
-                                    placeholder="Property">
+                                    th:placeholder="#{add_product_property}">
                         </td>
                         <td>
                             <input
@@ -82,14 +82,14 @@
                                     name="value"
                                     type="text"
                                     id="value"
-                                    placeholder="Value">
+                                    th:placeholder="#{add_product_value}">
                         </td>
                     </tr>
                 </table>
             </div>
 
             <div class="collecting-data-container">
-                <label>Upload Images 1</label>
+                <label th:text="#{add_product_upload_image_one}">Upload Images 1</label>
                 <div class="input-file-container">
                     <input
                             th:field="*{firstImage}"
@@ -97,12 +97,12 @@
                             type="file"
                             accept="/image/*"
                             id="first-image-input"
-                            placeholder="Upload image">
+                            th:placeholder="#{add_product_upload_image}">
                 </div>
             </div>
 
             <div class="collecting-data-container">
-                <label for="second-image-input">Upload Image 2</label>
+                <label for="second-image-input" th:text="#{add_product_upload_image_two}">Upload Image 2</label>
                 <div class="input-file-container">
                     <input
                             th:field="*{secondImage}"
@@ -110,13 +110,13 @@
                             type="file"
                             accept="/image/*"
                             id="second-image-input"
-                            placeholder="Upload image">
+                            th:placeholder="#{add_product_upload_image}">
                 </div>
             </div>
 
 
             <div class="collecting-data-container">
-                <label for="third-image-input">Upload Image 3</label>
+                <label for="third-image-input" th:text="#{add_product_upload_image_three}">Upload Image 3</label>
                 <div class="input-file-container">
                     <input
                             th:field="*{thirdImage}"
@@ -124,12 +124,12 @@
                             type="file"
                             accept="/image/*"
                             id="third-image-input"
-                            placeholder="Upload image">
+                            th:placeholder="#{add_product_upload_image}">
                 </div>
             </div>
 
             <div class="collecting-data-container">
-                <label for="fourth-image-input">Upload Image 4</label>
+                <label for="fourth-image-input" th:text="#{add_product_upload_image_four}">Upload Image 4</label>
                 <div class="input-file-container">
                     <input
                             th:field="*{fourthImage}"
@@ -137,12 +137,12 @@
                             type="file"
                             accept="/image/*"
                             id="fourth-image-input"
-                            placeholder="Upload image">
+                            th:placeholder="#{add_product_upload_image}">
                 </div>
             </div>
 
             <div class="collecting-data-container">
-                <label for="fifth-image-input">Upload Image 5</label>
+                <label for="fifth-image-input" th:text="#{add_product_upload_image_five}">Upload Image 5</label>
                 <div class="input-file-container">
                     <input
                             th:field="*{fifthImage}"
@@ -150,23 +150,23 @@
                             type="file"
                             accept="/image/*"
                             id="fifth-image-input"
-                            placeholder="Upload image">
+                            th:placeholder="#{add_product_upload_image}">
                 </div>
             </div>
 
             <div class="collecting-data-container">
-                <label for="category-input">Category</label>
+                <label for="category-input" th:text="#{add_product_category}">Category</label>
                 <select
                         th:field="*{secondaryCategoryName}"
                         name="category-input"
                         id="category-input">
-                    <option value="option">Select Category</option>
-                    <option th:each="secondaryCategory : ${secondaryCategories}" th:value="${secondaryCategory}" th:text="${secondaryCategory.name}">Select Category</option>
+                    <option value="option" th:text="#{add_product_select_category}">Select Category</option>
+                    <option th:each="secondaryCategory : ${secondaryCategories}" th:value="${secondaryCategory}" th:text="${secondaryCategory.name()}">Select Category</option>
                 </select>
             </div>
 
             <div class="collecting-data-container">
-                <label for="price-input">Quantity</label>
+                <label for="price-input" th:text="#{add_product_quantity}">Quantity</label>
                 <input
                         th:field="*{quantity}"
                         name="quantity-input"

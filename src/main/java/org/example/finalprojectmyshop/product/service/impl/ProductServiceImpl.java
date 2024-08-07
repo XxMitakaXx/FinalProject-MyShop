@@ -294,6 +294,30 @@ public class ProductServiceImpl implements ProductService {
         return foundedProductsForDeleteDTO;
     }
 
+    @Override
+    public FoundedProductsByNameDTO findProductsByName(String name) {
+        Set<Product> products = this.productRepository.findProductsByName(name);
+
+        FoundedProductsByNameDTO foundedProductsByNameDTO = new FoundedProductsByNameDTO();
+
+        products.forEach(product -> {
+            FoundedProductByNameDTO foundedProductByNameDTO = this.toFoundedProductForDeleteDTO(product);
+            foundedProductsByNameDTO.getFoundedProductByNameDTO().add(foundedProductByNameDTO);
+        });
+
+        return foundedProductsByNameDTO;
+    }
+
+    private FoundedProductByNameDTO toFoundedProductForDeleteDTO(Product product) {
+        FoundedProductByNameDTO foundedProductByNameDTO = new FoundedProductByNameDTO();
+
+        foundedProductByNameDTO.setId(product.getId());
+        foundedProductByNameDTO.setName(product.getName());
+        foundedProductByNameDTO.setImageUrl(product.getMainImage().getImageUrl());
+
+        return foundedProductByNameDTO;
+    }
+
     private FoundedProductForDeleteDTO toFoundedProductFroDeleteDTO(Product product) {
         FoundedProductForDeleteDTO foundedProductForDeleteDTO = new FoundedProductForDeleteDTO();
 

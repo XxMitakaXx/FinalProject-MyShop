@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/css/index.css}" />
+  <link rel="stylesheet" th:href="@{/css/search-products-styles.css}" />
+  <link rel="stylesheet" th:href="@{/css/navbar-styles.css}" />
+  <link rel="stylesheet" th:href="@{/css/search-bar-styles.css}" />
+  <link rel="stylesheet" th:href="@{/css/admin-context-styles.css}" />
+  <link rel="stylesheet" th:href="@{css/cart-styles.css}" />
+  <link rel="stylesheet" th:href="@{/css/profile-context-styles.css}" />
+  <link rel="stylesheet" th:href="@{/css/second-navbar-styles.css}" />
+  <link rel="stylesheet" th:href="@{/css/categories-styles.css}" />
+  <link rel="stylesheet" th:href="@{/css/suggest-product-by-category-styles.css}" />
+  <link rel="stylesheet" th:href="@{/css/footer-styles.css}" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <script th:src="@{/js/adminContext.js}" defer></script>
+  <script th:src="@{/js/profileContext.js}" defer></script>
+  <script th:src="@{/js/cartContext.js}" defer></script>
+  <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
+  <title>My Shop</title>
+  <link rel="stylesheet" href="../static/css/delete-product-styles.css">
+</head>
+  <body>
+    <nav th:replace="~{fragments/navbar}"></nav>
+    <nav th:replace="~{fragments/second-navbar}"></nav>
+    <nav th:replace="~{fragments/categories-navbar}"></nav>
+
+    <h1 th:text="#{search_for_product}">Search Product/s</h1>
+
+    <form
+            th:method="get"
+            th:action="@{/find-products-by-name}"
+            th:object="${searchProductByNameDTO}">
+      <div class="search">
+        <button type="submit">
+          <span class="search-icon material-symbols-outlined">search</span>
+        </button>
+
+        <input
+                th:field="*{name}"
+                class="search-input"
+                type="search"
+                th:placeholder="#{search_bar}">
+      </div>
+    </form>
+
+    <div th:if="${products.foundedProductByNameDTO.size > 0}" class="founded-products-container">
+      <div th:each="product : ${products.foundedProductByNameDTO}" class="founded-product">
+        <img th:src="@{${product.imageUrl}}" class="founded-product-image" alt="product">
+        <h2 th:text="${product.name}" class="founded-product-name"></h2>
+        <a th:href="@{/product-details/{id}(id=${product.id})}" class="view-product-details-button" th:text="#{view_details}">View Details</a>
+      </div>
+    </div>
+
+    <div th:unless="${products.foundedProductByNameDTO.size > 0}" class="not-founded-products-container">
+      <h2 th:text="#{search_for_product}">Search for product/s</h2>
+    </div>
+
+    <footer th:replace="~{fragments/footer}"></footer>
+  </body>
+</html>

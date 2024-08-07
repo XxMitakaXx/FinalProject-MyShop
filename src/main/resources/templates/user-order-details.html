@@ -24,13 +24,13 @@
     <nav th:replace="~{fragments/second-navbar}"></nav>
     <nav th:replace="~{fragments/categories-navbar}"></nav>
 
-    <h1>Order Details</h1>
+    <h1 th:text="#{order_details}">Order Details</h1>
 
     <div class="order-details">
         <div class="order-detail">
             <div class="order-detail-left-side">
                 <span class="material-symbols-outlined">person</span>
-                <p>First and last name</p>
+                <p th:text="#{first_and_last_name}">First and last name</p>
             </div>
 
             <p th:text="${orderDetails.firstAndLastName}"></p>
@@ -39,7 +39,7 @@
         <div class="order-detail">
             <div class="order-detail-left-side">
                 <span class="material-symbols-outlined">call</span>
-                <p>Phone number</p>
+                <p th:text="#{phone_number}">Phone number</p>
             </div>
 
             <p th:text="${orderDetails.phoneNumber}"></p>
@@ -48,7 +48,7 @@
         <div class="order-detail">
             <div class="order-detail-left-side">
                 <span class="material-symbols-outlined">location_city</span>
-                <p>City/Village</p>
+                <p th:text="#{city_village}">City/Village</p>
             </div>
 
             <p th:text="${orderDetails.cityVillage}"></p>
@@ -57,7 +57,7 @@
         <div class="order-detail">
             <div class="order-detail-left-side">
                 <span class="material-symbols-outlined">pin_drop</span>
-                <p>Delivery address</p>
+                <p th:text="#{delivery_address}">Delivery address</p>
             </div>
 
             <p th:text="${orderDetails.address}"></p>
@@ -66,7 +66,7 @@
         <div class="order-detail">
             <div class="order-detail-left-side">
                 <span class="material-symbols-outlined">local_shipping</span>
-                <p>Collecting place</p>
+                <p th:text="#{collecting_place}">Collecting place</p>
             </div>
 
             <p th:text="${orderDetails.collectingPlace.value}"></p>
@@ -75,7 +75,7 @@
         <div class="order-detail">
             <div class="order-detail-left-side">
                 <span class="material-symbols-outlined">payments</span>
-                <p>Price for products</p>
+                <p th:text="#{price_for_products}">Price for products</p>
             </div>
 
             <p th:text="${orderDetails.priceForProducts + ' LV.'}"></p>
@@ -84,7 +84,7 @@
         <div class="order-detail">
             <div class="order-detail-left-side">
                 <span class="material-symbols-outlined">payments</span>
-                <p>Price for delivery</p>
+                <p th:text="#{price_for_delivery}">Price for delivery</p>
             </div>
 
             <p th:text="${orderDetails.priceForDelivery + ' LV.'}"></p>
@@ -93,7 +93,7 @@
         <div class="order-detail">
             <div class="order-detail-left-side">
                 <span class="material-symbols-outlined">payments</span>
-                <p>Sum</p>
+                <p th:text="#{sum}">Sum</p>
             </div>
 
             <p th:text="${orderDetails.priceForSum + ' LV.'}"></p>
@@ -102,7 +102,7 @@
         <div class="order-detail">
             <div class="order-detail-left-side">
                 <span class="material-symbols-outlined">schedule</span>
-                <p>Date of registration</p>
+                <p th:text="#{date_of_registration}">Date of registration</p>
             </div>
 
             <p th:text="${orderDetails.orderDate}"></p>
@@ -111,7 +111,7 @@
         <div class="order-detail">
             <div class="order-detail-left-side">
                 <span class="material-symbols-outlined">schedule</span>
-                <p>Date of delivery</p>
+                <p th:text="#{date_of_delivery}">Date of delivery</p>
             </div>
 
             <p th:text="${orderDetails.deliveryDate}"></p>

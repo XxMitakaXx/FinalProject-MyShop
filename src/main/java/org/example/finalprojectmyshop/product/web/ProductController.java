@@ -1,16 +1,20 @@
 package org.example.finalprojectmyshop.product.web;
 
 import jakarta.validation.Valid;
+import org.example.finalprojectmyshop.order.models.dtos.imports.SearchProductByNameDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.CategoryAndRandomProductsDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.FavoriteProductDTO;
+import org.example.finalprojectmyshop.product.models.dtos.exports.FoundedProductByNameDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.FoundedProductsForDeleteDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductPropertyDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.SearchProductForDeleteDTO;
+import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
 import org.example.finalprojectmyshop.product.service.AdvancedProductService;
 import org.example.finalprojectmyshop.product.service.CategoryService;
 import org.example.finalprojectmyshop.product.service.ProductService;
+import org.example.finalprojectmyshop.product.service.SecondaryCategoryService;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
 import org.springframework.stereotype.Controller;
@@ -30,13 +34,15 @@ public class ProductController {
     private final CategoryService categoryService;
     private final UserHelperService userHelperService;
     private final UserService userService;
+    private final SecondaryCategoryService secondaryCategoryService;
 
-    public ProductController(ProductService productService, AdvancedProductService advancedProductService, CategoryService categoryService, UserHelperService userHelperService, UserService userService) {
+    public ProductController(ProductService productService, AdvancedProductService advancedProductService, CategoryService categoryService, UserHelperService userHelperService, UserService userService, SecondaryCategoryService secondaryCategoryService) {
         this.productService = productService;
         this.advancedProductService = advancedProductService;
         this.categoryService = categoryService;
         this.userHelperService = userHelperService;
         this.userService = userService;
+        this.secondaryCategoryService = secondaryCategoryService;
     }
 
     @ModelAttribute("addProductDTO")
@@ -53,6 +59,11 @@ public class ProductController {
     @ModelAttribute("secondaryCategories")
     public SecondaryCategoryName[] categories() {
         return SecondaryCategoryName.values();
+    }
+
+    @ModelAttribute("searchProductByNameDTO")
+    public SearchProductByNameDTO searchProductByNameDTO() {
+        return new SearchProductByNameDTO();
     }
 
     @GetMapping("/add-product")
@@ -146,5 +157,14 @@ public class ProductController {
         this.productService.deleteProductFromFavorites(id);
 
         return "redirect:/user-favorites";
+    }
+
+    @GetMapping("/find-products-by-category/{categoryName}")
+    public String processFindProductsByCategory(@PathVariable("categoryName") SecondaryCategoryName categoryName, Model model) {
+        Set<FoundedProductByNameDTO> products = this.secondaryCategoryService.getProductsByCategory(categoryName);
+
+        model.addAttribute("products", products);
+
+        return "search-products-by-category";
     }
 }

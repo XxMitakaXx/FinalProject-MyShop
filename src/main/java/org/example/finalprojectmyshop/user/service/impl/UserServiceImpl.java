@@ -5,6 +5,7 @@ import org.example.finalprojectmyshop.mediaFile.service.ImagesHelperService;
 import org.example.finalprojectmyshop.order.models.entities.CartEntity;
 import org.example.finalprojectmyshop.order.repository.CartRepository;
 import org.example.finalprojectmyshop.user.models.dtos.exports.UserDetailsDTO;
+import org.example.finalprojectmyshop.user.models.dtos.imports.AdminEditUserProfileDataDTO;
 import org.example.finalprojectmyshop.user.models.dtos.imports.UserEditProfileDataDTO;
 import org.example.finalprojectmyshop.user.models.dtos.imports.UserRegisterDTO;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
@@ -82,16 +83,42 @@ public class UserServiceImpl implements UserService {
     public void editUserProfileData(UserEntity user, UserEditProfileDataDTO newData) throws IOException {
         user.setFirstName(newData.getFirstName());
         user.setLastName(newData.getLastName());
-        user.setEmail(newData.getEmail());
         user.setPhoneNumber(newData.getPhoneNumber());
-        user.setBirthdate(newData.getBirthDate());
 
-        if (!newData.getProfilePicture().isEmpty()) {
+        if (newData.getBirthDate() != null) {
+            user.setBirthdate(newData.getBirthDate());
+        }
+
+
+        if (newData.getProfilePicture().getBytes().length != 0) {
             MediaFileEntity mediaFileEntity = this.imagesHelperService.saveImage(newData.getProfilePicture());
             user.setProfilePicture(mediaFileEntity);
         }
 
         this.save(user);
+    }
+
+    @Override
+    public void adminEditUserProfileData(UserEntity user, AdminEditUserProfileDataDTO newData) throws IOException {
+        Optional<UserEntity> optional = this.userRepository.findByEmail(newData.getEmail());
+
+        if (optional.isEmpty() || optional.get().getId() ==  user.getId()) {
+            user.setFirstName(newData.getFirstName());
+            user.setLastName(newData.getLastName());
+            user.setEmail(newData.getEmail());
+            user.setPhoneNumber(newData.getPhoneNumber());
+
+            if (newData.getBirthDate() != null) {
+                user.setBirthdate(newData.getBirthDate());
+            }
+
+            if (newData.getProfilePicture().getBytes().length != 0) {
+                MediaFileEntity mediaFileEntity = this.imagesHelperService.saveImage(newData.getProfilePicture());
+                user.setProfilePicture(mediaFileEntity);
+            }
+
+            this.save(user);
+        }
     }
 
     @Override

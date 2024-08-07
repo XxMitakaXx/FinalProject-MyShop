@@ -43,13 +43,13 @@ h1 {
     gap: 1em;
 }
 
-.order-details .order-detail .ordered-products-container {
+.order-details .ordered-products-container {
     width: 100%;
 }
 
 .order-details .ordered-products-container .ordered-product {
     height: 13em;
-    width: 80em;
+    width: 100%;
     color: var(--secondary-color);
     text-decoration: none;
     display: flex;

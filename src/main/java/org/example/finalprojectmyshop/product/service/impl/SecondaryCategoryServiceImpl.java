@@ -1,12 +1,14 @@
 package org.example.finalprojectmyshop.product.service.impl;
 
 import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
+import org.example.finalprojectmyshop.product.models.dtos.exports.FoundedProductByNameDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.ProductDetailsSecondaryCategoryDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.RandomProductsDTO;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.entities.Rating;
 import org.example.finalprojectmyshop.product.models.entities.Review;
 import org.example.finalprojectmyshop.product.models.entities.SecondaryCategory;
+import org.example.finalprojectmyshop.product.models.enums.CategoryName;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
 import org.example.finalprojectmyshop.product.repository.SecondaryCategoryRepository;
 import org.example.finalprojectmyshop.product.service.ProductService;
@@ -14,6 +16,8 @@ import org.example.finalprojectmyshop.product.service.SecondaryCategoryService;
 import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,6 +51,27 @@ public class SecondaryCategoryServiceImpl implements SecondaryCategoryService {
     @Override
     public SecondaryCategory findSecondaryCategoryEntityByName(SecondaryCategoryName name) {
         return this.secondaryCategoryRepository.findByName(name);
+    }
+
+    @Override
+    public Set<FoundedProductByNameDTO> getProductsByCategory(SecondaryCategoryName secondaryCategoryName) {
+        return this.secondaryCategoryRepository.findByName(secondaryCategoryName)
+                .getProducts()
+                .stream()
+                .map(this::toFoundedProductForDeleteDTO)
+                .collect(Collectors.toSet());
+    }
+
+
+
+    private FoundedProductByNameDTO toFoundedProductForDeleteDTO(Product product) {
+        FoundedProductByNameDTO foundedProductByNameDTO = new FoundedProductByNameDTO();
+
+        foundedProductByNameDTO.setId(product.getId());
+        foundedProductByNameDTO.setName(product.getName());
+        foundedProductByNameDTO.setImageUrl(product.getMainImage().getImageUrl());
+
+        return foundedProductByNameDTO;
     }
 
     private ProductDetailsSecondaryCategoryDTO toProductDetailsSecondaryCategoryDTO(SecondaryCategory category) {

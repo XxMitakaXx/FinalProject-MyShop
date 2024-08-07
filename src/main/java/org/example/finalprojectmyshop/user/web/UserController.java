@@ -1,10 +1,9 @@
 package org.example.finalprojectmyshop.user.web;
 
 import jakarta.validation.Valid;
-import org.example.finalprojectmyshop.mediaFile.service.ImagesHelperService;
+import org.example.finalprojectmyshop.order.models.dtos.imports.SearchProductByNameDTO;
 import org.example.finalprojectmyshop.user.models.dtos.imports.UserEditProfileDataDTO;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
-import org.example.finalprojectmyshop.user.service.AdvancedUserService;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.example.finalprojectmyshop.user.service.ValidateUserHelperService;
 import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,6 +28,11 @@ public class UserController {
         this.userHelperService = userHelperService;
         this.userService = userService;
         this.validateUserHelperService = validateUserHelperService;
+    }
+
+    @ModelAttribute("searchProductByNameDTO")
+    public SearchProductByNameDTO searchProductByNameDTO() {
+        return new SearchProductByNameDTO();
     }
 
     @GetMapping("/user-profile")
@@ -47,7 +52,6 @@ public class UserController {
 
         userEditProfileDataDTO.setFirstName(user.getFirstName());
         userEditProfileDataDTO.setLastName(user.getLastName());
-        userEditProfileDataDTO.setEmail(user.getEmail());
         userEditProfileDataDTO.setPhoneNumber(user.getPhoneNumber());
         userEditProfileDataDTO.setBirthDate(user.getBirthdate());
 
@@ -71,15 +75,9 @@ public class UserController {
             return "redirect:/edit-user-profile-data";
         }
 
-        UserEntity dbUser = this.userService.findUserByEmail(data.getEmail());
         UserEntity user = this.userHelperService.getUser();
 
-        if (
-                Integer.parseInt(String.valueOf(dbUser.getId())) == 0 ||
-                        Integer.parseInt(String.valueOf(dbUser.getId())) == Integer.parseInt(String.valueOf(user.getId()))
-        ) {
-            this.userService.editUserProfileData(user, data);
-        }
+        this.userService.editUserProfileData(user, data);
 
         return "redirect:/user-profile";
     }

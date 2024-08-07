@@ -12,7 +12,7 @@ h1 {
     font-size: 40px;
 }
 
-form {
+form.login {
     height: 35em;
     width: 40em;
     display: flex;
@@ -22,7 +22,7 @@ form {
     align-items: center;
 }
 
-form .data-collecting-container {
+form.login .data-collecting-container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -30,13 +30,13 @@ form .data-collecting-container {
     align-items: start;
 }
 
-form .data-collecting-container label {
+form.login .data-collecting-container label {
     color: var(--secondary-color);
     font-size: 20px;
     padding-bottom: 0.5em;
 }
 
-form .data-collecting-container input {
+form.login .data-collecting-container input {
     height: 100%;
     width: 100%;
     border: 2px solid #cecece;
@@ -49,7 +49,7 @@ form .data-collecting-container input {
     padding: 1em;
 }
 
-form .login-button {
+form.login .login-button {
     height: 10%;
     width: 100%;
     border-radius: 0.6em;
@@ -62,7 +62,7 @@ form .login-button {
     cursor: pointer;
 }
 
-form .login-button:hover {
+form.login .login-button:hover {
     background: #6262e6;
 }
 

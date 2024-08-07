@@ -26,7 +26,7 @@
     <nav th:replace="~{fragments/categories-navbar}"></nav>
 
     <div class="form-container">
-        <h1>Register</h1>
+        <h1 th:text="#{nav_bar_register}">Register</h1>
 
         <form
             th:action="@{/users/register}"
@@ -35,62 +35,62 @@
             enctype="multipart/form-data">
             <div class="collect-name-container">
                 <div class="collect-data-container">
-                    <label for="input-first-name">First Name</label>
+                    <label for="input-first-name" th:text="#{capital_first_name}">First Name</label>
                     <input
                             th:field="*{firstName}"
                             name="input-first-name"
                             type="text"
                             id="input-first-name"
-                            placeholder="First Name">
+                            th:placeholder="#{capital_first_name}">
                     <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></div>
                 </div>
 
                 <div class="collect-data-container">
-                    <label for="input-last-name">Last Name</label>
+                    <label for="input-last-name" th:text="#{capital_last_name}">Last Name</label>
                     <input
                             th:field="*{lastName}"
                             name="input-last-name"
                             type="text"
                             id="input-last-name"
-                            placeholder="Last Name">
+                            th:placeholder="#{capital_last_name}">
 
                     <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></div>
                 </div>
             </div>
 
             <div class="collect-data-container">
-                <label for="input-email">Email</label>
+                <label for="input-email" th:text="#{email}">Email</label>
                 <input
                         th:field="*{email}"
                         name="input-email"
                         type="email"
                         id="input-email"
-                        placeholder="Email">
+                        th:placeholder="#{email}">
 
                 <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
             </div>
 
             <div class="collect-name-container">
                 <div class="collect-data-container">
-                    <label for="input-password">Password</label>
+                    <label for="input-password" th:text="#{password}">Password</label>
                     <input
                             th:field="*{password}"
                             name="input-password"
                             type="password"
                             id="input-password"
-                            placeholder="Password">
+                            th:placeholder="#{password}">
 
                     <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
                 </div>
 
                 <div class="collect-data-container">
-                    <label for="input-confirm-password">Confirm Password</label>
+                    <label for="input-confirm-password" th:text="#{capital_confirm_password}">Confirm Password</label>
                     <input
                             th:field="*{confirmPassword}"
                             name="input-confirm-password"
                             type="password"
                             id="input-confirm-password"
-                            placeholder="Confirm Password">
+                            th:placeholder="#{capital_confirm_password}">
 
                     <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="error"></div>
 
@@ -101,29 +101,28 @@
             </div>
 
             <div class="collect-data-container">
-                <label for="input-phone-number">Phone Number</label>
+                <label for="input-phone-number" th:text="#{capital_phone_number}">Phone Number</label>
                 <input
                         th:field="*{phoneNumber}"
                         name="input-phone-number"
                         type="tel"
                         id="input-phone-number"
-                        placeholder="Phone Number">
+                        th:placeholder="#{capital_phone_number}">
 
                 <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="error"></div>
             </div>
 
             <div class="collect-data-container">
-                <label for="input-birth-date">Birthdate</label>
+                <label for="input-birth-date" th:text="#{birthdate}">Birthdate</label>
                 <input
                         th:field="*{birthDate}"
                         name="input-birth-date"
                         type="date"
-                        id="input-birth-date"
-                        placeholder="Birth Date">
+                        id="input-birth-date">
             </div>
 
             <div class="collect-data-container">
-                <label for="input-userEntity-profile-picture">Profile Picture</label>
+                <label for="input-userEntity-profile-picture" th:text="#{capital_profile_picture}">Profile Picture</label>
                 <input
                         th:field="*{profilePicture}"
                         th:errorclass="error"
@@ -132,10 +131,10 @@
                         id="input-userEntity-profile-picture">
             </div>
 
-            <button class="register-button" type="submit">Register</button>
+            <button class="register-button" type="submit" th:register="#{nav_bar_register}">Register</button>
         </form>
 
-        <a th:href="@{/login}" class="have-account-button">Have an account?</a>
+        <a th:href="@{/login}" class="have-account-button" th:text="#{have_an_account}">Have an account ?</a>
     </div>
 
     <footer th:replace="~{fragments/footer}"></footer>

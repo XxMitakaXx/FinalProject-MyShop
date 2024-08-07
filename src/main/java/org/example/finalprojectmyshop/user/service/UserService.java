@@ -1,6 +1,7 @@
 package org.example.finalprojectmyshop.user.service;
 
 import org.example.finalprojectmyshop.user.models.dtos.exports.UserDetailsDTO;
+import org.example.finalprojectmyshop.user.models.dtos.imports.AdminEditUserProfileDataDTO;
 import org.example.finalprojectmyshop.user.models.dtos.imports.UserEditProfileDataDTO;
 import org.example.finalprojectmyshop.user.models.dtos.imports.UserRegisterDTO;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
@@ -15,6 +16,7 @@ public interface UserService {
     UserEntity findUserByEmail(String email);
     Set<UserEntity> findAllUsers();
     void editUserProfileData(UserEntity user, UserEditProfileDataDTO newData) throws IOException;
+    void adminEditUserProfileData(UserEntity user, AdminEditUserProfileDataDTO newData) throws IOException;
     List<UserEntity> findUsersByEmail(String email);
     UserDetailsDTO findUserDetails(long id);
     UserEntity findUserEntity(long id);

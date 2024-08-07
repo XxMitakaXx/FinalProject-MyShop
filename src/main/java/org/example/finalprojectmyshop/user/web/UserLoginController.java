@@ -2,6 +2,7 @@ package org.example.finalprojectmyshop.user.web;
 
 import jakarta.validation.Valid;
 import org.apache.el.parser.BooleanNode;
+import org.example.finalprojectmyshop.order.models.dtos.imports.SearchProductByNameDTO;
 import org.example.finalprojectmyshop.user.models.dtos.imports.UserLoginDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,11 @@ public class UserLoginController {
     @ModelAttribute("loginData")
     public UserLoginDTO userData() {
         return new UserLoginDTO();
+    }
+
+    @ModelAttribute("searchProductByNameDTO")
+    public SearchProductByNameDTO searchProductByNameDTO() {
+        return new SearchProductByNameDTO();
     }
 
     @GetMapping("/login")

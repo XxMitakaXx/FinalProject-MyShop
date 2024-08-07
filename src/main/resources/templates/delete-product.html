@@ -25,7 +25,7 @@
     <nav th:replace="~{fragments/navbar}"></nav>
     <nav th:replace="~{fragments/second-navbar}"></nav>
     <nav th:replace="~{fragments/categories-navbar}"></nav>
-    <h1>Delete Product/s</h1>
+    <h1 th:text="#{delete_product}">Delete Product/s</h1>
 
     <form
         th:method="get"
@@ -40,7 +40,7 @@
                     th:field="*{name}"
                     class="search-input"
                     type="search"
-                    placeholder="Search">
+                    th:placeholder="#{search_bar}">
         </div>
     </form>
 
@@ -48,18 +48,18 @@
         <div th:each="product : ${foundedProductsForDeleteDTO.foundedProducts}" class="founded-product">
             <img th:src="@{${product.imageUrl}}" class="founded-product-image" alt="product">
             <h2 th:text="${product.name}" class="founded-product-name"></h2>
-            <a th:href="@{/product-details/{id}(id=${product.id})}" class="view-product-details-button">View Details</a>
+            <a th:href="@{/product-details/{id}(id=${product.id})}" class="view-product-details-button" th:text="#{view_details}">View Details</a>
 
             <form
                 th:method="delete"
                 th:action="@{/delete-product/{id}(id=${product.id})}">
-                <button class="delete-product-button" type="submit">Delete Product</button>
+                <button class="delete-product-button" type="submit" th:text="#{delete_product_button_text}">Delete Product</button>
             </form>
         </div>
     </div>
 
     <div th:unless="${foundedProductsForDeleteDTO.getFoundedProducts().size() > 0}" class="not-founded-products-container">
-        <h2>Search for product/s</h2>
+        <h2 th:text="#{search_for_product}">Search for product/s</h2>
     </div>
 
     <footer th:replace="~{fragments/footer}"></footer>

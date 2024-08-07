@@ -5,44 +5,44 @@
     <link rel="stylesheet" th:href="@{/css/index.css}" />
     <link rel="stylesheet" th:href="@{/css/login-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/footer-styles.css}" />
+
     <title>My Shop</title>
 </head>
 <body>
-
-
     <div class="login-container">
-        <h1>Login</h1>
+        <h1 th:text="#{nav_bar_login}">Login</h1>
 
         <form
             th:method="post"
             th:action="@{/users/login}"
-            th:object="${loginData}">
+            th:object="${loginData}"
+            class="login">
             <div class="login-error-message" th:if="${showErrorMessage}" th:text="'Invalid username or password"></div>
             <div class="data-collecting-container">
-                <label for="email">Email</label>
+                <label for="email" th:text="#{email}">Email</label>
                 <input
                         th:field="*{email}"
                         name="email"
                         type="text"
                         id="email"
-                        placeholder="Email">
+                        th:placeholder="#{email}">
 
                 <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
             </div>
             <div class="data-collecting-container">
-                <label for="password">Password</label>
+                <label for="password" th:text="#{password}">Password</label>
                 <input
                         th:field="*{password}"
                         name="password"
                         type="password"
                         id="password"
-                        placeholder="Password">
+                        th:placeholder="#{password}">
             </div>
 
-            <button class="login-button" type="submit">Login</button>
+            <button class="login-button" type="submit" th:text="#{nav_bar_login}">Login</button>
         </form>
 
-        <a th:href="@{/users/register}" class="do-not-have-account-button">Don't have an account ?</a>
+        <a th:href="@{/users/register}" class="do-not-have-account-button" th:text="#{dont_have_an_account}">Don't have an account ?</a>
     </div>
 
     <footer th:replace="~{fragments/footer}"></footer>

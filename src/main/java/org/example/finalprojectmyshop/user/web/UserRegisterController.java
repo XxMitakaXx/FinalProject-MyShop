@@ -1,6 +1,7 @@
 package org.example.finalprojectmyshop.user.web;
 
 import jakarta.validation.Valid;
+import org.example.finalprojectmyshop.order.models.dtos.imports.SearchProductByNameDTO;
 import org.example.finalprojectmyshop.user.models.dtos.imports.UserRegisterDTO;
 import org.example.finalprojectmyshop.user.models.entities.enums.UserRole;
 import org.example.finalprojectmyshop.user.service.UserService;
@@ -23,6 +24,11 @@ public class UserRegisterController {
 
     public UserRegisterController(UserService userService) {
         this.userService = userService;
+    }
+
+    @ModelAttribute("searchProductByNameDTO")
+    public SearchProductByNameDTO searchProductByNameDTO() {
+        return new SearchProductByNameDTO();
     }
 
     @ModelAttribute("userRegisterDTO")
