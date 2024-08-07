@@ -71,8 +71,15 @@ public class UserController {
             return "redirect:/edit-user-profile-data";
         }
 
+        UserEntity dbUser = this.userService.findUserByEmail(data.getEmail());
         UserEntity user = this.userHelperService.getUser();
-        this.userService.editUserProfileData(user, data);
+
+        if (
+                Integer.parseInt(String.valueOf(dbUser.getId())) == 0 ||
+                        Integer.parseInt(String.valueOf(dbUser.getId())) == Integer.parseInt(String.valueOf(user.getId()))
+        ) {
+            this.userService.editUserProfileData(user, data);
+        }
 
         return "redirect:/user-profile";
     }
