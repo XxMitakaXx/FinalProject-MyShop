@@ -25,9 +25,14 @@ public class SearchProductsController {
 
     @GetMapping ("/find-products-by-name")
     public String findProductsByName(SearchProductByNameDTO searchProductByNameDTO, Model model) {
-        FoundedProductsByNameDTO products = this.productService.findProductsByName(searchProductByNameDTO.getName());
 
-        model.addAttribute("products", products);
+        if (!searchProductByNameDTO.getName().isBlank()) {
+            FoundedProductsByNameDTO products = this.productService.findProductsByName(searchProductByNameDTO.getName());
+
+            model.addAttribute("products", products);
+        } else {
+            model.addAttribute("products", new FoundedProductsByNameDTO());
+        }
 
         return "search-products";
     }

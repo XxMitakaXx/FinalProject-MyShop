@@ -51,6 +51,7 @@
 }
 
 .category-product .category-product-info {
+    height: 20em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -67,8 +68,8 @@
 }
 
 .category-product .category-product-info .image-container img {
-    height: auto;
-    width: 90%;
+    margin: auto;
+    width: 50%;
 }
 
 .category-product .category-product-info .category-product-data {
@@ -76,7 +77,6 @@
 }
 
 .category-product .category-product-info .category-product-title {
-
     font-size: 1em;
 }
 

@@ -19,3 +19,23 @@
 
     border-radius: 0.5em;
 }
+
+form.language-change {
+    display: flex;
+    gap: 1em;
+}
+
+form.language-change label {
+    color: var(--secondary-color);
+    font-size: 1.2em;
+}
+
+form.language-change select {
+    padding: 0.5em;
+    color: var(--secondary-color);
+    font-size: 0.8em;
+    background: #eeeeee;
+    border: none;
+    border-radius: 0.3em;
+    outline: none;
+}

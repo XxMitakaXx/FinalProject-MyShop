@@ -1,6 +1,5 @@
 package org.example.finalprojectmyshop.product.service.impl;
 
-import org.example.finalprojectmyshop.mediaFile.service.MediaFileService;
 import org.example.finalprojectmyshop.product.models.dtos.exports.CategoryAndRandomProductsDTO;
 import org.example.finalprojectmyshop.product.models.dtos.exports.RandomProductsDTO;
 import org.example.finalprojectmyshop.product.models.entities.Category;
@@ -56,23 +55,41 @@ public class CategoryServiceImpl implements CategoryService {
         category.getSecondaryCategories()
                 .forEach(secondaryCategory -> {
                     if (!secondaryCategory.getProducts().isEmpty()) {
-                        for (int i = 1; i <= 5; i++) {
-                            ThreadLocalRandom random = ThreadLocalRandom.current();
-                            long productId = random.nextLong(secondaryCategory.getProducts().size() + 1);
+                        if (secondaryCategory.getProducts().size() > 7) {
+                            int addedProductCount = 0;
+                            for (int i = 1; addedProductCount <= 7; i++) {
+                                Set<Product> secondaryCategoryProducts = secondaryCategory.getProducts();
 
-                            secondaryCategory.getProducts()
-                                    .forEach(product -> {
-                                        boolean contains = categoryDto.getProducts()
+                                ThreadLocalRandom random = ThreadLocalRandom.current();
+                                int randomProductNumber = random.nextInt(secondaryCategory.getProducts().size() + 1);
+                                int currentProductNumber = 0;
+
+                                for (Product product : secondaryCategoryProducts) {
+                                    currentProductNumber++;
+
+                                    if (currentProductNumber == randomProductNumber) {
+
+                                        boolean contains = secondaryCategory.getProducts()
                                                 .stream()
-                                                .map(RandomProductsDTO::getId)
+                                                .map(Product::getId)
                                                 .collect(Collectors.toSet())
-                                                .contains(product.getId());
+                                                .stream()
+                                                .anyMatch(id -> id == randomProductNumber);
 
                                         if (!contains) {
-                                            RandomProductsDTO productDTO = this.mapToRandomProductDTO(product);
-                                            categoryDto.getProducts().add(productDTO);
+                                            secondaryCategory.getProducts().add(product);
+                                            addedProductCount++;
                                         }
-                                    });
+                                    }
+                                }
+                            }
+                        } else {
+                            Set<RandomProductsDTO> randomProductsDTOS = secondaryCategory.getProducts()
+                                    .stream()
+                                    .map(this::mapToRandomProductDTO)
+                                    .collect(Collectors.toSet());
+
+                            categoryDto.getProducts().addAll(randomProductsDTOS);
                         }
                     }
                 });

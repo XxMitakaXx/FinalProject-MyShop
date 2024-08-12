@@ -49,7 +49,7 @@
 <!--        <a class="continue-button" th:if="${cartData.productsInCart.size > 0}" th:href="@{/collecting-order-details}"><span class="material-symbols-outlined">double_arrow</span> Continue</a>-->
 <!--        <a class="continue-button-deactivated" th:unless="${cartData.productsInCart.size > 0}"><span class="material-symbols-outlined">double_arrow</span> Continue</a>-->
 
-                <a class="continue-button" th:if="${cartData.productsInCart.size > 0}" th:text="#{continue_button}">Continue</a>
+                <a class="continue-button" th:if="${cartData.productsInCart.size > 0}" th:text="#{continue_button}" th:href="@{/collecting-order-details}">Continue</a>
                 <a class="continue-button-deactivated" th:unless="${cartData.productsInCart.size > 0}" th:text="#{continue_button}">Continue</a>
 
     </div>
