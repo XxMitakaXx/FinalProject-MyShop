@@ -10,20 +10,28 @@ import org.example.finalprojectmyshop.order.service.SaleService;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 import org.example.finalprojectmyshop.user.service.UserService;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SaleServiceImpl implements SaleService {
 
-    private final SaleRepository saleRepository;
-    private final UserService userService;
+//    private final String GET_ALL_SALES_API_URL = ;
 
-    public SaleServiceImpl(SaleRepository saleRepository, UserService userService) {
+    private final SaleRepository saleRepository;
+    private final RestClient restClient;
+    private final RestTemplate restTemplate;
+
+    public SaleServiceImpl(SaleRepository saleRepository, RestClient restClient, RestTemplate restTemplate) {
         this.saleRepository = saleRepository;
-        this.userService = userService;
+        this.restClient = restClient;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -56,6 +64,25 @@ public class SaleServiceImpl implements SaleService {
         });
 
         return salesInfoDTO;
+    }
+
+    @Override
+    public boolean deleteSale(long id) {
+        this.saleRepository.deleteById(id);
+
+        Optional<Sale> optional = this.saleRepository.findById(id);
+
+        return optional.isEmpty();
+    }
+
+    @Override
+    public SalesInfoDTO getSales() {
+        return restClient
+                .get()
+                .uri("http://localhost:8080/sales-api/get-all")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(SalesInfoDTO.class);
     }
 
     private SaleInfoDTO toSaleInfoDTO(Sale sale) {

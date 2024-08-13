@@ -1,6 +1,7 @@
 package org.example.finalprojectmyshop.order.models.dtos.exports;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 public class SaleInfoDTO {
@@ -12,7 +13,9 @@ public class SaleInfoDTO {
     private String cityVillage;
     private String address;
 
-    public SaleInfoDTO() {}
+    public SaleInfoDTO() {
+        this.products = new HashSet<>();
+    }
 
     public long getId() {
         return this.id;

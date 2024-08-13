@@ -26,6 +26,7 @@ public class Sale {
     )
     private Set<Product> products;
 
+    @Column(nullable = false)
     private double sum;
 
     @Column(nullable = false)

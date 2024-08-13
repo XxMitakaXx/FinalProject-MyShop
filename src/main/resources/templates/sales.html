@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Shop</title>
+</head>
+<body>
+    <h1>Sales</h1>
+
+    <div class="sales-container">
+        <div th:if="${sales.getSalesInfos().size() > 0}" th:each="sale : ${sales.getSalesInfos()}" class="sale-container">
+            <div class="sale-details">
+                <p th:text="#{date_of_registration}"></p>
+                <p th:text="${sale.date}"></p>
+            </div>
+            <div class="sale-details">
+                <p th:text="#{city_village}"></p>
+                <p th:text="${sale.cityVillage}"></p>
+            </div>
+            <div class="sale-details">
+                <p th:text="#{address}"></p>
+                <p th:text="${sale.address}"></p>
+            </div>
+            <div class="sale-details">
+                <p th:text="#{sum}"></p>
+                <p th:text="${sale.sum}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h2 th:unless="${sales.getSalesInfos().size() > 0}">There are no sales.</h2>
+    </div>
+</body>
+</html>
