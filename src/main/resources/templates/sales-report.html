@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" th:href="@{/css/sales-report-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/search-bar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/cart-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/profile-context-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/second-navbar-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/categories-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/suggest-product-by-category-styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer-styles.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script th:src="@{/js/adminContext.js}" defer></script>
+    <script th:src="@{/js/profileContext.js}" defer></script>
+    <script th:src="@{/js/cartContext.js}" defer></script>
+    <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
+    <title>My Shop</title>
+</head>
+<body>
+    <nav th:replace="~{fragments/navbar}"></nav>
+    <nav th:replace="~{fragments/second-navbar}"></nav>
+    <nav th:replace="~{fragments/categories-navbar}"></nav>
+
+    <div class="align-container">
+        <h1 th:text="#{sales_report}">Sales Report</h1>
+
+        <div class="report-container">
+            <div class="report-detail">
+                <p th:text="#{sales_count}">Sales count</p>
+                <p th:text="${report.salesCount}"></p>
+            </div>
+            <div class="report-detail">
+                <p th:text="#{income_from_sales}">Income from sales</p>
+                <p th:text="${report.incomeFromSales}"></p>
+            </div>
+            <div class="report-detail">
+                <p th:text="#{date_of_report}">Date of report</p>
+                <p th:text="${report.date}"></p>
+            </div>
+
+            <div class="sold-products-container">
+                <h2 th:text="#{sold_products}">Sold Products</h2>
+
+
+                <div th:each="product : ${report.products}" class="sold-product-container">
+                    <div class="image-container">
+                        <img th:src="@{${product.imageUrl}}">
+                    </div>
+
+                    <h2 th:text="${product.name}">iPhone 15 PRO</h2>
+                    <a th:href="@{/product-details/{id}(id=${product.id})}" class="view-product-details-button" th:text="#{view_details}">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>

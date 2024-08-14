@@ -18,7 +18,7 @@ public class Sale {
     @Column(nullable = false)
     private Date date;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "sales_products",
             joinColumns = @JoinColumn(name = "sale_id"),
