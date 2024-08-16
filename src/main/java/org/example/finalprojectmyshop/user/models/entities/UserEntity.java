@@ -88,6 +88,16 @@ public class UserEntity {
         this.warranties = new HashSet<>();
     }
 
+    public UserEntity(String firstName, String lastName, String email, String password, String phoneNumber, LocalDate birthdate) {
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.birthdate = birthdate;
+    }
+
     public long getId() {
         return this.id;
     }

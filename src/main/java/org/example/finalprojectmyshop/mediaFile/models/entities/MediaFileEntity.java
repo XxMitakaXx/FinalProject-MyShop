@@ -15,6 +15,11 @@ public class MediaFileEntity {
 
     public MediaFileEntity() {}
 
+    public MediaFileEntity(String imageUrl, String imageId) {
+        this.imageUrl = imageUrl;
+        this.imageId = imageId;
+    }
+
     public long getId() {
         return this.id;
     }
