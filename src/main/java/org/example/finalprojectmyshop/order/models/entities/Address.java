@@ -24,9 +24,6 @@ public class Address {
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false)
-    private double sum;
-
     public Address() {}
 
     public long getId() {
@@ -75,13 +72,5 @@ public class Address {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public double getSum() {
-        return this.sum;
-    }
-
-    public void setSum(double sum) {
-        this.sum = sum;
     }
 }

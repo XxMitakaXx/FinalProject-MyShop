@@ -43,6 +43,7 @@ public class UserLoginController {
             redirectAttributes.addFlashAttribute("userLoginDTO", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
         }
+
         return "redirect:/users/login";
     }
 
