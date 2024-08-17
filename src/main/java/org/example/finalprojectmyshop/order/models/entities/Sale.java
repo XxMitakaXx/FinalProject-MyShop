@@ -2,7 +2,6 @@ package org.example.finalprojectmyshop.order.models.entities;
 
 import jakarta.persistence.*;
 import org.example.finalprojectmyshop.product.models.entities.Product;
-import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,8 +25,8 @@ public class Sale {
     )
     private Set<Product> products;
 
-    @Column(nullable = false)
-    private double sum;
+    @Column(name = "sale_sum", nullable = false)
+    private double saleSum;
 
     @Column(nullable = false)
     private String cityVillage;
@@ -64,12 +63,12 @@ public class Sale {
         this.products = products;
     }
 
-    public double getSum() {
-        return this.sum;
+    public double getSaleSum() {
+        return this.saleSum;
     }
 
-    public void setSum(double sum) {
-        this.sum = sum;
+    public void setSaleSum(double sum) {
+        this.saleSum = sum;
     }
 
     public String getCityVillage() {

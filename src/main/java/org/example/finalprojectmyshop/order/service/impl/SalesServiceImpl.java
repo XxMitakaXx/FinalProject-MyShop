@@ -48,7 +48,7 @@ public class SalesServiceImpl implements SaleService, SalesReportService {
         sale.setDate(new Date());
 
         order.getProducts().forEach(product -> sale.getProducts().add(product));
-        sale.setSum(order.getPriceForSum());
+        sale.setSaleSum(order.getPriceForSum());
         sale.setCityVillage(order.getCityVillage());
         sale.setAddress(order.getAddress());
 
@@ -99,7 +99,7 @@ public class SalesServiceImpl implements SaleService, SalesReportService {
                     saleInfoDTO.getProducts().add(saleInfoProductDTO);
                 });
 
-        saleInfoDTO.setSum(sale.getSum());
+        saleInfoDTO.setSum(sale.getSaleSum());
         saleInfoDTO.setCityVillage(sale.getCityVillage());
         saleInfoDTO.setAddress(sale.getAddress());
 
@@ -125,7 +125,7 @@ public class SalesServiceImpl implements SaleService, SalesReportService {
 
         double incomeFromSales = salesForPastDay
                 .stream()
-                .map(Sale::getSum)
+                .map(Sale::getSaleSum)
                 .reduce(Double::sum)
                 .orElse(0.0);
 

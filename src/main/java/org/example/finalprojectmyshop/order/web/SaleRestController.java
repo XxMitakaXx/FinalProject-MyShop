@@ -1,13 +1,11 @@
 package org.example.finalprojectmyshop.order.web;
 
-import org.example.finalprojectmyshop.order.models.dtos.exports.SaleInfoDTO;
-import org.example.finalprojectmyshop.order.models.dtos.exports.SaleOperationResultDTO;
 import org.example.finalprojectmyshop.order.models.dtos.exports.SalesInfoDTO;
-import org.example.finalprojectmyshop.order.models.entities.Sale;
 import org.example.finalprojectmyshop.order.service.SaleService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/sales-api")
