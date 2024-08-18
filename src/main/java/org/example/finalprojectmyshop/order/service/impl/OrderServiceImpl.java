@@ -5,10 +5,7 @@ import org.example.finalprojectmyshop.order.models.dtos.imports.OrderDetailsDTO;
 import org.example.finalprojectmyshop.order.models.entities.*;
 import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
 import org.example.finalprojectmyshop.order.repository.OrderRepository;
-import org.example.finalprojectmyshop.order.service.CartService;
-import org.example.finalprojectmyshop.order.service.OrderService;
-import org.example.finalprojectmyshop.order.service.ProductInCartService;
-import org.example.finalprojectmyshop.order.service.ProductInOrderService;
+import org.example.finalprojectmyshop.order.service.*;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.service.ProductService;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
@@ -17,30 +14,26 @@ import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class OrderServiceImpl implements OrderService {
-
+public class OrderServiceImpl implements OrderCrudService, UserOrderService {
     private final OrderRepository orderRepository;
     private final CartService cartService;
     private final UserHelperService userHelperService;
     private final UserService userService;
     private final ProductInCartService productInCartService;
     private final ProductService productService;
-    private final ProductInOrderService productInOrderService;
 
-    public OrderServiceImpl(OrderRepository orderRepository, CartService cartService, UserHelperService userHelperService, UserService userService, ProductInCartService productInCartService, ProductService productService, ProductInOrderService productInOrderService) {
+    public OrderServiceImpl(OrderRepository orderRepository, CartService cartService, UserHelperService userHelperService, UserService userService, ProductInCartService productInCartService, ProductService productService) {
         this.orderRepository = orderRepository;
         this.cartService = cartService;
         this.userHelperService = userHelperService;
         this.userService = userService;
         this.productInCartService = productInCartService;
         this.productService = productService;
-        this.productInOrderService = productInOrderService;
     }
 
     @Override

@@ -111,17 +111,17 @@
                         <div class="prices-container">
                             <div class="price-container">
                                 <p th:text="#{price_for_products_in_shopping_cart}">Products price</p>
-                                <p th:text="${cartDataDTO.getPriceForProducts()}">2000.00 LV.</p>
+                                <p th:text="${cartDataDTO.getPriceForProducts() + ' LV'}">2000.00 LV.</p>
                             </div>
                             <div class="price-container">
                                 <p th:text="#{price_for_delivery_in_shopping_cart}">Delivery price</p>
-                                <p th:text="${cartDataDTO.getPriceForDelivery()}">0.00 LV.</p>
+                                <p th:text="${cartDataDTO.getPriceForDelivery() + ' LV'}">0.00 LV.</p>
                             </div>
                         </div>
 
                         <div class="sum-container">
                             <p th:text="#{SUM}">SUM: </p>
-                            <p th:text="${cartDataDTO.getPriceForSum()}">2000.00 LV.</p>
+                            <p th:text="${cartDataDTO.getPriceForSum() + ' LV'}">2000.00 LV.</p>
                         </div>
                     </div>
 

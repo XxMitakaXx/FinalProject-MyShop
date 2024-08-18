@@ -8,7 +8,7 @@ import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.order.models.entities.ProductInCartEntity;
 import org.example.finalprojectmyshop.order.service.AddressService;
 import org.example.finalprojectmyshop.order.service.CartService;
-import org.example.finalprojectmyshop.order.service.OrderService;
+import org.example.finalprojectmyshop.order.service.OrderCrudService;
 import org.example.finalprojectmyshop.order.service.ProductInCartService;
 import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.entities.Warranty;
@@ -36,18 +36,18 @@ public class AdvancedUserServiceImpl implements AdvancedUserService {
     private final UserService userService;
     private final AddressService addressService;
     private final CartService cartService;
-    private final OrderService orderService;
+    private final OrderCrudService orderCrudService;
     private final ReviewService reviewService;
     private final WarrantyService warrantyService;
     private final ProductInCartService productInCartService;
     private final ImagesHelperService imagesHelperService;
 
-    public AdvancedUserServiceImpl(UserHelperService userHelperService, UserService userService, AddressService addressService, CartService cartService, OrderService orderService, ReviewService reviewService, WarrantyService warrantyService, ProductInCartService productInCartService, ImagesHelperService imagesHelperService) {
+    public AdvancedUserServiceImpl(UserHelperService userHelperService, UserService userService, AddressService addressService, CartService cartService, OrderCrudService orderCrudService, ReviewService reviewService, WarrantyService warrantyService, ProductInCartService productInCartService, ImagesHelperService imagesHelperService) {
         this.userHelperService = userHelperService;
         this.userService = userService;
         this.addressService = addressService;
         this.cartService = cartService;
-        this.orderService = orderService;
+        this.orderCrudService = orderCrudService;
         this.reviewService = reviewService;
         this.warrantyService = warrantyService;
         this.productInCartService = productInCartService;
@@ -114,7 +114,7 @@ public class AdvancedUserServiceImpl implements AdvancedUserService {
         orders.forEach(order -> {
             userEntity.getOrders().remove(order);
             this.userService.save(userEntity);
-            this.orderService.deleteOrder(order.getId());
+            this.orderCrudService.deleteOrder(order.getId());
         });
 
         userEntity.getReviews().forEach(this.reviewService::deleteReview);

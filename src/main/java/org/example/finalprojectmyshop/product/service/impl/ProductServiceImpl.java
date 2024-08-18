@@ -12,7 +12,9 @@ import org.example.finalprojectmyshop.product.models.entities.*;
 import org.example.finalprojectmyshop.product.repository.ProductPropertyRepository;
 import org.example.finalprojectmyshop.product.repository.ProductRepository;
 import org.example.finalprojectmyshop.product.repository.SecondaryCategoryRepository;
+import org.example.finalprojectmyshop.product.service.FavoriteProductService;
 import org.example.finalprojectmyshop.product.service.ProductService;
+import org.example.finalprojectmyshop.product.service.ProductInCartCrudService;
 import org.example.finalprojectmyshop.user.models.entities.UserEntity;
 import org.example.finalprojectmyshop.user.service.UserService;
 import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
@@ -26,7 +28,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements ProductService, FavoriteProductService, ProductInCartCrudService {
 
     private final ProductRepository productRepository;
     private final SecondaryCategoryRepository secondaryCategoryRepository;
@@ -37,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     private final CartService cartService;
     private final ProductInCartService productInCartService;
 
-    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, ProductPropertyRepository productPropertyRepository, ImagesHelperService imagesHelperService, UserService userService, UserHelperService userHelperService, CartService cartService, ProductInCartService productInCartService) {
+    public ProductServiceImpl(ProductRepository productRepository, SecondaryCategoryRepository secondaryCategoryRepository, ProductPropertyRepository productPropertyRepository, ImagesHelperService imagesHelperService, UserService userService, UserHelperService userHelperService, CartService cartService, org.example.finalprojectmyshop.order.service.ProductInCartService productInCartService) {
         this.productRepository = productRepository;
         this.secondaryCategoryRepository = secondaryCategoryRepository;
         this.productPropertyRepository = productPropertyRepository;

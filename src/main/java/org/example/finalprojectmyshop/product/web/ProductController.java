@@ -9,14 +9,8 @@ import org.example.finalprojectmyshop.product.models.dtos.exports.FoundedProduct
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.AddProductPropertyDTO;
 import org.example.finalprojectmyshop.product.models.dtos.imports.SearchProductForDeleteDTO;
-import org.example.finalprojectmyshop.product.models.entities.Product;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
-import org.example.finalprojectmyshop.product.service.AdvancedProductService;
-import org.example.finalprojectmyshop.product.service.CategoryService;
-import org.example.finalprojectmyshop.product.service.ProductService;
-import org.example.finalprojectmyshop.product.service.SecondaryCategoryService;
-import org.example.finalprojectmyshop.user.service.UserService;
-import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
+import org.example.finalprojectmyshop.product.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,18 +24,18 @@ import java.util.Set;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductInCartCrudService productInCartCrudService;
+    private final FavoriteProductService favoriteProductService;
     private final AdvancedProductService advancedProductService;
     private final CategoryService categoryService;
-    private final UserHelperService userHelperService;
-    private final UserService userService;
     private final SecondaryCategoryService secondaryCategoryService;
 
-    public ProductController(ProductService productService, AdvancedProductService advancedProductService, CategoryService categoryService, UserHelperService userHelperService, UserService userService, SecondaryCategoryService secondaryCategoryService) {
+    public ProductController(ProductService productService, ProductInCartCrudService productInCartCrudService, FavoriteProductService favoriteProductService, AdvancedProductService advancedProductService, CategoryService categoryService, SecondaryCategoryService secondaryCategoryService) {
         this.productService = productService;
+        this.productInCartCrudService = productInCartCrudService;
+        this.favoriteProductService = favoriteProductService;
         this.advancedProductService = advancedProductService;
         this.categoryService = categoryService;
-        this.userHelperService = userHelperService;
-        this.userService = userService;
         this.secondaryCategoryService = secondaryCategoryService;
     }
 
@@ -76,7 +70,8 @@ public class ProductController {
             @Valid AddProductDTO addProductDTO,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
-            Model model) throws IOException {
+            Model model
+    ) throws IOException {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addProductDTO", addProductDTO);
@@ -96,7 +91,7 @@ public class ProductController {
     @PostMapping("/add-product-to-cart/{id}")
     public String processAddProductToCart(@PathVariable("id") long id) {
 
-        this.productService.addProductToCart(id);
+        this.productInCartCrudService.addProductToCart(id);
 
         return "redirect:/cart";
     }
@@ -131,14 +126,14 @@ public class ProductController {
 
     @DeleteMapping("/delete-product-from-cart/{id}")
     public String processDeleteProductFromCart(@PathVariable("id") long id) {
-        this.productService.deleteProductFromCartByProduct(id);
+        this.productInCartCrudService.deleteProductFromCartByProduct(id);
 
         return "redirect:/cart";
     }
 
     @GetMapping("/user-favorites")
     public String viewUserFavorites(Model model) {
-        Set<FavoriteProductDTO> favorites = this.productService.findFavoriteProducts();
+        Set<FavoriteProductDTO> favorites = this.favoriteProductService.findFavoriteProducts();
 
         model.addAttribute("userFavorites", favorites);
 
@@ -147,14 +142,14 @@ public class ProductController {
 
     @PostMapping("/add-product-to-favorites/{id}")
     public String processAddProductToFavorites(@PathVariable("id") long id) {
-        this.productService.addProductToFavorites(id);
+        this.favoriteProductService.addProductToFavorites(id);
 
         return "redirect:/user-favorites";
     }
 
     @DeleteMapping("/delete-product-from-favorites/{id}")
     public String processDeleteProductFromFavorite(@PathVariable("id") long id) {
-        this.productService.deleteProductFromFavorites(id);
+        this.favoriteProductService.deleteProductFromFavorites(id);
 
         return "redirect:/user-favorites";
     }

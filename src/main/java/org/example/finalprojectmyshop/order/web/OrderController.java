@@ -10,9 +10,9 @@ import org.example.finalprojectmyshop.order.models.entities.Order;
 import org.example.finalprojectmyshop.order.models.enums.CollectingPlace;
 import org.example.finalprojectmyshop.order.models.enums.OrderLogisticStatus;
 import org.example.finalprojectmyshop.order.service.CartService;
-import org.example.finalprojectmyshop.order.service.OrderService;
+import org.example.finalprojectmyshop.order.service.OrderCrudService;
 import org.example.finalprojectmyshop.order.service.SaleService;
-import org.example.finalprojectmyshop.user.service.impl.UserHelperService;
+import org.example.finalprojectmyshop.order.service.UserOrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,18 +24,17 @@ import java.util.Set;
 
 @Controller
 public class OrderController {
-
     private final CartService cartService;
-    private final OrderService orderService;
-    private final UserHelperService userHelperService;
+    private final OrderCrudService orderCrudService;
+    private final UserOrderService userOrderService;
     private final SaleService saleService;
     private final CollectingPlace[] collectingPlaces = CollectingPlace.values();
     private final OrderLogisticStatus[] orderLogisticStatuses = OrderLogisticStatus.values();
 
-    public OrderController(CartService cartService, OrderService orderService, UserHelperService userHelperService, SaleService saleService) {
+    public OrderController(CartService cartService, OrderCrudService orderCrudService, UserOrderService userOrderService, SaleService saleService) {
         this.cartService = cartService;
-        this.orderService = orderService;
-        this.userHelperService = userHelperService;
+        this.orderCrudService = orderCrudService;
+        this.userOrderService = userOrderService;
         this.saleService = saleService;
     }
 
@@ -74,14 +73,14 @@ public class OrderController {
             return "redirect:/collecting-order-details";
         }
 
-        this.orderService.save(orderDetailsDTO);
+        this.orderCrudService.save(orderDetailsDTO);
 
         return "redirect:/user-orders";
     }
 
     @GetMapping("/user-orders")
     public String viewUserOrders(Model model) {
-        Set<UserOrderDTO> userOrders = this.orderService.getUserOrders();
+        Set<UserOrderDTO> userOrders = this.userOrderService.getUserOrders();
 
         model.addAttribute("userOrders", userOrders);
 
@@ -90,7 +89,7 @@ public class OrderController {
 
     @GetMapping("/user-order-details/{id}")
     public String viewUserOrderDetails(@PathVariable long id, Model model) {
-        UserOrderDetailsDTO orderDetails = this.orderService.findOrderDetails(id);
+        UserOrderDetailsDTO orderDetails = this.orderCrudService.findOrderDetails(id);
 
         model.addAttribute("orderDetails", orderDetails);
 
@@ -100,7 +99,7 @@ public class OrderController {
     @GetMapping("/users-orders")
     public String viewUsersOrders(Model model) {
 
-        Set<UserOrderDTO> usersOrders = this.orderService.findUsersOrders();
+        Set<UserOrderDTO> usersOrders = this.userOrderService.findUsersOrders();
 
         model.addAttribute("usersOrders", usersOrders);
 
@@ -109,7 +108,7 @@ public class OrderController {
 
     @GetMapping("/users-orders-details/{id}")
     public String viewUsersOrdersDetails(@PathVariable long id, Model model) {
-        UserOrderDetailsDTO orderDetails = this.orderService.findOrderDetails(id);
+        UserOrderDetailsDTO orderDetails = this.orderCrudService.findOrderDetails(id);
 
         model.addAttribute("orderDetails", orderDetails);
 
@@ -119,9 +118,9 @@ public class OrderController {
     @PutMapping("/move-order-to-shipped/{id}")
     public String processMoveOrderToShipped(@PathVariable("id") long id) {
 
-        Order order = this.orderService.findOrderEntity(id);
+        Order order = this.orderCrudService.findOrderEntity(id);
         order.setLogisticStatus(OrderLogisticStatus.SHIPPED);
-        this.orderService.save(order);
+        this.orderCrudService.save(order);
 
         return "redirect:/users-orders";
     }
@@ -129,9 +128,9 @@ public class OrderController {
     @PutMapping("/move-order-to-in-office/{id}")
     public String processMoveOrderToInOffice(@PathVariable("id") long id) {
 
-        Order order = this.orderService.findOrderEntity(id);
+        Order order = this.orderCrudService.findOrderEntity(id);
         order.setLogisticStatus(OrderLogisticStatus.IN_OFFICE);
-        this.orderService.save(order);
+        this.orderCrudService.save(order);
 
         return "redirect:/users-orders";
     }
@@ -139,10 +138,10 @@ public class OrderController {
     @PutMapping("/move-order-to-received/{id}")
     public String processMoveOrderToReceived(@PathVariable("id") long id) {
 
-        Order order = this.orderService.findOrderEntity(id);
+        Order order = this.orderCrudService.findOrderEntity(id);
         order.setLogisticStatus(OrderLogisticStatus.RECEIVED);
         order.setDeliveryDate(new Date());
-        this.orderService.save(order);
+        this.orderCrudService.save(order);
 
         this.saleService.save(order);
 
