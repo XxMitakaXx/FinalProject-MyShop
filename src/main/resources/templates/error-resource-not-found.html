@@ -12,6 +12,11 @@
     <link rel="stylesheet" th:href="@{/css/second-navbar-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/categories-styles.css}" />
     <link rel="stylesheet" th:href="@{/css/footer-styles.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script th:src="@{/js/adminContext.js}" defer></script>
+    <script th:src="@{/js/profileContext.js}" defer></script>
+    <script th:src="@{/js/cartContext.js}" defer></script>
+    <script th:src="@{/js/categoriesHideAndShow.js}" defer></script>
     <title>My Shop</title>
 </head>
 <body>
@@ -20,13 +25,16 @@
     <nav th:replace="~{fragments/categories-navbar}"></nav>
 
     <div class="error-info-container">
-        <h1>Wrong turn?</h1>
+        <h1 th:text="#{wrong_turn}">Wrong turn?</h1>
 
-        <p>There is not what you are looking for. My advice is to follow one of these links to find what you want.</p>
+        <div class="error-text-container">
+            <p th:text="#{what_you_are_looking_for_is_not_here}">What you are looking for is not here.</p>
+            <p th:text="#{my_advice_is_to_follow_one_of_these_links_to_find_what_you_want}">My advice is to follow one of these links to find what you want.</p>
+        </div>
 
         <ul>
-            <a th:href="@{/}">Home Page</a>
-            <a th:href="@{/support}">My Shop Support</a>
+            <a th:href="@{/}" th:text="#{home_page}">Home Page</a>
+            <a th:href="@{/support}" th:text="#{my_shop_support}">My Shop Support</a>
         </ul>
     </div>
 

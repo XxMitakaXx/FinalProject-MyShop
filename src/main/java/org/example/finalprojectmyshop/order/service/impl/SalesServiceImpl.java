@@ -8,7 +8,12 @@ import org.example.finalprojectmyshop.order.repository.SalesReportRepository;
 import org.example.finalprojectmyshop.order.repository.SaleRepository;
 import org.example.finalprojectmyshop.order.service.SalesReportService;
 import org.example.finalprojectmyshop.order.service.SaleService;
+import org.example.finalprojectmyshop.order.web.SaleRestController;
 import org.example.finalprojectmyshop.product.models.entities.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -23,16 +28,15 @@ import java.util.stream.Collectors;
 public class SalesServiceImpl implements SaleService, SalesReportService {
 
 //    private final String GET_ALL_SALES_API_URL = ;
+    private static final Logger LOGGER = LoggerFactory.getLogger(SaleRestController.class);
 
     private final SaleRepository saleRepository;
     private final RestClient restClient;
-    private final RestTemplate restTemplate;
     private final SalesReportRepository salesReportRepository;
 
-    public SalesServiceImpl(SaleRepository saleRepository, RestClient restClient, RestTemplate restTemplate, SalesReportRepository salesReportRepository) {
+    public SalesServiceImpl(SaleRepository saleRepository, @Qualifier("salesRestClient") RestClient restClient, SalesReportRepository salesReportRepository) {
         this.saleRepository = saleRepository;
         this.restClient = restClient;
-        this.restTemplate = restTemplate;
         this.salesReportRepository = salesReportRepository;
     }
 
@@ -56,16 +60,16 @@ public class SalesServiceImpl implements SaleService, SalesReportService {
     }
 
     @Override
-    public SalesInfoDTO findSalesInfo() {
+    public List<SaleInfoDTO> findSalesInfo() {
         List<Sale> sales = this.saleRepository.findAll();
-        SalesInfoDTO salesInfoDTO = new SalesInfoDTO();
+        List<SaleInfoDTO> salesInfoDTOS = new ArrayList<>();
 
         sales.forEach(sale -> {
             SaleInfoDTO saleInfoDTO = this.toSaleInfoDTO(sale);
-            salesInfoDTO.getSalesInfos().add(saleInfoDTO);
+            salesInfoDTOS.add(saleInfoDTO);
         });
 
-        return salesInfoDTO;
+        return salesInfoDTOS;
     }
 
     @Override
@@ -78,13 +82,15 @@ public class SalesServiceImpl implements SaleService, SalesReportService {
     }
 
     @Override
-    public SalesInfoDTO getSales() {
+    public List<SaleInfoDTO> getSales() {
+        LOGGER.info("Going to retrieve all sales.");
+
         return restClient
                 .get()
-                .uri("http://localhost:8080/sales-api/get-all")
+                .uri("/sales-api/get-all")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .body(SalesInfoDTO.class);
+                .body(new ParameterizedTypeReference<>(){});
     }
 
     private SaleInfoDTO toSaleInfoDTO(Sale sale) {
