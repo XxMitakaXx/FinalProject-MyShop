@@ -1,9 +1,10 @@
-package org.example.finalprojectmyshop.user.validation.annotations;
+package org.example.finalprojectmyshop.user.validation.validators;
 
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.example.finalprojectmyshop.user.models.dtos.imports.UserRegisterDTO;
+import org.example.finalprojectmyshop.user.validation.annotations.PasswordMatches;
 import org.hibernate.validator.constraintvalidation.HibernateConstraintValidatorContext;
 import org.springframework.stereotype.Component;
 
