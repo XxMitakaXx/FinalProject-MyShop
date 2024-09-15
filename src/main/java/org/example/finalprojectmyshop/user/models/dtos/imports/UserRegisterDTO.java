@@ -4,10 +4,12 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.example.finalprojectmyshop.user.validation.annotations.PasswordMatches;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
+@PasswordMatches
 public class UserRegisterDTO {
 
     @Size(min = 2, max = 20, message = "Size must be between 2 and 20!")
