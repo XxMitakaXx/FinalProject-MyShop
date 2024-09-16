@@ -29,7 +29,7 @@
         <h1 th:text="#{nav_bar_register}">Register</h1>
 
         <form
-            th:action="@{/users/register}"
+            action="/users/register"
             th:method="post"
             th:object="${userRegisterDTO}"
             enctype="multipart/form-data">

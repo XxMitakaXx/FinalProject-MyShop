@@ -52,18 +52,18 @@ public class UserRegisterController {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userRegisterDTO", data);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterDTO", bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserRegisterDTO", bindingResult);
 
             return "redirect:/users/register";
         }
-
-        if (!data.getPassword().equals(data.getConfirmPassword())) {
-            // TODO handle error
-            redirectAttributes.addFlashAttribute("userRegisterDTO", data);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterDTO", bindingResult);
-
-            return "redirect:/users/register";
-        }
+//
+//        if (!data.getPassword().equals(data.getConfirmPassword())) {
+//            // TODO handle error
+//            redirectAttributes.addFlashAttribute("userRegisterDTO", data);
+//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterDTO", bindingResult);
+//
+//            return "redirect:/users/register";
+//        }
 
         this.userService.register(data);
 
