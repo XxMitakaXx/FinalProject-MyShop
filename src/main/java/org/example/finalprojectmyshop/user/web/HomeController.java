@@ -32,7 +32,7 @@ public class HomeController {
     public String home(Model model, @AuthenticationPrincipal MyShopUserDetails user) {
         this.categories = this.categoryService.getCategoriesWithRandomProducts();
 
-        model.addAttribute("categories", categories);
+        model.addAttribute("categories", this.categories);
         model.addAttribute("user", user);
 
         return "home";
