@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Constraint(validatedBy = PasswordMatchesValidator.class)
 public @interface PasswordMatches {
-    String message() default "Passwords must be equal";
+    String message() default "Passwords must be equal.";
 
     Class<?>[] groups() default {};
 

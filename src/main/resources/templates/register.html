@@ -21,10 +21,6 @@
     <title>My Shop</title>
 </head>
 <body>
-    <nav th:replace="~{fragments/navbar}"></nav>
-<!--    <nav th:replace="~{fragments/second-navbar}"></nav>-->
-<!--    <nav th:replace="~{fragments/categories-navbar}"></nav>-->
-
     <div class="form-container">
         <h1 th:text="#{nav_bar_register}">Register</h1>
 
@@ -35,23 +31,23 @@
             enctype="multipart/form-data">
             <div class="collect-name-container">
                 <div class="collect-data-container">
-                    <label for="input-first-name" th:text="#{capital_first_name}">First Name</label>
+                    <label for="first-name" th:text="#{capital_first_name}">First Name</label>
                     <input
                             th:field="*{firstName}"
-                            name="input-first-name"
+                            name="first-name"
                             type="text"
-                            id="input-first-name"
+                            id="first-name"
                             th:placeholder="#{capital_first_name}">
                     <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></div>
                 </div>
 
                 <div class="collect-data-container">
-                    <label for="input-last-name" th:text="#{capital_last_name}">Last Name</label>
+                    <label for="last-name" th:text="#{capital_last_name}">Last Name</label>
                     <input
                             th:field="*{lastName}"
-                            name="input-last-name"
+                            name="last-name"
                             type="text"
-                            id="input-last-name"
+                            id="last-name"
                             th:placeholder="#{capital_last_name}">
 
                     <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></div>
@@ -59,12 +55,12 @@
             </div>
 
             <div class="collect-data-container">
-                <label for="input-email" th:text="#{email}">Email</label>
+                <label for="email" th:text="#{email}">Email</label>
                 <input
                         th:field="*{email}"
-                        name="input-email"
+                        name="email"
                         type="email"
-                        id="input-email"
+                        id="email"
                         th:placeholder="#{email}">
 
                 <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
@@ -72,24 +68,24 @@
 
             <div class="collect-name-container">
                 <div class="collect-data-container">
-                    <label for="input-password" th:text="#{password}">Password</label>
+                    <label for="password" th:text="#{password}">Password</label>
                     <input
                             th:field="*{password}"
-                            name="input-password"
+                            name="password"
                             type="password"
-                            id="input-password"
+                            id="password"
                             th:placeholder="#{password}">
 
                     <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
                 </div>
 
                 <div class="collect-data-container">
-                    <label for="input-confirm-password" th:text="#{capital_confirm_password}">Confirm Password</label>
+                    <label for="confirm-password" th:text="#{capital_confirm_password}">Confirm Password</label>
                     <input
                             th:field="*{confirmPassword}"
-                            name="input-confirm-password"
+                            name="confirm-password"
                             type="password"
-                            id="input-confirm-password"
+                            id="confirm-password"
                             th:placeholder="#{capital_confirm_password}">
 
                     <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="error"></div>
@@ -101,34 +97,34 @@
             </div>
 
             <div class="collect-data-container">
-                <label for="input-phone-number" th:text="#{capital_phone_number}">Phone Number</label>
+                <label for="phone-number" th:text="#{capital_phone_number}">Phone Number</label>
                 <input
                         th:field="*{phoneNumber}"
-                        name="input-phone-number"
+                        name="phone-number"
                         type="tel"
-                        id="input-phone-number"
+                        id="phone-number"
                         th:placeholder="#{capital_phone_number}">
 
                 <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="error"></div>
             </div>
 
             <div class="collect-data-container">
-                <label for="input-birth-date" th:text="#{birthdate}">Birthdate</label>
+                <label for="birth-date" th:text="#{birthdate}">Birthdate</label>
                 <input
                         th:field="*{birthDate}"
-                        name="input-birth-date"
+                        name="birth-date"
                         type="date"
-                        id="input-birth-date">
+                        id="birth-date">
             </div>
 
             <div class="collect-data-container">
-                <label for="input-userEntity-profile-picture" th:text="#{capital_profile_picture}">Profile Picture</label>
+                <label for="user-profile-picture" th:text="#{capital_profile_picture}">Profile Picture</label>
                 <input
                         th:field="*{profilePicture}"
                         th:errorclass="error"
-                        name="input-userEntity-profile-picture"
+                        name="user-profile-picture"
                         type="file"
-                        id="input-userEntity-profile-picture">
+                        id="user-profile-picture">
             </div>
 
             <button class="register-button" type="submit" th:register="#{nav_bar_register}">Register</button>
