@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.example.finalprojectmyshop.user.validation.annotations.DateNotNull;
 import org.example.finalprojectmyshop.user.validation.annotations.PasswordMatches;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +36,7 @@ public class UserRegisterDTO {
     @NotBlank(message = "Phone number cannot be empty!")
     private String phoneNumber;
 
+    @DateNotNull
     private LocalDate birthDate;
 
     private MultipartFile profilePicture;

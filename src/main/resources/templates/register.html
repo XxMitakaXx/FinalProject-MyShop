@@ -89,10 +89,6 @@
                             th:placeholder="#{capital_confirm_password}">
 
                     <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="error"></div>
-
-<!--                    <div th:if="${confirmPasswordError}" class="error">-->
-<!--                        <p>Confirm password must match the password!</p>-->
-<!--                    </div>-->
                 </div>
             </div>
 
@@ -115,6 +111,8 @@
                         name="birth-date"
                         type="date"
                         id="birth-date">
+
+                <div th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="error"></div>
             </div>
 
             <div class="collect-data-container">
