@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.example.finalprojectmyshop.user.validation.annotations.DateNotNull;
 import org.example.finalprojectmyshop.user.validation.annotations.PasswordMatches;
+import org.example.finalprojectmyshop.user.validation.annotations.PictureNotNull;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
@@ -39,6 +40,7 @@ public class UserRegisterDTO {
     @DateNotNull
     private LocalDate birthDate;
 
+    @PictureNotNull
     private MultipartFile profilePicture;
 
     public UserRegisterDTO() {}

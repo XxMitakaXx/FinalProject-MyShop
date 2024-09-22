@@ -119,10 +119,11 @@
                 <label for="user-profile-picture" th:text="#{capital_profile_picture}">Profile Picture</label>
                 <input
                         th:field="*{profilePicture}"
-                        th:errorclass="error"
                         name="user-profile-picture"
                         type="file"
                         id="user-profile-picture">
+
+                <div th:if="${#fields.hasErrors('profilePicture')}" th:errors="*{profilePicture}" class="error"></div>
             </div>
 
             <button class="register-button" type="submit" th:register="#{nav_bar_register}">Register</button>
