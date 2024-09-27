@@ -22,12 +22,10 @@ public class UserController {
 
     private final UserHelperService userHelperService;
     private final UserService userService;
-    private final ValidateUserHelperService validateUserHelperService;
 
-    public UserController(UserHelperService userHelperService, UserService userService, ValidateUserHelperService validateUserHelperService) {
+    public UserController(UserHelperService userHelperService, UserService userService) {
         this.userHelperService = userHelperService;
         this.userService = userService;
-        this.validateUserHelperService = validateUserHelperService;
     }
 
     @ModelAttribute("searchProductByNameDTO")
@@ -70,7 +68,7 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userEditProfileDataDTO", data);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userEditProfileDataDTO", bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserEditProfileDataDTO", bindingResult);
 
             return "redirect:/edit-user-profile-data";
         }

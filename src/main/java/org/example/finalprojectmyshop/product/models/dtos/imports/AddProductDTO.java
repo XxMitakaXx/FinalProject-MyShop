@@ -2,6 +2,7 @@ package org.example.finalprojectmyshop.product.models.dtos.imports;
 
 import jakarta.validation.constraints.*;
 import org.example.finalprojectmyshop.product.models.enums.SecondaryCategoryName;
+import org.example.finalprojectmyshop.user.validation.annotations.PictureNotNull;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -17,19 +18,24 @@ public class AddProductDTO {
 
     private List<AddProductPropertyDTO> properties;
 
+    @PictureNotNull
     private MultipartFile firstImage;
 
+    @PictureNotNull
     private MultipartFile secondImage;
 
+    @PictureNotNull
     private MultipartFile thirdImage;
 
+    @PictureNotNull
     private MultipartFile fourthImage;
 
+    @PictureNotNull
     private MultipartFile fifthImage;
 
     private SecondaryCategoryName secondaryCategoryName;
 
-    @Positive(message = "Quantity must be positive number or zero!")
+    @PositiveOrZero(message = "Quantity must be positive number or zero!")
     private int quantity;
 
     public AddProductDTO() {

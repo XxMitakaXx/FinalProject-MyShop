@@ -41,7 +41,7 @@
                         id="name-input"
                         th:placeholder="#{add_product_name}">
 
-                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></div>
+                <div th:errors="*{name}" class="error"></div>
             </div>
 
             <div class="collecting-data-container">
@@ -55,7 +55,7 @@
                         id="price-input"
                         th:placeholder="#{add_product_price}">
 
-                <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error"></div>
+                <div th:errors="*{price}" class="error"></div>
             </div>
 
             <div class="properties-table-container">
@@ -99,6 +99,8 @@
                             id="first-image-input"
                             th:placeholder="#{add_product_upload_image}">
                 </div>
+
+                <div th:errors="*{firstImage}" class="error"></div>
             </div>
 
             <div class="collecting-data-container">
@@ -112,6 +114,8 @@
                             id="second-image-input"
                             th:placeholder="#{add_product_upload_image}">
                 </div>
+
+                <div th:errors="*{secondImage}" class="error"></div>
             </div>
 
 
@@ -126,6 +130,8 @@
                             id="third-image-input"
                             th:placeholder="#{add_product_upload_image}">
                 </div>
+
+                <div th:errors="*{thirdImage}" class="error"></div>
             </div>
 
             <div class="collecting-data-container">
@@ -139,6 +145,8 @@
                             id="fourth-image-input"
                             th:placeholder="#{add_product_upload_image}">
                 </div>
+
+                <div th:errors="*{fourthImage}" class="error"></div>
             </div>
 
             <div class="collecting-data-container">
@@ -152,6 +160,8 @@
                             id="fifth-image-input"
                             th:placeholder="#{add_product_upload_image}">
                 </div>
+
+                <div th:errors="*{fifthImage}" class="error"></div>
             </div>
 
             <div class="collecting-data-container">
@@ -175,7 +185,7 @@
                         id="quantity-input"
                         placeholder="Quantity">
 
-                <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="error"></div>
+                <div th:errors="*{quantity}" class="error"></div>
             </div>
 
             <button class="add-product-button" type="submit">Add Product</button>

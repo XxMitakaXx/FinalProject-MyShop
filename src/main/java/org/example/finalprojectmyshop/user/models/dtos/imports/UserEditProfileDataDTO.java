@@ -4,6 +4,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.example.finalprojectmyshop.user.validation.annotations.DateNotNull;
+import org.example.finalprojectmyshop.user.validation.annotations.PictureNotNull;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
@@ -22,8 +24,10 @@ public class UserEditProfileDataDTO {
     @Size(min = 10, max = 10, message = "Enter valid phone number!")
     private String phoneNumber;
 
+    @DateNotNull
     private LocalDate birthDate;
 
+    @PictureNotNull
     private MultipartFile profilePicture;
 
     public UserEditProfileDataDTO() {}

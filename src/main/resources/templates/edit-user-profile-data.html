@@ -45,7 +45,7 @@
                             id="input-first-name"
                             th:placeholder="#{capital_first_name}">
 
-<!--                    <div th:if="${emailError}" class="error"></div>-->
+                    <div th:errors="*{firstName}" class="error"></div>
                 </div>
 
                 <div class="collect-data-container">
@@ -58,7 +58,7 @@
                             id="input-last-name"
                             th:placeholder="#{capital_last_name}">
 
-                    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></div>
+                    <div th:errors="*{lastName}" class="error"></div>
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
                         id="input-phone-number"
                         th:placeholder="#{capital_phone_number}">
 
-                <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="error"></div>
+                <div th:errors="*{phoneNumber}" class="error"></div>
             </div>
 
             <div class="collect-data-container">
@@ -83,6 +83,8 @@
                         name="input-birth-date"
                         type="date"
                         id="input-birth-date">
+
+                <div th:errors="*{birthDate}" class="error"></div>
             </div>
 
             <div class="collect-data-container">
@@ -93,6 +95,8 @@
                         name="input-userEntity-profile-picture"
                         type="file"
                         id="input-userEntity-profile-picture">
+
+                <div th:errors="*{profilePicture}" class="error"></div>
             </div>
 
             <button class="apply-changes-button" type="submit" th:text="#{apply_changes}">Apply Changes</button>
