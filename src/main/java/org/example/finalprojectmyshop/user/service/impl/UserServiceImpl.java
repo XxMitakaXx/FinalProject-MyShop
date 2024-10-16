@@ -89,7 +89,6 @@ public class UserServiceImpl implements UserService {
             user.setBirthdate(newData.getBirthDate());
         }
 
-
         if (newData.getProfilePicture().getBytes().length != 0) {
             MediaFileEntity mediaFileEntity = this.imagesHelperService.saveImage(newData.getProfilePicture());
             user.setProfilePicture(mediaFileEntity);

@@ -1,11 +1,9 @@
 package org.example.finalprojectmyshop.user.models.dtos.imports;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.example.finalprojectmyshop.user.validation.annotations.DateNotNull;
 import org.example.finalprojectmyshop.user.validation.annotations.PictureNotNull;
+import org.example.finalprojectmyshop.user.validation.annotations.UniqueEmail;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
@@ -20,14 +18,17 @@ public class UserEditProfileDataDTO {
     @Size(min = 2, max = 30, message = "Size must be between 2 and 30!")
     private String lastName;
 
+    @Email(message = "Must be a well-formed email address!")
+    @UniqueEmail
+    @NotBlank(message = "Email cannot be empty!")
+    private String email;
+
     @NotEmpty(message = "Enter your phone number!")
     @Size(min = 10, max = 10, message = "Enter valid phone number!")
     private String phoneNumber;
 
-    @DateNotNull
     private LocalDate birthDate;
-
-    @PictureNotNull
+    
     private MultipartFile profilePicture;
 
     public UserEditProfileDataDTO() {}
@@ -46,6 +47,14 @@ public class UserEditProfileDataDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhoneNumber() {
