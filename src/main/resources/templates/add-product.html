@@ -173,6 +173,8 @@
                     <option value="option" th:text="#{add_product_select_category}">Select Category</option>
                     <option th:each="secondaryCategory : ${secondaryCategories}" th:value="${secondaryCategory}" th:text="${secondaryCategory.name()}">Select Category</option>
                 </select>
+
+                <div th:errors="*{secondaryCategoryName}" class="error"></div>
             </div>
 
             <div class="collecting-data-container">

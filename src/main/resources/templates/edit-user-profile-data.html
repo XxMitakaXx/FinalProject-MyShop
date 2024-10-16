@@ -98,6 +98,8 @@
                         id="input-birth-date">
 
                 <div th:errors="*{birthDate}" class="error"></div>
+
+                <p class="message" th:text="#{do_not_want_to_change_your_birthdate}">If do not want to change your birthdate just left this field empty!</p>
             </div>
 
             <div class="collect-data-container">
@@ -110,6 +112,8 @@
                         id="input-userEntity-profile-picture">
 
                 <div th:errors="*{profilePicture}" class="error"></div>
+
+                <p class="message" th:text="#{do_not_want_to_change_your_profile_picture}">If do not want to change your profile picture just left this field empty!</p>
             </div>
 
             <button class="apply-changes-button" type="submit" th:text="#{apply_changes}">Apply Changes</button>

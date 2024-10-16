@@ -52,7 +52,7 @@ form.edit-user-profile-data-form .collect-password-container .collect-data-conta
 }
 
 form.edit-user-profile-data-form .collect-data-container {
-    height: 8em;
+    height: 10em;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -118,4 +118,12 @@ form.edit-user-profile-data-form .collect-data-container select {
     font-size: 20px;
     text-decoration: none;
     margin: 1em;
+}
+
+.message {
+    margin: 1em 0;
+    padding: 1em;
+    color: var(--primary-color);
+    background: var(--secondary-color);
+    border-radius: 0.5em;
 }
